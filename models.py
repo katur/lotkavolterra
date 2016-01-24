@@ -1,8 +1,5 @@
 from enum import Enum
-
-
-class Group(Enum):
-    HERD, PACK, COLONY = range(3)
+from interactions import Group
 
 
 class Seat(object):
@@ -17,17 +14,17 @@ class Seat(object):
     def get_group(self):
         return self.group
 
-    def is_herd(self):
-        return self.group == Group.HERD
-
-    def is_colony(self):
-        return self.group == Group.COLONY
-
-    def is_pack(self):
-        return self.group == Group.PACK
-
     def set_group(self, group):
         self.group = group
+
+    def is_herd(self):
+        return self.get_group() == Group.HERD
+
+    def is_colony(self):
+        return self.get_group() == Group.COLONY
+
+    def is_pack(self):
+        return self.get_group() == Group.PACK
 
     def get_size(self):
         return self.size
@@ -36,10 +33,10 @@ class Seat(object):
         self.size = size
 
     def increase_size(self, factor):
-        self.size = int(self.size * factor)
+        self.size = int(self.get_size() * factor)
 
     def decrease_size(self, factor):
-        self.size = int(self.size / factor)
+        self.size = int(self.get_size() / factor)
 
     def get_next(self):
         return self.next_seat

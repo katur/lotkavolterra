@@ -1,10 +1,13 @@
 import random
 from coins import CoinFlip
-from models import Group
 
 
 GROWTH_RATE = 1.333
 COMPETITIVE_COIN_WEIGHT = 0.667
+
+
+class Group(Enum):
+    HERD, PACK, COLONY = range(3)
 
 
 def change_group_if_colony(x):
