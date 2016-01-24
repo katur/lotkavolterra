@@ -6,9 +6,11 @@ class Group(Enum):
 
 
 class Seat(object):
-    def __init__(self, name, group=None, next_seat=None, previous_seat=None):
+    def __init__(self, name, group=None, size=None,
+                 next_seat=None, previous_seat=None):
         self.name = name
         self.group = group
+        self.size = size
         self.next_seat = next_seat
         self.previous_seat = previous_seat
 
@@ -45,8 +47,8 @@ class Table(object):
         self.name = name
         self.head = head
 
-    def insert(self, name, group=None):
-        new = Seat(name, group)
+    def insert(self, name, group=None, size=None):
+        new = Seat(name=name, group=group, size=size)
 
         if not self.head:
             new.set_next(new)
@@ -63,7 +65,7 @@ class Table(object):
 
         self.head = new
 
-    def get_size(self):
+    def get_number_of_seats(self):
         if not self.head:
             return 0
 
@@ -90,8 +92,8 @@ class Table(object):
 
 
     def __repr__(self):
-        return ('Table {}, size {}, head {}'
-                .format(self.name, self.get_size(), self.head))
+        return ('Table {}, {} seats, head is {}'
+                .format(self.name, self.get_number_of_seats(), self.head))
 
     def __str__(self):
         return self.__repr__()
