@@ -1,5 +1,7 @@
 import random
-from coins import CoinFlip
+from enum import Enum
+
+from coins import flip_coin, Flip
 
 
 GROWTH_RATE = 1.333
@@ -14,14 +16,15 @@ def change_group_if_colony(x):
     if not x.is_colony():
         return False
 
-    x.set_group(random.choice([Group.PACK, Group.HERD])
+    x.set_group(random.choice([Group.PACK, Group.HERD]))
+
     return True
 
 
 def compete(pack, herd):
     f = flip_coin(weight=COMPETITIVE_COIN_WEIGHT)
 
-    if f == CoinFlip.HEADS:
+    if f == Flip.HEADS:
         pack.increase_size(GROWTH_RATE)
         herd.decrease_size(GROWTH_RATE)
     else:
