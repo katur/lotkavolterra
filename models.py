@@ -5,6 +5,41 @@ class Group(Enum):
     HERD, PACK, COLONY = range(3)
 
 
+class Seat(object):
+    def __init__(self, name, group=None, next_seat=None, previous_seat=None):
+        self.name = name
+        self.group = group
+        self.next_seat = next_seat
+        self.previous_seat = previous_seat
+
+    def is_herd(self):
+        return self.group == Group.HERD
+
+    def is_colony(self):
+        return self.group == Group.COLONY
+
+    def is_pack(self):
+        return self.group == Group.PACK
+
+    def get_next(self):
+        return self.next_seat
+
+    def get_previous(self):
+        return self.previous_seat
+
+    def set_next(self, other):
+        self.next_seat = other
+
+    def set_previous(self, other):
+        self.previous_seat = other
+
+    def __repr__(self):
+        return '{}: {}'.format(self.group.name, self.name)
+
+    def __str__(self):
+        return self.__repr__()
+
+
 class Table(object):
     def __init__(self, name, head=None):
         self.name = name
@@ -57,32 +92,6 @@ class Table(object):
     def __repr__(self):
         return ('Table {}, size {}, head {}'
                 .format(self.name, self.get_size(), self.head))
-
-    def __str__(self):
-        return self.__repr__()
-
-
-class Seat(object):
-    def __init__(self, name, group=None, next_seat=None, previous_seat=None):
-        self.name = name
-        self.group = group
-        self.next_seat = next_seat
-        self.previous_seat = previous_seat
-
-    def get_next(self):
-        return self.next_seat
-
-    def get_previous(self):
-        return self.previous_seat
-
-    def set_next(self, other):
-        self.next_seat = other
-
-    def set_previous(self, other):
-        self.previous_seat = other
-
-    def __repr__(self):
-        return '{}: {}'.format(self.group.name, self.name)
 
     def __str__(self):
         return self.__repr__()

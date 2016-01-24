@@ -9,3 +9,4 @@ x.insert('django', Group.HERD)
 x.insert('erlich', Group.HERD)
 print x
 print x.get_seats()
+print x.head.is_herd()
