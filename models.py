@@ -17,17 +17,20 @@ class Seat(object):
     def get_next(self):
         return self.next_seat
 
-    def get_previous(self):
-        return self.previous_seat
-
     def set_next(self, other):
         self.next_seat = other
+
+    def get_previous(self):
+        return self.previous_seat
 
     def set_previous(self, other):
         self.previous_seat = other
 
     def get_group(self):
         return self.group
+
+    def set_group(self, group):
+        self.group = group
 
     def is_herd(self):
         return self.group == Group.HERD
@@ -44,14 +47,15 @@ class Seat(object):
     def set_size(self, size):
         self.size = size
 
-    def increase_size(factor):
+    def increase_size(self, factor):
         self.size = int(self.size * factor)
 
-    def decrease_size(factor):
+    def decrease_size(self, factor):
         self.size = int(self.size / factor)
 
     def __repr__(self):
-        return '{}: {}'.format(self.group.name, self.name)
+        return '{} {} size:{}'.format(self.group.name, self.name,
+                                        self.size)
 
     def __str__(self):
         return self.__repr__()
