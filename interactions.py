@@ -4,7 +4,7 @@ from enum import Enum
 from coins import flip_coin, Flip
 
 
-GROWTH_RATE = 1.333
+GROWTH_RATE = 0.333
 COMPETITIVE_COIN_WEIGHT = 0.667
 
 

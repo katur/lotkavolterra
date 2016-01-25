@@ -32,11 +32,15 @@ class Seat(object):
     def set_size(self, size):
         self.size = size
 
-    def increase_size(self, factor):
-        self.size = int(self.get_size() * factor)
+    def increase_size(self, growth_rate):
+        change = int(round(self.size * growth_rate))
+        self.size = self.size + change
 
-    def decrease_size(self, factor):
-        self.size = int(self.get_size() / factor)
+    def decrease_size(self, growth_rate):
+        change = int(round(self.size * growth_rate))
+        self.size = self.size - change
+        if self.size <= 2:
+            self.size = 0
 
     def get_next(self):
         return self.next_seat
