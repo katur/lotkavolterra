@@ -1,5 +1,5 @@
 from enum import Enum
-from interactions import Group
+from interactions import Group, interact
 
 
 class Seat(object):
@@ -10,6 +10,15 @@ class Seat(object):
         self.size = size
         self.next_seat = next_seat
         self.previous_seat = previous_seat
+
+    def __repr__(self):
+        return '{} {}'.format(self.group.name, self.name)
+
+    def __str__(self):
+        return self.__repr__()
+
+    def get_string_with_size(self):
+        return '{} size:{}'.format(str(self), self.get_size())
 
     def get_group(self):
         return self.group
@@ -54,18 +63,21 @@ class Seat(object):
     def set_previous(self, other):
         self.previous_seat = other
 
-    def __repr__(self):
-        return '{} {} size:{}'.format(self.group.name, self.name,
-                                        self.size)
-
-    def __str__(self):
-        return self.__repr__()
+    def interact_with_next(self):
+        interact(self, self.get_next())
 
 
 class Table(object):
     def __init__(self, name, head=None):
         self.name = name
         self.head = head
+
+    def __repr__(self):
+        return ('Table {}, {} seats, head is {}'
+                .format(self.name, self.get_number_of_seats(), self.head))
+
+    def __str__(self):
+        return self.__repr__()
 
     def insert(self, name, group=None, size=None):
         new = Seat(name=name, group=group, size=size)
@@ -110,10 +122,11 @@ class Table(object):
 
         return seats
 
+    def get_seats_as_strings(self):
+        seats = self.get_seats()
+        return [i.get_string_with_size() for i in seats]
 
-    def __repr__(self):
-        return ('Table {}, {} seats, head is {}'
-                .format(self.name, self.get_number_of_seats(), self.head))
-
-    def __str__(self):
-        return self.__repr__()
+    def all_seats_interact(self, num_generations=1):
+        for i in range(num_generations):
+            for seat in self.get_seats():
+                seat.interact_with_next()
