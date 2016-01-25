@@ -3,6 +3,16 @@ from interactions import Group, interact
 
 
 class Seat(object):
+    """
+    A seat at a Table.
+
+    Each seat can be assigned to a group (Pack, Herd, Colony), and has
+    a certain population size.
+
+    A seat is connected to both adjacent seats, in a double-linked list
+    fashion.
+    """
+
     def __init__(self, name, group=None, size=None,
                  next_seat=None, previous_seat=None):
         self.name = name
@@ -12,13 +22,10 @@ class Seat(object):
         self.previous_seat = previous_seat
 
     def __repr__(self):
-        return '{} {}'.format(self.group.name, self.name)
+        return '{} {} size:{}'.format(self.group.name, self.name, self.size)
 
     def __str__(self):
-        return self.__repr__()
-
-    def get_string_with_size(self):
-        return '{} size:{}'.format(str(self), self.get_size())
+        return '{} {}'.format(self.group.name, self.name)
 
     def get_group(self):
         return self.group
@@ -42,28 +49,35 @@ class Seat(object):
         self.size = size
 
     def increase_size(self, growth_rate):
+        """Increase this seat's population size by growth_rate."""
         change = int(round(self.size * growth_rate))
         self.size = self.size + change
 
     def decrease_size(self, growth_rate):
+        """Decrease this seat's population size by growth rate."""
         change = int(round(self.size * growth_rate))
         self.size = self.size - change
         if self.size <= 2:
             self.size = 0
 
     def get_next(self):
+        """Get the next adjacent seat."""
         return self.next_seat
 
     def get_previous(self):
+        """Get the previous adjacent seat."""
         return self.previous_seat
 
     def set_next(self, other):
+        """Set the next adjacent seat."""
         self.next_seat = other
 
     def set_previous(self, other):
+        """Set the previous adjacent seat."""
         self.previous_seat = other
 
     def interact_with_next(self):
+        """Interact with the next adjacent seat."""
         interact(self, self.get_next())
 
 
@@ -77,7 +91,7 @@ class Table(object):
                 .format(self.name, self.get_number_of_seats(), self.head))
 
     def __str__(self):
-        return self.__repr__()
+        return 'Table {}'.format(self.name)
 
     def insert(self, name, group=None, size=None):
         new = Seat(name=name, group=group, size=size)
@@ -121,10 +135,6 @@ class Table(object):
             current = current.get_next()
 
         return seats
-
-    def get_seats_as_strings(self):
-        seats = self.get_seats()
-        return [i.get_string_with_size() for i in seats]
 
     def all_seats_interact(self, num_generations=1):
         for i in range(num_generations):

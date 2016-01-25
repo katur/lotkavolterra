@@ -17,8 +17,8 @@ x.insert('heidi', Group.PACK, 100)
 x.insert('indigo', Group.COLONY, 100)
 x.insert('jack', Group.PACK, 100)
 
-logging.debug('Initial state: {}'.format(x.get_seats_as_strings()))
+logging.info('Initial state: {}'.format(x.get_seats()))
 
 x.all_seats_interact(num_generations=5)
 
-logging.debug('Final state: {}'.format(x.get_seats_as_strings()))
+logging.info('Final state: {}'.format(x.get_seats()))
