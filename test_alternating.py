@@ -1,6 +1,6 @@
 import logging
-from interactions import Group
-from models import Table
+
+from models import Group, Table
 
 
 logging.basicConfig(level=logging.DEBUG)
