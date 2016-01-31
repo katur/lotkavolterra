@@ -3,6 +3,7 @@ import logging
 from flask import Flask
 
 from models import Group, Table
+from localsettings import DEBUG
 
 
 app = Flask(__name__)
@@ -89,4 +90,4 @@ def test_halves():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=DEBUG)
