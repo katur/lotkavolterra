@@ -70,6 +70,16 @@ class Seat(object):
     def is_pack(self):
         return self.group == Group.PACK
 
+    def get_color(self):
+        if self.is_herd():
+            return 'blue'
+        elif self.is_pack():
+            return 'red'
+        elif self.is_colony():
+            return 'green'
+        else:
+            return 'gray'
+
     def set_to_colony(self):
         """Set this seat's group to colony."""
         self.group = Group.COLONY

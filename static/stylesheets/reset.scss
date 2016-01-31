@@ -21,82 +21,25 @@ time, mark, audio, video {
   border: 0;
   font-size: 100%;
   font: inherit;
-  vertical-align: baseline; }
-
+  vertical-align: baseline;
+}
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
-  display: block; }
-
+  display: block;
+}
 ol, ul {
-  list-style: none; }
-
+  list-style: none;
+}
 blockquote, q {
-  quotes: none; }
-
+  quotes: none;
+}
 blockquote:before, blockquote:after,
 q:before, q:after {
   content: '';
-  content: none; }
-
+  content: none;
+}
 table {
   border-collapse: collapse;
-  border-spacing: 0; }
-
-body {
-  box-sizing: border-box; }
-
-body {
-  font-family: "Trebuchet MS", Helvetica, sans-serif;
-  font-size: 16px;
-  line-height: 1.5; }
-
-h1 {
-  font-size: 34px; }
-
-h2 {
-  font-size: 28px; }
-
-h3 {
-  font-size: 22px; }
-
-h4 {
-  font-size: 19px; }
-
-body {
-  padding: 40px;
-  font-family: "Trebuchet MS", Helvetica, sans-serif; }
-
-#site-title {
-  margin-bottom: 40px; }
-
-#page-title {
-  margin-bottom: 20px; }
-
-.page-subtitle {
-  margin-bottom: 10px; }
-
-.page-section {
-  margin-bottom: 40px; }
-  .page-section:last-child {
-    margin-bottom: 0; }
-
-.three-columns .column {
-  float: left;
-  width: 30%;
-  margin-right: 5%; }
-  .three-columns .column:last-child {
-    margin-right: 0; }
-
-table td {
-  border: 1px solid #eee;
-  padding: 4px 6px; }
-
-.blue {
-  background: #9999ff; }
-
-.red {
-  background: #ff8080; }
-
-.green {
-  background: #95a451; }
+  border-spacing: 0;
+}

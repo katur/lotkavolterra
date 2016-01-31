@@ -1,28 +1,27 @@
 {% extends 'base.html' %}
 
+{% block page_title %}Test Simulation: {{ simulation }}{% endblock %}
+
 {% block content %}
 
-<h1>Test Simulation: {{ simulation }}</h1>
+<div class="three-columns">
+  <div class="column">
+    <h3 class="page-subtitle">Initial state</h3>
 
-<ul>
-  {% for simulation in simulations %}
-  <li>
-    <a href="{{ url_for('test_simulation', name=simulation) }}">
-      {{ simulation }}</a>
-  </li>
-  {% endfor %}
-</ul>
+    {% with show_initial = True %}
+    {% include 'table_snapshot.html' %}
+    {% endwith %}
+  </div>
 
-<h3>Initial state</h3>
+  <div class="column">
+    ... after {{ num_generations }} generations ...
+  </div>
 
-{% with show_initial = True %}
-{% include 'table_snapshot.html' %}
-{% endwith %}
+  <div class="column">
+    <h3 class="page-subtitle">Final state</h3>
 
-<h3>... after {{ num_generations }} generations ...</h3>
-
-<h3>Final state</h3>
-
-{% include 'table_snapshot.html' %}
+    {% include 'table_snapshot.html' %}
+  </div>
+</div>
 
 {% endblock %}

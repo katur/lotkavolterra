@@ -60,10 +60,14 @@ def test_simulation(simulation):
     table = Table('Test')
     populate_test_table(table, simulation, num_seats, population_size)
 
+    for seat in table.get_seats():
+        seat.color = seat.get_color()
+
     # Run the simulation
     table.all_seats_interact(num_generations=num_generations)
 
     context = {
+        'simulation': simulation,
         'table': table,
         'num_generations': num_generations,
     }

@@ -1,0 +1,32 @@
+.page-section
+  margin-bottom: $whitespace
+
+  &:last-child
+    margin-bottom: 0
+
+.three-columns
+  .column
+    float: left
+    width: 30%
+    margin-right: 5%
+
+    &:last-child
+      margin-right: 0
+
+@mixin bulleted-list
+  list-style-position: inside
+  list-style-type: disc
+
+table
+  td
+    border: 1px solid #eee
+    padding: 4px 6px
+
+.blue
+  background: lighten(blue, 30%)
+
+.red
+  background: lighten(red, 25%)
+
+.green
+  background: #95a451

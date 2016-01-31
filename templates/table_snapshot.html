@@ -1,8 +1,12 @@
 <table>
   {% for seat in table.get_seats() %}
   <tr>
-    <td>{{ seat.group }}</td>
+    <td class="{{ seat.color }}">
+      {{ seat.group }}
+    </td>
+
     <td>{{ seat.name }}</td>
+
     <td>
       {% if show_initial %}
       {{ seat.initial_population_size }}
