@@ -1,6 +1,6 @@
 import logging
 
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, request, url_for
 
 from models import Group, Table, get_random_group
 from localsettings import DEBUG
@@ -36,9 +36,16 @@ def list_simulations():
 
 
 @app.route("/test-simulation/<name>/")
-def test_simulation(name, num_generations=DEFAULT_NUM_GENERATIONS):
+def test_simulation(name):
     # Enable command line DEBUG logging
     logging.basicConfig(level=logging.DEBUG)
+
+    num_generations = request.args.get('num_generations',
+                                       DEFAULT_NUM_GENERATIONS)
+    try:
+        num_generations = int(num_generations)
+    except TypeError():
+        num_generations = DEFAULT_NUM_GENERATIONS
 
     # Create and populate Test table
     table = Table('Test')
