@@ -18,10 +18,11 @@ def get_interaction_html(table):
 
 
 def get_seats_as_ul(seats):
-    output = '<ul>'
+    output = '<table>'
     for seat in seats:
-        output += '<li>{}</li>'.format(seat)
-    output += '</ul>'
+        output += '<tr><td>{}</td><td>{}</td></tr>'.format(
+            seat, seat.population_size)
+    output += '</table>'
     return output
 
 
