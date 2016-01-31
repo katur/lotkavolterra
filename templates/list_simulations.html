@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Test Simulations</h1>
+
+<ul>
+  {% for simulation in simulations %}
+  <li>
+    <a href="{{ url_for('test_simulation', name=simulation) }}">
+      {{ simulation }}</a>
+  </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,6 +1,6 @@
 import logging
 
-from flask import Flask, url_for
+from flask import Flask, render_template, url_for
 
 from models import Group, Table, get_random_group
 from localsettings import DEBUG
@@ -25,22 +25,15 @@ SIMULATIONS = (RANDOM, ALTERNATING, HALVES,)
 
 @app.route("/")
 def home():
-    output = '<h1>Lotka-Volterra Game</h1>'
-    output += '<a href="{}">View simulations</a>'.format(
-        url_for('list_test_simulations'))
-    return output
+    return render_template('home.html')
 
 
-@app.route("/test-simulations/")
-def list_test_simulations():
-    output = '<h1>Test simulations</h1>'
-    output += '<ul>'
-    for simulation in SIMULATIONS:
-        output += '<li><a href="{}">{}</a></li>'.format(
-            url_for('test_simulation', name=simulation), simulation)
-
-    output += '</ul>'
-    return output
+@app.route("/list-simulations/")
+def list_simulations():
+    context = {
+        'simulations': SIMULATIONS,
+    }
+    return render_template('list_simulations.html', **context)
 
 
 @app.route("/test-simulation/<name>/")
