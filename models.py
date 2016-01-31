@@ -5,6 +5,9 @@ from interactions import interact
 
 
 class Group(Enum):
+    """
+    An organism group -- herd, pack, or colony.
+    """
     HERD, PACK, COLONY = range(3)
 
 
@@ -102,6 +105,11 @@ class Seat(object):
 
 
 class Table(object):
+    """
+    A table at the luncheon.
+
+    A table is made up of Seats.
+    """
     def __init__(self, name, head=None):
         self.name = name
         self.head = head
