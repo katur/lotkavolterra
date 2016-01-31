@@ -24,18 +24,19 @@ SIMULATIONS = (RANDOM, ALTERNATING, HALVES,)
 
 
 @app.route("/")
-def hello_mars():
-    output = "<h1>Lotka-Volterra Game</h1>"
+def home():
+    output = '<h1>Lotka-Volterra Game</h1>'
     output += '<a href="{}">View simulations</a>'.format(
-        url_for('list_simulations'))
+        url_for('list_test_simulations'))
     return output
 
 
-@app.route("/test-simulation/")
-def list_simulations():
-    output = '<ul>'
+@app.route("/test-simulations/")
+def list_test_simulations():
+    output = '<h1>Test simulations</h1>'
+    output += '<ul>'
     for simulation in SIMULATIONS:
-        output += '<li><a href="{0}">{1}</a></li>'.format(
+        output += '<li><a href="{}">{}</a></li>'.format(
             url_for('test_simulation', name=simulation), simulation)
 
     output += '</ul>'
@@ -79,7 +80,11 @@ def populate_test_table(table, name):
 def get_interaction_html(table, num_generations):
     output = '<h3>Initial state</h3>'
     output += get_seats_html(table.get_seats())
+
+    output += '<h3>... simulating {} generations ...</h3>'.format(
+        num_generations)
     table.all_seats_interact(num_generations=num_generations)
+
     output += '<h3>Final state</h3>'
     output += get_seats_html(table.get_seats())
     return output
