@@ -1,9 +1,12 @@
 # Project-specific Node.js packages (e.g. gulp)
 node_modules/
 
+
 # Local or private settings
 *localsettings.py
+
 
 # Compiled and temporary files
 *.pyc
 *.swp
+.sass-cache/
