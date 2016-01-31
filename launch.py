@@ -25,7 +25,9 @@ SIMULATIONS = (RANDOM, ALTERNATING, HALVES,)
 
 @app.route("/")
 def hello_mars():
-    return "Hello Mars!"
+    output = "<h1>Lotka-Volterra Game</h1>"
+    output += '<a href="/test-simulation/">View simulations</a>'
+    return output
 
 
 @app.route("/test-simulation/")
