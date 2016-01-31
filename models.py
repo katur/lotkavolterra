@@ -11,6 +11,13 @@ class Group(Enum):
     HERD, PACK, COLONY = range(3)
 
 
+def get_random_group():
+    """
+    Get a random group (herd, pack, or colony)
+    """
+    return random.choice([Group.PACK, Group.HERD, Group.COLONY])
+
+
 class Seat(object):
     """
     A seat at a Table.
