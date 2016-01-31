@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Test Simulation: {{ simulation }}</h1>
+
+<ul>
+  {% for simulation in simulations %}
+  <li>
+    <a href="{{ url_for('test_simulation', name=simulation) }}">
+      {{ simulation }}</a>
+  </li>
+  {% endfor %}
+</ul>
+
+<h3>Initial state</h3>
+
+<table>
+  {% for seat in table.get_seats() %}
+  <tr>
+    <td>{{ seat }}</td>
+    <td>{{ seat.initial_population_size }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h3>... after {{ num_generations }} generations ...</h3>
+
+<h3>Final state</h3>
+
+<table>
+  {% for seat in table.get_seats() %}
+  <tr>
+    <td>{{ seat }}</td>
+    <td>{{ seat.population_size }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}

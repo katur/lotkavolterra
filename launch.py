@@ -10,11 +10,10 @@ app = Flask(__name__)
 
 
 # Test settings
+DEFAULT_NUM_GENERATIONS = 5
+DEFAULT_POPULATION_SIZE = 100
 PEOPLE = ('Alice', 'Bob', 'Carol', 'Django', 'Erlich', 'Freddy',
           'Georgia', 'Heidi', 'Indigo', 'Jack',)
-NUM_GENERATIONS = 5
-POPULATION_SIZE = 100
-
 
 # Test simulations
 RANDOM = 'random'
@@ -37,21 +36,31 @@ def list_simulations():
 
 
 @app.route("/test-simulation/<name>/")
-def test_simulation(name):
+def test_simulation(name, num_generations=DEFAULT_NUM_GENERATIONS):
+    # Enable command line DEBUG logging
     logging.basicConfig(level=logging.DEBUG)
 
-    table = Table(1)
-
+    # Create and populate Test table
+    table = Table('Test')
     populate_test_table(table, name)
 
-    return get_interaction_html(table, NUM_GENERATIONS)
+    # Run the simulation
+    table.all_seats_interact(num_generations=num_generations)
+
+    context = {
+        'table': table,
+        'num_generations': num_generations,
+    }
+
+    return render_template('test_simulation.html', **context)
 
 
 # Helpers
 def populate_test_table(table, name):
     if name == RANDOM:
         for person in PEOPLE:
-            table.insert(person, get_random_group(), POPULATION_SIZE)
+            table.insert(person, get_random_group(),
+                         DEFAULT_POPULATION_SIZE)
 
     elif name == ALTERNATING:
         for i, person in enumerate(PEOPLE):
@@ -60,36 +69,14 @@ def populate_test_table(table, name):
             else:
                 group = Group.HERD
 
-            table.insert(person, group, POPULATION_SIZE)
+            table.insert(person, group, DEFAULT_POPULATION_SIZE)
 
     elif name == HALVES:
         for i, person in enumerate(PEOPLE):
             if i < (len(PEOPLE) / 2):
-                table.insert(person, Group.PACK, POPULATION_SIZE)
+                table.insert(person, Group.PACK, DEFAULT_POPULATION_SIZE)
             else:
-                table.insert(person, Group.HERD, POPULATION_SIZE)
-
-
-def get_interaction_html(table, num_generations):
-    output = '<h3>Initial state</h3>'
-    output += get_seats_html(table.get_seats())
-
-    output += '<h3>... simulating {} generations ...</h3>'.format(
-        num_generations)
-    table.all_seats_interact(num_generations=num_generations)
-
-    output += '<h3>Final state</h3>'
-    output += get_seats_html(table.get_seats())
-    return output
-
-
-def get_seats_html(seats):
-    output = '<table>'
-    for seat in seats:
-        output += '<tr><td>{}</td><td>{}</td></tr>'.format(
-            seat, seat.population_size)
-    output += '</table>'
-    return output
+                table.insert(person, Group.HERD, DEFAULT_POPULATION_SIZE)
 
 
 if __name__ == "__main__":

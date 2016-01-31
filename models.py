@@ -34,6 +34,7 @@ class Seat(object):
         self.name = name
         self.group = group
         self.population_size = population_size
+        self.initial_population_size = population_size
         self.next_seat = next_seat
         self.previous_seat = previous_seat
 
