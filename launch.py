@@ -1,6 +1,6 @@
 import logging
 
-from flask import Flask
+from flask import Flask, url_for
 
 from models import Group, Table, get_random_group
 from localsettings import DEBUG
@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 # Test settings
 PEOPLE = ('Alice', 'Bob', 'Carol', 'Django', 'Erlich', 'Freddy',
-          'Georgia', 'Heidi', 'Indigo', 'Jack')
+          'Georgia', 'Heidi', 'Indigo', 'Jack',)
 NUM_GENERATIONS = 5
 POPULATION_SIZE = 100
 
@@ -26,7 +26,8 @@ SIMULATIONS = (RANDOM, ALTERNATING, HALVES,)
 @app.route("/")
 def hello_mars():
     output = "<h1>Lotka-Volterra Game</h1>"
-    output += '<a href="/test-simulation/">View simulations</a>'
+    output += '<a href="{}">View simulations</a>'.format(
+        url_for('list_simulations'))
     return output
 
 
@@ -34,30 +35,31 @@ def hello_mars():
 def list_simulations():
     output = '<ul>'
     for simulation in SIMULATIONS:
-        output += '<li><a href="/test-simulation/{0}">{0}</a></li>'.format(simulation)
+        output += '<li><a href="{0}">{1}</a></li>'.format(
+            url_for('test_simulation', name=simulation), simulation)
 
     output += '</ul>'
     return output
 
 
-@app.route("/test-simulation/<simulation_name>/")
-def test_simulation(simulation_name):
+@app.route("/test-simulation/<name>/")
+def test_simulation(name):
     logging.basicConfig(level=logging.DEBUG)
 
     table = Table(1)
 
-    populate_test_table(table, simulation_name)
+    populate_test_table(table, name)
 
     return get_interaction_html(table, NUM_GENERATIONS)
 
 
 # Helpers
-def populate_test_table(table, simulation_name):
-    if simulation_name == RANDOM:
+def populate_test_table(table, name):
+    if name == RANDOM:
         for person in PEOPLE:
             table.insert(person, get_random_group(), POPULATION_SIZE)
 
-    elif simulation_name == ALTERNATING:
+    elif name == ALTERNATING:
         for i, person in enumerate(PEOPLE):
             if i % 2 == 0:
                 group = Group.PACK
@@ -66,7 +68,7 @@ def populate_test_table(table, simulation_name):
 
             table.insert(person, group, POPULATION_SIZE)
 
-    elif simulation_name == HALVES:
+    elif name == HALVES:
         for i, person in enumerate(PEOPLE):
             if i < (len(PEOPLE) / 2):
                 table.insert(person, Group.PACK, POPULATION_SIZE)
