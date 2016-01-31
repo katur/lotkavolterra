@@ -31,11 +31,11 @@ class Seat(object):
         self.previous_seat = previous_seat
 
     def __str__(self):
-        return '{} {}, size:{}'.format(self.group.name, self.name,
-                                       self.population_size)
+        return '{} {}'.format(self.group.name, self.name)
 
     def __repr__(self):
-        return str(self)
+        return '{} {}, size:{}'.format(self.group.name, self.name,
+                                       self.population_size)
 
     def get_next(self):
         """Get the next adjacent seat."""
