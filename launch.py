@@ -32,8 +32,8 @@ def hello_mars():
     return "Hello Mars!"
 
 
-@app.route("/test-random")
-def test_random():
+@app.route("/simulate-random")
+def simulate_random():
     logging.basicConfig(level=logging.DEBUG)
 
     x = Table(1)
@@ -51,8 +51,8 @@ def test_random():
     return get_interaction_html(x)
 
 
-@app.route("/test-alternating")
-def test_alternating():
+@app.route("/simulate-alternating")
+def simulate_alternating():
     logging.basicConfig(level=logging.DEBUG)
 
     x = Table(1)
@@ -70,8 +70,8 @@ def test_alternating():
     return get_interaction_html(x)
 
 
-@app.route("/test-halves")
-def test_halves():
+@app.route("/simulate-halves")
+def simulate_halves():
     logging.basicConfig(level=logging.DEBUG)
 
     x = Table(1)
