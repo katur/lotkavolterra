@@ -1,0 +1,15 @@
+<table>
+  {% for seat in table.get_seats() %}
+  <tr>
+    <td>{{ seat.group }}</td>
+    <td>{{ seat.name }}</td>
+    <td>
+      {% if show_initial %}
+      {{ seat.initial_population_size }}
+      {% else %}
+      {{ seat.population_size }}
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>

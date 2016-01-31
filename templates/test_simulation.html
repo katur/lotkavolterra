@@ -15,26 +15,14 @@
 
 <h3>Initial state</h3>
 
-<table>
-  {% for seat in table.get_seats() %}
-  <tr>
-    <td>{{ seat }}</td>
-    <td>{{ seat.initial_population_size }}</td>
-  </tr>
-  {% endfor %}
-</table>
+{% with show_initial = True %}
+{% include 'table_snapshot.html' %}
+{% endwith %}
 
 <h3>... after {{ num_generations }} generations ...</h3>
 
 <h3>Final state</h3>
 
-<table>
-  {% for seat in table.get_seats() %}
-  <tr>
-    <td>{{ seat }}</td>
-    <td>{{ seat.population_size }}</td>
-  </tr>
-  {% endfor %}
-</table>
+{% include 'table_snapshot.html' %}
 
 {% endblock %}
