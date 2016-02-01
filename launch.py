@@ -51,8 +51,8 @@ def list_simulations():
 
 @app.route("/test-simulation/<simulation>/")
 def test_simulation(simulation):
-    # Enable command line DEBUG logging
-    logging.basicConfig(level=logging.DEBUG)
+    # Uncomment to command line DEBUG logging
+    # logging.basicConfig(level=logging.DEBUG)
 
     num_seats, population_size, num_generations = parse_get_params()
 
