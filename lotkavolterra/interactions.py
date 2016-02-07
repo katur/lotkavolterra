@@ -1,7 +1,6 @@
 import logging
-from enum import Enum
 
-from coins import flip_coin, Flip
+from coins import Flip, flip_coin
 
 
 GROWTH_RATE = 0.333

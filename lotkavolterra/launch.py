@@ -1,6 +1,4 @@
-import logging
-
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request
 
 from models import Group, Table, get_random_group
 from localsettings import DEBUG
@@ -28,6 +26,7 @@ SIMULATIONS = (RANDOM, ALTERNATING, HALVES,)
 
 PEOPLE = ('Alice', 'Bob', 'Carol', 'Django', 'Erlich', 'Freddy',
           'Georgia', 'Heidi', 'Indigo', 'Jack',)
+
 
 def get_person(i):
     try:
