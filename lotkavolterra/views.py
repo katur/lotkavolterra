@@ -1,10 +1,7 @@
-from flask import Flask, render_template, request
+from flask import render_template, request
 
-from models import Group, Table, get_random_group
-from localsettings import DEBUG
-
-
-app = Flask(__name__)
+from lotkavolterra import app
+from lotkavolterra.models import Group, Table, get_random_group
 
 
 # Default sizes
@@ -26,13 +23,6 @@ SIMULATIONS = (RANDOM, ALTERNATING, HALVES,)
 
 PEOPLE = ('Alice', 'Bob', 'Carol', 'Django', 'Erlich', 'Freddy',
           'Georgia', 'Heidi', 'Indigo', 'Jack',)
-
-
-def get_person(i):
-    try:
-        return PEOPLE[i]
-    except IndexError:
-        return 'Person{}'.format(i)
 
 
 @app.route("/")
@@ -76,6 +66,13 @@ def test_simulation(simulation):
 
 # Helpers
 
+def get_person(i):
+    try:
+        return PEOPLE[i]
+    except IndexError:
+        return 'Person{}'.format(i)
+
+
 def parse_get_params():
     try:
         num_seats = int(request.args['num_seats'])
@@ -116,7 +113,3 @@ def populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
                 table.insert(person, Group.PACK, population_size)
             else:
                 table.insert(person, Group.HERD, population_size)
-
-
-if __name__ == "__main__":
-    app.run(debug=DEBUG)

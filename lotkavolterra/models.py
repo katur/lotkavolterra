@@ -1,7 +1,7 @@
 import random
 from enum import Enum
 
-from interactions import interact
+from lotkavolterra.interactions import interact
 
 
 class Group(Enum):

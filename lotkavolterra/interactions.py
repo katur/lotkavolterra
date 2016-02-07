@@ -1,6 +1,6 @@
 import logging
 
-from coins import Flip, flip_coin
+from lotkavolterra.coins import Flip, flip_coin
 
 
 GROWTH_RATE = 0.333
