@@ -4,13 +4,20 @@
     <link href="{{ url_for('static', filename='stylesheets/styles.css') }}"
       rel="stylesheet" type="text/css" />
 
+    <script src="{{ url_for('static', filename='js/d3/d3.min.js') }}"
+      charset="utf-8"></script>
+
+    <script src="{{ url_for('static', filename='js/test.js') }} "
+      charset="utf-8"></script>
+
     <title>
       {% block head_title_prefix %}{% endblock %}
       Lotka-Volterra
     </title>
   </head>
 
-  <body>
+
+  <body id="{% block body_id %}{% endblock %}">
     <h1 id="site-title">Lotka-Volterra</h1>
 
     <div id="content">

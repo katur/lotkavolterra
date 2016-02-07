@@ -64,6 +64,11 @@ def test_simulation(simulation):
     return render_template('test_simulation.html', **context)
 
 
+@app.route("/test-d3/")
+def test_d3():
+    return render_template('test_d3.html')
+
+
 # Helpers
 
 def get_person(i):
