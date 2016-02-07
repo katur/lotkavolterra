@@ -5,7 +5,7 @@ of invasive species interact according to the rules outlined below.
 While inspired by the Lotka-Volterra equations for modeling predator-prey
 dynamics, it is not a direct representation of those continuous equations.
 
-This project is graciously sponsored by the
+This project is made under the guidance of, and graciously sponsored by, the
 [RiskEcon lab at NYU](http://www.cims.nyu.edu/riskeconlab/).
 
 
