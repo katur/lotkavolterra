@@ -7,7 +7,22 @@
 
 {% block content %}
 
-<div class="three-columns">
+<div class="page-section forms">
+  <form method="GET" action="">
+    Number of seats:
+    <input name="num_seats" value="{{ num_seats }}"></input>
+
+    Population size:
+    <input name="population_size" value="{{ population_size }}"></input>
+
+    Number of generations:
+    <input name="num_generations" value="{{ num_generations }}"></input>
+
+    <input type="submit" value="submit"></input>
+  </form>
+</div>
+
+<div class="page-section three-columns">
   <div class="column">
     <span>Initial state</span>
 

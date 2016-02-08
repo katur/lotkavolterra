@@ -106,13 +106,15 @@ table td {
   border: 1px solid #eee;
   padding: 4px 6px; }
 
-#test-simulation .three-columns {
-  padding-top: 20px; }
-  #test-simulation .three-columns .blue {
-    background: #9999ff; }
-  #test-simulation .three-columns .red {
-    background: #ff8080; }
-  #test-simulation .three-columns .green {
-    background: #95a451; }
-  #test-simulation .three-columns .generations {
-    padding-top: 80px; }
+#test-simulation .forms {
+  font-size: 14px; }
+  #test-simulation .forms input {
+    width: 50px; }
+#test-simulation .three-columns .blue {
+  background: #9999ff; }
+#test-simulation .three-columns .red {
+  background: #ff8080; }
+#test-simulation .three-columns .green {
+  background: #95a451; }
+#test-simulation .three-columns .generations {
+  padding-top: 80px; }

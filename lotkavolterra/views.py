@@ -6,9 +6,9 @@ from lotkavolterra.models import Group, Table, get_random_group
 
 # Default sizes
 
-DEFAULT_NUM_GENERATIONS = 5
+DEFAULT_NUM_GENERATIONS = 10
 DEFAULT_NUM_SEATS = 10
-DEFAULT_POPULATION_SIZE = 100
+DEFAULT_POPULATION_SIZE = 1000
 
 
 # Test simulations
@@ -58,6 +58,8 @@ def test_simulation(simulation):
     context = {
         'simulation': simulation,
         'table': table,
+        'num_seats': num_seats,
+        'population_size': population_size,
         'num_generations': num_generations,
     }
 
