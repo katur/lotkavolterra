@@ -18,7 +18,9 @@
 
 
   <body id="{% block body_id %}{% endblock %}">
-    <h1 id="site-title">Lotka-Volterra</h1>
+    <a href="{{ url_for('home') }}">
+      <h1 id="site-title">Lotka-Volterra</h1>
+    </a>
 
     <div id="content">
       <h2 id="page-title">{% block page_title %}{% endblock %}</h2>
