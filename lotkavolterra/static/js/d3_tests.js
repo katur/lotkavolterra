@@ -39,22 +39,22 @@ function createCirclesOfCircles() {
   var tableY = SVG_HEIGHT / 2;
   var tableRadius = Math.min(SVG_WIDTH, SVG_HEIGHT) / 2 - 2*MAX_RADIUS
 
+  createCircleOfCircles(tableX1, tableY, tableRadius);
+  createCircleOfCircles(tableX2, tableY, tableRadius);
+}
+
+
+function createCircleOfCircles(tableX, tableY, tableRadius) {
   var circleEnd = 2 * Math.PI
   var circleStep = 0.2 * Math.PI
 
   for (i = 0; i < circleEnd; i += circleStep) {
-    x1 = tableX1 + tableRadius * Math.cos(i);
-    x2 = tableX2 + tableRadius * Math.cos(i);
+    x = tableX + tableRadius * Math.cos(i);
     y = tableY + tableRadius * Math.sin(i);
 
     d3.select("svg")
       .append("circle")
-      .attr("cx", x1)
-      .attr("cy", y);
-
-    d3.select("svg")
-      .append("circle")
-      .attr("cx", x2)
+      .attr("cx", x)
       .attr("cy", y);
   }
 }
