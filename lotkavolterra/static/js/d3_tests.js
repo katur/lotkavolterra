@@ -2,7 +2,7 @@ const SVG_WIDTH = 1200;
 const SVG_HEIGHT = 600;
 const MAX_RADIUS = 75;
 const NUM_RANDOM_CIRCLES = 20;
-const TRANSITION_DURATION = 500;
+const TRANSITION_DURATION = 1000;
 const EASING_FXN = "easeOutCubic";
 
 
