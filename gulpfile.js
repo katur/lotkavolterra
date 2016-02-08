@@ -4,8 +4,8 @@ var plumber = require('gulp-plumber');
 var sass = require('gulp-ruby-sass');
 
 var sassFiles = '**/*.sass';
-var sassMain = 'static/stylesheets/styles.sass';
-var cssDir = 'static/stylesheets/';
+var sassMain = 'lotkavolterra/static/stylesheets/styles.sass';
+var cssDir = 'lotkavolterra/static/stylesheets/';
 
 gulp.task('default', function() {
   gulp.run('compileSass')
