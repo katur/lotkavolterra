@@ -64,9 +64,19 @@ def test_simulation(simulation):
     return render_template('test_simulation.html', **context)
 
 
-@app.route("/test-d3/")
-def test_d3():
-    return render_template('test_d3.html')
+@app.route("/list-d3-tests/")
+def list_d3_tests():
+    return render_template('list_d3_tests.html')
+
+
+@app.route("/d3-circles-of-circles/")
+def d3_circles_of_circles():
+    return render_template('d3_circles_of_circles.html')
+
+
+@app.route("/d3-random-circles/")
+def d3_random_circles():
+    return render_template('d3_random_circles.html')
 
 
 # Helpers

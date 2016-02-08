@@ -2,6 +2,14 @@
 
 {% block content %}
 
-<a href="{{ url_for('list_simulations') }}">View the simulations</a>
+<ul>
+  <li>
+    <a href="{{ url_for('list_simulations') }}">View the simulations</a>
+  </li>
+
+  <li>
+    <a href="{{ url_for('list_d3_tests') }}">View the D3 tests</a>
+  </li>
+</ul>
 
 {% endblock %}
