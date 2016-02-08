@@ -3,7 +3,7 @@ import logging
 from lotkavolterra.coins import Flip, flip_coin
 
 
-GROWTH_RATE = 0.333
+GROWTH_RATE = 0.10
 COMPETITIVE_COIN_WEIGHT = 0.667
 
 
