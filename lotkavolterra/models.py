@@ -114,7 +114,9 @@ class Seat(object):
         """Decrease this seat's population size by growth rate."""
         change = int(round(self.population_size * growth_rate))
         self.population_size = self.population_size - change
-        if self.population_size <= 2:
+
+        # If, by this growth_rate, further decline is not possible
+        if int(round(self.population_size * growth_rate)) == 0:
             self.population_size = 0
 
     def interact_with_next(self):
