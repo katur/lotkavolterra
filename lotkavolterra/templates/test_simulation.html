@@ -1,24 +1,27 @@
 {% extends 'base.html' %}
 
+
+{% block body_id %}test-simulation{% endblock %}
 {% block page_title %}Test Simulation: {{ simulation }}{% endblock %}
+
 
 {% block content %}
 
 <div class="three-columns">
   <div class="column">
-    <h3 class="page-subtitle">Initial state</h3>
+    <span>Initial state</span>
 
     {% with show_initial = True %}
     {% include 'table_snapshot.html' %}
     {% endwith %}
   </div>
 
-  <div class="column">
-    ... after {{ num_generations }} generations ...
+  <div class="column generations">
+    <span>... after {{ num_generations }} generations ...</span>
   </div>
 
   <div class="column">
-    <h3 class="page-subtitle">Final state</h3>
+    <span>Final state</span>
 
     {% include 'table_snapshot.html' %}
   </div>

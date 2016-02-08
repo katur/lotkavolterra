@@ -4,6 +4,7 @@
   &:last-child
     margin-bottom: 0
 
+
 .three-columns
   .column
     float: left
@@ -13,20 +14,30 @@
     &:last-child
       margin-right: 0
 
+
 @mixin bulleted-list
   list-style-position: inside
   list-style-type: disc
+
 
 table
   td
     border: 1px solid #eee
     padding: 4px 6px
 
-.blue
-  background: lighten(blue, 30%)
 
-.red
-  background: lighten(red, 25%)
+#test-simulation
+  .three-columns
+    padding-top: $whitespace / 2
 
-.green
-  background: #95a451
+    .blue
+      background: lighten(blue, 30%)
+
+    .red
+      background: lighten(red, 25%)
+
+    .green
+      background: #95a451
+
+    .generations
+      padding-top: $whitespace * 2
