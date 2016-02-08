@@ -43,13 +43,16 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-body {
+html {
   box-sizing: border-box; }
 
 body {
-  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
   font-size: 16px;
   line-height: 1.5; }
+
+h1, h2, h3, h4 {
+  font-weight: bold; }
 
 h1 {
   font-size: 34px; }
@@ -64,8 +67,7 @@ h4 {
   font-size: 19px; }
 
 body {
-  padding: 40px;
-  font-family: "Trebuchet MS", Helvetica, sans-serif; }
+  padding: 40px; }
 
 #site-title {
   margin-bottom: 40px; }
