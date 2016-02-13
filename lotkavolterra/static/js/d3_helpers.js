@@ -67,7 +67,7 @@ function createCircleOfCircles(outerX, outerY, outerRadius, numCircles) {
 }
 
 
-function colorCircles() {
+function colorCirclesRandomly() {
   var colors = d3.scale.category20();
 
   var circle = d3.selectAll("circle")
@@ -79,7 +79,7 @@ function colorCircles() {
 }
 
 
-function changeCircleRadius() {
+function changeCircleRadiusRandomly() {
     d3.selectAll("circle")
       .transition()
       .duration(TRANSITION_DURATION)
@@ -87,5 +87,5 @@ function changeCircleRadius() {
       .attr("r", function() {
         return Math.random() * MAX_NODE_RADIUS;
       })
-      .each("end", changeCircleRadius);
+      .each("end", changeCircleRadiusRandomly);
 }
