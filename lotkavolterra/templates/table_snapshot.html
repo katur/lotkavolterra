@@ -2,7 +2,7 @@
   {% for seat in table.get_seats() %}
   <tr>
     <td class="{{ seat.color }}">
-      {{ seat.group }}
+      {{ seat.group.name }}
     </td>
 
     <td>{{ seat.name }}</td>

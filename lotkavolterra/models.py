@@ -8,14 +8,14 @@ class Group(Enum):
     """
     An organism group -- herd, pack, or colony.
     """
-    HERD, PACK, COLONY = range(3)
+    herd, pack, colony = range(3)
 
 
 def get_random_group():
     """
     Get a random group (herd, pack, or colony)
     """
-    return random.choice([Group.PACK, Group.HERD, Group.COLONY])
+    return random.choice([Group.pack, Group.herd, Group.colony])
 
 
 class Seat(object):
@@ -63,13 +63,13 @@ class Seat(object):
         self.previous_seat = other
 
     def is_herd(self):
-        return self.group == Group.HERD
+        return self.group == Group.herd
 
     def is_colony(self):
-        return self.group == Group.COLONY
+        return self.group == Group.colony
 
     def is_pack(self):
-        return self.group == Group.PACK
+        return self.group == Group.pack
 
     def get_color(self):
         if self.is_herd():
@@ -83,11 +83,11 @@ class Seat(object):
 
     def set_to_colony(self):
         """Set this seat's group to colony."""
-        self.group = Group.COLONY
+        self.group = Group.colony
 
     def set_randomly_to_pack_or_herd(self):
         """Set this seat's group to pack or herd, randomly."""
-        self.group = random.choice([Group.PACK, Group.HERD])
+        self.group = random.choice([Group.pack, Group.herd])
 
     def change_group_if_colony(self):
         """
