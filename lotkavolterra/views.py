@@ -38,8 +38,15 @@ def list_simulations():
     return render_template('list_simulations.html', **context)
 
 
-@app.route("/test-simulation/<simulation>/")
-def test_simulation(simulation):
+@app.route("/test-simulation/<simulation_name>/")
+def test_simulation(simulation_name):
+    """
+    Old version of test simulation.
+
+    In this version, the front end is passed the Table object
+    after all generations have run. Through this, they can see
+    the initial state and final states only.
+    """
     # Uncomment to command line DEBUG logging
     # logging.basicConfig(level=logging.DEBUG)
 
@@ -47,20 +54,45 @@ def test_simulation(simulation):
 
     # Create and populate Test table
     table = Table('Test')
-    populate_test_table(table, simulation, num_seats, population_size)
-
-    for seat in table.get_seats():
-        seat.color = seat.get_color()
+    populate_test_table(table, simulation_name, num_seats, population_size)
 
     # Run the simulation
     table.all_seats_interact(num_generations=num_generations)
 
     context = {
-        'simulation': simulation,
-        'table': table,
+        'simulation_name': simulation_name,
         'num_seats': num_seats,
-        'population_size': population_size,
         'num_generations': num_generations,
+        'population_size': population_size,
+        'table': table,
+    }
+
+    return render_template('test_simulation.html', **context)
+
+
+@app.route("/test-simulation-d3/<simulation_name>/")
+def test_simulation_d3(simulation_name):
+    num_seats, population_size, num_generations = parse_get_params()
+
+    # Create and populate Test table
+    table = Table('Test')
+    populate_test_table(table, simulation_name, num_seats, population_size)
+
+    # Get initial state
+    initial_state = table.export_full_state()
+
+    states = []
+    for generation in range(num_generations):
+        table.all_seats_interact()
+        states.append(table.export_current_sizes())
+
+    context = {
+        'simulation_name': simulation_name,
+        'num_seats': num_seats,
+        'num_generations': num_generations,
+        'population_size': population_size,
+        'initial_state': initial_state,
+        'states': states,
     }
 
     return render_template('test_simulation.html', **context)

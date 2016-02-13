@@ -1,7 +1,7 @@
 <table class="snapshot">
   {% for seat in table.get_seats() %}
   <tr>
-    <td class="{{ seat.color }}">
+    <td class="{{ seat.get_color() }}">
       {{ seat.group.name }}
     </td>
 

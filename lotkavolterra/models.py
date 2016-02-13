@@ -1,3 +1,4 @@
+import json
 import random
 from enum import Enum
 
@@ -192,7 +193,37 @@ class Table(object):
         return seats
 
     def all_seats_interact(self, num_generations=1):
-        """Have all seats at this table interact for num_generations."""
+        """
+        Have all seats at this table interact for num_generations.
+        """
         for i in range(num_generations):
             for seat in self.get_seats():
                 seat.interact_with_next()
+
+    def export_full_state(self):
+        """
+        Export the full state of this table.
+        """
+        data = {}
+        data['table_name'] = self.name
+        data['seats'] = []
+
+        for seat in self.get_seats():
+            data['seats'].append({
+                'id': seat.id,
+                'name': seat.name,
+                'group': seat.group.name,
+                'population_size': seat.population_size,
+            })
+
+        return json.dumps(data)
+
+    def export_current_sizes(self):
+        """
+        Export a mapping from seat id to population size for this table.
+        """
+        data = {}
+        for seat in self.get_seats():
+            data[seat.id] = seat.population_size
+
+        return json.dumps(data)
