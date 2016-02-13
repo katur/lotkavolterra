@@ -29,8 +29,9 @@ class Seat(object):
     fashion.
     """
 
-    def __init__(self, name, group, population_size,
+    def __init__(self, pk, name, group, population_size,
                  next_seat=None, previous_seat=None):
+        self.pk = pk
         self.name = name
         self.group = group
         self.population_size = population_size
@@ -128,7 +129,7 @@ class Table(object):
     """
     A table at the luncheon.
 
-    A table is made up of Seats.
+    A Table is made up of Seats.
     """
     def __init__(self, name, head=None):
         self.name = name
@@ -141,9 +142,9 @@ class Table(object):
         return ('Table {}, {} seats, head is {}'
                 .format(self.name, self.get_number_of_seats(), self.head))
 
-    def insert(self, name, group, population_size):
+    def insert(self, pk, name, group, population_size):
         """Insert a new seat at the head of this table."""
-        new = Seat(name=name, group=group,
+        new = Seat(pk=pk, name=name, group=group,
                    population_size=population_size)
 
         if not self.head:

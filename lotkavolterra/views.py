@@ -112,10 +112,10 @@ def parse_get_params():
 def populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
                         population_size=DEFAULT_POPULATION_SIZE):
     for i in range(num_seats):
-        person = get_person(i)
+        name = get_person(i)
 
         if simulation == RANDOM:
-            table.insert(person, get_random_group(), population_size)
+            table.insert(i, name, get_random_group(), population_size)
 
         elif simulation == ALTERNATING:
             if i % 2 == 0:
@@ -123,10 +123,10 @@ def populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
             else:
                 group = Group.HERD
 
-            table.insert(person, group, population_size)
+            table.insert(i, name, group, population_size)
 
         elif simulation == HALVES:
             if i < (num_seats / 2):
-                table.insert(person, Group.PACK, population_size)
+                table.insert(i, name, Group.PACK, population_size)
             else:
-                table.insert(person, Group.HERD, population_size)
+                table.insert(i, name, Group.HERD, population_size)
