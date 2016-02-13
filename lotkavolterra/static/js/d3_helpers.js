@@ -8,11 +8,12 @@ const DEFAULT_SVG_HEIGHT = 600;
 const DEFAULT_NUM_RANDOM_CIRCLES = 20;
 const DEFAULT_SEATS_PER_TABLE = 10;
 
+
 ////////////////
 // Test cases //
 ////////////////
 
-function createRandomCircles(numCircles) {
+function drawRandomCircles(numCircles) {
   var numCircles = numCircles || DEFAULT_NUM_RANDOM_CIRCLES;
   var svgWidth = DEFAULT_SVG_WIDTH;
   var svgHeight = DEFAULT_SVG_HEIGHT;
@@ -22,7 +23,7 @@ function createRandomCircles(numCircles) {
   for (i = 0; i < numCircles; i++) {
     var cx = Math.random() * (svgWidth - 2*MAX_NODE_RADIUS) + MAX_NODE_RADIUS;
     var cy = Math.random() * (svgHeight - 2*MAX_NODE_RADIUS) + MAX_NODE_RADIUS;
-    createCircle(cx, cy);
+    drawCircle(cx, cy);
   }
 
   colorAllCirclesRandomly();
@@ -30,7 +31,7 @@ function createRandomCircles(numCircles) {
 }
 
 
-function createTwoCirclesOfCircles() {
+function drawTwoCirclesOfCircles() {
   var svgWidth = DEFAULT_SVG_WIDTH;
   var svgHeight = DEFAULT_SVG_HEIGHT;
   createSVG(svgWidth, svgHeight);
@@ -40,13 +41,17 @@ function createTwoCirclesOfCircles() {
   var outerY = svgHeight / 2;
   var outerRadius = Math.min(svgWidth, svgHeight) / 2 - 2*MAX_NODE_RADIUS;
 
-  createCircleOfCircles(outerX1, outerY, outerRadius);
-  createCircleOfCircles(outerX2, outerY, outerRadius);
+  drawCircleOfCircles(outerX1, outerY, outerRadius);
+  drawCircleOfCircles(outerX2, outerY, outerRadius);
 
   colorAllCirclesRandomly();
   changeAllRadiiRandomly();
 }
 
+
+/////////////
+// Helpers //
+/////////////
 
 function createSVG(width, height) {
   var width = width || DEFAULT_SVG_WIDTH;
@@ -58,20 +63,35 @@ function createSVG(width, height) {
 }
 
 
-function createCircleOfCircles(outerX, outerY, outerRadius, numCircles) {
-  var numCircles = numCircles || DEFAULT_SEATS_PER_TABLE;
+function drawCircleOfCircles(outerX, outerY, outerRadius, nodes) {
+  var numCircles = nodes.length || DEFAULT_SEATS_PER_TABLE;
   var circleEnd = 2 * Math.PI
   var circleStep = circleEnd / numCircles
 
+  var innerX, innerY, node, color;
+  var nodeCounter = 0;
   for (i = 0; i < circleEnd; i += circleStep) {
-    var innerX = outerX + outerRadius * Math.cos(i);
-    var innerY = outerY + outerRadius * Math.sin(i);
-    createCircle(innerX, innerY);
+    innerX = outerX + outerRadius * Math.cos(i);
+    innerY = outerY + outerRadius * Math.sin(i);
+    node = nodes[nodeCounter];
+    drawCircle(innerX, innerY, getGroupColor(node));
+    nodeCounter++;
   }
 }
 
 
-function createCircle(cx, cy, color) {
+function getGroupColor(node) {
+  var color;
+  if (node.group == "herd")
+    color = "brown";
+  else if (node.group == "pack")
+    color = "gray";
+  else if (node.group == "colony")
+    color = "green";
+  return color;
+}
+
+function drawCircle(cx, cy, color) {
   d3.select("svg")
     .append("circle")
     .attr("cx", cx)

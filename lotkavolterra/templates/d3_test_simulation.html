@@ -24,18 +24,12 @@
 
 <script charset="utf-8">
   var initial = {{ initial_state|safe }};
-  console.log(initial);
+
+  var changes = {{ states|safe }};
+
+  createSVG(1200, 600);
+  drawCircleOfCircles(300, 300, 150, initial.seats);
+  changeAllRadiiRandomly();
 </script>
-
-<div class="page-section">
-  {{ initial_state }}
-
-  <hr>
-
-  {% for state in states %}
-    {{ state }}
-    <hr>
-  {% endfor %}
-</div>
 
 {% endblock %}
