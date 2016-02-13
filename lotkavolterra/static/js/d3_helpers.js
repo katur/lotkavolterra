@@ -67,7 +67,7 @@ function createCircleOfCircles(outerX, outerY, outerRadius, numCircles) {
 }
 
 
-function colorCircles(color) {
+function colorCircles() {
   var colors = d3.scale.category20();
 
   var circle = d3.selectAll("circle")
