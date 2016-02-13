@@ -7,7 +7,7 @@
 <ul>
   {% for simulation in simulations %}
   <li>
-    <a href="{{ url_for('test_simulation', simulation=simulation) }}">
+    <a href="{{ url_for('test_simulation', simulation_name=simulation) }}">
       {{ simulation }}</a>
   </li>
   {% endfor %}
