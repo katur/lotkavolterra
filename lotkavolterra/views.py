@@ -95,7 +95,7 @@ def test_simulation_d3(simulation_name):
         'states': states,
     }
 
-    return render_template('test_simulation.html', **context)
+    return render_template('test_simulation_d3.html', **context)
 
 
 @app.route("/list-d3-tests/")
@@ -151,14 +151,14 @@ def populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
 
         elif simulation == ALTERNATING:
             if i % 2 == 0:
-                group = Group.PACK
+                group = Group.pack
             else:
-                group = Group.HERD
+                group = Group.herd
 
             table.insert(i, name, group, population_size)
 
         elif simulation == HALVES:
             if i < (num_seats / 2):
-                table.insert(i, name, Group.PACK, population_size)
+                table.insert(i, name, Group.pack, population_size)
             else:
-                table.insert(i, name, Group.HERD, population_size)
+                table.insert(i, name, Group.herd, population_size)

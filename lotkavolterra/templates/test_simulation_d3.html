@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+
+{% block body_id %}test-simulation-d3{% endblock %}
+{% block page_title %}Test Simulation: {{ simulation_name }}{% endblock %}
+
+
+{% block content %}
+
+<div class="page-section forms">
+  <form method="GET" action="">
+    Number of seats:
+    <input name="num_seats" value="{{ num_seats }}"></input>
+
+    Number of generations:
+    <input name="num_generations" value="{{ num_generations }}"></input>
+
+    Initial population size:
+    <input name="population_size" value="{{ population_size }}"></input>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<script charset="utf-8">
+  var initial = {{ initial_state|safe }};
+  console.log(initial);
+</script>
+
+<div class="page-section">
+  {{ initial_state }}
+
+  <hr>
+
+  {% for state in states %}
+    {{ state }}
+    <hr>
+  {% endfor %}
+</div>
+
+{% endblock %}

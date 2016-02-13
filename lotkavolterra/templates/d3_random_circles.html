@@ -3,3 +3,12 @@
 
 {% block body_id %}d3-random-circles{% endblock %}
 {% block page_title %}D3 Random Circles{% endblock %}
+
+{% block content %}
+<script>
+  addSVG();
+  createRandomCircles(30);
+  colorCircles();
+  changeCircleRadius();
+</script>
+{% endblock %}
