@@ -70,8 +70,8 @@ def test_simulation(simulation_name):
     return render_template('test_simulation.html', **context)
 
 
-@app.route("/test-simulation-d3/<simulation_name>/")
-def test_simulation_d3(simulation_name):
+@app.route("/d3-test-simulation/<simulation_name>/")
+def d3_test_simulation(simulation_name):
     num_seats, population_size, num_generations = parse_get_params()
 
     # Create and populate Test table
@@ -95,7 +95,7 @@ def test_simulation_d3(simulation_name):
         'states': states,
     }
 
-    return render_template('test_simulation_d3.html', **context)
+    return render_template('d3_test_simulation.html', **context)
 
 
 @app.route("/list-d3-tests/")
