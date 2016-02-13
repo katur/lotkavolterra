@@ -29,12 +29,14 @@ class Seat(object):
     fashion.
     """
 
-    def __init__(self, pk, name, group, population_size,
+    def __init__(self, id, name, group, population_size,
                  next_seat=None, previous_seat=None):
-        self.pk = pk
+        self.id = id
         self.name = name
         self.group = group
         self.population_size = population_size
+
+        # hold onto this just for fun
         self.initial_population_size = population_size
         self.next_seat = next_seat
         self.previous_seat = previous_seat
@@ -142,9 +144,9 @@ class Table(object):
         return ('Table {}, {} seats, head is {}'
                 .format(self.name, self.get_number_of_seats(), self.head))
 
-    def insert(self, pk, name, group, population_size):
+    def insert(self, id, name, group, population_size):
         """Insert a new seat at the head of this table."""
-        new = Seat(pk=pk, name=name, group=group,
+        new = Seat(id=id, name=name, group=group,
                    population_size=population_size)
 
         if not self.head:
