@@ -1,5 +1,6 @@
 const TRANSITION_DURATION = 1000;
 const EASING_FXN = "easeOutCubic";
+const OPACITY = 0.5;
 const MAX_NODE_RADIUS = 75;
 
 const DEFAULT_SVG_WIDTH = 1200;
@@ -7,38 +8,32 @@ const DEFAULT_SVG_HEIGHT = 600;
 const DEFAULT_NUM_RANDOM_CIRCLES = 20;
 const DEFAULT_SEATS_PER_TABLE = 10;
 
-
-function addSVG(width, height) {
-  width = width || DEFAULT_SVG_WIDTH;
-  height = height || DEFAULT_SVG_HEIGHT;
-  d3.select("body")
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height);
-}
-
+////////////////
+// Test cases //
+////////////////
 
 function createRandomCircles(numCircles) {
-  numCircles = numCircles || DEFAULT_NUM_RANDOM_CIRCLES;
-  svgWidth = d3.select("svg").attr("width");
-  svgHeight = d3.select("svg").attr("height");
+  var numCircles = numCircles || DEFAULT_NUM_RANDOM_CIRCLES;
+  var svgWidth = DEFAULT_SVG_WIDTH;
+  var svgHeight = DEFAULT_SVG_HEIGHT;
+
+  createSVG(svgWidth, svgHeight);
 
   for (i = 0; i < numCircles; i++) {
-    d3.select("svg")
-      .append("circle")
-      .attr("cx", function() {
-        return MAX_NODE_RADIUS + Math.random()*(svgWidth - 2*MAX_NODE_RADIUS);
-      })
-      .attr("cy", function() {
-        return MAX_NODE_RADIUS + Math.random()*(svgHeight - 2*MAX_NODE_RADIUS);
-      });
+    var cx = Math.random() * (svgWidth - 2*MAX_NODE_RADIUS) + MAX_NODE_RADIUS;
+    var cy = Math.random() * (svgHeight - 2*MAX_NODE_RADIUS) + MAX_NODE_RADIUS;
+    createCircle(cx, cy);
   }
+
+  colorAllCirclesRandomly();
+  changeAllRadiiRandomly();
 }
 
 
 function createTwoCirclesOfCircles() {
-  svgWidth = d3.select("svg").attr("width");
-  svgHeight = d3.select("svg").attr("height");
+  var svgWidth = DEFAULT_SVG_WIDTH;
+  var svgHeight = DEFAULT_SVG_HEIGHT;
+  createSVG(svgWidth, svgHeight);
 
   var outerX1 = svgWidth / 4;
   var outerX2 = 3 * svgWidth / 4;
@@ -47,6 +42,19 @@ function createTwoCirclesOfCircles() {
 
   createCircleOfCircles(outerX1, outerY, outerRadius);
   createCircleOfCircles(outerX2, outerY, outerRadius);
+
+  colorAllCirclesRandomly();
+  changeAllRadiiRandomly();
+}
+
+
+function createSVG(width, height) {
+  var width = width || DEFAULT_SVG_WIDTH;
+  var height = height || DEFAULT_SVG_HEIGHT;
+  d3.select("body")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height);
 }
 
 
@@ -56,30 +64,34 @@ function createCircleOfCircles(outerX, outerY, outerRadius, numCircles) {
   var circleStep = circleEnd / numCircles
 
   for (i = 0; i < circleEnd; i += circleStep) {
-    innerX = outerX + outerRadius * Math.cos(i);
-    innerY = outerY + outerRadius * Math.sin(i);
-
-    d3.select("svg")
-      .append("circle")
-      .attr("cx", innerX)
-      .attr("cy", innerY);
+    var innerX = outerX + outerRadius * Math.cos(i);
+    var innerY = outerY + outerRadius * Math.sin(i);
+    createCircle(innerX, innerY);
   }
 }
 
 
-function colorCirclesRandomly() {
-  var colors = d3.scale.category20();
-
-  var circle = d3.selectAll("circle")
-    .style("fill", function(d, i) {
-      return colors(i);
-    })
-    .style("opacity", 0.5);
-
+function createCircle(cx, cy, color) {
+  d3.select("svg")
+    .append("circle")
+    .attr("cx", cx)
+    .attr("cy", cy)
+    .style("fill", color)
+    .style("opacity", OPACITY);
 }
 
 
-function changeCircleRadiusRandomly() {
+function colorAllCirclesRandomly() {
+  var colors = d3.scale.category20();
+
+  d3.selectAll("circle")
+    .style("fill", function(d, i) {
+      return colors(i);
+    });
+}
+
+
+function changeAllRadiiRandomly() {
     d3.selectAll("circle")
       .transition()
       .duration(TRANSITION_DURATION)
@@ -87,5 +99,5 @@ function changeCircleRadiusRandomly() {
       .attr("r", function() {
         return Math.random() * MAX_NODE_RADIUS;
       })
-      .each("end", changeCircleRadiusRandomly);
+      .each("end", changeAllRadiiRandomly);
 }
