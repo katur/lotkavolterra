@@ -24,12 +24,16 @@
 
 <script charset="utf-8">
   var initial = {{ initial_state|safe }};
+  console.log(initial);
 
-  var changes = {{ states|safe }};
+  var change = {{ change|safe }};
+  console.log(change);
 
   createSVG(1200, 600);
 
   drawTable(300, 300, 200, initial.seats);
+
+  updateTable(change);
 </script>
 
 {% endblock %}

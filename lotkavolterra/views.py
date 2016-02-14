@@ -81,10 +81,9 @@ def d3_test_simulation(simulation_name):
     # Get initial state
     initial_state = table.export_full_state()
 
-    states = []
-    for generation in range(num_generations):
-        table.all_seats_interact()
-        states.append(table.export_current_sizes())
+    # Try one interaction
+    table.all_seats_interact()
+    change = table.export_current_sizes()
 
     context = {
         'simulation_name': simulation_name,
@@ -92,7 +91,7 @@ def d3_test_simulation(simulation_name):
         'num_generations': num_generations,
         'population_size': population_size,
         'initial_state': initial_state,
-        'states': states,
+        'change': change,
     }
 
     return render_template('d3_test_simulation.html', **context)

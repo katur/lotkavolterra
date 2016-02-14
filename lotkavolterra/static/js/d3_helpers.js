@@ -108,17 +108,12 @@ function drawTable(tableX, tableY, tableRadius, seats) {
       return getColor(d);
     })
     .style("opacity", OPACITY);
-
-  d3.select("svg")
-    .selectAll("circle")
-
 }
 
 
 function getSize(seat) {
   return seat.population_size / 20;
 }
-
 
 function getColor(seat) {
   var color;
@@ -129,6 +124,18 @@ function getColor(seat) {
   else if (seat.group == "colony")
     color = "green";
   return color;
+}
+
+
+function updateTable(change) {
+  d3.select("svg")
+    .selectAll("circle")
+    .transition()
+    .duration(TRANSITION_DURATION)
+    .ease(EASING_FXN)
+    .attr("r", function(d, i) {
+      return change[d.id] / 20;
+    });
 }
 
 
@@ -143,16 +150,6 @@ function drawCircle(cx, cy, r, color) {
 }
 
 
-function colorAllCirclesRandomly() {
-  var colors = d3.scale.category20();
-
-  d3.selectAll("circle")
-    .style("fill", function(d, i) {
-      return colors(i);
-    });
-}
-
-
 function changeAllRadiiRandomly() {
     d3.selectAll("circle")
       .transition()
@@ -162,4 +159,14 @@ function changeAllRadiiRandomly() {
         return Math.random() * MAX_NODE_RADIUS;
       })
       .each("end", changeAllRadiiRandomly);
+}
+
+
+function colorAllCirclesRandomly() {
+  var colors = d3.scale.category20();
+
+  d3.selectAll("circle")
+    .style("fill", function(d, i) {
+      return colors(i);
+    });
 }
