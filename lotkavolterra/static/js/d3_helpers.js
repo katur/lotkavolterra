@@ -63,42 +63,74 @@ function createSVG(width, height) {
 }
 
 
-function drawCircleOfCircles(outerX, outerY, outerRadius, nodes) {
-  var numCircles = nodes ? nodes.length : DEFAULT_SEATS_PER_TABLE;
+function drawCircleOfCircles(outerX, outerY, outerRadius, numCircles) {
+  var numCircles = numCircles || DEFAULT_SEATS_PER_TABLE;
   var circleEnd = 2 * Math.PI
   var circleStep = circleEnd / numCircles
 
-  var innerX, innerY, node, color;
-  var nodeCounter = 0;
-  for (i = 0; i < circleEnd; i += circleStep) {
+  var innerX, innerY;
+  for (var i = 0; i < circleEnd; i += circleStep) {
     innerX = outerX + outerRadius * Math.cos(i);
     innerY = outerY + outerRadius * Math.sin(i);
-    if (nodes) {
-      node = nodes[nodeCounter];
-      drawCircle(innerX, innerY, getSize(node), getColor(node));
-    } else {
-      drawCircle(innerX, innerY);
-    }
-    nodeCounter++;
+    drawCircle(innerX, innerY);
   }
 }
 
 
-function getSize(node) {
-  return node.population_size;
+function drawTable(tableX, tableY, tableRadius, seats) {
+  var numSeats = seats.length;
+
+  var circleFull = 2 * Math.PI;
+  var circleStep = circleFull / numSeats;
+
+  function getPosition(seat) {
+    var angle = circleStep * seat.id;
+    var cx = tableX + tableRadius * Math.cos(angle);
+    var cy = tableY + tableRadius * Math.sin(angle);
+    return [cx, cy];
+  }
+
+  d3.select("svg")
+    .selectAll("circle")
+    .data(seats)
+    .enter()
+    .append("circle")
+    .attr("cx", function(d, i) {
+      return getPosition(d)[0];
+    })
+    .attr("cy", function(d, i) {
+      return getPosition(d)[1];
+    })
+    .attr("r", function(d, i) {
+      return getSize(d);
+    })
+    .style("fill", function(d, i) {
+      return getColor(d);
+    })
+    .style("opacity", OPACITY);
+
+  d3.select("svg")
+    .selectAll("circle")
+
 }
 
 
-function getColor(node) {
+function getSize(seat) {
+  return seat.population_size / 20;
+}
+
+
+function getColor(seat) {
   var color;
-  if (node.group == "herd")
+  if (seat.group == "herd")
     color = "brown";
-  else if (node.group == "pack")
+  else if (seat.group == "pack")
     color = "gray";
-  else if (node.group == "colony")
+  else if (seat.group == "colony")
     color = "green";
   return color;
 }
+
 
 function drawCircle(cx, cy, r, color) {
   d3.select("svg")
