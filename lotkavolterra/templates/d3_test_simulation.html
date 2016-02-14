@@ -26,14 +26,16 @@
   var initial = {{ initial_state|safe }};
   console.log(initial);
 
-  var change = {{ change|safe }};
-  console.log(change);
-
   createSVG(1200, 600);
 
-  drawTable(300, 300, 200, initial.seats);
+  drawTable(600, 300, 200, initial.seats);
 
-  updateTable(change);
+  var changes = {{ changes|safe }};
+  console.log(changes);
+
+  for (var i = 0; i < changes.length; i++) {
+    updateTable(changes[i]);
+  }
 </script>
 
 {% endblock %}

@@ -1,4 +1,3 @@
-import json
 import random
 from enum import Enum
 
@@ -216,7 +215,7 @@ class Table(object):
                 'population_size': seat.population_size,
             })
 
-        return json.dumps(data)
+        return data
 
     def export_current_sizes(self):
         """
@@ -226,4 +225,4 @@ class Table(object):
         for seat in self.get_seats():
             data[seat.id] = seat.population_size
 
-        return json.dumps(data)
+        return data

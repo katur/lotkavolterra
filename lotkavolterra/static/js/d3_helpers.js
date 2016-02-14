@@ -118,7 +118,7 @@ function getSize(seat) {
 function getColor(seat) {
   var color;
   if (seat.group == "herd")
-    color = "brown";
+    color = "#68513b";
   else if (seat.group == "pack")
     color = "gray";
   else if (seat.group == "colony")
