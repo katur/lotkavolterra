@@ -98,13 +98,15 @@ def populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
     for i in range(num_seats):
         id = i
         index = i
+
         try:
             name = PEOPLE[i]
         except IndexError:
             return 'Person{}'.format(i)
 
         if simulation == RANDOM:
-            table.insert(id, index, name, get_random_group(), population_size)
+            table.insert(id, index, name, get_random_group(),
+                         population_size)
 
         elif simulation == ALTERNATING:
             if i % 2 == 0:

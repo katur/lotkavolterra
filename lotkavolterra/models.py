@@ -121,19 +121,30 @@ class Seat(object):
         """Determine if this seat has become extinct."""
         return self.population_size == 0
 
-    def interact_with_next_interactor(self):
-        """Interact with the next seat."""
+    def get_next_interactor(self):
+        """
+        Get the next interactor for this seat.
+
+        Returns None if this seat is extinct, or if this seat is the only
+        node left.
+        """
         if self.is_extinct():
-            return
+            return None
 
         interactor = self.get_next()
         while interactor.is_extinct():
             interactor = interactor.get_next()
 
         if self == interactor:
-            raise Exception('Single remaining interactor!')
+            return None
 
-        interact(self, interactor)
+        return interactor
+
+    def interact_with_next_interactor(self):
+        """Interact with the next seat."""
+        interactor = self.get_next_interactor()
+        if interactor:
+            interact(self, interactor)
 
 
 class Table(object):
@@ -164,8 +175,8 @@ class Table(object):
 
         else:
             # Create next pointers
-            new.set_next(self.head)
-            new.set_previous(self.head.get_previous())
+            new.set_previous(self.head)
+            new.set_next(self.head.get_next())
 
             # Update old pointers
             new.get_next().set_previous(new)

@@ -77,6 +77,17 @@ a {
   a:hover {
     color: #b9af8e; }
 
+table td {
+  border: 1px solid #eee;
+  padding: 4px 6px; }
+
+.three-columns .column {
+  float: left;
+  width: 30%;
+  margin-right: 5%; }
+  .three-columns .column:last-child {
+    margin-right: 0; }
+
 body {
   padding: 40px;
   background: #eee; }
@@ -92,19 +103,12 @@ body {
 
 .page-section {
   margin-bottom: 40px; }
+  .page-section:after {
+    content: "";
+    display: table;
+    clear: both; }
   .page-section:last-child {
     margin-bottom: 0; }
-
-table td {
-  border: 1px solid #eee;
-  padding: 4px 6px; }
-
-.three-columns .column {
-  float: left;
-  width: 30%;
-  margin-right: 5%; }
-  .three-columns .column:last-child {
-    margin-right: 0; }
 
 #test-simulation .forms {
   font-size: 14px; }

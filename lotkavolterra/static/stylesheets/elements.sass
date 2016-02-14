@@ -3,6 +3,13 @@
   list-style-type: disc
 
 
+@mixin clearfix
+  &:after
+    content: ""
+    display: table
+    clear: both
+
+
 table
   td
     border: 1px solid #eee
