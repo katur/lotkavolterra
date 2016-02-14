@@ -95,6 +95,10 @@ body {
   .page-section:last-child {
     margin-bottom: 0; }
 
+table td {
+  border: 1px solid #eee;
+  padding: 4px 6px; }
+
 .three-columns .column {
   float: left;
   width: 30%;
@@ -102,19 +106,27 @@ body {
   .three-columns .column:last-child {
     margin-right: 0; }
 
-table td {
-  border: 1px solid #eee;
-  padding: 4px 6px; }
-
 #test-simulation .forms {
   font-size: 14px; }
   #test-simulation .forms input {
     width: 50px; }
-#test-simulation .three-columns .blue {
-  background: #9999ff; }
-#test-simulation .three-columns .red {
-  background: #ff8080; }
-#test-simulation .three-columns .green {
-  background: #95a451; }
+#test-simulation .three-columns .snapshot .group {
+  position: relative;
+  z-index: 1; }
+#test-simulation .three-columns .snapshot .group::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  z-index: -1; }
+#test-simulation .three-columns .snapshot .herd::before {
+  background: green; }
+#test-simulation .three-columns .snapshot .pack::before {
+  background: red; }
+#test-simulation .three-columns .snapshot .colony::before {
+  background: blue; }
 #test-simulation .three-columns .generations {
   padding-top: 80px; }

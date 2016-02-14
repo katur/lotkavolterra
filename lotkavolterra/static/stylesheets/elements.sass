@@ -1,8 +1,12 @@
-.page-section
-  margin-bottom: $whitespace
+@mixin bulleted-list
+  list-style-position: inside
+  list-style-type: disc
 
-  &:last-child
-    margin-bottom: 0
+
+table
+  td
+    border: 1px solid #eee
+    padding: 4px 6px
 
 
 .three-columns
@@ -13,14 +17,3 @@
 
     &:last-child
       margin-right: 0
-
-
-@mixin bulleted-list
-  list-style-position: inside
-  list-style-type: disc
-
-
-table
-  td
-    border: 1px solid #eee
-    padding: 4px 6px
