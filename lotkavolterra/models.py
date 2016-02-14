@@ -76,11 +76,11 @@ class Seat(object):
 
     def get_color(self):
         if self.is_herd():
-            return 'blue'
+            return 'green'
         elif self.is_pack():
             return 'red'
         elif self.is_colony():
-            return 'green'
+            return 'blue'
         else:
             return 'gray'
 

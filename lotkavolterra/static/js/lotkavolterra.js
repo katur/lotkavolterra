@@ -87,10 +87,10 @@ function getColor(group) {
    */
   var color;
   if (group == "herd")
-    color = "blue";
+    color = "green";
   else if (group == "pack")
     color = "red";
   else if (group == "colony")
-    color = "green";
+    color = "blue";
   return color;
 }
