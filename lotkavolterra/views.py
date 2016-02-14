@@ -17,10 +17,6 @@ RANDOM = 'random'
 ALTERNATING = 'alternating'
 HALVES = 'halves'
 SIMULATIONS = (RANDOM, ALTERNATING, HALVES,)
-
-
-# Test people
-
 PEOPLE = ('Alice', 'Bob', 'Carol', 'Django', 'Erlich', 'Freddy',
           'Georgia', 'Heidi', 'Indigo', 'Jack',)
 
@@ -56,36 +52,16 @@ def test_simulation(simulation_name):
     table = Table('Test')
     populate_test_table(table, simulation_name, num_seats, population_size)
 
-    # Run the simulation
-    table.all_seats_interact(num_generations=num_generations)
-
-    context = {
-        'simulation_name': simulation_name,
-        'num_seats': num_seats,
-        'num_generations': num_generations,
-        'population_size': population_size,
-        'table': table,
-    }
-
-    return render_template('test_simulation.html', **context)
-
-
-@app.route("/d3-test-simulation/<simulation_name>/")
-def d3_test_simulation(simulation_name):
-    num_seats, population_size, num_generations = parse_get_params()
-
-    # Create and populate Test table
-    table = Table('Test')
-    populate_test_table(table, simulation_name, num_seats, population_size)
-
-    # Get initial state
+    # Save initial state
     initial_state = table.export_full_state()
 
-    # Try one interaction
+    # Interact for num_generations
     changes = []
     for generation in range(num_generations):
         table.all_seats_interact()
         changes.append(table.export_current_sizes())
+
+    table.all_seats_interact(num_generations=num_generations)
 
     context = {
         'simulation_name': simulation_name,
@@ -94,34 +70,15 @@ def d3_test_simulation(simulation_name):
         'population_size': population_size,
         'initial_state': initial_state,
         'changes': changes,
+        'table': table,
     }
 
-    return render_template('d3_test_simulation.html', **context)
+    return render_template('test_simulation.html', **context)
 
 
-@app.route("/list-d3-tests/")
-def list_d3_tests():
-    return render_template('list_d3_tests.html')
-
-
-@app.route("/d3-circles-of-circles/")
-def d3_circles_of_circles():
-    return render_template('d3_circles_of_circles.html')
-
-
-@app.route("/d3-random-circles/")
-def d3_random_circles():
-    return render_template('d3_random_circles.html')
-
-
-# Helpers
-
-def get_person(i):
-    try:
-        return PEOPLE[i]
-    except IndexError:
-        return 'Person{}'.format(i)
-
+###########
+# Helpers #
+###########
 
 def parse_get_params():
     try:
@@ -147,7 +104,10 @@ def populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
     for i in range(num_seats):
         id = i
         index = i
-        name = get_person(i)
+        try:
+            name = PEOPLE[i]
+        except IndexError:
+            return 'Person{}'.format(i)
 
         if simulation == RANDOM:
             table.insert(id, index, name, get_random_group(), population_size)
@@ -165,3 +125,22 @@ def populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
                 table.insert(id, index, name, Group.pack, population_size)
             else:
                 table.insert(id, index, name, Group.herd, population_size)
+
+
+############
+# D3 Demos #
+############
+
+@app.route("/d3-demo-list/")
+def d3_demo_list():
+    return render_template('d3_demo_list.html')
+
+
+@app.route("/d3-demo-circles-of-circles/")
+def d3_demo_circles_of_circles():
+    return render_template('d3_demo_circles_of_circles.html')
+
+
+@app.route("/d3-demo-random-circles/")
+def d3_demo_random_circles():
+    return render_template('d3_demo_random_circles.html')

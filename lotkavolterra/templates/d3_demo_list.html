@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block page_title %}D3 Demos{% endblock %}
+
+{% block content %}
+
+<ul>
+  <li>
+    <a href="{{ url_for('d3_demo_random_circles') }}">
+      Random Circles</a>
+  </li>
+
+  <li>
+    <a href="{{ url_for('d3_demo_circles_of_circles') }}">
+      Circles of Circles</a>
+  </li>
+</ul>
+
+{% endblock %}

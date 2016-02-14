@@ -22,6 +22,11 @@
   </form>
 </div>
 
+<div class="page-section">
+  <svg width="1200" height="600">
+  </svg>
+</div>
+
 <div class="page-section three-columns">
   <div class="column">
     <span>Initial state</span>
@@ -41,5 +46,16 @@
     {% include 'table_snapshot.html' %}
   </div>
 </div>
+
+<script charset="utf-8">
+  var initial = {{ initial_state|safe }};
+  var changes = {{ changes|safe }};
+
+  drawTable(600, 300, 200, initial.seats);
+
+  for (var i = 0; i < changes.length; i++) {
+    updateTable(changes[i], i);
+  }
+</script>
 
 {% endblock %}
