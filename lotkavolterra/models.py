@@ -63,6 +63,41 @@ class Seat(object):
         """Set the previous adjacent seat."""
         self.previous_seat = other
 
+    def is_extinct(self):
+        """Determine if this seat has become extinct."""
+        return self.population_size == 0
+
+    def increase_population(self, growth_rate):
+        """Increase this seat's population size by growth_rate."""
+        change = int(round(self.population_size * growth_rate))
+        self.population_size = self.population_size + change
+
+        if self.population_size >= 10 * self.initial_population_size:
+            self.population_size = 0
+
+    def decrease_population(self, growth_rate):
+        """Decrease this seat's population size by growth rate."""
+        change = int(round(self.population_size * growth_rate))
+        self.population_size = self.population_size - change
+
+        # If, by this growth_rate, further decline is not possible
+        if int(round(self.population_size * growth_rate)) == 0:
+            self.population_size = 0
+
+    def interact_with_next_interactor(self):
+        """Interact with the next seat."""
+        if self.is_extinct():
+            return
+
+        interactor = self.get_next()
+        while interactor.is_extinct():
+            interactor = interactor.get_next()
+
+        if self == interactor:
+            return
+
+        interact(self, interactor)
+
     def is_herd(self):
         return self.group == Group.herd
 
@@ -106,24 +141,6 @@ class Seat(object):
         self.set_randomly_to_pack_or_herd()
 
         return True
-
-    def increase_population(self, growth_rate):
-        """Increase this seat's population size by growth_rate."""
-        change = int(round(self.population_size * growth_rate))
-        self.population_size = self.population_size + change
-
-    def decrease_population(self, growth_rate):
-        """Decrease this seat's population size by growth rate."""
-        change = int(round(self.population_size * growth_rate))
-        self.population_size = self.population_size - change
-
-        # If, by this growth_rate, further decline is not possible
-        if int(round(self.population_size * growth_rate)) == 0:
-            self.population_size = 0
-
-    def interact_with_next(self):
-        """Interact with the next seat."""
-        interact(self, self.get_next())
 
 
 class Table(object):
@@ -196,7 +213,7 @@ class Table(object):
         """
         for i in range(num_generations):
             for seat in self.get_all_seats():
-                seat.interact_with_next()
+                seat.interact_with_next_interactor()
 
     def export_full_state(self):
         """
