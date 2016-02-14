@@ -84,7 +84,7 @@ function drawTable(tableX, tableY, tableRadius, seats) {
   var circleStep = circleFull / numSeats;
 
   function getPosition(seat) {
-    var angle = circleStep * seat.id;
+    var angle = circleStep * seat.index;
     var cx = tableX + tableRadius * Math.cos(angle);
     var cy = tableY + tableRadius * Math.sin(angle);
     return [cx, cy];
@@ -118,20 +118,24 @@ function getSize(seat) {
 function getColor(seat) {
   var color;
   if (seat.group == "herd")
-    color = "#68513b";
+    color = "blue"; // "#68513b";
   else if (seat.group == "pack")
-    color = "gray";
+    color = "red";
   else if (seat.group == "colony")
     color = "green";
   return color;
 }
 
 
-function updateTable(change) {
+function updateTable(change, iteration) {
   d3.select("svg")
     .selectAll("circle")
     .transition()
     .duration(TRANSITION_DURATION)
+    .delay(function(d, i) {
+      var delay = iteration * TRANSITION_DURATION;
+      return delay;
+    })
     .ease(EASING_FXN)
     .attr("r", function(d, i) {
       return change[d.id] / 20;
