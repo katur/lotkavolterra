@@ -42,11 +42,11 @@ def test_simulation(simulation_name):
     # Uncomment to command line DEBUG logging
     # logging.basicConfig(level=logging.DEBUG)
 
-    num_seats, population_size, num_generations = parse_get_params()
+    num_seats, population_size, num_generations = _parse_get_params()
 
     # Create and populate Test table
     table = Table('Test')
-    populate_test_table(table, simulation_name, num_seats, population_size)
+    _populate_test_table(table, simulation_name, num_seats, population_size)
 
     # Save initial state
     initial_state = table.export_full_state()
@@ -74,7 +74,7 @@ def test_simulation(simulation_name):
 # Helpers #
 ###########
 
-def parse_get_params():
+def _parse_get_params():
     try:
         num_seats = int(request.args['num_seats'])
     except Exception:
@@ -93,8 +93,8 @@ def parse_get_params():
     return (num_seats, population_size, num_generations)
 
 
-def populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
-                        population_size=DEFAULT_POPULATION_SIZE):
+def _populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
+                         population_size=DEFAULT_POPULATION_SIZE):
     for i in range(num_seats):
         id = i
         index = i
@@ -102,7 +102,7 @@ def populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
         try:
             name = PEOPLE[i]
         except IndexError:
-            return 'Person{}'.format(i)
+            name = 'Person{}'.format(i)
 
         if simulation == RANDOM:
             table.insert(id, index, name, get_random_group(),
