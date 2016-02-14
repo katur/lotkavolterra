@@ -1,11 +1,10 @@
-const TRANSITION_DURATION = 1000;
+const TRANSITION_DURATION = 500;
 const EASING_FXN = "easeOutCubic";
 const OPACITY = 0.5;
 const MAX_NODE_RADIUS = 75;
 
 const DEFAULT_SVG_WIDTH = 1200;
 const DEFAULT_SVG_HEIGHT = 600;
-const DEFAULT_NUM_RANDOM_CIRCLES = 20;
 const DEFAULT_SEATS_PER_TABLE = 10;
 
 
@@ -14,7 +13,6 @@ const DEFAULT_SEATS_PER_TABLE = 10;
 ////////////////
 
 function drawRandomCircles(numCircles) {
-  var numCircles = numCircles || DEFAULT_NUM_RANDOM_CIRCLES;
   var svgWidth = DEFAULT_SVG_WIDTH;
   var svgHeight = DEFAULT_SVG_HEIGHT;
 
@@ -102,7 +100,7 @@ function drawTable(tableX, tableY, tableRadius, seats) {
       return getPosition(d)[1];
     })
     .attr("r", function(d, i) {
-      return getSize(d);
+      return getRadius(d.population_size);
     })
     .style("fill", function(d, i) {
       return getColor(d);
@@ -111,8 +109,11 @@ function drawTable(tableX, tableY, tableRadius, seats) {
 }
 
 
-function getSize(seat) {
-  return seat.population_size / 20;
+function getRadius(population_size) {
+  /*
+   * Choose radius such that area equals population size.
+   */
+  return Math.sqrt(population_size / Math.PI);
 }
 
 function getColor(seat) {
@@ -138,7 +139,7 @@ function updateTable(change, iteration) {
     })
     .ease(EASING_FXN)
     .attr("r", function(d, i) {
-      return change[d.id] / 20;
+      return getRadius(change[d.id]);
     });
 }
 
@@ -157,7 +158,7 @@ function drawCircle(cx, cy, r, color) {
 function changeAllRadiiRandomly() {
     d3.selectAll("circle")
       .transition()
-      .duration(TRANSITION_DURATION)
+      .duration(1000)
       .ease(EASING_FXN)
       .attr("r", function() {
         return Math.random() * MAX_NODE_RADIUS;
