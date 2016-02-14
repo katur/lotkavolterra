@@ -8,29 +8,25 @@ function drawTable(tableX, tableY, tableRadius, seats) {
   // The angle step between each of the seats
   var step = CIRCLE_FULL / seats.length;
 
-  d3.select("svg")
-    .selectAll("circle")
+  // Create and position wrapper group elements (g tags)
+  var elem = d3.select("svg")
+    .selectAll("g")
     .data(seats)
     .enter()
-    .append("circle")
-    .attr("cx", function(d, i) {
-      return getCoordinates({
+    .append("g")
+    .attr("transform", function(d) {
+      coords = getCoordinates({
         index: d.index,
         step: step,
         tableX: tableX,
         tableY: tableY,
         tableRadius: tableRadius,
-      })[0];
-    })
-    .attr("cy", function(d, i) {
-      return getCoordinates({
-        index: d.index,
-        step: step,
-        tableX: tableX,
-        tableY: tableY,
-        tableRadius: tableRadius,
-      })[1];
-    })
+      });
+      return "translate("+coords[0]+","+coords[1]+")"
+    });
+
+  // Add the circles
+  elem.append("circle")
     .attr("r", function(d, i) {
       return getRadius(d.population_size);
     })
@@ -41,6 +37,15 @@ function drawTable(tableX, tableY, tableRadius, seats) {
     .text(function(d, i) {
       return d.name;
     });
+
+  // Add the text
+  elem.append("text")
+    .text(function(d, i){
+      return d.name;
+    })
+    .attr("text-anchor", "middle")
+    .attr("alignment-baseline", "middle")
+    .attr("font-size", "10");
 }
 
 
@@ -50,8 +55,7 @@ function updateTable(change, iteration) {
     .transition()
     .duration(TRANSITION_DURATION)
     .delay(function(d, i) {
-      var delay = iteration * TRANSITION_DURATION;
-      return delay;
+      return iteration * TRANSITION_DURATION;
     })
     .ease(EASING_FXN)
     .attr("r", function(d, i) {

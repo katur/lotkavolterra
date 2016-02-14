@@ -6,7 +6,7 @@ from lotkavolterra.models import Group, Table, get_random_group
 
 # Default sizes
 
-DEFAULT_NUM_GENERATIONS = 10
+DEFAULT_NUM_GENERATIONS = 20
 DEFAULT_NUM_SEATS = 10
 DEFAULT_POPULATION_SIZE = 1000
 
@@ -37,11 +37,7 @@ def list_simulations():
 @app.route("/test-simulation/<simulation_name>/")
 def test_simulation(simulation_name):
     """
-    Old version of test simulation.
-
-    In this version, the front end is passed the Table object
-    after all generations have run. Through this, they can see
-    the initial state and final states only.
+    Run a test simulation.
     """
     # Uncomment to command line DEBUG logging
     # logging.basicConfig(level=logging.DEBUG)
@@ -60,8 +56,6 @@ def test_simulation(simulation_name):
     for generation in range(num_generations):
         table.all_seats_interact()
         changes.append(table.export_current_sizes())
-
-    table.all_seats_interact(num_generations=num_generations)
 
     context = {
         'simulation_name': simulation_name,
