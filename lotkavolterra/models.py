@@ -31,13 +31,11 @@ class Seat(object):
 
     def __init__(self, id, index, name, group, population_size,
                  next_seat=None, previous_seat=None):
-        self.id = id
-        self.index = index
+        self.id = id  # A unique identifier
+        self.index = index  # Position within the table
         self.name = name
         self.group = group
         self.population_size = population_size
-
-        # hold onto this just for fun
         self.initial_population_size = population_size
         self.next_seat = next_seat
         self.previous_seat = previous_seat
@@ -178,7 +176,7 @@ class Table(object):
 
         return count
 
-    def get_seats(self):
+    def get_all_seats(self):
         """Get a list of all seats at this table."""
         seats = []
         if not self.head:
@@ -197,7 +195,7 @@ class Table(object):
         Have all seats at this table interact for num_generations.
         """
         for i in range(num_generations):
-            for seat in self.get_seats():
+            for seat in self.get_all_seats():
                 seat.interact_with_next()
 
     def export_full_state(self):
@@ -208,7 +206,7 @@ class Table(object):
         data['table_name'] = self.name
         data['seats'] = []
 
-        for seat in self.get_seats():
+        for seat in self.get_all_seats():
             data['seats'].append({
                 'id': seat.id,
                 'index': seat.index,
@@ -224,7 +222,7 @@ class Table(object):
         Export a mapping from seat id to population size for this table.
         """
         data = {}
-        for seat in self.get_seats():
+        for seat in self.get_all_seats():
             data[seat.id] = seat.population_size
 
         return data
