@@ -1,3 +1,5 @@
+import json
+
 from flask import render_template, request
 
 from lotkavolterra import app
@@ -68,6 +70,45 @@ def test_simulation(simulation_name):
     }
 
     return render_template('test_simulation.html', **context)
+
+
+@app.route("/simulation/")
+def run_simulation():
+    """
+    Run the actual simulation from an input file.
+    """
+    with open('input.json', 'r') as f:
+        json_data = json.loads(f.read())
+
+    json_tables = json_data['tables']
+    tables = []
+    current_id = 0
+
+    for table_name, table_info in json_tables.iteritems():
+        table = Table(table_name,
+                      xcoordinate=table_info['xcoordinate'],
+                      ycoordinate=table_info['ycoordinate'])
+
+        tables.append(table)
+
+        for index, person in enumerate(table_info['people']):
+            table.insert(current_id, index, person,
+                         get_random_group(),
+                         DEFAULT_POPULATION_SIZE)
+            current_id += 1
+
+    initial_states = []
+    for table in tables:
+        initial_states.append(table.export_full_state())
+
+    print initial_states
+
+    context = {
+        'tables': tables,
+        'initial_states': initial_states,
+    }
+
+    return render_template('run_simulation.html', **context)
 
 
 ###########
