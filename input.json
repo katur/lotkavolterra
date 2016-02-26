@@ -1,6 +1,6 @@
 {
   "tables": {
-    "1": {
+    "Randos": {
       "people": [
         "Alice H.",
         "Bobby V.",
@@ -16,7 +16,7 @@
       "xcoordinate": 100,
       "ycoordinate": 100
     },
-    "2": {
+    "Pan": {
       "people": [
         "Zeke R.",
         "Michael G.",
@@ -26,11 +26,11 @@
         "Noah S.",
         "Sparkle D."
       ],
-      "xcoordinate": 500,
-      "ycoordinate": 500
+      "xcoordinate": 200,
+      "ycoordinate": 200
     },
-    "3": {
-      "people": {
+    "Cider Party": {
+      "people": [
         "Adrian W.",
         "Dan K.",
         "Eric Z.",
@@ -41,8 +41,8 @@
         "Jim K.",
         "Elizabeth K."
       ],
-      "xcoordinate": 100,
-      "ycoordinate": 900
+      "xcoordinate": 300,
+      "ycoordinate": 100
     }
   }
 }
