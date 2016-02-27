@@ -77,8 +77,10 @@ a {
   a:hover {
     color: #b9af8e; }
 
+table thead {
+  font-variant: small-caps; }
 table td {
-  border: 1px solid #eee;
+  border: 1px solid #ddd;
   padding: 4px 6px; }
 
 .three-columns .column {
@@ -115,10 +117,10 @@ body {
   #run-test-simulation #parameters input, #run-simulation #parameters input {
     width: 50px; }
 
-#run-test-simulation .three-columns .snapshot .group {
+#run-test-simulation .snapshot .group {
   position: relative;
   z-index: 1; }
-#run-test-simulation .three-columns .snapshot .group::before {
+#run-test-simulation .snapshot .group::before {
   content: "";
   position: absolute;
   top: 0;
@@ -127,11 +129,11 @@ body {
   height: 100%;
   opacity: 0.5;
   z-index: -1; }
-#run-test-simulation .three-columns .snapshot .herd::before {
+#run-test-simulation .snapshot .herd::before {
   background: green; }
-#run-test-simulation .three-columns .snapshot .pack::before {
+#run-test-simulation .snapshot .pack::before {
   background: red; }
-#run-test-simulation .three-columns .snapshot .colony::before {
+#run-test-simulation .snapshot .colony::before {
   background: blue; }
-#run-test-simulation .three-columns .generations {
+#run-test-simulation .generations {
   padding-top: 80px; }

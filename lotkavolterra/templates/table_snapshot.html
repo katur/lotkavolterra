@@ -1,19 +1,34 @@
 <table class="snapshot">
-  {% for seat in table.get_all_seats() %}
-  <tr>
-    <td class="group {{ seat.group.name }}">
-      {{ seat.group.name }}
-    </td>
+  <thead>
+    <tr>
+      <td>Group</td>
+      <td>Name</td>
+      <td>Population size</td>
+      <td>Interactor</td>
+    </tr>
+  </thead>
 
-    <td>{{ seat.name }}</td>
+  <tbody>
+    {% for seat in table.get_all_seats() %}
+    <tr>
+      <td class="group {{ seat.group.name }}">
+        {{ seat.group.name }}
+      </td>
 
-    <td>
-      {% if show_initial %}
-      {{ seat.initial_population_size }}
-      {% else %}
-      {{ seat.population_size }}
-      {% endif %}
-    </td>
-  </tr>
-  {% endfor %}
+      <td>{{ seat.name }}</td>
+
+      <td>
+        {% if show_initial %}
+        {{ seat.initial_population_size }}
+        {% else %}
+        {{ seat.population_size }}
+        {% endif %}
+      </td>
+
+      <td>
+        {{ seat.get_next_interactor() }}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>

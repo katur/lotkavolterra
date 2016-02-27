@@ -27,32 +27,10 @@
   }
 </script>
 
-<div class="page-section three-columns">
-  <div class="column">
-    <span>Initial state</span>
-
-    {% with show_initial = True %}
-    {% include 'table_snapshot.html' %}
-    {% endwith %}
-  </div>
-
-  <div class="column generations">
-    <span>... after {{ num_generations }} generations ...</span>
-  </div>
-
-  <div class="column">
-    <span>Final state</span>
-
-    {% include 'table_snapshot.html' %}
-  </div>
-</div>
-
 <div class="page-section">
-  {% for seat in table.get_all_seats() %}
-    {{ seat }} currently interacts with {{ seat.get_next_interactor() }}
-    <br>
+  <h3>Final state</h3>
 
-  {% endfor %}
+  {% include 'table_snapshot.html' %}
 </div>
 
 {% endblock %}
