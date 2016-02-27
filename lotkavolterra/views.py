@@ -84,7 +84,7 @@ def run_input_simulation(input_file):
     """
     Run the simulation from an input file.
     """
-    with open(input_file + '.json', 'r') as f:
+    with open('input/{}.json'.format(input_file), 'r') as f:
         json_data = json.loads(f.read())
 
     json_tables = json_data['tables']

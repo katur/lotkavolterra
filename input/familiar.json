@@ -26,8 +26,8 @@
         "Noah S.",
         "Sparkle D."
       ],
-      "xcoordinate": 200,
-      "ycoordinate": 200
+      "xcoordinate": 300,
+      "ycoordinate": 100
     },
     "Cider Party": {
       "people": [
@@ -41,11 +41,11 @@
         "Jim K.",
         "Elizabeth K."
       ],
-      "xcoordinate": 300,
-      "ycoordinate": 100
+      "xcoordinate": 100,
+      "ycoordinate": 300
     },
     "Duluth": {
-      "people": {
+      "people": [
         "Laura L.",
         "Russell J.",
         "Thomas E.",
@@ -57,7 +57,9 @@
         "Ashlie B.",
         "Heidi S.",
         "Josh B."
-      }
+      ],
+      "xcoordinate": 300,
+      "ycoordinate": 300
     }
   }
 }
