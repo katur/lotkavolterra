@@ -15,20 +15,26 @@ DEFAULT_POPULATION_SIZE = 1000
 
 @app.route("/")
 def home():
+    """
+    Render the homepage.
+    """
     return render_template('home.html')
 
 
-@app.route("/input-simulations/")
-def list_input_simulations():
+@app.route("/simulations/")
+def list_simulations():
+    """
+    Render the page listing the available simulation inputs.
+    """
     filenames = [f for f in listdir(INPUT_DIR) if isfile(join(INPUT_DIR, f))]
     context = {
         'inputs': filenames,
     }
-    return render_template('list_input_simulations.html', **context)
+    return render_template('list_simulations.html', **context)
 
 
-@app.route("/input-simulation/<input_file>/")
-def run_input_simulation(input_file):
+@app.route("/simulation/<input_file>/")
+def run_simulation(input_file):
     """
     Run the simulation from an input file.
     """
@@ -71,7 +77,7 @@ def run_input_simulation(input_file):
         'changes': changes,
     }
 
-    return render_template('run_input_simulation.html', **context)
+    return render_template('run_simulation.html', **context)
 
 
 ####################
@@ -88,6 +94,13 @@ PEOPLE = ('Alice', 'Bob', 'Carol', 'Django', 'Erlich', 'Freddy',
 
 @app.route("/test-simulations/")
 def list_test_simulations():
+    """
+    Render the page listing the "test case" simulations.
+
+    These are not from input files. Rather they generate the seat
+    assignments algorithmically, with the number of seats being
+    parameterized.
+    """
     context = {
         'simulations': (RANDOM, ALTERNATING, HALVES,),
     }
@@ -132,29 +145,6 @@ def run_test_simulation(simulation_name):
     return render_template('run_test_simulation.html', **context)
 
 
-###########
-# Helpers #
-###########
-
-def _parse_get_params():
-    try:
-        num_generations = int(request.args['num_generations'])
-    except Exception:
-        num_generations = DEFAULT_NUM_GENERATIONS
-
-    try:
-        population_size = int(request.args['population_size'])
-    except Exception:
-        population_size = DEFAULT_POPULATION_SIZE
-
-    try:
-        num_seats = int(request.args['num_seats'])
-    except Exception:
-        num_seats = DEFAULT_NUM_SEATS
-
-    return (num_generations, population_size, num_seats)
-
-
 def _populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
                          population_size=DEFAULT_POPULATION_SIZE):
     for i in range(num_seats):
@@ -183,6 +173,29 @@ def _populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
                 table.insert(pk, index, name, Group.pack, population_size)
             else:
                 table.insert(pk, index, name, Group.herd, population_size)
+
+
+###########
+# Helpers #
+###########
+
+def _parse_get_params():
+    try:
+        num_generations = int(request.args['num_generations'])
+    except Exception:
+        num_generations = DEFAULT_NUM_GENERATIONS
+
+    try:
+        population_size = int(request.args['population_size'])
+    except Exception:
+        population_size = DEFAULT_POPULATION_SIZE
+
+    try:
+        num_seats = int(request.args['num_seats'])
+    except Exception:
+        num_seats = DEFAULT_NUM_SEATS
+
+    return (num_generations, population_size, num_seats)
 
 
 ############
