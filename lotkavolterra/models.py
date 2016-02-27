@@ -243,7 +243,7 @@ class Table(object):
             for seat in self.get_all_seats():
                 seat.interact_with_next_interactor()
 
-    def export_state(self):
+    def export_seat_states(self):
         """
         Export the current state of this table.
         """
@@ -254,7 +254,7 @@ class Table(object):
 
         return seat_states
 
-    def export_current_sizes(self):
+    def export_seat_sizes(self):
         """
         Export a mapping from seat pk to population size for all seats
         at this table.
@@ -262,5 +262,49 @@ class Table(object):
         seat_sizes = {}
         for seat in self.get_all_seats():
             seat_sizes[seat.pk] = seat.population_size
+
+        return seat_sizes
+
+
+class Luncheon(object):
+    """
+    A luncheon of tables.
+    """
+    def __init__(self, name):
+        self.name = name
+        self.tables = []
+
+    def __str__(self):
+        return 'Luncheon {}'.format(self.name)
+
+    def __repr__(self):
+        return str(self)
+
+    def add_table(self, table):
+        self.tables.append(table)
+
+    def run_generation(self):
+        for table in self.tables:
+            table.all_seats_interact()
+
+    def export_seat_states(self):
+        """
+        Export the current state of this table.
+        """
+        seat_states = []
+
+        for table in self.tables:
+            seat_states.extend(table.export_seat_states())
+
+        return seat_states
+
+    def export_seat_sizes(self):
+        """
+        Export a mapping from seat pk to population size for all seats
+        at this table.
+        """
+        seat_sizes = {}
+        for table in self.tables.export_seat_sizes():
+            seat_sizes.update(table)
 
         return seat_sizes

@@ -9,11 +9,11 @@
 
 <div class="page-section forms">
   <form method="GET" action="">
-    Initial population size:
-    <input name="population_size" value="{{ population_size }}"></input>
-
     Number of generations:
     <input name="num_generations" value="{{ num_generations }}"></input>
+
+    Initial population size:
+    <input name="population_size" value="{{ population_size }}"></input>
 
     <button type="submit">Submit</button>
   </form>
@@ -24,14 +24,8 @@
 </div>
 
 <script charset="utf-8">
-  var initialStates = {{ initial_states|safe }};
-
-  var seats = [];
-  for (var i = 0; i < initialStates.length; i++) {
-    seats.push.apply(seats, initialStates[i]);
-  }
-
-  drawSeats(seats);
+  var initialState = {{ initial_state|safe }};
+  drawSeats(initialState);
 
   // var changes = {{ changes|safe }};
 

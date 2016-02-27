@@ -3,7 +3,7 @@ import json
 from flask import render_template, request
 
 from lotkavolterra import app
-from lotkavolterra.models import Group, Table, get_random_group
+from lotkavolterra.models import Group, Table, Luncheon, get_random_group
 
 
 # Default sizes
@@ -51,26 +51,28 @@ def run_test_simulation(simulation_name):
     # Uncomment to command line DEBUG logging
     # logging.basicConfig(level=logging.DEBUG)
 
-    num_seats, population_size, num_generations = _parse_get_params()
+    num_generations, population_size, num_seats = _parse_get_params()
 
     # Create and populate Test table
+    luncheon = Luncheon('Test')
     table = Table('Test', 600, 300)
     _populate_test_table(table, simulation_name, num_seats, population_size)
+    luncheon.add_table(table)
 
     # Save initial state
-    initial_state = table.export_state()
+    initial_state = luncheon.export_seat_states()
 
     # Interact for num_generations
     changes = []
     for generation in range(num_generations):
-        table.all_seats_interact()
-        changes.append(table.export_current_sizes())
+        luncheon.run_generation()
+        changes.append(table.export_seat_sizes())
 
     context = {
         'simulation_name': simulation_name,
-        'num_seats': num_seats,
         'num_generations': num_generations,
         'population_size': population_size,
+        'num_seats': num_seats,
         'initial_state': initial_state,
         'changes': changes,
         'table': table,
@@ -84,33 +86,34 @@ def run_input_simulation(input_file):
     """
     Run the simulation from an input file.
     """
+    # Will not use num_seats here
+    num_generations, population_size, num_seats = _parse_get_params()
+
     with open('input/{}.json'.format(input_file), 'r') as f:
         json_data = json.loads(f.read())
 
     json_tables = json_data['tables']
     current_pk = 0
-    tables = []
+    luncheon = Luncheon('Black Rock Forest Luncheon')
 
     for table_name, table_info in json_tables.iteritems():
         table = Table(table_name,
                       xcoordinate=table_info['xcoordinate'],
                       ycoordinate=table_info['ycoordinate'])
 
-        tables.append(table)
-
         for index, person in enumerate(table_info['people']):
             table.insert(current_pk, index, person,
-                         get_random_group(),
-                         DEFAULT_POPULATION_SIZE)
+                         get_random_group(), population_size)
             current_pk += 1
 
-    initial_states = []
-    for table in tables:
-        initial_states.append(table.export_state())
+        luncheon.add_table(table)
+
+    initial_state = luncheon.export_seat_states()
 
     context = {
-        'tables': tables,
-        'initial_states': initial_states,
+        'num_generations': num_generations,
+        'population_size': population_size,
+        'initial_state': initial_state,
     }
 
     return render_template('run_input_simulation.html', **context)
@@ -122,9 +125,9 @@ def run_input_simulation(input_file):
 
 def _parse_get_params():
     try:
-        num_seats = int(request.args['num_seats'])
+        num_generations = int(request.args['num_generations'])
     except Exception:
-        num_seats = DEFAULT_NUM_SEATS
+        num_generations = DEFAULT_NUM_GENERATIONS
 
     try:
         population_size = int(request.args['population_size'])
@@ -132,11 +135,11 @@ def _parse_get_params():
         population_size = DEFAULT_POPULATION_SIZE
 
     try:
-        num_generations = int(request.args['num_generations'])
+        num_seats = int(request.args['num_seats'])
     except Exception:
-        num_generations = DEFAULT_NUM_GENERATIONS
+        num_seats = DEFAULT_NUM_SEATS
 
-    return (num_seats, population_size, num_generations)
+    return (num_generations, population_size, num_seats)
 
 
 def _populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
