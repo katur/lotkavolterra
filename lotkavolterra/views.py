@@ -51,15 +51,15 @@ def run_simulation(input_file):
     with open(join(INPUT_DIR, input_file), 'r') as f:
         json_data = json.loads(f.read())
 
-    json_tables = json_data['tables']
+    luncheon = Luncheon(json_data['luncheon']['name'])
     current_pk = 0
-    luncheon = Luncheon('Black Rock Forest Luncheon')
 
     # Populate tables from the json input
-    for table_name, table_info in json_tables.iteritems():
-        table = Table(table_name, x=table_info['x'], y=table_info['y'])
+    for json_table in json_data['luncheon']['tables']:
+        table = Table(json_table['name'], x=json_table['x'],
+                      y=json_table['y'])
 
-        for index, person in enumerate(table_info['people']):
+        for index, person in enumerate(json_table['people']):
             table.insert(current_pk, index, person,
                          get_random_group(), population_size)
             current_pk += 1
@@ -76,7 +76,7 @@ def run_simulation(input_file):
         changes.append(luncheon.export_seat_sizes())
 
     context = {
-        'simulation_name': input_file,
+        'simulation_name': luncheon.name,
         'num_generations': num_generations,
         'population_size': population_size,
         'initial_state': initial_state,
@@ -165,6 +165,9 @@ def _populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
 
 
 def _parse_get_params():
+    """
+    Parse the simulation settings GET parameters.
+    """
     try:
         num_generations = int(request.args['num_generations'])
     except Exception:

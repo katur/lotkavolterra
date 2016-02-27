@@ -1,65 +1,72 @@
 {
-  "tables": {
-    "Randos": {
-      "people": [
-        "Alice H.",
-        "Bobby V.",
-        "Carol K.",
-        "Django R.",
-        "Erlich R.",
-        "Freddy G.",
-        "Georgia T.",
-        "Heidi T. R.",
-        "Indigo V.",
-        "Jack J."
-      ],
-      "x": 0.25,
-      "y": 0.25
-    },
-    "Pan": {
-      "people": [
-        "Zeke R.",
-        "Michael G.",
-        "Steve L.",
-        "Anne T.",
-        "Ze'ev S.",
-        "Noah S.",
-        "Sparkle D."
-      ],
-      "x": 0.75,
-      "y": 0.25
-    },
-    "Cider Party": {
-      "people": [
-        "Adrian W.",
-        "Dan K.",
-        "Eric Z.",
-        "Stacey L.",
-        "Crispen M.",
-        "Rosalie K.",
-        "Dinah Y.",
-        "Jim K.",
-        "Elizabeth K."
-      ],
-      "x": 0.25,
-      "y": 0.75
-    },
-    "Duluth": {
-      "people": [
-        "Laura L.",
-        "Russell J.",
-        "Thomas E.",
-        "Helen E.",
-        "Toast R.",
-        "Amy W.",
-        "Pepper G.",
-        "Gaelynn W.",
-        "Ashlie B.",
-        "Heidi S.",
-        "Josh B."
-      ],
-      "x": 0.75,
-      "y": 0.75
-    }
+  "luncheon": {
+    "name": "My friends",
+    "tables": [
+      {
+        "name": "Pan",
+        "x": 0.75,
+        "y": 0.25,
+        "people": [
+          "Zeke R.",
+          "Michael G.",
+          "Steve L.",
+          "Anne T.",
+          "Ze'ev S.",
+          "Noah S.",
+          "Sparkle D."
+        ]
+      },
+      {
+        "name": "Cider Party",
+        "x": 0.25,
+        "y": 0.75,
+        "people": [
+          "Adrian W.",
+          "Dan K.",
+          "Eric Z.",
+          "Stacey L.",
+          "Crispen M.",
+          "Rosalie K.",
+          "Dinah Y.",
+          "Jim K.",
+          "Elizabeth K."
+        ]
+      },
+      {
+        "name": "Duluth",
+        "x": 0.75,
+        "y": 0.75,
+        "people": [
+          "Laura L.",
+          "Russell J.",
+          "Thomas E.",
+          "Helen E.",
+          "Toast R.",
+          "Amy W.",
+          "Pepper G.",
+          "Gaelynn W.",
+          "Ashlie B.",
+          "Heidi S.",
+          "Josh B."
+        ]
+      },
+      {
+        "name": "Randos",
+        "x": 0.25,
+        "y": 0.25,
+        "people": [
+          "Alice H.",
+          "Bobby V.",
+          "Carol K.",
+          "Django R.",
+          "Erlich R.",
+          "Freddy G.",
+          "Georgia T.",
+          "Heidi T. R.",
+          "Indigo V.",
+          "Jack J."
+        ]
+      }
+    ]
   }
 }
