@@ -102,7 +102,9 @@ class Seat(object):
         return True
 
     def increase_population(self, growth_rate):
-        """Increase this seat's population size by growth_rate."""
+        """
+        Increase this seat's population size by growth_rate.
+        """
         change = int(round(self.population_size * growth_rate))
         self.population_size = self.population_size + change
 
@@ -110,7 +112,9 @@ class Seat(object):
             self.population_size = 0
 
     def decrease_population(self, growth_rate):
-        """Decrease this seat's population size by growth rate."""
+        """
+        Decrease this seat's population size by growth_rate.
+        """
         change = int(round(self.population_size * growth_rate))
         self.population_size = self.population_size - change
 
@@ -119,7 +123,9 @@ class Seat(object):
             self.population_size = 0
 
     def is_extinct(self):
-        """Determine if this seat has become extinct."""
+        """
+        Determine if this seat has become extinct.
+        """
         return self.population_size == 0
 
     def get_next_interactor(self):
@@ -142,12 +148,17 @@ class Seat(object):
         return interactor
 
     def interact_with_next_interactor(self):
-        """Interact with the next seat."""
+        """
+        Interact with the next defined interactor.
+        """
         interactor = self.get_next_interactor()
         if interactor:
             interact(self, interactor)
 
     def export_state(self):
+        """
+        Export the current state of this seat.
+        """
         return {
             'pk': self.pk,
             'index': self.index,
@@ -162,9 +173,7 @@ class Seat(object):
 
 class Table(object):
     """
-    A table at the luncheon.
-
-    A Table is made up of Seats.
+    A table of seats.
     """
     def __init__(self, name, xcoordinate=0, ycoordinate=0):
         self.name = name
@@ -184,7 +193,9 @@ class Table(object):
                 .format(self.name, self.size, self.head))
 
     def insert(self, pk, index, name, group, population_size):
-        """Insert a new seat at the head of this table."""
+        """
+        Insert a new seat at the head of this table.
+        """
         new_seat = Seat(pk=pk, index=index, name=name, group=group,
                         population_size=population_size, table=self)
 
@@ -205,7 +216,9 @@ class Table(object):
         self.size += 1
 
     def get_all_seats(self):
-        """Get a list of all seats at this table."""
+        """
+        Get a list of all seats at this table.
+        """
         seats = []
         if not self.head:
             return seats
