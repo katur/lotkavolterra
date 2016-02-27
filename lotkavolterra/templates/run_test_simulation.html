@@ -27,13 +27,12 @@
 </div>
 
 <script charset="utf-8">
-  var initial = {{ initial_state|safe }};
+  var initialState = {{ initial_state|safe }};
+  drawSeats(initialState);
+
   var changes = {{ changes|safe }};
-
-  drawSeats(initial.seats);
-
   for (var i = 0; i < changes.length; i++) {
-    updateTable(changes[i], i);
+    updateSeats(changes[i], i);
   }
 </script>
 

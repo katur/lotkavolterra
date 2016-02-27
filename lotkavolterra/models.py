@@ -157,7 +157,11 @@ class Seat(object):
 
     def export_state(self):
         """
-        Export the current state of this seat.
+        Export the current state this seat.
+
+        Includes all information necessary to pass the seat to the front
+        end, such that the frontn end can render it, including its
+        position.
         """
         return {
             'pk': self.pk,
@@ -243,21 +247,20 @@ class Table(object):
         """
         Export the current state of this table.
         """
-        data = {}
-        data['seats'] = []
+        seat_states = []
 
         for seat in self.get_all_seats():
-            data['seats'].append(seat.export_state())
+            seat_states.append(seat.export_state())
 
-        return data
+        return seat_states
 
     def export_current_sizes(self):
         """
         Export a mapping from seat pk to population size for all seats
         at this table.
         """
-        data = {}
+        seat_sizes = {}
         for seat in self.get_all_seats():
-            data[seat.pk] = seat.population_size
+            seat_sizes[seat.pk] = seat.population_size
 
-        return data
+        return seat_sizes

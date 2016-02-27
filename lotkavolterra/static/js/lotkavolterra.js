@@ -50,7 +50,7 @@ function drawSeats(seats) {
 }
 
 
-function updateTable(change, iteration) {
+function updateSeats(change, iteration) {
   d3.select("svg")
     .selectAll("circle")
     .transition()

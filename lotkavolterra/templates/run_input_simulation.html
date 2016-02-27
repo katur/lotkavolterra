@@ -28,7 +28,7 @@
 
   var seats = [];
   for (var i = 0; i < initialStates.length; i++) {
-    seats.push.apply(seats, initialStates[i].seats);
+    seats.push.apply(seats, initialStates[i]);
   }
 
   drawSeats(seats);
