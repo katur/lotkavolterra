@@ -2,9 +2,10 @@ const TRANSITION_DURATION = 500;
 const EASING_FXN = "easeOutCubic";
 const OPACITY = 0.5;
 const CIRCLE_FULL = 2 * Math.PI;
+const TABLE_RADIUS = 200
 
 
-function drawTable(tableX, tableY, tableRadius, seats) {
+function drawTables(seats) {
   // The angle step between each of the seats
   var step = CIRCLE_FULL / seats.length;
 
@@ -18,9 +19,9 @@ function drawTable(tableX, tableY, tableRadius, seats) {
       coords = getCoordinates({
         index: d.index,
         step: step,
-        tableX: tableX,
-        tableY: tableY,
-        tableRadius: tableRadius,
+        tableX: d.table_xcoordinate,
+        tableY: d.table_ycoordinate,
+        tableRadius: TABLE_RADIUS,
       });
       return "translate("+coords[0]+","+coords[1]+")"
     });

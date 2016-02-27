@@ -9,12 +9,12 @@ from lotkavolterra.models import Group, Table, get_random_group
 # Default sizes
 
 DEFAULT_NUM_GENERATIONS = 20
-DEFAULT_NUM_SEATS = 10
 DEFAULT_POPULATION_SIZE = 1000
 
 
 # Test simulations
 
+DEFAULT_NUM_SEATS = 10
 RANDOM = 'random'
 ALTERNATING = 'alternating'
 HALVES = 'halves'
@@ -47,11 +47,11 @@ def test_simulation(simulation_name):
     num_seats, population_size, num_generations = _parse_get_params()
 
     # Create and populate Test table
-    table = Table('Test')
+    table = Table('Test', 600, 300)
     _populate_test_table(table, simulation_name, num_seats, population_size)
 
     # Save initial state
-    initial_state = table.export_full_state()
+    initial_state = table.export_state()
 
     # Interact for num_generations
     changes = []
@@ -99,7 +99,7 @@ def run_simulation():
 
     initial_states = []
     for table in tables:
-        initial_states.append(table.export_full_state())
+        initial_states.append(table.export_state())
 
     context = {
         'tables': tables,

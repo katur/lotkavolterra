@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+{% block body_id %}run-simulation{% endblock %}
+{% block page_title %}Run Simulation from Input File{% endblock %}
+
+
+{% block content %}
+
+<div class="page-section forms">
+  <form method="GET" action="">
+    Initial population size:
+    <input name="population_size" value="{{ population_size }}"></input>
+
+    Number of generations:
+    <input name="num_generations" value="{{ num_generations }}"></input>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<div class="page-section">
+  <svg width="1200" height="600"></svg>
+</div>
+
+<script charset="utf-8">
+  var initialStates = {{ initial_states|safe }};
+  console.log(initialStates);
+
+  var newSeats;
+  var seats = [];
+  for (var i = 0; i < initialStates.length; i++) {
+    newSeats = initialStates[i].seats;
+    seats.push.apply(seats, newSeats);
+  }
+
+  drawTables(seats);
+
+  // var changes = {{ changes|safe }};
+
+  /*
+  for (var i = 0; i < changes.length; i++) {
+    updateTable(changes[i], i);
+  }
+  */
+</script>
+
+{% endblock %}

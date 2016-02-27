@@ -30,13 +30,14 @@ class Seat(object):
     """
 
     def __init__(self, pk, index, name, group, population_size,
-                 next_seat=None, previous_seat=None):
+                 table=None, next_seat=None, previous_seat=None):
         self.pk = pk  # Unique identifier across tables
         self.index = index  # Position within the table
         self.name = name
         self.group = group
         self.population_size = population_size
         self.initial_population_size = population_size
+        self.table = table
         self.next_seat = next_seat
         self.previous_seat = previous_seat
 
@@ -146,6 +147,17 @@ class Seat(object):
         if interactor:
             interact(self, interactor)
 
+    def export_state(self):
+        return {
+            'pk': self.pk,
+            'index': self.index,
+            'name': str(self.name),
+            'group': self.group.name,
+            'population_size': self.population_size,
+            'table_xcoordinate': self.table.xcoordinate,
+            'table_ycoordinate': self.table.ycoordinate,
+        }
+
 
 class Table(object):
     """
@@ -153,9 +165,13 @@ class Table(object):
 
     A Table is made up of Seats.
     """
-    def __init__(self, name, head=None):
+    def __init__(self, name, xcoordinate=0, ycoordinate=0):
         self.name = name
-        self.head = head
+        self.head = None
+
+        # Position in the space
+        self.xcoordinate = xcoordinate
+        self.ycoordinate = ycoordinate
 
     def __str__(self):
         return 'Table {}'.format(self.name)
@@ -167,7 +183,7 @@ class Table(object):
     def insert(self, pk, index, name, group, population_size):
         """Insert a new seat at the head of this table."""
         new_seat = Seat(pk=pk, index=index, name=name, group=group,
-                        population_size=population_size)
+                        population_size=population_size, table=self)
 
         if not self.head:
             new_seat.set_next(new_seat)
@@ -219,28 +235,25 @@ class Table(object):
             for seat in self.get_all_seats():
                 seat.interact_with_next_interactor()
 
-    def export_full_state(self):
+    def export_state(self):
         """
-        Export the full state of this table.
+        Export the current state of this table.
         """
         data = {}
-        data['table_name'] = self.name
+        data['table_name'] = str(self.name)
+        data['xcoordinate'] = self.xcoordinate
+        data['ycoordinate'] = self.ycoordinate
         data['seats'] = []
 
         for seat in self.get_all_seats():
-            data['seats'].append({
-                'pk': seat.pk,
-                'index': seat.index,
-                'name': str(seat.name),
-                'group': seat.group.name,
-                'population_size': seat.population_size,
-            })
+            data['seats'].append(seat.export_state())
 
         return data
 
     def export_current_sizes(self):
         """
-        Export a mapping from seat pk to population size for this table.
+        Export a mapping from seat pk to population size for all seats
+        at this table.
         """
         data = {}
         for seat in self.get_all_seats():
