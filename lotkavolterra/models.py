@@ -45,8 +45,7 @@ class Seat(object):
         return '{} {}'.format(self.group.name, self.name)
 
     def __repr__(self):
-        return '{} {}, size:{}'.format(self.group.name, self.name,
-                                       self.population_size)
+        return str(self)
 
     def format_name(self):
         names = self.name.split()
@@ -191,8 +190,9 @@ class Table(object):
     """
     A table of seats.
     """
-    def __init__(self, name, x=0, y=0):
+    def __init__(self, name="Test", number=0, x=0, y=0):
         self.name = name
+        self.number = number
         self.head = None
 
         # Relative position
@@ -202,11 +202,10 @@ class Table(object):
         self.size = 0
 
     def __str__(self):
-        return 'Table {}'.format(self.name)
+        return 'Table {}: {}'.format(self.number, self.name)
 
     def __repr__(self):
-        return ('Table {}, {} seats, head is {}'
-                .format(self.name, self.size, self.head))
+        return str(self)
 
     def insert(self, pk, index, name, group, population_size):
         """

@@ -56,7 +56,9 @@ def run_simulation(input_file):
 
     # Populate tables from the json input
     for json_table in json_data['luncheon']['tables']:
-        table = Table(json_table['name'], x=json_table['x'],
+        table = Table(json_table['name'],
+                      number=json_table['number'],
+                      x=json_table['x'],
                       y=json_table['y'])
 
         for index, person in enumerate(json_table['people']):
@@ -104,7 +106,7 @@ def run_test_simulation(simulation_name):
 
     # Create and populate Test table
     luncheon = Luncheon('Test')
-    table = Table('Test', 0.5, 0.25)
+    table = Table(x=0.5, y=0.25)
     _populate_test_table(table, simulation_name, num_seats,
                          population_size)
     luncheon.add_table(table)
