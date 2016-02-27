@@ -48,6 +48,37 @@ class Seat(object):
         return '{} {}, size:{}'.format(self.group.name, self.name,
                                        self.population_size)
 
+    def format_name(self):
+        names = self.name.split()
+
+        # Take first name as is
+        formatted_names = [names[0]]
+
+        for name in names[1:]:
+            initial = name[0]
+            formatted_names.append(initial + '.')
+
+        return ' '.join(formatted_names)
+
+    def export_state(self):
+        """
+        Export the current state this seat.
+
+        Includes all information necessary to pass the seat to the front
+        end, such that the frontn end can render it, including its
+        position.
+        """
+        return {
+            'pk': self.pk,
+            'index': self.index,
+            'name': str(self.format_name()),
+            'group': self.group.name,
+            'population_size': self.population_size,
+            'table_x': self.table.x,
+            'table_y': self.table.y,
+            'table_size': self.table.size,
+        }
+
     def get_next(self):
         """Get the next adjacent seat."""
         return self.next_seat
@@ -154,25 +185,6 @@ class Seat(object):
         interactor = self.get_next_interactor()
         if interactor:
             interact(self, interactor)
-
-    def export_state(self):
-        """
-        Export the current state this seat.
-
-        Includes all information necessary to pass the seat to the front
-        end, such that the frontn end can render it, including its
-        position.
-        """
-        return {
-            'pk': self.pk,
-            'index': self.index,
-            'name': str(self.name),
-            'group': self.group.name,
-            'population_size': self.population_size,
-            'table_x': self.table.x,
-            'table_y': self.table.y,
-            'table_size': self.table.size,
-        }
 
 
 class Table(object):
