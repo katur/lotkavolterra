@@ -18,7 +18,6 @@ DEFAULT_NUM_SEATS = 10
 RANDOM = 'random'
 ALTERNATING = 'alternating'
 HALVES = 'halves'
-SIMULATIONS = (RANDOM, ALTERNATING, HALVES,)
 PEOPLE = ('Alice', 'Bob', 'Carol', 'Django', 'Erlich', 'Freddy',
           'Georgia', 'Heidi', 'Indigo', 'Jack',)
 
@@ -28,16 +27,24 @@ def home():
     return render_template('home.html')
 
 
-@app.route("/list-simulations/")
-def list_simulations():
+@app.route("/test-simulations/")
+def list_test_simulations():
     context = {
-        'simulations': SIMULATIONS,
+        'simulations': (RANDOM, ALTERNATING, HALVES,),
     }
-    return render_template('list_simulations.html', **context)
+    return render_template('list_test_simulations.html', **context)
+
+
+@app.route("/input-simulations/")
+def list_input_simulations():
+    context = {
+        'inputs': ('input',),
+    }
+    return render_template('list_input_simulations.html', **context)
 
 
 @app.route("/test-simulation/<simulation_name>/")
-def test_simulation(simulation_name):
+def run_test_simulation(simulation_name):
     """
     Run a test simulation.
     """
@@ -69,15 +76,15 @@ def test_simulation(simulation_name):
         'table': table,
     }
 
-    return render_template('test_simulation.html', **context)
+    return render_template('run_test_simulation.html', **context)
 
 
-@app.route("/simulation/")
-def run_simulation():
+@app.route("/input-simulation/<input_file>/")
+def run_input_simulation(input_file):
     """
-    Run the actual simulation from an input file.
+    Run the simulation from an input file.
     """
-    with open('input.json', 'r') as f:
+    with open(input_file + '.json', 'r') as f:
         json_data = json.loads(f.read())
 
     json_tables = json_data['tables']
@@ -106,7 +113,7 @@ def run_simulation():
         'initial_states': initial_states,
     }
 
-    return render_template('run_simulation.html', **context)
+    return render_template('run_input_simulation.html', **context)
 
 
 ###########
@@ -166,16 +173,16 @@ def _populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
 # D3 Demos #
 ############
 
-@app.route("/d3-demo-list/")
-def d3_demo_list():
-    return render_template('d3_demo_list.html')
+@app.route("/d3-demos/")
+def list_d3_demos():
+    return render_template('list_d3_demos.html')
 
 
-@app.route("/d3-demo-circles-of-circles/")
+@app.route("/d3-demo/circles-of-circles/")
 def d3_demo_circles_of_circles():
     return render_template('d3_demo_circles_of_circles.html')
 
 
-@app.route("/d3-demo-random-circles/")
+@app.route("/d3-demo/random-circles/")
 def d3_demo_random_circles():
     return render_template('d3_demo_random_circles.html')

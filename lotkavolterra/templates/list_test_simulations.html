@@ -5,10 +5,10 @@
 {% block content %}
 
 <ul>
-  {% for simulation in simulations %}
+  {% for s in simulations %}
   <li>
-    <a href="{{ url_for('test_simulation', simulation_name=simulation) }}">
-      {{ simulation }}</a>
+    <a href="{{ url_for('run_test_simulation', simulation_name=s) }}">
+      {{ s }}</a>
   </li>
   {% endfor %}
 </ul>
