@@ -17,6 +17,8 @@ function drawSeats(seats) {
     .append("g")
     .attr("transform", function(d) {
       coords = getCoordinates({
+        svgWidth: 1200,
+        svgHeight: 1200,
         tableX: d.table_x,
         tableY: d.table_y,
         tableRadius: TABLE_RADIUS,
@@ -67,8 +69,10 @@ function updateSeats(change, iteration) {
 
 function getCoordinates(params) {
   var angle = params.index * params.step;
-  var cx = params.tableX + params.tableRadius * Math.cos(angle);
-  var cy = params.tableY + params.tableRadius * Math.sin(angle);
+  var cx = (params.tableX * params.svgWidth) +
+           (params.tableRadius * Math.cos(angle));
+  var cy = (params.tableY * params.svgHeight) +
+           (params.tableRadius * Math.sin(angle));
   return [cx, cy];
 }
 
