@@ -112,18 +112,18 @@ body {
   .page-section:last-child {
     margin-bottom: 0; }
 
-#run-simulation #parameters {
+#simulation #parameters {
   font-size: 14px; }
-  #run-simulation #parameters input {
+  #simulation #parameters input {
     width: 50px; }
-#run-simulation .table-snapshot {
+#simulation .table-snapshot {
   margin-bottom: 40px; }
-  #run-simulation .table-snapshot:last-child {
+  #simulation .table-snapshot:last-child {
     margin-bottom: 0; }
-  #run-simulation .table-snapshot .group {
+  #simulation .table-snapshot .group {
     position: relative;
     z-index: 1; }
-  #run-simulation .table-snapshot .group::before {
+  #simulation .table-snapshot .group::before {
     content: "";
     position: absolute;
     top: 0;
@@ -132,11 +132,11 @@ body {
     height: 100%;
     opacity: 0.5;
     z-index: -1; }
-  #run-simulation .table-snapshot .herd::before {
+  #simulation .table-snapshot .herd::before {
     background: green; }
-  #run-simulation .table-snapshot .pack::before {
+  #simulation .table-snapshot .pack::before {
     background: red; }
-  #run-simulation .table-snapshot .colony::before {
+  #simulation .table-snapshot .colony::before {
     background: blue; }
-#run-simulation h3, #run-simulation h4 {
+#simulation h3, #simulation h4 {
   margin-bottom: 13.33333px; }
