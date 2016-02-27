@@ -9,34 +9,13 @@ from lotkavolterra.models import Group, Table, Luncheon, get_random_group
 
 
 INPUT_DIR = 'input'
-
-# Default sizes
-
 DEFAULT_NUM_GENERATIONS = 20
 DEFAULT_POPULATION_SIZE = 1000
-
-
-# Test simulations
-
-DEFAULT_NUM_SEATS = 10
-RANDOM = 'random'
-ALTERNATING = 'alternating'
-HALVES = 'halves'
-PEOPLE = ('Alice', 'Bob', 'Carol', 'Django', 'Erlich', 'Freddy',
-          'Georgia', 'Heidi', 'Indigo', 'Jack',)
 
 
 @app.route("/")
 def home():
     return render_template('home.html')
-
-
-@app.route("/test-simulations/")
-def list_test_simulations():
-    context = {
-        'simulations': (RANDOM, ALTERNATING, HALVES,),
-    }
-    return render_template('list_test_simulations.html', **context)
 
 
 @app.route("/input-simulations/")
@@ -46,44 +25,6 @@ def list_input_simulations():
         'inputs': filenames,
     }
     return render_template('list_input_simulations.html', **context)
-
-
-@app.route("/test-simulation/<simulation_name>/")
-def run_test_simulation(simulation_name):
-    """
-    Run a test simulation.
-    """
-    # Uncomment to command line DEBUG logging
-    # logging.basicConfig(level=logging.DEBUG)
-
-    num_generations, population_size, num_seats = _parse_get_params()
-
-    # Create and populate Test table
-    luncheon = Luncheon('Test')
-    table = Table('Test', 600, 300)
-    _populate_test_table(table, simulation_name, num_seats, population_size)
-    luncheon.add_table(table)
-
-    # Save initial state
-    initial_state = luncheon.export_seat_states()
-
-    # Interact for num_generations
-    changes = []
-    for generation in range(num_generations):
-        luncheon.run_generation()
-        changes.append(luncheon.export_seat_sizes())
-
-    context = {
-        'simulation_name': simulation_name,
-        'num_generations': num_generations,
-        'population_size': population_size,
-        'num_seats': num_seats,
-        'initial_state': initial_state,
-        'changes': changes,
-        'table': table,
-    }
-
-    return render_template('run_test_simulation.html', **context)
 
 
 @app.route("/input-simulation/<input_file>/")
@@ -131,6 +72,64 @@ def run_input_simulation(input_file):
     }
 
     return render_template('run_input_simulation.html', **context)
+
+
+####################
+# Test simulations #
+####################
+
+RANDOM = 'random'
+ALTERNATING = 'alternating'
+HALVES = 'halves'
+DEFAULT_NUM_SEATS = 10
+PEOPLE = ('Alice', 'Bob', 'Carol', 'Django', 'Erlich', 'Freddy',
+          'Georgia', 'Heidi', 'Indigo', 'Jack',)
+
+
+@app.route("/test-simulations/")
+def list_test_simulations():
+    context = {
+        'simulations': (RANDOM, ALTERNATING, HALVES,),
+    }
+    return render_template('list_test_simulations.html', **context)
+
+
+@app.route("/test-simulation/<simulation_name>/")
+def run_test_simulation(simulation_name):
+    """
+    Run a test simulation.
+    """
+    # Uncomment to command line DEBUG logging
+    # logging.basicConfig(level=logging.DEBUG)
+
+    num_generations, population_size, num_seats = _parse_get_params()
+
+    # Create and populate Test table
+    luncheon = Luncheon('Test')
+    table = Table('Test', 600, 300)
+    _populate_test_table(table, simulation_name, num_seats, population_size)
+    luncheon.add_table(table)
+
+    # Save initial state
+    initial_state = luncheon.export_seat_states()
+
+    # Interact for num_generations
+    changes = []
+    for generation in range(num_generations):
+        luncheon.run_generation()
+        changes.append(luncheon.export_seat_sizes())
+
+    context = {
+        'simulation_name': simulation_name,
+        'num_generations': num_generations,
+        'population_size': population_size,
+        'num_seats': num_seats,
+        'initial_state': initial_state,
+        'changes': changes,
+        'table': table,
+    }
+
+    return render_template('run_test_simulation.html', **context)
 
 
 ###########
