@@ -4,67 +4,141 @@
     "tables": [
       {
         "name": "Pan",
-        "x": 0.75,
-        "y": 0.25,
+        "x": 0.25,
+        "y": 0.75,
         "people": [
-          "Zeke R.",
-          "Michael G.",
-          "Steve L.",
-          "Anne T.",
-          "Ze'ev S.",
-          "Noah S.",
-          "Sparkle D."
+          {
+            "name": "Zeke R."
+          },
+          {
+            "name": "Michael G."
+          },
+          {
+            "name": "Steve L."
+          },
+          {
+            "name": "Anne T."
+          },
+          {
+            "name": "Ze'ev S."
+          },
+          {
+            "name": "Noah S."
+          },
+          {
+            "name": "Sparkle D."
+          }
         ]
       },
       {
         "name": "Cider Party",
         "x": 0.25,
-        "y": 0.75,
+        "y": 0.25,
         "people": [
-          "Adrian W.",
-          "Dan K.",
-          "Eric Z.",
-          "Stacey L.",
-          "Crispen M.",
-          "Rosalie K.",
-          "Dinah Y.",
-          "Jim K.",
-          "Elizabeth K."
+          {
+            "name": "Adrian W."
+          },
+          {
+            "name": "Dan K."
+          },
+          {
+            "name": "Eric Z."
+          },
+          {
+            "name": "Stacey L."
+          },
+          {
+            "name": "Crispen M."
+          },
+          {
+            "name": "Rosalie K."
+          },
+          {
+            "name": "Dinah Y."
+          },
+          {
+            "name": "Jim K."
+          },
+          {
+            "name": "Elizabeth K."
+          }
         ]
       },
       {
         "name": "Duluth",
         "x": 0.75,
-        "y": 0.75,
+        "y": 0.25,
         "people": [
-          "Laura L.",
-          "Russell J.",
-          "Thomas E.",
-          "Helen E.",
-          "Toast R.",
-          "Amy W.",
-          "Pepper G.",
-          "Gaelynn W.",
-          "Ashlie B.",
-          "Heidi S.",
-          "Josh B."
+          {
+            "name": "Laura L."
+          },
+          {
+            "name": "Russell J."
+          },
+          {
+            "name": "Thomas E."
+          },
+          {
+            "name": "Helen E."
+          },
+          {
+            "name": "Toast R."
+          },
+          {
+            "name": "Amy W."
+          },
+          {
+            "name": "Pepper G."
+          },
+          {
+            "name": "Gaelynn W."
+          },
+          {
+            "name": "Ashlie B."
+          },
+          {
+            "name": "Heidi S."
+          },
+          {
+            "name": "Josh B."
+          }
         ]
       },
       {
-        "name": "Randos",
-        "x": 0.25,
-        "y": 0.25,
+        "name": "Famous",
+        "x": 0.75,
+        "y": 0.75,
         "people": [
-          "Alice H.",
-          "Bobby V.",
-          "Carol K.",
-          "Django R.",
-          "Erlich R.",
-          "Freddy G.",
-          "Georgia T.",
-          "Heidi T. R.",
-          "Indigo V.",
-          "Jack J."
+          {
+            "name": "Angela Davis"
+          },
+          {
+            "name": "Billie Holiday"
+          },
+          {
+            "name": "Crispin Glover"
+          },
+          {
+            "name": "Django Reinhardt"
+          },
+          {
+            "name": "Ewan McGregor"
+          },
+          {
+            "name": "Frank Gehry."
+          },
+          {
+            "name": "Georgia O'Keeffe"
+          },
+          {
+            "name": "Herbert Hoover"
+          },
+          {
+            "name": "Iggy Pop"
+          },
+          {
+            "name": "Jean-Claude Van Damme"
+          }
         ]
       }
     ]

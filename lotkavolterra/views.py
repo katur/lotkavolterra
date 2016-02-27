@@ -60,7 +60,7 @@ def run_simulation(input_file):
                       y=json_table['y'])
 
         for index, person in enumerate(json_table['people']):
-            table.insert(current_pk, index, person,
+            table.insert(current_pk, index, person['name'],
                          get_random_group(), population_size)
             current_pk += 1
 
