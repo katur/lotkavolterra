@@ -2,21 +2,46 @@
 
 {% block content %}
 
-<ul>
-  <li>
-    <a href="{{ url_for('list_simulations') }}">
-      View the input-based simulations</a>
-  </li>
+<div class="page-section">
+  <h4>Input-file based simulations</h4>
 
-  <li>
-    <a href="{{ url_for('list_test_simulations') }}">
-      View the test case simulations</a>
-  </li>
+  <ul>
+    {% for f in input_filenames %}
+    <li>
+      <a href="{{ url_for('run_simulation', input_file=f) }}">
+        {{ f }}</a>
+    </li>
+    {% endfor %}
+  <ul>
+</div>
 
-  <li>
-    <a href="{{ url_for('list_d3_demos') }}">
-      View some D3 demos</a>
-  </li>
-</ul>
+<div class="page-section">
+  <h4>Test case simulations</h4>
+
+  <ul>
+    {% for s in test_simulations %}
+    <li>
+      <a href="{{ url_for('run_test_simulation', simulation_name=s) }}">
+        {{ s }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="page-section">
+  <h4>D3 Demos</h4>
+
+  <ul>
+    <li>
+      <a href="{{ url_for('d3_demo_random_circles') }}">
+        Random Circles</a>
+    </li>
+
+    <li>
+      <a href="{{ url_for('d3_demo_circles_of_circles') }}">
+        Circles of Circles</a>
+    </li>
+  </ul>
+</div>
 
 {% endblock %}

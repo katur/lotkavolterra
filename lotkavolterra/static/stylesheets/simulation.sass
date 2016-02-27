@@ -1,12 +1,11 @@
-#run-test-simulation, #run-simulation
+#run-simulation
   #parameters
     font-size: $base-font-size - 4
 
     input
       width: 50px
 
-#run-test-simulation
-  .snapshot
+  .table-snapshot
     .group
       position: relative
       z-index: 1
@@ -30,5 +29,5 @@
     .colony::before
       background: blue
 
-  .generations
-    padding-top: $whitespace * 2
+  h3, h4
+    margin-bottom: $whitespace / 3

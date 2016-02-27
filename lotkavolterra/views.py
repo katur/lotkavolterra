@@ -7,30 +7,31 @@ from flask import render_template, request
 from lotkavolterra import app
 from lotkavolterra.models import Group, Table, Luncheon, get_random_group
 
-
-INPUT_DIR = 'input'
 DEFAULT_NUM_GENERATIONS = 20
 DEFAULT_POPULATION_SIZE = 1000
+
+# This is relevant for "input-file based simulations" only
+INPUT_DIR = 'input'
+
+# These are relevant for "test case simulations" only
+DEFAULT_NUM_SEATS = 10
+RANDOM = 'random'
+ALTERNATING = 'alternating'
+HALVES = 'halves'
 
 
 @app.route("/")
 def home():
     """
-    Render the homepage.
-    """
-    return render_template('home.html')
-
-
-@app.route("/simulations/")
-def list_simulations():
-    """
-    Render the page listing the available simulation inputs.
+    Render the homepage, listing available simulations and demos.
     """
     filenames = [f for f in listdir(INPUT_DIR) if isfile(join(INPUT_DIR, f))]
+    test_simulations = (RANDOM, ALTERNATING, HALVES,)
     context = {
-        'inputs': filenames,
+        'input_filenames': filenames,
+        'test_simulations': test_simulations,
     }
-    return render_template('list_simulations.html', **context)
+    return render_template('home.html', **context)
 
 
 @app.route("/simulation/<input_file>/")
@@ -38,7 +39,7 @@ def run_simulation(input_file):
     """
     Run the simulation from an input file.
     """
-    # Will not use num_seats here
+    # num_seats not used here
     num_generations, population_size, num_seats = _parse_get_params()
 
     with open(join(INPUT_DIR, input_file), 'r') as f:
@@ -69,40 +70,15 @@ def run_simulation(input_file):
         changes.append(luncheon.export_seat_sizes())
 
     context = {
+        'simulation_name': input_file,
         'num_generations': num_generations,
         'population_size': population_size,
         'initial_state': initial_state,
         'changes': changes,
+        'tables': luncheon.tables,
     }
 
-    return render_template('run_simulation.html', **context)
-
-
-####################
-# Test simulations #
-####################
-
-RANDOM = 'random'
-ALTERNATING = 'alternating'
-HALVES = 'halves'
-DEFAULT_NUM_SEATS = 10
-PEOPLE = ('Alice', 'Bob', 'Carol', 'Django', 'Erlich', 'Freddy',
-          'Georgia', 'Heidi', 'Indigo', 'Jack',)
-
-
-@app.route("/test-simulations/")
-def list_test_simulations():
-    """
-    Render the page listing the "test case" simulations.
-
-    These are not from input files. Rather they generate the seat
-    assignments algorithmically, with the number of seats being
-    parameterized.
-    """
-    context = {
-        'simulations': (RANDOM, ALTERNATING, HALVES,),
-    }
-    return render_template('list_test_simulations.html', **context)
+    return render_template('simulation.html', **context)
 
 
 @app.route("/test-simulation/<simulation_name>/")
@@ -118,7 +94,8 @@ def run_test_simulation(simulation_name):
     # Create and populate Test table
     luncheon = Luncheon('Test')
     table = Table('Test', 0.5, 0.25)
-    _populate_test_table(table, simulation_name, num_seats, population_size)
+    _populate_test_table(table, simulation_name, num_seats,
+                         population_size)
     luncheon.add_table(table)
 
     # Save initial state
@@ -137,14 +114,22 @@ def run_test_simulation(simulation_name):
         'num_seats': num_seats,
         'initial_state': initial_state,
         'changes': changes,
-        'table': table,
+        'tables': [table],
     }
 
-    return render_template('run_test_simulation.html', **context)
+    return render_template('simulation.html', **context)
 
 
 def _populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
                          population_size=DEFAULT_POPULATION_SIZE):
+    """
+    Helper function to populate a test table for a test simulation.
+
+    These test tables are populated from rules, not from a json input file.
+    """
+    PEOPLE = ('Alice', 'Bob', 'Carol', 'Django', 'Erlich', 'Freddy',
+              'Georgia', 'Heidi', 'Indigo', 'Jack',)
+
     for i in range(num_seats):
         pk = i
         index = i
@@ -173,10 +158,6 @@ def _populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
                 table.insert(pk, index, name, Group.herd, population_size)
 
 
-###########
-# Helpers #
-###########
-
 def _parse_get_params():
     try:
         num_generations = int(request.args['num_generations'])
@@ -199,11 +180,6 @@ def _parse_get_params():
 ############
 # D3 Demos #
 ############
-
-@app.route("/d3-demos/")
-def list_d3_demos():
-    return render_template('list_d3_demos.html')
-
 
 @app.route("/d3-demo/circles-of-circles/")
 def d3_demo_circles_of_circles():

@@ -112,15 +112,14 @@ body {
   .page-section:last-child {
     margin-bottom: 0; }
 
-#run-test-simulation #parameters, #run-simulation #parameters {
+#run-simulation #parameters {
   font-size: 14px; }
-  #run-test-simulation #parameters input, #run-simulation #parameters input {
+  #run-simulation #parameters input {
     width: 50px; }
-
-#run-test-simulation .snapshot .group {
+#run-simulation .table-snapshot .group {
   position: relative;
   z-index: 1; }
-#run-test-simulation .snapshot .group::before {
+#run-simulation .table-snapshot .group::before {
   content: "";
   position: absolute;
   top: 0;
@@ -129,11 +128,11 @@ body {
   height: 100%;
   opacity: 0.5;
   z-index: -1; }
-#run-test-simulation .snapshot .herd::before {
+#run-simulation .table-snapshot .herd::before {
   background: green; }
-#run-test-simulation .snapshot .pack::before {
+#run-simulation .table-snapshot .pack::before {
   background: red; }
-#run-test-simulation .snapshot .colony::before {
+#run-simulation .table-snapshot .colony::before {
   background: blue; }
-#run-test-simulation .generations {
-  padding-top: 80px; }
+#run-simulation h3, #run-simulation h4 {
+  margin-bottom: 13.33333px; }
