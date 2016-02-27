@@ -7,7 +7,7 @@
 <ul>
   {% for i in inputs %}
   <li>
-    <a href="{{ url_for('run_input_simulation', input_file=i) }}">
+    <a href="{{ url_for('run_simulation', input_file=i) }}">
       {{ i }}</a>
   </li>
   {% endfor %}
