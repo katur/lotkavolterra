@@ -156,6 +156,7 @@ class Seat(object):
             'population_size': self.population_size,
             'table_xcoordinate': self.table.xcoordinate,
             'table_ycoordinate': self.table.ycoordinate,
+            'table_size': self.table.size,
         }
 
 
@@ -173,12 +174,14 @@ class Table(object):
         self.xcoordinate = xcoordinate
         self.ycoordinate = ycoordinate
 
+        self.size = 0
+
     def __str__(self):
         return 'Table {}'.format(self.name)
 
     def __repr__(self):
         return ('Table {}, {} seats, head is {}'
-                .format(self.name, self.get_number_of_seats(), self.head))
+                .format(self.name, self.size, self.head))
 
     def insert(self, pk, index, name, group, population_size):
         """Insert a new seat at the head of this table."""
@@ -199,19 +202,7 @@ class Table(object):
             new_seat.get_previous().set_next(new_seat)
 
         self.head = new_seat
-
-    def get_number_of_seats(self):
-        """Get the number of seats at this table."""
-        if not self.head:
-            return 0
-
-        count = 1
-        current = self.head.get_next()
-        while current != self.head:
-            count += 1
-            current = current.get_next()
-
-        return count
+        self.size += 1
 
     def get_all_seats(self):
         """Get a list of all seats at this table."""
@@ -240,9 +231,6 @@ class Table(object):
         Export the current state of this table.
         """
         data = {}
-        data['table_name'] = str(self.name)
-        data['xcoordinate'] = self.xcoordinate
-        data['ycoordinate'] = self.ycoordinate
         data['seats'] = []
 
         for seat in self.get_all_seats():

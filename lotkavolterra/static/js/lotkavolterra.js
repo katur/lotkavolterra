@@ -18,7 +18,7 @@ function drawTables(seats) {
     .attr("transform", function(d) {
       coords = getCoordinates({
         index: d.index,
-        step: step,
+        step: CIRCLE_FULL / d.table_size,
         tableX: d.table_xcoordinate,
         tableY: d.table_ycoordinate,
         tableRadius: TABLE_RADIUS,
