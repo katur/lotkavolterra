@@ -38,7 +38,7 @@ def list_test_simulations():
 @app.route("/input-simulations/")
 def list_input_simulations():
     context = {
-        'inputs': ('input',),
+        'inputs': ('familiar',),
     }
     return render_template('list_input_simulations.html', **context)
 
