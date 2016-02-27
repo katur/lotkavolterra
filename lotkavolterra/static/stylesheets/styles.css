@@ -110,14 +110,15 @@ body {
   .page-section:last-child {
     margin-bottom: 0; }
 
-#test-simulation .forms {
+#run-test-simulation #parameters, #run-simulation #parameters {
   font-size: 14px; }
-  #test-simulation .forms input {
+  #run-test-simulation #parameters input, #run-simulation #parameters input {
     width: 50px; }
-#test-simulation .three-columns .snapshot .group {
+
+#run-test-simulation .three-columns .snapshot .group {
   position: relative;
   z-index: 1; }
-#test-simulation .three-columns .snapshot .group::before {
+#run-test-simulation .three-columns .snapshot .group::before {
   content: "";
   position: absolute;
   top: 0;
@@ -126,11 +127,11 @@ body {
   height: 100%;
   opacity: 0.5;
   z-index: -1; }
-#test-simulation .three-columns .snapshot .herd::before {
+#run-test-simulation .three-columns .snapshot .herd::before {
   background: green; }
-#test-simulation .three-columns .snapshot .pack::before {
+#run-test-simulation .three-columns .snapshot .pack::before {
   background: red; }
-#test-simulation .three-columns .snapshot .colony::before {
+#run-test-simulation .three-columns .snapshot .colony::before {
   background: blue; }
-#test-simulation .three-columns .generations {
+#run-test-simulation .three-columns .generations {
   padding-top: 80px; }

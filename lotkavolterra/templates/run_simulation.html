@@ -7,16 +7,8 @@
 
 {% block content %}
 
-<div class="page-section forms">
-  <form method="GET" action="">
-    Number of generations:
-    <input name="num_generations" value="{{ num_generations }}"></input>
-
-    Initial population size:
-    <input name="population_size" value="{{ population_size }}"></input>
-
-    <button type="submit">Submit</button>
-  </form>
+<div class="page-section">
+  {% include 'parameters.html' %}
 </div>
 
 <div class="page-section">
