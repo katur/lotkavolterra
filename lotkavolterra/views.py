@@ -117,7 +117,7 @@ def run_test_simulation(simulation_name):
 
     # Create and populate Test table
     luncheon = Luncheon('Test')
-    table = Table('Test', 600, 300)
+    table = Table('Test', 0.5, 0.25)
     _populate_test_table(table, simulation_name, num_seats, population_size)
     luncheon.add_table(table)
 
