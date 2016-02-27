@@ -166,23 +166,23 @@ class Table(object):
 
     def insert(self, id, index, name, group, population_size):
         """Insert a new seat at the head of this table."""
-        new = Seat(id=id, index=index, name=name, group=group,
-                   population_size=population_size)
+        new_seat = Seat(id=id, index=index, name=name, group=group,
+                        population_size=population_size)
 
         if not self.head:
-            new.set_next(new)
-            new.set_previous(new)
+            new_seat.set_next(new_seat)
+            new_seat.set_previous(new_seat)
 
         else:
             # Create next pointers
-            new.set_previous(self.head)
-            new.set_next(self.head.get_next())
+            new_seat.set_previous(self.head)
+            new_seat.set_next(self.head.get_next())
 
             # Update old pointers
-            new.get_next().set_previous(new)
-            new.get_previous().set_next(new)
+            new_seat.get_next().set_previous(new_seat)
+            new_seat.get_previous().set_next(new_seat)
 
-        self.head = new
+        self.head = new_seat
 
     def get_number_of_seats(self):
         """Get the number of seats at this table."""
