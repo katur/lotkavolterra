@@ -2,7 +2,7 @@
 
 
 {% block body_id %}run-simulation{% endblock %}
-{% block page_title %}Run Simulation: {{ simulation_name }}{% endblock %}
+{% block page_title %}Simulation: {{ simulation_name }}{% endblock %}
 
 
 {% block content %}
@@ -32,7 +32,7 @@
   <h3>Final state</h3>
 
   {% for table in tables %}
-    <h4>{{ table.name }}</h4>
+    <h4>Table: {{ table.name }}</h4>
 
     {% include 'table_snapshot.html' %}
   {% endfor %}
