@@ -15,7 +15,7 @@
         {{ seat.group.name }}
       </td>
 
-      <td>{{ seat.name }}</td>
+      <td>{{ seat.format_name() }}</td>
 
       <td>
         {% if show_initial %}
@@ -27,7 +27,7 @@
 
       <td>
         {% if seat.get_next_interactor() %}
-          {{ seat.get_next_interactor().name }}
+          {{ seat.get_next_interactor().format_name() }}
         {% else %}
           None
         {% endif %}
