@@ -1,17 +1,20 @@
 import json
-from os import listdir
 from os.path import isfile, join
 
 from flask import render_template, request
 
 from lotkavolterra import app
 from lotkavolterra.models import Group, Table, Luncheon, get_random_group
+from lotkavolterra.utils import listdir_nohidden
+
 
 DEFAULT_NUM_GENERATIONS = 20
 DEFAULT_POPULATION_SIZE = 1000
 
+
 # This is relevant for "input-file based simulations" only
 INPUT_DIR = 'input'
+
 
 # These are relevant for "test case simulations" only
 DEFAULT_NUM_SEATS = 10
@@ -25,8 +28,11 @@ def home():
     """
     Render the homepage, listing available simulations and demos.
     """
-    filenames = [f for f in listdir(INPUT_DIR) if isfile(join(INPUT_DIR, f))]
+    filenames = [f for f in listdir_nohidden(INPUT_DIR)
+                 if isfile(join(INPUT_DIR, f))]
+
     test_simulations = (RANDOM, ALTERNATING, HALVES,)
+
     context = {
         'input_filenames': filenames,
         'test_simulations': test_simulations,
