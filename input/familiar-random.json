@@ -13,8 +13,8 @@
         "Indigo V.",
         "Jack J."
       ],
-      "xcoordinate": 300,
-      "ycoordinate": 300
+      "x": 300,
+      "y": 300
     },
     "Pan": {
       "people": [
@@ -26,8 +26,8 @@
         "Noah S.",
         "Sparkle D."
       ],
-      "xcoordinate": 900,
-      "ycoordinate": 300
+      "x": 900,
+      "y": 300
     },
     "Cider Party": {
       "people": [
@@ -41,8 +41,8 @@
         "Jim K.",
         "Elizabeth K."
       ],
-      "xcoordinate": 300,
-      "ycoordinate": 900
+      "x": 300,
+      "y": 900
     },
     "Duluth": {
       "people": [
@@ -58,8 +58,8 @@
         "Heidi S.",
         "Josh B."
       ],
-      "xcoordinate": 900,
-      "ycoordinate": 900
+      "x": 900,
+      "y": 900
     }
   }
 }

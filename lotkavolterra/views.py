@@ -50,9 +50,7 @@ def run_simulation(input_file):
 
     # Populate tables from the json input
     for table_name, table_info in json_tables.iteritems():
-        table = Table(table_name,
-                      xcoordinate=table_info['xcoordinate'],
-                      ycoordinate=table_info['ycoordinate'])
+        table = Table(table_name, x=table_info['x'], y=table_info['y'])
 
         for index, person in enumerate(table_info['people']):
             table.insert(current_pk, index, person,

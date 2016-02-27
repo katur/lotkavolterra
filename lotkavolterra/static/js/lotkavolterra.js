@@ -17,11 +17,11 @@ function drawSeats(seats) {
     .append("g")
     .attr("transform", function(d) {
       coords = getCoordinates({
+        tableX: d.table_x,
+        tableY: d.table_y,
+        tableRadius: TABLE_RADIUS,
         index: d.index,
         step: CIRCLE_FULL / d.table_size,
-        tableX: d.table_xcoordinate,
-        tableY: d.table_ycoordinate,
-        tableRadius: TABLE_RADIUS,
       });
       return "translate("+coords[0]+","+coords[1]+")"
     });

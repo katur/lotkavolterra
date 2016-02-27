@@ -169,8 +169,8 @@ class Seat(object):
             'name': str(self.name),
             'group': self.group.name,
             'population_size': self.population_size,
-            'table_xcoordinate': self.table.xcoordinate,
-            'table_ycoordinate': self.table.ycoordinate,
+            'table_x': self.table.x,
+            'table_y': self.table.y,
             'table_size': self.table.size,
         }
 
@@ -179,13 +179,13 @@ class Table(object):
     """
     A table of seats.
     """
-    def __init__(self, name, xcoordinate=0, ycoordinate=0):
+    def __init__(self, name, x=0, y=0):
         self.name = name
         self.head = None
 
-        # Position in the space
-        self.xcoordinate = xcoordinate
-        self.ycoordinate = ycoordinate
+        # Relative position
+        self.x = x
+        self.y = y
 
         self.size = 0
 
