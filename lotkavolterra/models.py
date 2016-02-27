@@ -304,7 +304,7 @@ class Luncheon(object):
         at this table.
         """
         seat_sizes = {}
-        for table in self.tables.export_seat_sizes():
-            seat_sizes.update(table)
+        for table in self.tables:
+            seat_sizes.update(table.export_seat_sizes())
 
         return seat_sizes

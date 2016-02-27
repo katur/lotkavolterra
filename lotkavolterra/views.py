@@ -66,7 +66,7 @@ def run_test_simulation(simulation_name):
     changes = []
     for generation in range(num_generations):
         luncheon.run_generation()
-        changes.append(table.export_seat_sizes())
+        changes.append(luncheon.export_seat_sizes())
 
     context = {
         'simulation_name': simulation_name,
@@ -96,6 +96,7 @@ def run_input_simulation(input_file):
     current_pk = 0
     luncheon = Luncheon('Black Rock Forest Luncheon')
 
+    # Populate tables from the json input
     for table_name, table_info in json_tables.iteritems():
         table = Table(table_name,
                       xcoordinate=table_info['xcoordinate'],
