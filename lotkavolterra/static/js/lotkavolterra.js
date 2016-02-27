@@ -5,7 +5,7 @@ const CIRCLE_FULL = 2 * Math.PI;
 const TABLE_RADIUS = 200
 
 
-function drawTables(seats) {
+function drawSeats(seats) {
   // The angle step between each of the seats
   var step = CIRCLE_FULL / seats.length;
 

@@ -25,16 +25,13 @@
 
 <script charset="utf-8">
   var initialStates = {{ initial_states|safe }};
-  console.log(initialStates);
 
-  var newSeats;
   var seats = [];
   for (var i = 0; i < initialStates.length; i++) {
-    newSeats = initialStates[i].seats;
-    seats.push.apply(seats, newSeats);
+    seats.push.apply(seats, initialStates[i].seats);
   }
 
-  drawTables(seats);
+  drawSeats(seats);
 
   // var changes = {{ changes|safe }};
 

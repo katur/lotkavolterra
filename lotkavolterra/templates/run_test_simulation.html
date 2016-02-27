@@ -30,7 +30,7 @@
   var initial = {{ initial_state|safe }};
   var changes = {{ changes|safe }};
 
-  drawTables(initial.seats);
+  drawSeats(initial.seats);
 
   for (var i = 0; i < changes.length; i++) {
     updateTable(changes[i], i);
