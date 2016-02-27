@@ -34,6 +34,7 @@ function drawSeats(seats) {
       return getRadius(d.population_size);
     })
     .style("fill", function(d, i) {
+      // return getPattern(d.group);
       return getColor(d.group);
     })
     .style("opacity", OPACITY)
@@ -98,4 +99,16 @@ function getColor(group) {
   else if (group == "colony")
     color = "blue";
   return color;
+}
+
+
+function getPattern(group) {
+  var pattern;
+  if (group == "herd")
+    pattern = "url(#green)";
+  else if (group == "pack")
+    pattern = "url(#red)";
+  else if (group == "colony")
+    pattern = "url(#blue)";
+  return pattern;
 }
