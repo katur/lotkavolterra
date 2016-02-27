@@ -5,7 +5,7 @@ from flask import render_template, request
 
 from lotkavolterra import app
 from lotkavolterra.models import Group, Table, Luncheon, get_random_group
-from lotkavolterra.utils import listdir_nohidden
+from lotkavolterra.utils import listdir_json
 
 
 DEFAULT_NUM_GENERATIONS = 20
@@ -28,7 +28,7 @@ def home():
     """
     Render the homepage, listing available simulations and demos.
     """
-    filenames = [f for f in listdir_nohidden(INPUT_DIR)
+    filenames = [f for f in listdir_json(INPUT_DIR)
                  if isfile(join(INPUT_DIR, f))]
 
     test_simulations = (RANDOM, ALTERNATING, HALVES,)
