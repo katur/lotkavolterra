@@ -1,10 +1,14 @@
 import json
+from os import listdir
+from os.path import isfile, join
 
 from flask import render_template, request
 
 from lotkavolterra import app
 from lotkavolterra.models import Group, Table, Luncheon, get_random_group
 
+
+INPUT_DIR = 'input'
 
 # Default sizes
 
@@ -37,8 +41,9 @@ def list_test_simulations():
 
 @app.route("/input-simulations/")
 def list_input_simulations():
+    filenames = [f for f in listdir(INPUT_DIR) if isfile(join(INPUT_DIR, f))]
     context = {
-        'inputs': ('familiar',),
+        'inputs': filenames,
     }
     return render_template('list_input_simulations.html', **context)
 
@@ -89,7 +94,7 @@ def run_input_simulation(input_file):
     # Will not use num_seats here
     num_generations, population_size, num_seats = _parse_get_params()
 
-    with open('input/{}.json'.format(input_file), 'r') as f:
+    with open(join(INPUT_DIR, input_file), 'r') as f:
         json_data = json.loads(f.read())
 
     json_tables = json_data['tables']
