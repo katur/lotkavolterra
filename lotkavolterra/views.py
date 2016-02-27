@@ -81,8 +81,8 @@ def run_simulation():
         json_data = json.loads(f.read())
 
     json_tables = json_data['tables']
+    current_pk = 0
     tables = []
-    current_id = 0
 
     for table_name, table_info in json_tables.iteritems():
         table = Table(table_name,
@@ -92,16 +92,14 @@ def run_simulation():
         tables.append(table)
 
         for index, person in enumerate(table_info['people']):
-            table.insert(current_id, index, person,
+            table.insert(current_pk, index, person,
                          get_random_group(),
                          DEFAULT_POPULATION_SIZE)
-            current_id += 1
+            current_pk += 1
 
     initial_states = []
     for table in tables:
         initial_states.append(table.export_full_state())
-
-    print initial_states
 
     context = {
         'tables': tables,
@@ -137,7 +135,7 @@ def _parse_get_params():
 def _populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
                          population_size=DEFAULT_POPULATION_SIZE):
     for i in range(num_seats):
-        id = i
+        pk = i
         index = i
 
         try:
@@ -146,7 +144,7 @@ def _populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
             name = 'Person{}'.format(i)
 
         if simulation == RANDOM:
-            table.insert(id, index, name, get_random_group(),
+            table.insert(pk, index, name, get_random_group(),
                          population_size)
 
         elif simulation == ALTERNATING:
@@ -155,13 +153,13 @@ def _populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
             else:
                 group = Group.herd
 
-            table.insert(id, index, name, group, population_size)
+            table.insert(pk, index, name, group, population_size)
 
         elif simulation == HALVES:
             if i < (num_seats / 2):
-                table.insert(id, index, name, Group.pack, population_size)
+                table.insert(pk, index, name, Group.pack, population_size)
             else:
-                table.insert(id, index, name, Group.herd, population_size)
+                table.insert(pk, index, name, Group.herd, population_size)
 
 
 ############

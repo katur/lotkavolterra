@@ -29,9 +29,9 @@ class Seat(object):
     fashion.
     """
 
-    def __init__(self, id, index, name, group, population_size,
+    def __init__(self, pk, index, name, group, population_size,
                  next_seat=None, previous_seat=None):
-        self.id = id  # A unique identifier
+        self.pk = pk  # Unique identifier across tables
         self.index = index  # Position within the table
         self.name = name
         self.group = group
@@ -164,9 +164,9 @@ class Table(object):
         return ('Table {}, {} seats, head is {}'
                 .format(self.name, self.get_number_of_seats(), self.head))
 
-    def insert(self, id, index, name, group, population_size):
+    def insert(self, pk, index, name, group, population_size):
         """Insert a new seat at the head of this table."""
-        new_seat = Seat(id=id, index=index, name=name, group=group,
+        new_seat = Seat(pk=pk, index=index, name=name, group=group,
                         population_size=population_size)
 
         if not self.head:
@@ -229,9 +229,9 @@ class Table(object):
 
         for seat in self.get_all_seats():
             data['seats'].append({
-                'id': seat.id,
+                'pk': seat.pk,
                 'index': seat.index,
-                'name': seat.name,
+                'name': str(seat.name),
                 'group': seat.group.name,
                 'population_size': seat.population_size,
             })
@@ -240,10 +240,10 @@ class Table(object):
 
     def export_current_sizes(self):
         """
-        Export a mapping from seat id to population size for this table.
+        Export a mapping from seat pk to population size for this table.
         """
         data = {}
         for seat in self.get_all_seats():
-            data[seat.id] = seat.population_size
+            data[seat.pk] = seat.population_size
 
         return data

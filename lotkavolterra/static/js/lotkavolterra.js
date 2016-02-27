@@ -59,7 +59,7 @@ function updateTable(change, iteration) {
     })
     .ease(EASING_FXN)
     .attr("r", function(d, i) {
-      return getRadius(change[d.id]);
+      return getRadius(change[d.pk]);
     });
 }
 
