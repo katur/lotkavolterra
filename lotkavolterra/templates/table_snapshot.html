@@ -26,7 +26,11 @@
       </td>
 
       <td>
-        {{ seat.get_next_interactor() }}
+        {% if seat.get_next_interactor() %}
+          {{ seat.get_next_interactor().name }}
+        {% else %}
+          None
+        {% endif %}
       </td>
     </tr>
     {% endfor %}
