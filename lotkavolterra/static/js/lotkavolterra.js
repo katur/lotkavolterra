@@ -1,8 +1,8 @@
-const TRANSITION_DURATION = 500;
-const EASING_FXN = "easeOutCubic";
-const OPACITY = 0.5;
 const CIRCLE_FULL = 2 * Math.PI;
 const TABLE_RADIUS = 200
+const OPACITY = 0.5;
+const TRANSITION_DURATION = 500;
+const EASING_FXN = "easeOutCubic";
 
 
 function drawSeats(seats) {

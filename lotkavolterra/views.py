@@ -109,12 +109,20 @@ def run_input_simulation(input_file):
 
         luncheon.add_table(table)
 
+    # Save initial state
     initial_state = luncheon.export_seat_states()
+
+    # Interact for num_generations
+    changes = []
+    for generation in range(num_generations):
+        luncheon.run_generation()
+        changes.append(luncheon.export_seat_sizes())
 
     context = {
         'num_generations': num_generations,
         'population_size': population_size,
         'initial_state': initial_state,
+        'changes': changes,
     }
 
     return render_template('run_input_simulation.html', **context)
