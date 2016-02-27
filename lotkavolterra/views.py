@@ -60,8 +60,13 @@ def run_simulation(input_file):
                       y=json_table['y'])
 
         for index, person in enumerate(json_table['people']):
+            try:
+                group = Group[person['group']]
+            except KeyError:
+                group = get_random_group()
+
             table.insert(current_pk, index, person['name'],
-                         get_random_group(), population_size)
+                         group, population_size)
             current_pk += 1
 
         luncheon.add_table(table)
