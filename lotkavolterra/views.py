@@ -11,10 +11,8 @@ from lotkavolterra.utils import listdir_json
 DEFAULT_NUM_GENERATIONS = 20
 DEFAULT_POPULATION_SIZE = 1000
 
-
 # This is relevant for "input-file based simulations" only
 INPUT_DIR = 'input'
-
 
 # These are relevant for "test case simulations" only
 DEFAULT_NUM_SEATS = 10
@@ -45,21 +43,22 @@ def run_simulation(input_file):
     """
     Run the simulation from an input file.
     """
-    # num_seats not used here
-    num_generations, population_size, num_seats = _parse_get_params()
+    num_generations, population_size, _ = _parse_get_params()
 
+    # Read the input file
     with open(join(INPUT_DIR, input_file), 'r') as f:
         json_data = json.loads(f.read())
 
-    luncheon = Luncheon(json_data['luncheon']['name'])
-    current_pk = 0
+    # Create the luncheon object
+    json_luncheon = json_data['luncheon']
+    luncheon = Luncheon(json_luncheon['name'])
+
+    # Incrementing per-person primary key
+    pk = 0
 
     # Populate tables from the json input
-    for json_table in json_data['luncheon']['tables']:
-        table = Table(json_table['name'],
-                      number=json_table['number'],
-                      x=json_table['x'],
-                      y=json_table['y'])
+    for json_table in json_luncheon['tables']:
+        table = Table(**json_table)
 
         for index, person in enumerate(json_table['people']):
             try:
@@ -67,9 +66,9 @@ def run_simulation(input_file):
             except KeyError:
                 group = get_random_group()
 
-            table.insert(current_pk, index, person['name'],
+            table.insert(pk, index, person['name'],
                          group, population_size)
-            current_pk += 1
+            pk += 1
 
         luncheon.add_table(table)
 
@@ -83,14 +82,23 @@ def run_simulation(input_file):
         changes.append(luncheon.export_seat_sizes())
 
     context = {
+        # For the page title
         'simulation_name': luncheon.name,
+
+        # For the GET param form
         'num_generations': num_generations,
         'population_size': population_size,
+
+        # For printing the final table states <tables>
+        'tables': luncheon.tables,
+
+        # Data for the D3 simulation
         'initial_state': initial_state,
         'changes': changes,
-        'tables': luncheon.tables,
-        'max_tables_x': json_data['luncheon']['maxTablesX'],
-        'max_tables_y': json_data['luncheon']['maxTablesY'],
+
+        # For calculating table size for the D3 simulation
+        'max_tables_x': json_luncheon['maxTablesX'],
+        'max_tables_y': json_luncheon['maxTablesY'],
     }
 
     return render_template('simulation.html', **context)
@@ -100,23 +108,20 @@ def run_simulation(input_file):
 def run_test_simulation(simulation_name):
     """
     Run a test simulation.
-    """
-    # Uncomment to command line DEBUG logging
-    # logging.basicConfig(level=logging.DEBUG)
 
+    This is very similar to run_simulation, but instead of parsing
+    a json file it creates a test table based on rules.
+    """
     num_generations, population_size, num_seats = _parse_get_params()
 
-    # Create and populate Test table
-    luncheon = Luncheon('Test')
+    luncheon = Luncheon()
     table = Table(x=0.5, y=0.5)
     _populate_test_table(table, simulation_name, num_seats,
                          population_size)
     luncheon.add_table(table)
 
-    # Save initial state
     initial_state = luncheon.export_seat_states()
 
-    # Interact for num_generations
     changes = []
     for generation in range(num_generations):
         luncheon.run_generation()
@@ -127,9 +132,9 @@ def run_test_simulation(simulation_name):
         'num_generations': num_generations,
         'population_size': population_size,
         'num_seats': num_seats,
+        'tables': [table],
         'initial_state': initial_state,
         'changes': changes,
-        'tables': [table],
         'max_tables_x': 1,
         'max_tables_y': 1,
     }
@@ -141,8 +146,6 @@ def _populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
                          population_size=DEFAULT_POPULATION_SIZE):
     """
     Helper function to populate a test table for a test simulation.
-
-    These test tables are populated from rules, not from a json input file.
     """
     PEOPLE = ('Alice', 'Bob', 'Carol', 'Django', 'Erlich', 'Freddy',
               'Georgia', 'Heidi', 'Indigo', 'Jack',)

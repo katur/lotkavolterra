@@ -190,9 +190,9 @@ class Table(object):
     """
     A table of seats.
     """
-    def __init__(self, name="Test", number=0, x=0, y=0):
-        self.name = name
+    def __init__(self, number=0, name="Test", x=0.5, y=0.5, **kwargs):
         self.number = number
+        self.name = name
         self.head = None
 
         # Relative position
@@ -281,7 +281,7 @@ class Luncheon(object):
     """
     A luncheon of tables.
     """
-    def __init__(self, name):
+    def __init__(self, name="Test"):
         self.name = name
         self.tables = []
 
