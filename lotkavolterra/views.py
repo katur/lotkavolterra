@@ -29,6 +29,8 @@ def home():
     filenames = [f for f in listdir_json(INPUT_DIR)
                  if isfile(join(INPUT_DIR, f))]
 
+    filenames = [f.split('.')[0] for f in filenames]
+
     test_simulations = (RANDOM, ALTERNATING, HALVES,)
 
     context = {
@@ -46,7 +48,7 @@ def run_simulation(input_file):
     num_generations, population_size, _ = _parse_get_params()
 
     # Read the input file
-    with open(join(INPUT_DIR, input_file), 'r') as f:
+    with open(join(INPUT_DIR, input_file + '.json'), 'r') as f:
         json_data = json.loads(f.read())
 
     # Create the luncheon object
