@@ -9,7 +9,7 @@ const OPACITY = 0.5;
 const TEXT_SIZE = 8;
 
 // Sizing factors
-const TABLE_RADIUS_TO_SPACE_RATIO = 3;
+const TABLE_SPACE_TO_RADIUS_FACTOR = 1/3;
 const OVERPOPULATION_FACTOR = 10;
 
 
@@ -33,7 +33,7 @@ function drawSeats(seats, numTablesX, numTablesY) {
 
   // Calculate the space each table can take up in both x and y dimensions.
   var tableSpace = svgWidth / numTablesX;
-  var tableRadius = tableSpace / TABLE_RADIUS_TO_SPACE_RATIO;
+  var tableRadius = tableSpace * TABLE_SPACE_TO_RADIUS_FACTOR;
 
   // Add these extra attributes to the seat.
   // Use underscores to resemble the rest of the Python-derived attributes.

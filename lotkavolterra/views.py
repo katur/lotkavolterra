@@ -53,7 +53,9 @@ def run_simulation(input_file):
 
     # Create the luncheon object
     json_luncheon = json_data['luncheon']
-    luncheon = Luncheon(json_luncheon['name'])
+    luncheon = Luncheon(json_luncheon['name'],
+                        json_luncheon['num_tables_x'],
+                        json_luncheon['num_tables_y'])
 
     # Incrementing per-person primary key
     pk = 0
@@ -84,23 +86,13 @@ def run_simulation(input_file):
         changes.append(luncheon.export_seat_sizes())
 
     context = {
-        # For the page title
-        'simulation_name': luncheon.name,
+        'luncheon': luncheon,
+        'initial_state': initial_state,
+        'changes': changes,
 
         # For the GET param form
         'num_generations': num_generations,
         'population_size': population_size,
-
-        # For printing the final table states <tables>
-        'tables': luncheon.tables,
-
-        # Data for the D3 simulation
-        'initial_state': initial_state,
-        'changes': changes,
-
-        # For calculating table size for the D3 simulation
-        'max_tables_x': json_luncheon['maxTablesX'],
-        'max_tables_y': json_luncheon['maxTablesY'],
     }
 
     return render_template('simulation.html', **context)
@@ -116,7 +108,7 @@ def run_test_simulation(simulation_name):
     """
     num_generations, population_size, num_seats = _parse_get_params()
 
-    luncheon = Luncheon()
+    luncheon = Luncheon(simulation_name, 1, 1)
     table = Table(x=0.5, y=0.5)
     _populate_test_table(table, simulation_name, num_seats,
                          population_size)
@@ -130,15 +122,14 @@ def run_test_simulation(simulation_name):
         changes.append(luncheon.export_seat_sizes())
 
     context = {
-        'simulation_name': simulation_name,
+        'luncheon': luncheon,
+        'initial_state': initial_state,
+        'changes': changes,
+
+        # For the GET param form
         'num_generations': num_generations,
         'population_size': population_size,
         'num_seats': num_seats,
-        'tables': [table],
-        'initial_state': initial_state,
-        'changes': changes,
-        'max_tables_x': 1,
-        'max_tables_y': 1,
     }
 
     return render_template('simulation.html', **context)

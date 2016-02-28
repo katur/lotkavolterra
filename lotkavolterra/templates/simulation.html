@@ -2,7 +2,7 @@
 
 
 {% block body_id %}simulation{% endblock %}
-{% block page_title %}{{ simulation_name }}{% endblock %}
+{% block page_title %}{{ luncheon.name }}{% endblock %}
 
 
 {% block content %}
@@ -18,12 +18,12 @@
 </div>
 
 <script charset="utf-8">
-  var maxTablesX = {{ max_tables_x }};
-  var maxTablesY = {{ max_tables_y }};
+  var numTablesX = {{ luncheon.num_tables_x }};
+  var numTablesY = {{ luncheon.num_tables_y }};
   var initialState = {{ initial_state|safe }};
   var changes = {{ changes|safe }};
 
-  drawSeats(initialState, maxTablesX, maxTablesY);
+  drawSeats(initialState, numTablesX, numTablesY);
 
   for (var i = 0; i < changes.length; i++) {
     updateSeatRadii(changes[i], i);
@@ -33,7 +33,7 @@
 <div class="page-section">
   <h3>Final state</h3>
 
-  {% for table in tables %}
+  {% for table in luncheon.tables %}
     <h4>Table: {{ table.name }}</h4>
 
     {% include 'table_snapshot.html' %}

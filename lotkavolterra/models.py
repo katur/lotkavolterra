@@ -9,8 +9,10 @@ class Luncheon(object):
     A luncheon, made up of Tables, to take part in the simulation.
     """
 
-    def __init__(self, name="Test"):
+    def __init__(self, name, num_tables_x, num_tables_y):
         self.name = name
+        self.num_tables_x = num_tables_x
+        self.num_tables_y = num_tables_y
         self.tables = []
 
     def __str__(self):
