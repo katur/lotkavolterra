@@ -90,7 +90,7 @@ function getCoordinates(params) {
 
 function moveFromEdge(coord) {
   var distanceFromCenter = Math.abs(0.5 - coord);
-  var skew = distanceFromCenter * 0.3;
+  var skew = distanceFromCenter * 0.25;
 
   if (coord < 0.5) {
     coord += skew;
