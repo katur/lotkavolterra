@@ -56,11 +56,11 @@ for table_number, table in sorted(tables.iteritems()):
     table_list.append(table)
 
 data = {
-    "luncheon": {
-        "name": "Black Rock Luncheon: 2015",
-        "tables": table_list,
-        "maxTablesX": NUM_X,
-        "maxTablesY": NUM_Y,
+    'luncheon': {
+        'name': 'Black Rock Luncheon: 2015',
+        'tables': table_list,
+        'maxTablesX': NUM_X,
+        'maxTablesY': NUM_Y,
     }
 }
 
