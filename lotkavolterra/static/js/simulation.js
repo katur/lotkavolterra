@@ -6,28 +6,28 @@ const CENTER = 0.5
 const EASING_FXN = "easeOutCubic";
 const TRANSITION_DURATION = 500;
 const OPACITY = 0.5;
-const TEXT_SIZE = 10;
+const TEXT_SIZE = 8;
 
 // Sizing factors
 const TABLE_REDUCTION_FACTOR = 0.6;
 const EDGE_SKEW_FACTOR = 0.25;
 
 
+
 function drawSeats(seats, maxTablesX, maxTablesY) {
-  var svg = d3.select("svg")
+  var svg = d3.select("svg");
   var svgWidth = svg.attr("width");
   var svgHeight = svg.attr("height");
 
-  // Calculate tableRadius based on how many tables there are in either
-  // dimension.
-  var maxTableWidth = svgWidth / maxTablesX * TABLE_REDUCTION_FACTOR;
-  var maxTableHeight = svgHeight / maxTablesY * TABLE_REDUCTION_FACTOR;
-  var tableDiameter = Math.min(maxTableWidth, maxTableHeight,
-                               svgHeight / 2, svgWidth / 2);
-  var tableRadius = tableDiameter / 2;
+  // tableRadius depends on max number of tables in both dimensions
+  var tableRadius = getTableRadius(maxTablesX, maxTablesY,
+                                   svgWidth, svgHeight);
+  for (var i = 0; i < seats.length; i++) {
+    seats[i]["table_radius"] = tableRadius;
+  }
 
-  // Create and position wrapper group elements (g tags). Each g tag
-  // will hold both a circle and a text box.
+  // Create and position the group elements (g tags). Each one of
+  // these elements will hold both a circle and a text box.
   var elem = svg
     .selectAll("g")
     .data(seats)
@@ -39,17 +39,17 @@ function drawSeats(seats, maxTablesX, maxTablesY) {
         svgHeight: svgHeight,
         tableX: d.table_x,
         tableY: d.table_y,
-        tableRadius: tableRadius,
+        tableRadius: d.table_radius,
         index: d.index,
         step: CIRCLE_FULL / d.table_size,
       });
       return "translate("+coords[0]+","+coords[1]+")"
     });
 
-  // Add the circles
+  // Add the circles to the g elements
   elem.append("circle")
     .attr("r", function(d, i) {
-      return getRadius(d.population_size);
+      return getRadius(d.population_size, d.table_radius);
     })
     .style("fill", function(d, i) {
       // return getPattern(d.group);
@@ -60,7 +60,7 @@ function drawSeats(seats, maxTablesX, maxTablesY) {
       return d.name;
     });
 
-  // Add the text
+  // Add the text to the g elements
   elem.append("text")
     .text(function(d, i){
       return d.name;
@@ -81,8 +81,17 @@ function updateSeats(change, iteration) {
     })
     .ease(EASING_FXN)
     .attr("r", function(d, i) {
-      return getRadius(change[d.pk]);
+      return getRadius(change[d.pk], d.table_radius);
     });
+}
+
+
+function getTableRadius(maxTablesX, maxTablesY, svgWidth, svgHeight) {
+  var maxTableWidth = svgWidth / maxTablesX * TABLE_REDUCTION_FACTOR;
+  var maxTableHeight = svgHeight / maxTablesY * TABLE_REDUCTION_FACTOR;
+  var tableDiameter = Math.min(maxTableWidth, maxTableHeight,
+                               svgHeight / 2, svgWidth / 2);
+  return tableDiameter / 2;
 }
 
 
@@ -114,11 +123,12 @@ function bringInFromEdge(coord) {
 }
 
 
-function getRadius(population_size) {
+function getRadius(populationSize, tableRadius) {
   /*
    * Calculate radius such that area reflects population size.
    */
-  return Math.sqrt(population_size / Math.PI);
+  var skew = tableRadius / 65;
+  return Math.sqrt(populationSize / Math.PI) * skew;
 }
 
 
