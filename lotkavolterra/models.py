@@ -3,6 +3,8 @@ from enum import Enum
 
 from lotkavolterra.interactions import interact
 
+OVERPOPULATION_FACTOR = 10
+
 
 class Luncheon(object):
     """
@@ -273,7 +275,9 @@ class Seat(object):
         change = int(round(self.population_size * growth_rate))
         self.population_size = self.population_size + change
 
-        if self.population_size >= 10 * self.initial_population_size:
+        # Extinction case due to overpopulation
+        if self.population_size >= (OVERPOPULATION_FACTOR *
+                                    self.initial_population_size):
             self.population_size = 0
 
     def decrease_population(self, growth_rate):

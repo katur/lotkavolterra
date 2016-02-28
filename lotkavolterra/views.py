@@ -4,7 +4,8 @@ from os.path import isfile, join
 from flask import render_template, request
 
 from lotkavolterra import app
-from lotkavolterra.models import Group, Table, Luncheon, get_random_group
+from lotkavolterra.models import (Luncheon, Table, Group, get_random_group,
+                                  OVERPOPULATION_FACTOR)
 from lotkavolterra.utils import listdir_json
 
 
@@ -93,6 +94,9 @@ def run_simulation(input_file):
         # For the GET param form
         'num_generations': num_generations,
         'population_size': population_size,
+
+        # For size calculations
+        'OVERPOPULATION_FACTOR': OVERPOPULATION_FACTOR,
     }
 
     return render_template('simulation.html', **context)
@@ -109,7 +113,7 @@ def run_test_simulation(simulation_name):
     num_generations, population_size, num_seats = _parse_get_params()
 
     luncheon = Luncheon(simulation_name, 1, 1)
-    table = Table(x=0.5, y=0.5)
+    table = Table(x=0, y=0)
     _populate_test_table(table, simulation_name, num_seats,
                          population_size)
     luncheon.add_table(table)
@@ -130,6 +134,9 @@ def run_test_simulation(simulation_name):
         'num_generations': num_generations,
         'population_size': population_size,
         'num_seats': num_seats,
+
+        # For size calculations
+        'OVERPOPULATION_FACTOR': OVERPOPULATION_FACTOR,
     }
 
     return render_template('simulation.html', **context)
