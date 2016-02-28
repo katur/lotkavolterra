@@ -16,8 +16,12 @@ const EDGE_SKEW_FACTOR = 0.25;
 
 function drawSeats(seats, maxTablesX, maxTablesY) {
   var svg = d3.select("svg");
-  var svgWidth = svg.attr("width");
-  var svgHeight = svg.attr("height");
+  var svgWidth = svg.style("width").replace("px", "");
+
+  // Set height using width along with ratio of x/y tables
+  var svgHeight = svgWidth * (maxTablesY / maxTablesX);
+  svg.style("height", svgHeight);
+  svgHeight = svg.style("height").replace("px", "");
 
   // tableRadius depends on max number of tables in both dimensions
   var tableRadius = getTableRadius(maxTablesX, maxTablesY,
@@ -89,8 +93,9 @@ function updateSeats(change, iteration) {
 function getTableRadius(maxTablesX, maxTablesY, svgWidth, svgHeight) {
   var maxTableWidth = svgWidth / maxTablesX * TABLE_REDUCTION_FACTOR;
   var maxTableHeight = svgHeight / maxTablesY * TABLE_REDUCTION_FACTOR;
+
   var tableDiameter = Math.min(maxTableWidth, maxTableHeight,
-                               svgHeight / 2, svgWidth / 2);
+                               svgHeight / 3, svgWidth / 3);
   return tableDiameter / 2;
 }
 
