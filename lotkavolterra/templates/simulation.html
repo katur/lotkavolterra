@@ -20,15 +20,13 @@
 <script charset="utf-8">
   var maxTablesX = {{ max_tables_x }};
   var maxTablesY = {{ max_tables_y }};
-
   var initialState = {{ initial_state|safe }};
+  var changes = {{ changes|safe }};
 
   drawSeats(initialState, maxTablesX, maxTablesY);
 
-  var changes = {{ changes|safe }};
-
   for (var i = 0; i < changes.length; i++) {
-    updateSeats(changes[i], i);
+    updateSeatRadii(changes[i], i);
   }
 </script>
 

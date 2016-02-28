@@ -1,6 +1,6 @@
 // Simple maths
 const PI = Math.PI;
-const CIRCLE_FULL = 2 * PI;
+const CIRCLE_RADIANS = 2 * PI;
 
 // Transition / style
 const EASING_FXN = "easeOutCubic";
@@ -10,28 +10,30 @@ const TEXT_SIZE = 8;
 
 // Sizing factors
 const TABLE_RADIUS_TO_SPACE_RATIO = 3;
-const MAX_POPULATION_FACTOR = 10;
+const MAX_POPULATION_FACTOR = 10;  // TODO: pass this from python
 
+
+/*************************
+ * Luncheon-wide helpers *
+ *************************/
 
 /**
- * Draw the seats initially.
+ * Draw all seats.
  *
- * maxTablesX and maxTableY are required to determine how big the
- * tables should be.
+ * Call this to draw the initial state.
  */
-function drawSeats(seats, maxTablesX, maxTablesY) {
+function drawSeats(seats, numTablesX, numTablesY) {
   var svg = d3.select("svg");
 
-  // Calculate svgWidth and height
-  var svgWidth = svg.style("width").replace("px", "");
-  var hwRatio = maxTablesY / maxTablesX;
+  // Calculate svg height from width.
+  var svgWidth = parseInt(svg.style("width"), 10);
+  var hwRatio = numTablesY / numTablesX;
   var svgHeight = svgWidth * hwRatio;
   svg.style("height", svgHeight);
-  svgHeight = svg.style("height").replace("px", "");
 
-  // Calculate the amount of space each table can take up
-  var tableSpace = getTableSpace(svgWidth, svgHeight,
-                                 maxTablesX, maxTablesY);
+  // Calculate the space each table can take up in both x and y dimensions.
+  var tableSpace = svgWidth / numTablesX;
+  var tableRadius = tableSpace / TABLE_RADIUS_TO_SPACE_RATIO;
 
   // Add these extra attributes to the seat.
   // Use underscores to resemble the rest of the Python-derived attributes.
@@ -40,12 +42,12 @@ function drawSeats(seats, maxTablesX, maxTablesY) {
     seat["svg_width"] = svgWidth;
     seat["svg_height"] = svgHeight;
     seat["table_space"] = tableSpace;
-    seat["table_radius"] = tableSpace / TABLE_RADIUS_TO_SPACE_RATIO;
+    seat["table_radius"] = tableRadius;
   }
 
-  // Create and position the group elements (g tags). Each one of
-  // these elements will hold both a circle and a text box.
-  var elem = svg
+  // Create and position the group elents (g tags). Each one of
+  // these elents will hold both a circle and a text box.
+  var el = svg
     .selectAll("g")
     .data(seats)
     .enter()
@@ -55,31 +57,53 @@ function drawSeats(seats, maxTablesX, maxTablesY) {
       return "translate("+coords[0]+","+coords[1]+")"
     });
 
-  addCircles(elem);
-  addText(elem);
+  addCircles(el);
+  addText(el);
 }
 
-
-function addCircles(elem) {
-  // Add the circles to the g elements
-  elem.append("circle")
-    .attr("r", function(d, i) {
+/**
+ * Update seat radii according to changes.
+ */
+function updateSeatRadii(changes, iteration) {
+  d3.select("svg")
+    .selectAll("circle")
+    .transition()
+    .duration(TRANSITION_DURATION)
+    .delay(function(d) {
+      return iteration * TRANSITION_DURATION;
+    })
+    .ease(EASING_FXN)
+    .attr("r", function(d) {
+      d.population_size = changes[d.pk];
       return getRadius(d);
-    })
-    .style("fill", function(d, i) {
-      // return getPattern(d.group);
-      return getColor(d);
-    })
-    .style("opacity", OPACITY)
-    .text(function(d, i) {
-      return d.name;
     });
 }
 
 
-function addText(elem) {
-  elem.append("text")
-    .text(function(d, i){
+/*******************
+ * Drawing helpers *
+ *******************/
+
+/**
+ * Add the circle elements.
+ */
+function addCircles(el) {
+  el.append("circle")
+    .attr("r", function(d) {
+      return getRadius(d);
+    })
+    .style("fill", function(d) {
+      return getColor(d);
+    })
+    .style("opacity", OPACITY);
+}
+
+/**
+ * Add the text elements.
+ */
+function addText(el) {
+  el.append("text")
+    .text(function(d){
       return d.name;
     })
     .attr("text-anchor", "middle")
@@ -88,111 +112,81 @@ function addText(elem) {
 }
 
 
-/**
- * Update seats according to changes.
- */
-function updateSeats(changes, iteration) {
-  d3.select("svg")
-    .selectAll("circle")
-    .transition()
-    .duration(TRANSITION_DURATION)
-    .delay(function(d, i) {
-      return iteration * TRANSITION_DURATION;
-    })
-    .ease(EASING_FXN)
-    .attr("r", function(d, i) {
-      d.population_size = changes[d.pk];
-      return getRadius(d);
-    });
-}
-
-
-function getTableSpace(svgWidth, svgHeight, maxTablesX, maxTablesY) {
-  var maxTableWidth = svgWidth / maxTablesX;
-  var maxTableHeight = svgHeight / maxTablesY;
-  return Math.min(maxTableWidth, maxTableHeight);
-}
-
+/********************
+ * Per-seat helpers *
+ ********************/
 
 /**
- * Calculate the coordinates for a particular seat.
- *
- * This calculation depends on the relative table coordinates,
- * the table radius, the index of this seat in the table, the
- * total number of seats at this table, and the size of the SVG
- * container.
+ * Get the coordinates of a seat.
  */
-function getCoordinates(d) {
-  var step = CIRCLE_FULL / d.table_size;
-  var angle = d.index * step;
+function getCoordinates(seat) {
+  var step = CIRCLE_RADIANS / seat.table_seat_count;
+  var angle = seat.index * step;
 
   // Skew angle slightly so that tables with an even number of seats
-  // don't have two horizontally-aligned seats at the top and bottom
-  // of the circle. Better since text runs horizontally.
-  angle = (angle + (step / 2)) % CIRCLE_FULL;
+  // don't have horizontally-aligned seats at the top and bottom
+  // of the circle (better since text runs horizontally)
+  angle = (angle + (step / 2)) % CIRCLE_RADIANS;
 
-  var cx = (d.table_x * (d.svg_width - d.table_space)) +
-           (d.table_space / 2) +
-           (d.table_radius * Math.cos(angle));
+  // Table coordinates, shifted such that relative table positions
+  // 0 and 1 are moved a half-table inward from the svg edges.
+  var tableX = (seat.table_x * (seat.svg_width - seat.table_space)) +
+               (seat.table_space / 2);
+  var tableY = (seat.table_y * (seat.svg_height - seat.table_space)) +
+               (seat.table_space / 2);
 
-  var cy = (d.table_y * (d.svg_height - d.table_space)) +
-           (d.table_space / 2) +
-           (d.table_radius * Math.sin(angle));
+  // Seat coordinates now just trigonometry
+  var seatX = tableX + (seat.table_radius * Math.cos(angle));
+  var seatY = tableY + (seat.table_radius * Math.sin(angle));
 
-  return [cx, cy];
+  return [seatX, seatY];
 }
 
+/**
+ * Get the radius of a seat based on its current population size.
+ */
+function getRadius(seat) {
+  var current = getRadiusFromArea(seat.population_size);
+  var max = getRadiusFromArea(seat.initial_population_size *
+                               MAX_POPULATION_FACTOR);
+  var relative = current / max;
+
+  // Allow seats to get as big as the table at their largest
+  return relative * seat.table_radius;
+}
+
+/**
+ * Get the fill color of seat based on its group.
+ */
+function getColor(seat) {
+  if (seat.group == "herd")
+    return "green";
+  else if (seat.group == "pack")
+    return "red";
+  else if (seat.group == "colony")
+    return "blue";
+}
+
+/**
+ * Get the fill pattern of a seat based on its group.
+ */
+function getPattern(seat) {
+  if (seat.group == "herd")
+    return "url(#green)";
+  else if (seat.group == "pack")
+    return "url(#red)";
+  else if (seat.group == "colony")
+    return "url(#blue)";
+}
+
+
+/*******************
+ * General helpers *
+ *******************/
 
 /**
  * Get a circle's radius from its area.
  */
 function getRadiusFromArea(area) {
   return Math.sqrt(area / PI);
-}
-
-
-/**
- * Calculate radius of a seat based on its population size.
- *
- * The amount returned takes into account the initialPopulationSize
- * and the table size.
- */
-function getRadius(d) {
-  var current = getRadiusFromArea(d.population_size);
-  var full = getRadiusFromArea(d.initial_population_size *
-                               MAX_POPULATION_FACTOR);
-  var relative = current / full;
-  return relative * d.table_radius;
-}
-
-
-/**
- * Get the color of seat, based on its group.
- */
-function getColor(d) {
-  var group = d.group;
-  var color;
-  if (group == "herd")
-    color = "green";
-  else if (group == "pack")
-    color = "red";
-  else if (group == "colony")
-    color = "blue";
-  return color;
-}
-
-
-/**
- * Get the pattern of a seat, based on its group.
- */
-function getPattern(d) {
-  var group = d.group;
-  var pattern;
-  if (group == "herd")
-    pattern = "url(#green)";
-  else if (group == "pack")
-    pattern = "url(#red)";
-  else if (group == "colony")
-    pattern = "url(#blue)";
-  return pattern;
 }
