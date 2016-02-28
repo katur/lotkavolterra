@@ -72,7 +72,7 @@ class Table(object):
         self.y = y
 
         # Number of seats
-        self.size = 0
+        self.seat_count = 0
 
     def __str__(self):
         return 'Table {}: {}'.format(self.number, self.name)
@@ -101,7 +101,7 @@ class Table(object):
             new_seat.get_previous().set_next(new_seat)
 
         self.head = new_seat
-        self.size += 1
+        self.seat_count += 1
 
     def get_all_seats(self):
         """
@@ -208,7 +208,7 @@ class Seat(object):
             'initial_population_size': self.initial_population_size,
             'table_x': self.table.x,
             'table_y': self.table.y,
-            'table_size': self.table.size,
+            'table_seat_count': self.table.seat_count,
         }
 
     def get_next(self):
