@@ -205,6 +205,7 @@ class Seat(object):
             'name': str(self.format_name()),
             'group': self.group.name,
             'population_size': self.population_size,
+            'initial_population_size': self.initial_population_size,
             'table_x': self.table.x,
             'table_y': self.table.y,
             'table_size': self.table.size,
