@@ -1,7 +1,16 @@
+// Simple maths
 const CIRCLE_FULL = 2 * Math.PI;
-const OPACITY = 0.5;
-const TRANSITION_DURATION = 500;
+const CENTER = 0.5
+
+// Transition / style
 const EASING_FXN = "easeOutCubic";
+const TRANSITION_DURATION = 500;
+const OPACITY = 0.5;
+const TEXT_SIZE = 10;
+
+// Sizing factors
+const TABLE_REDUCTION_FACTOR = 0.6;
+const EDGE_SKEW_FACTOR = 0.25;
 
 
 function drawSeats(seats, maxTablesX, maxTablesY) {
@@ -9,12 +18,16 @@ function drawSeats(seats, maxTablesX, maxTablesY) {
   var svgWidth = svg.attr("width");
   var svgHeight = svg.attr("height");
 
-  var maxTableWidth = svgWidth / maxTablesX * 0.6;
-  var maxTableHeight = svgHeight / maxTablesY * 0.6;
-  var tableRadius = Math.min(maxTableWidth, maxTableHeight,
-                             svgHeight / 2, svgWidth / 2) / 2;
+  // Calculate tableRadius based on how many tables there are in either
+  // dimension.
+  var maxTableWidth = svgWidth / maxTablesX * TABLE_REDUCTION_FACTOR;
+  var maxTableHeight = svgHeight / maxTablesY * TABLE_REDUCTION_FACTOR;
+  var tableDiameter = Math.min(maxTableWidth, maxTableHeight,
+                               svgHeight / 2, svgWidth / 2);
+  var tableRadius = tableDiameter / 2;
 
-  // Create and position wrapper group elements (g tags)
+  // Create and position wrapper group elements (g tags). Each g tag
+  // will hold both a circle and a text box.
   var elem = svg
     .selectAll("g")
     .data(seats)
@@ -54,7 +67,7 @@ function drawSeats(seats, maxTablesX, maxTablesY) {
     })
     .attr("text-anchor", "middle")
     .attr("alignment-baseline", "middle")
-    .attr("font-size", "10");
+    .attr("font-size", TEXT_SIZE);
 }
 
 
@@ -77,8 +90,8 @@ function getCoordinates(params) {
   var angle = params.index * params.step;
 
   // Move x and y coords inward to avoid edges of svg
-  var tableX = moveFromEdge(params.tableX);
-  var tableY = moveFromEdge(params.tableY);
+  var tableX = bringInFromEdge(params.tableX);
+  var tableY = bringInFromEdge(params.tableY);
 
   var cx = (tableX * params.svgWidth) +
            (params.tableRadius * Math.cos(angle));
@@ -88,13 +101,13 @@ function getCoordinates(params) {
 }
 
 
-function moveFromEdge(coord) {
-  var distanceFromCenter = Math.abs(0.5 - coord);
-  var skew = distanceFromCenter * 0.25;
+function bringInFromEdge(coord) {
+  var distanceFromCenter = Math.abs(CENTER - coord);
+  var skew = distanceFromCenter * EDGE_SKEW_FACTOR;
 
-  if (coord < 0.5) {
+  if (coord < CENTER) {
     coord += skew;
-  } else if (coord > 0.5) {
+  } else if (coord > CENTER) {
     coord -= skew;
   }
   return coord;
