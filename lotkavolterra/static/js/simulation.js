@@ -10,7 +10,7 @@ const TEXT_SIZE = 8;
 
 // Sizing factors
 const TABLE_RADIUS_TO_SPACE_RATIO = 3;
-const MAX_POPULATION_FACTOR = 10;  // TODO: pass this from python
+const OVERPOPULATION_FACTOR = 10;
 
 
 /*************************
@@ -148,7 +148,7 @@ function getCoordinates(seat) {
 function getRadius(seat) {
   var current = getRadiusFromArea(seat.population_size);
   var max = getRadiusFromArea(seat.initial_population_size *
-                               MAX_POPULATION_FACTOR);
+                               OVERPOPULATION_FACTOR);
   var relative = current / max;
 
   // Allow seats to get as big as the table at their largest
