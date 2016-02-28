@@ -10,6 +10,7 @@ const TEXT_SIZE = 8;
 
 // Sizing factors
 const TABLE_RADIUS_TO_SPACE_RATIO = 3;
+const MAX_POPULATION_FACTOR = 10;
 
 
 /**
@@ -33,12 +34,13 @@ function drawSeats(seats, maxTablesX, maxTablesY) {
                                  maxTablesX, maxTablesY);
 
   // Add these extra attributes to the seat.
-  // Use underscores to resemble the rest of the bound attributes.
+  // Use underscores to resemble the rest of the Python-derived attributes.
   for (var i = 0; i < seats.length; i++) {
-    seats[i]["svg_width"] = svgWidth;
-    seats[i]["svg_height"] = svgHeight;
-    seats[i]["table_space"] = tableSpace;
-    seats[i]["table_radius"] = tableSpace / TABLE_RADIUS_TO_SPACE_RATIO;
+    seat = seats[i];
+    seat["svg_width"] = svgWidth;
+    seat["svg_height"] = svgHeight;
+    seat["table_space"] = tableSpace;
+    seat["table_radius"] = tableSpace / TABLE_RADIUS_TO_SPACE_RATIO;
   }
 
   // Create and position the group elements (g tags). Each one of
@@ -53,6 +55,12 @@ function drawSeats(seats, maxTablesX, maxTablesY) {
       return "translate("+coords[0]+","+coords[1]+")"
     });
 
+  addCircles(elem);
+  addText(elem);
+}
+
+
+function addCircles(elem) {
   // Add the circles to the g elements
   elem.append("circle")
     .attr("r", function(d, i) {
@@ -66,8 +74,10 @@ function drawSeats(seats, maxTablesX, maxTablesY) {
     .text(function(d, i) {
       return d.name;
     });
+}
 
-  // Add the text to the g elements
+
+function addText(elem) {
   elem.append("text")
     .text(function(d, i){
       return d.name;
@@ -149,7 +159,8 @@ function getRadiusFromArea(area) {
  */
 function getRadius(d) {
   var current = getRadiusFromArea(d.population_size);
-  var full = getRadiusFromArea(d.initial_population_size * 10);
+  var full = getRadiusFromArea(d.initial_population_size *
+                               MAX_POPULATION_FACTOR);
   var relative = current / full;
   return relative * d.table_radius;
 }
