@@ -89,6 +89,8 @@ def run_simulation(input_file):
         'initial_state': initial_state,
         'changes': changes,
         'tables': luncheon.tables,
+        'max_tables_x': json_data['luncheon']['maxTablesX'],
+        'max_tables_y': json_data['luncheon']['maxTablesY'],
     }
 
     return render_template('simulation.html', **context)
@@ -106,7 +108,7 @@ def run_test_simulation(simulation_name):
 
     # Create and populate Test table
     luncheon = Luncheon('Test')
-    table = Table(x=0.5, y=0.25)
+    table = Table(x=0.5, y=0.5)
     _populate_test_table(table, simulation_name, num_seats,
                          population_size)
     luncheon.add_table(table)
@@ -128,6 +130,8 @@ def run_test_simulation(simulation_name):
         'initial_state': initial_state,
         'changes': changes,
         'tables': [table],
+        'max_tables_x': 1,
+        'max_tables_y': 1,
     }
 
     return render_template('simulation.html', **context)

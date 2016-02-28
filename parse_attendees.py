@@ -48,14 +48,17 @@ for i, row in enumerate(csv.DictReader(args.infile)):
 # Tranform dictionary to a list, sorted by table number
 table_list = []
 for table_number, table in sorted(tables.iteritems()):
-    table['x'] = (table['number'] % 6) / 5.0
-    table['y'] = (table['number'] / 6) / 4.0
+    num = table_number - 1  # Go from 1-indexed to 0-indexed
+    table['x'] = (num % 6) / 5.0
+    table['y'] = (num / 6) / 4.0
     table_list.append(table)
 
 data = {
     "luncheon": {
         "name": "Black Rock Luncheon: 2015",
         "tables": table_list,
+        "maxTablesX": 6,
+        "maxTablesY": 5
     }
 }
 

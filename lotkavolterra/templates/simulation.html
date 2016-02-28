@@ -12,14 +12,18 @@
 </div>
 
 <div class="page-section">
-  <svg width="1200" height="1200">
+  <svg width="1200" height="1000">
     {% include 'svg_patterns.html' %}
   </svg>
 </div>
 
 <script charset="utf-8">
+  var maxTablesX = {{ max_tables_x }};
+  var maxTablesY = {{ max_tables_y }};
+
   var initialState = {{ initial_state|safe }};
-  drawSeats(initialState);
+
+  drawSeats(initialState, maxTablesX, maxTablesY);
 
   var changes = {{ changes|safe }};
 
