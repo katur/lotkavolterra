@@ -1,6 +1,6 @@
 // Simple maths
-const CIRCLE_FULL = 2 * Math.PI;
-const CENTER = 0.5;
+const PI = Math.PI;
+const CIRCLE_FULL = 2 * PI;
 
 // Transition / style
 const EASING_FXN = "easeOutCubic";
@@ -20,22 +20,25 @@ const TABLE_RADIUS_TO_SPACE_RATIO = 3;
  */
 function drawSeats(seats, maxTablesX, maxTablesY) {
   var svg = d3.select("svg");
-  var svgWidth = svg.style("width").replace("px", "");
 
-  // Set height using width along with ratio of x/y tables
+  // Calculate svgWidth and height
+  var svgWidth = svg.style("width").replace("px", "");
   var hwRatio = maxTablesY / maxTablesX;
   var svgHeight = svgWidth * hwRatio;
   svg.style("height", svgHeight);
   svgHeight = svg.style("height").replace("px", "");
 
-  // tableSpace depends on max number of tables in both dimensions
-  var tableSpace = getTableSpace(maxTablesX, maxTablesY,
-                                 svgWidth, svgHeight);
+  // Calculate the amount of space each table can take up
+  var tableSpace = getTableSpace(svgWidth, svgHeight,
+                                 maxTablesX, maxTablesY);
+
+  // Add these extra attributes to the seat.
+  // Use underscores to resemble the rest of the bound attributes.
   for (var i = 0; i < seats.length; i++) {
-    seats[i]["tableSpace"] = tableSpace;
-    seats[i]["tableRadius"] = tableSpace / TABLE_RADIUS_TO_SPACE_RATIO;
-    seats[i]["svgWidth"] = svgWidth;
-    seats[i]["svgHeight"] = svgHeight;
+    seats[i]["svg_width"] = svgWidth;
+    seats[i]["svg_height"] = svgHeight;
+    seats[i]["table_space"] = tableSpace;
+    seats[i]["table_radius"] = tableSpace / TABLE_RADIUS_TO_SPACE_RATIO;
   }
 
   // Create and position the group elements (g tags). Each one of
@@ -53,12 +56,11 @@ function drawSeats(seats, maxTablesX, maxTablesY) {
   // Add the circles to the g elements
   elem.append("circle")
     .attr("r", function(d, i) {
-      return getRadius(d.population_size, d.initial_population_size,
-                       d.tableRadius);
+      return getRadius(d);
     })
     .style("fill", function(d, i) {
       // return getPattern(d.group);
-      return getColor(d.group);
+      return getColor(d);
     })
     .style("opacity", OPACITY)
     .text(function(d, i) {
@@ -89,13 +91,13 @@ function updateSeats(changes, iteration) {
     })
     .ease(EASING_FXN)
     .attr("r", function(d, i) {
-      return getRadius(changes[d.pk], d.initial_population_size,
-                       d.tableRadius);
+      d.population_size = changes[d.pk];
+      return getRadius(d);
     });
 }
 
 
-function getTableSpace(maxTablesX, maxTablesY, svgWidth, svgHeight) {
+function getTableSpace(svgWidth, svgHeight, maxTablesX, maxTablesY) {
   var maxTableWidth = svgWidth / maxTablesX;
   var maxTableHeight = svgHeight / maxTablesY;
   return Math.min(maxTableWidth, maxTableHeight);
@@ -114,17 +116,18 @@ function getCoordinates(d) {
   var step = CIRCLE_FULL / d.table_size;
   var angle = d.index * step;
 
-  // Skew angle slight so that common case (even number) doesn't have two
-  // horizontally-even seats at top and bottom of circle
+  // Skew angle slightly so that tables with an even number of seats
+  // don't have two horizontally-aligned seats at the top and bottom
+  // of the circle. Better since text runs horizontally.
   angle = (angle + (step / 2)) % CIRCLE_FULL;
 
-  var cx = (d.table_x * (d.svgWidth - d.tableSpace)) +
-           (d.tableSpace / 2) +
-           (d.tableRadius * Math.cos(angle));
+  var cx = (d.table_x * (d.svg_width - d.table_space)) +
+           (d.table_space / 2) +
+           (d.table_radius * Math.cos(angle));
 
-  var cy = (d.table_y * (d.svgHeight - d.tableSpace)) +
-           (d.tableSpace / 2) +
-           (d.tableRadius * Math.sin(angle));
+  var cy = (d.table_y * (d.svg_height - d.table_space)) +
+           (d.table_space / 2) +
+           (d.table_radius * Math.sin(angle));
 
   return [cx, cy];
 }
@@ -134,7 +137,7 @@ function getCoordinates(d) {
  * Get a circle's radius from its area.
  */
 function getRadiusFromArea(area) {
-  return Math.sqrt(area / Math.PI);
+  return Math.sqrt(area / PI);
 }
 
 
@@ -144,18 +147,19 @@ function getRadiusFromArea(area) {
  * The amount returned takes into account the initialPopulationSize
  * and the table size.
  */
-function getRadius(populationSize, initialPopulationSize, tableRadius) {
-  var current = getRadiusFromArea(populationSize);
-  var full = getRadiusFromArea(initialPopulationSize * 10);
+function getRadius(d) {
+  var current = getRadiusFromArea(d.population_size);
+  var full = getRadiusFromArea(d.initial_population_size * 10);
   var relative = current / full;
-  return relative * tableRadius;
+  return relative * d.table_radius;
 }
 
 
 /**
- * Get the color of a particular group.
+ * Get the color of seat, based on its group.
  */
-function getColor(group) {
+function getColor(d) {
+  var group = d.group;
   var color;
   if (group == "herd")
     color = "green";
@@ -168,9 +172,10 @@ function getColor(group) {
 
 
 /**
- * Get the pattern of a particular group.
+ * Get the pattern of a seat, based on its group.
  */
-function getPattern(group) {
+function getPattern(d) {
+  var group = d.group;
   var pattern;
   if (group == "herd")
     pattern = "url(#green)";
