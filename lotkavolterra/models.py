@@ -4,18 +4,150 @@ from enum import Enum
 from lotkavolterra.interactions import interact
 
 
-class Group(Enum):
+class Luncheon(object):
     """
-    An organism group -- herd, pack, or colony.
+    A luncheon, made up of Tables, to take part in the simulation.
     """
-    herd, pack, colony = range(3)
+
+    def __init__(self, name="Test"):
+        self.name = name
+        self.tables = []
+
+    def __str__(self):
+        return 'Luncheon {}'.format(self.name)
+
+    def __repr__(self):
+        return str(self)
+
+    def add_table(self, table):
+        """
+        Add a table to this luncheon.
+        """
+        self.tables.append(table)
+
+    def all_seats_interact(self, num_generations=1):
+        """
+        Run one generation of the simulation.
+
+        I.e., all active neighbors interact once.
+        """
+        for i in range(num_generations):
+            for table in self.tables:
+                table.all_seats_interact()
+
+    def export_seat_states(self):
+        """
+        Export the current state of all seats at the luncheon.
+        """
+        seat_states = []
+
+        for table in self.tables:
+            seat_states.extend(table.export_seat_states())
+
+        return seat_states
+
+    def export_seat_sizes(self):
+        """
+        Export a mapping from seat.pk to seat.population_size for all seats
+        at the luncheon.
+        """
+        seat_sizes = {}
+        for table in self.tables:
+            seat_sizes.update(table.export_seat_sizes())
+
+        return seat_sizes
 
 
-def get_random_group():
+class Table(object):
     """
-    Get a random group (herd, pack, or colony)
+    A table, made up of Seats, to take part in the simulation.
     """
-    return random.choice([Group.pack, Group.herd, Group.colony])
+    def __init__(self, number=0, name="Test", x=0.5, y=0.5, **kwargs):
+        self.number = number
+        self.name = name
+        self.head = None
+
+        # Relative position in the space
+        self.x = x
+        self.y = y
+
+        # Number of seats
+        self.size = 0
+
+    def __str__(self):
+        return 'Table {}: {}'.format(self.number, self.name)
+
+    def __repr__(self):
+        return str(self)
+
+    def insert(self, pk, index, name, group, population_size):
+        """
+        Insert a new seat at the head of this table.
+        """
+        new_seat = Seat(pk=pk, index=index, name=name, group=group,
+                        population_size=population_size, table=self)
+
+        if not self.head:
+            new_seat.set_next(new_seat)
+            new_seat.set_previous(new_seat)
+
+        else:
+            # Create next pointers
+            new_seat.set_previous(self.head)
+            new_seat.set_next(self.head.get_next())
+
+            # Update old pointers
+            new_seat.get_next().set_previous(new_seat)
+            new_seat.get_previous().set_next(new_seat)
+
+        self.head = new_seat
+        self.size += 1
+
+    def get_all_seats(self):
+        """
+        Get a list of all seats at this table.
+        """
+        seats = []
+        if not self.head:
+            return seats
+
+        seats.append(self.head)
+        current = self.head.get_next()
+        while current != self.head:
+            seats.append(current)
+            current = current.get_next()
+
+        return seats
+
+    def all_seats_interact(self, num_generations=1):
+        """
+        Have all seats at this table interact for num_generations.
+        """
+        for i in range(num_generations):
+            for seat in self.get_all_seats():
+                seat.interact_with_next_interactor()
+
+    def export_seat_states(self):
+        """
+        Export the current state of all seats at this table.
+        """
+        seat_states = []
+
+        for seat in self.get_all_seats():
+            seat_states.append(seat.export_state())
+
+        return seat_states
+
+    def export_seat_sizes(self):
+        """
+        Export a mapping from seat.pk to seat.population_size for all seats
+        at this table.
+        """
+        seat_sizes = {}
+        for seat in self.get_all_seats():
+            seat_sizes[seat.pk] = seat.population_size
+
+        return seat_sizes
 
 
 class Seat(object):
@@ -186,136 +318,15 @@ class Seat(object):
             interact(self, interactor)
 
 
-class Table(object):
+class Group(Enum):
     """
-    A table of seats.
+    An organism group -- herd, pack, or colony.
     """
-    def __init__(self, number=0, name="Test", x=0.5, y=0.5, **kwargs):
-        self.number = number
-        self.name = name
-        self.head = None
-
-        # Relative position
-        self.x = x
-        self.y = y
-
-        self.size = 0
-
-    def __str__(self):
-        return 'Table {}: {}'.format(self.number, self.name)
-
-    def __repr__(self):
-        return str(self)
-
-    def insert(self, pk, index, name, group, population_size):
-        """
-        Insert a new seat at the head of this table.
-        """
-        new_seat = Seat(pk=pk, index=index, name=name, group=group,
-                        population_size=population_size, table=self)
-
-        if not self.head:
-            new_seat.set_next(new_seat)
-            new_seat.set_previous(new_seat)
-
-        else:
-            # Create next pointers
-            new_seat.set_previous(self.head)
-            new_seat.set_next(self.head.get_next())
-
-            # Update old pointers
-            new_seat.get_next().set_previous(new_seat)
-            new_seat.get_previous().set_next(new_seat)
-
-        self.head = new_seat
-        self.size += 1
-
-    def get_all_seats(self):
-        """
-        Get a list of all seats at this table.
-        """
-        seats = []
-        if not self.head:
-            return seats
-
-        seats.append(self.head)
-        current = self.head.get_next()
-        while current != self.head:
-            seats.append(current)
-            current = current.get_next()
-
-        return seats
-
-    def all_seats_interact(self, num_generations=1):
-        """
-        Have all seats at this table interact for num_generations.
-        """
-        for i in range(num_generations):
-            for seat in self.get_all_seats():
-                seat.interact_with_next_interactor()
-
-    def export_seat_states(self):
-        """
-        Export the current state of this table.
-        """
-        seat_states = []
-
-        for seat in self.get_all_seats():
-            seat_states.append(seat.export_state())
-
-        return seat_states
-
-    def export_seat_sizes(self):
-        """
-        Export a mapping from seat pk to population size for all seats
-        at this table.
-        """
-        seat_sizes = {}
-        for seat in self.get_all_seats():
-            seat_sizes[seat.pk] = seat.population_size
-
-        return seat_sizes
+    herd, pack, colony = range(3)
 
 
-class Luncheon(object):
+def get_random_group():
     """
-    A luncheon of tables.
+    Get a random group (herd, pack, or colony)
     """
-    def __init__(self, name="Test"):
-        self.name = name
-        self.tables = []
-
-    def __str__(self):
-        return 'Luncheon {}'.format(self.name)
-
-    def __repr__(self):
-        return str(self)
-
-    def add_table(self, table):
-        self.tables.append(table)
-
-    def run_generation(self):
-        for table in self.tables:
-            table.all_seats_interact()
-
-    def export_seat_states(self):
-        """
-        Export the current state of this table.
-        """
-        seat_states = []
-
-        for table in self.tables:
-            seat_states.extend(table.export_seat_states())
-
-        return seat_states
-
-    def export_seat_sizes(self):
-        """
-        Export a mapping from seat pk to population size for all seats
-        at this table.
-        """
-        seat_sizes = {}
-        for table in self.tables:
-            seat_sizes.update(table.export_seat_sizes())
-
-        return seat_sizes
+    return random.choice([Group.pack, Group.herd, Group.colony])

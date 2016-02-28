@@ -78,7 +78,7 @@ def run_simulation(input_file):
     # Interact for num_generations
     changes = []
     for generation in range(num_generations):
-        luncheon.run_generation()
+        luncheon.all_seats_interact()
         changes.append(luncheon.export_seat_sizes())
 
     context = {
@@ -124,7 +124,7 @@ def run_test_simulation(simulation_name):
 
     changes = []
     for generation in range(num_generations):
-        luncheon.run_generation()
+        luncheon.all_seats_interact()
         changes.append(luncheon.export_seat_sizes())
 
     context = {
