@@ -16,9 +16,9 @@ INPUT_DIR = 'input'
 
 # These are relevant for "test case simulations" only
 DEFAULT_NUM_SEATS = 10
-RANDOM = 'random'
-ALTERNATING = 'alternating'
-HALVES = 'halves'
+RANDOM = 'Random'
+ALTERNATING = 'Alternating'
+HALVES = 'Halves'
 
 
 @app.route("/")
