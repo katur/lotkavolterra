@@ -311,8 +311,11 @@ class Seat(object):
         while interactor.is_extinct():
             interactor = interactor.get_next()
 
+        '''
+        # Enable this to keep "last man standing"
         if self == interactor:
             return None
+        '''
 
         return interactor
 
