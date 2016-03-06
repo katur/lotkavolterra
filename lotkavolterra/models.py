@@ -109,19 +109,15 @@ class Table(object):
 
     def get_all_seats(self):
         """
-        Get a list of all seats at this table.
+        Get all seats at this table.
         """
-        seats = []
-        if not self.head:
-            return seats
+        if self.head:
+            yield self.head
 
-        seats.append(self.head)
-        current = self.head.get_next()
-        while current != self.head:
-            seats.append(current)
-            current = current.get_next()
-
-        return seats
+            current = self.head.get_next()
+            while current != self.head:
+                yield current
+                current = current.get_next()
 
     def all_seats_interact(self, num_generations=1):
         """
