@@ -112,7 +112,7 @@ def run_test_simulation(simulation_name):
     """
     num_generations, population_size, num_seats = _parse_get_params()
 
-    luncheon = Luncheon(simulation_name, 1, 1)
+    luncheon = Luncheon(simulation_name, 2, 2)
     table = Table(x=0, y=0)
     _populate_test_table(table, simulation_name, num_seats,
                          population_size)
