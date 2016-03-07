@@ -9,7 +9,7 @@ from lotkavolterra.models import (Luncheon, Table, Group, get_random_group,
 from lotkavolterra.utils import listdir_json
 
 
-DEFAULT_NUM_GENERATIONS = 20
+DEFAULT_NUM_GENERATIONS = 50
 DEFAULT_POPULATION_SIZE = 1000
 
 # This is relevant for "input-file based simulations" only
@@ -112,8 +112,8 @@ def run_test_simulation(simulation_name):
     """
     num_generations, population_size, num_seats = _parse_get_params()
 
-    luncheon = Luncheon(simulation_name, 2, 2)
-    table = Table(x=0, y=0)
+    luncheon = Luncheon(simulation_name, 2, 1)
+    table = Table(x=0.5, y=0)
     _populate_test_table(table, simulation_name, num_seats,
                          population_size)
     luncheon.add_table(table)
