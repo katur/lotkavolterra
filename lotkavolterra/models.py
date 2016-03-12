@@ -180,6 +180,12 @@ class Seat(object):
         return str(self)
 
     def format_name(self):
+        return self.get_first_name()
+
+    def get_first_name(self):
+        return self.name.split()[0]
+
+    def get_first_name_last_initial(self):
         names = self.name.split()
 
         # Take first name as is
