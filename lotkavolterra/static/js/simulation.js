@@ -3,10 +3,10 @@ const PI = Math.PI;
 const CIRCLE_RADIANS = 2 * PI;
 
 // Transition / style
+const OPACITY = 0.5;
+const TEXT_SIZE = 9;
 const EASING_FXN = "easeOutCubic";
 const TRANSITION_DURATION = 500;
-const OPACITY = 0.5;
-const TEXT_SIZE = 8;
 
 // Sizing factors
 const TABLE_SPACE_TO_RADIUS_FACTOR = 1/3;
