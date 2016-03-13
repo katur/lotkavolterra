@@ -137,8 +137,8 @@ def run_test_simulation():
     population_size = int(request.args['population_size'])
     num_seats = int(request.args['num_seats'])
 
-    luncheon = Luncheon(simulation, 2, 1)
-    table = Table(x=0.5, y=0)
+    luncheon = Luncheon(simulation, 2, 2)
+    table = Table(x=0.5, y=0.25)
     _populate_test_table(table, simulation, num_seats, population_size)
     luncheon.add_table(table)
 
