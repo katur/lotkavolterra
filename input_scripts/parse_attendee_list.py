@@ -45,7 +45,7 @@ for i, row in enumerate(csv.DictReader(args.infile)):
 
     table['people'].append({'name': person_name})
 
-NUM_TABLES_X = 7
+NUM_TABLES_X = 8
 NUM_TABLES_Y = 4
 
 # Tranform dictionary to a list, sorted by table number
