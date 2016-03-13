@@ -79,7 +79,7 @@ a {
 
 table thead {
   font-variant: small-caps; }
-table td {
+table td, table th {
   border: 1px solid #ddd;
   padding: 4px 6px; }
 
@@ -93,6 +93,9 @@ table td {
 body {
   padding: 40px;
   background: #eee; }
+
+body#run-simulation {
+  padding: 0; }
 
 #site-title {
   margin-bottom: 40px; }
@@ -113,30 +116,34 @@ body {
     margin-bottom: 0; }
 
 #run-simulation #svg-container {
-  position: relative;
-  margin-left: -40px;
-  width: calc(100% + 40px * 2); }
-#run-simulation .table-snapshot {
-  margin-bottom: 40px; }
-  #run-simulation .table-snapshot:last-child {
-    margin-bottom: 0; }
-  #run-simulation .table-snapshot .group {
-    position: relative;
-    z-index: 1; }
-  #run-simulation .table-snapshot .group::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.5;
-    z-index: -1; }
-  #run-simulation .table-snapshot .herd::before {
-    background: green; }
-  #run-simulation .table-snapshot .pack::before {
-    background: red; }
-  #run-simulation .table-snapshot .colony::before {
-    background: blue; }
-#run-simulation h3, #run-simulation h4 {
-  margin-bottom: 13.33333px; }
+  width: 100%; }
+#run-simulation #final-states {
+  margin-left: 40px;
+  margin-right: 40px; }
+  #run-simulation #final-states h3 {
+    margin-bottom: 13.33333px; }
+  #run-simulation #final-states .table-snapshot {
+    font-size: 15px;
+    float: left;
+    margin-bottom: 20px;
+    margin-right: 20px; }
+    #run-simulation #final-states .table-snapshot:last-child {
+      margin-bottom: 0; }
+    #run-simulation #final-states .table-snapshot .group {
+      position: relative;
+      z-index: 1; }
+    #run-simulation #final-states .table-snapshot .group::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.5;
+      z-index: -1; }
+    #run-simulation #final-states .table-snapshot .herd::before {
+      background: green; }
+    #run-simulation #final-states .table-snapshot .pack::before {
+      background: red; }
+    #run-simulation #final-states .table-snapshot .colony::before {
+      background: blue; }

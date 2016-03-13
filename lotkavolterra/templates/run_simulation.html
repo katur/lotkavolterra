@@ -27,12 +27,10 @@
   }
 </script>
 
-<div class="page-section">
+<div id="final-states" class="page-section">
   <h3>Final state</h3>
 
   {% for table in luncheon.tables %}
-    <h4>Table: {{ table.name }}</h4>
-
     {% include 'table_snapshot.html' %}
   {% endfor %}
 </div>

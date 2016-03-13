@@ -1,37 +1,42 @@
 #run-simulation
   #svg-container
-    position: relative
-    margin-left: -$whitespace
-    width: calc(100% + #{$whitespace} * 2)
+    width: 100%
 
-  .table-snapshot
-    margin-bottom: $whitespace
+  #final-states
+    margin-left: $whitespace
+    margin-right: $whitespace
 
-    &:last-child
-      margin-bottom: 0
+    h3
+      margin-bottom: $whitespace / 3
 
-    .group
-      position: relative
-      z-index: 1
+    .table-snapshot
+      font-size: $base-font-size - 3
+      float: left
+      margin-bottom: $whitespace / 2
+      margin-right: $whitespace / 2
 
-    .group::before
-      content: ''
-      position: absolute
-      top: 0
-      left: 0
-      width: 100%
-      height: 100%
-      opacity: 0.5
-      z-index: -1
+      &:last-child
+        margin-bottom: 0
 
-    .herd::before
-      background: green
+      .group
+        position: relative
+        z-index: 1
 
-    .pack::before
-      background: red
+      .group::before
+        content: ''
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        opacity: 0.5
+        z-index: -1
 
-    .colony::before
-      background: blue
+      .herd::before
+        background: green
 
-  h3, h4,
-    margin-bottom: $whitespace / 3
+      .pack::before
+        background: red
+
+      .colony::before
+        background: blue
