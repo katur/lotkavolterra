@@ -1,0 +1,18 @@
+{% extends 'base_title.html' %}
+
+{% block content %}
+
+<div class="page-section">
+  <h4>Input based simulations</h4>
+
+  <ul>
+    {% for f in filenames %}
+    <li>
+      <a href="{{ url_for('run_simulation', input_file=f) }}">
+        {{ f }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}

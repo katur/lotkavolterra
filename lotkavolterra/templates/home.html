@@ -3,29 +3,19 @@
 {% block content %}
 
 <div class="page-section">
-  <h4>Input based simulations</h4>
+  <h4>View simulations</h4>
 
   <ul>
-    {% for f in input_filenames %}
     <li>
-      <a href="{{ url_for('run_simulation', input_file=f) }}">
-        {{ f }}</a>
+      <a href="{{ url_for('list_simulations') }}">
+        Input based simulations</a>
     </li>
-    {% endfor %}
-  <ul>
-</div>
 
-<div class="page-section">
-  <h4>Test case simulations</h4>
-
-  <ul>
-    {% for s in test_simulations %}
     <li>
-      <a href="{{ url_for('run_test_simulation', simulation_name=s) }}">
-        {{ s }}</a>
+      <a href="{{ url_for('list_test_simulations') }}">
+        Test case simulations</a>
     </li>
-    {% endfor %}
-  </ul>
+  <ul>
 </div>
 
 <div class="page-section">

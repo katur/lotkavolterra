@@ -25,20 +25,36 @@ HALVES = 'Halves'
 @app.route("/")
 def home():
     """
-    Render the homepage, listing available simulations and demos.
+    Render the homepage.
+    """
+    return render_template('home.html')
+
+
+@app.route("/list-simulations/")
+def list_simulations():
+    """
+    Render the page listing the simulations.
     """
     filenames = [f for f in listdir_json(INPUT_DIR)
                  if isfile(join(INPUT_DIR, f))]
-
     filenames = [f.split('.')[0] for f in filenames]
+    context = {
+        'filenames': filenames,
+    }
+    return render_template('list_simulations.html', **context)
 
+
+@app.route("/list-test-simulations")
+def list_test_simulations():
+    """
+    Render the page listing the test case simulations.
+    """
     test_simulations = (RANDOM, ALTERNATING, HALVES,)
 
     context = {
-        'input_filenames': filenames,
         'test_simulations': test_simulations,
     }
-    return render_template('home.html', **context)
+    return render_template('list_test_simulations.html', **context)
 
 
 @app.route("/simulation/<input_file>/")
