@@ -9,14 +9,14 @@ from lotkavolterra.models import (Luncheon, Table, Group, get_random_group,
 from lotkavolterra.utils import listdir_json
 
 
-DEFAULT_NUM_GENERATIONS = 50
-DEFAULT_POPULATION_SIZE = 1000
+# Default simulation parameters
+DEFAULTS = {
+    'num_generations': 50,
+    'population_size': 1000,
+    'num_seats': 10,  # This one used for test case simulations only
+}
 
-# This is relevant for "input-file based simulations" only
 INPUT_DIR = 'input'
-
-# These are relevant for "test case simulations" only
-DEFAULT_NUM_SEATS = 10
 RANDOM = 'Random'
 ALTERNATING = 'Alternating'
 HALVES = 'Halves'
@@ -37,9 +37,11 @@ def list_simulations():
     """
     filenames = [f for f in listdir_json(INPUT_DIR)
                  if isfile(join(INPUT_DIR, f))]
-    filenames = [f.split('.')[0] for f in filenames]
+    simulations = [f.split('.')[0] for f in filenames]
+
     context = {
-        'filenames': filenames,
+        'simulations': simulations,
+        'defaults': DEFAULTS,
     }
     return render_template('list_simulations.html', **context)
 
@@ -49,23 +51,27 @@ def list_test_simulations():
     """
     Render the page listing the test case simulations.
     """
-    test_simulations = (RANDOM, ALTERNATING, HALVES,)
+    simulations = (RANDOM, ALTERNATING, HALVES,)
 
     context = {
-        'test_simulations': test_simulations,
+        'simulations': simulations,
+        'defaults': DEFAULTS,
+        'show_num_seats': True,
     }
     return render_template('list_test_simulations.html', **context)
 
 
-@app.route("/simulation/<input_file>/")
-def run_simulation(input_file):
+@app.route("/run-simulation/")
+def run_simulation():
     """
     Run the simulation from an input file.
     """
-    num_generations, population_size, _ = _parse_get_params()
+    simulation = request.args['simulation']
+    num_generations = int(request.args['num_generations'])
+    population_size = int(request.args['population_size'])
 
     # Read the input file
-    with open(join(INPUT_DIR, input_file + '.json'), 'r') as f:
+    with open(join(INPUT_DIR, simulation + '.json'), 'r') as f:
         json_data = json.loads(f.read())
 
     # Create the luncheon object
@@ -115,23 +121,25 @@ def run_simulation(input_file):
         'OVERPOPULATION_FACTOR': OVERPOPULATION_FACTOR,
     }
 
-    return render_template('simulation.html', **context)
+    return render_template('run_simulation.html', **context)
 
 
-@app.route("/test-simulation/<simulation_name>/")
-def run_test_simulation(simulation_name):
+@app.route("/test-simulation/")
+def run_test_simulation():
     """
     Run a test simulation.
 
     This is very similar to run_simulation, but instead of parsing
     a json file it creates a test table based on rules.
     """
-    num_generations, population_size, num_seats = _parse_get_params()
+    simulation = request.args['simulation']
+    num_generations = int(request.args['num_generations'])
+    population_size = int(request.args['population_size'])
+    num_seats = int(request.args['num_seats'])
 
-    luncheon = Luncheon(simulation_name, 2, 1)
+    luncheon = Luncheon(simulation, 2, 1)
     table = Table(x=0.5, y=0)
-    _populate_test_table(table, simulation_name, num_seats,
-                         population_size)
+    _populate_test_table(table, simulation, num_seats, population_size)
     luncheon.add_table(table)
 
     initial_state = luncheon.export_seat_states()
@@ -155,11 +163,10 @@ def run_test_simulation(simulation_name):
         'OVERPOPULATION_FACTOR': OVERPOPULATION_FACTOR,
     }
 
-    return render_template('simulation.html', **context)
+    return render_template('run_simulation.html', **context)
 
 
-def _populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
-                         population_size=DEFAULT_POPULATION_SIZE):
+def _populate_test_table(table, simulation, num_seats, population_size):
     """
     Helper function to populate a test table for a test simulation.
     """
@@ -192,28 +199,6 @@ def _populate_test_table(table, simulation, num_seats=DEFAULT_NUM_SEATS,
                 table.insert(pk, index, name, Group.pack, population_size)
             else:
                 table.insert(pk, index, name, Group.herd, population_size)
-
-
-def _parse_get_params():
-    """
-    Parse the simulation settings GET parameters.
-    """
-    try:
-        num_generations = int(request.args['num_generations'])
-    except Exception:
-        num_generations = DEFAULT_NUM_GENERATIONS
-
-    try:
-        population_size = int(request.args['population_size'])
-    except Exception:
-        population_size = DEFAULT_POPULATION_SIZE
-
-    try:
-        num_seats = int(request.args['num_seats'])
-    except Exception:
-        num_seats = DEFAULT_NUM_SEATS
-
-    return (num_generations, population_size, num_seats)
 
 
 ############

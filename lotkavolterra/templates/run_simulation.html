@@ -1,15 +1,11 @@
 {% extends 'base_no_title.html' %}
 
 
-{% block body_id %}simulation{% endblock %}
+{% block body_id %}run-simulation{% endblock %}
 {% block page_title %}{{ luncheon.name }}{% endblock %}
 
 
 {% block content %}
-
-<div class="page-section">
-  {% include 'parameters.html' %}
-</div>
 
 <div id="svg-container" class="page-section">
   <svg width="100%">

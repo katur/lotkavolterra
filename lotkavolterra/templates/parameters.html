@@ -1,14 +1,41 @@
-<form id="parameters" method="GET" action="">
-  Number of generations:
-  <input name="num_generations" value="{{ num_generations }}"></input>
+<table>
+  <tr>
+    <td>Simulation</td>
+    <td>
+      <select name="simulation">
+        {% for simulation in simulations %}
+          <option value="{{ simulation }}">{{ simulation }}</option>
+        {% endfor %}
+      </select>
+    </td>
+  </tr>
 
-  Initial population size:
-  <input name="population_size" value="{{ population_size }}"></input>
+  <tr>
+    <td>Number of generations</td>
+    <td>
+      <input name="num_generations"
+             value="{{ defaults.num_generations }}">
+      </input>
+    </td>
+  </tr>
 
-  {% if num_seats %}
-    Number of seats:
-    <input name="num_seats" value="{{ num_seats }}"></input>
+  <tr>
+    <td>Initial population size</td>
+    <td>
+      <input name="population_size"
+             value="{{ defaults.population_size }}">
+      </input>
+    </td>
+  </tr>
+
+  {% if show_num_seats %}
+  <tr>
+    <td>Number of seats</td>
+    <td>
+      <input name="num_seats"
+             value="{{ defaults.num_seats }}">
+      </input>
+    </td>
+  </tr>
   {% endif %}
-
-  <button type="submit">Submit</button>
-</form>
+</table>

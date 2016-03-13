@@ -5,14 +5,10 @@
 <div class="page-section">
   <h4>Test case simulations</h4>
 
-  <ul>
-    {% for s in test_simulations %}
-    <li>
-      <a href="{{ url_for('run_test_simulation', simulation_name=s) }}">
-        {{ s }}</a>
-    </li>
-    {% endfor %}
-  </ul>
+  <form method="GET" action="{{ url_for('run_test_simulation') }}">
+    {% include 'parameters.html' %}
+    <button type="submit">Submit</button>
+  </form>
 </div>
 
 {% endblock %}
