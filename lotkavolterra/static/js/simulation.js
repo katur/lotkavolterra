@@ -4,7 +4,7 @@ const CIRCLE_RADIANS = 2 * PI;
 
 // Transition / style
 const OPACITY = 0.5;
-const TEXT_SIZE = 9;
+const TEXT_SIZE = 10;
 const EASING_FXN = "easeOutCubic";
 const TRANSITION_DURATION = 500;
 
