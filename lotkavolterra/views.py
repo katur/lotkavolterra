@@ -11,7 +11,7 @@ from lotkavolterra.utils import listdir_json
 
 # Default simulation parameters
 DEFAULTS = {
-    'num_generations': 50,
+    'num_generations': 25,
     'population_size': 1000,
     'num_seats': 10,  # This one used for test case simulations only
 }
