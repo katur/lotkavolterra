@@ -21,7 +21,7 @@ const TABLE_SPACE_TO_RADIUS_FACTOR = 1/3;
  *
  * Call this to draw the initial state.
  */
-function drawSeats(seats, numTablesX, numTablesY) {
+function drawSeats(seats, numTablesX, numTablesY, hasStage) {
   var svg = d3.select("svg");
 
   // Calculate svg height from width.
@@ -58,6 +58,16 @@ function drawSeats(seats, numTablesX, numTablesY) {
 
   addCircles(el);
   addText(el);
+
+  if (hasStage) {
+    svg.append("rect")
+      .attr("x", svgWidth * .4)
+      .attr("width", svgWidth * .2)
+      .attr("height", svgHeight * .2)
+      .style("fill", "none")
+      .style("stroke-width", "1")
+      .style("stroke", "#000");
+  }
 }
 
 /**

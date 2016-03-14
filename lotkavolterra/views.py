@@ -69,6 +69,7 @@ def run_simulation():
     simulation = request.args['simulation']
     num_generations = int(request.args['num_generations'])
     population_size = int(request.args['population_size'])
+    has_stage = 'stage' in request.args
 
     # Read the input file
     with open(join(INPUT_DIR, simulation + '.json'), 'r') as f:
@@ -110,6 +111,7 @@ def run_simulation():
 
     context = {
         'luncheon': luncheon,
+        'has_stage': has_stage,
         'initial_state': initial_state,
         'changes': changes,
 

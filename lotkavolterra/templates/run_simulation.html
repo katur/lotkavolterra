@@ -20,7 +20,11 @@
   var initialState = {{ initial_state|safe }};
   var changes = {{ changes|safe }};
 
-  drawSeats(initialState, numTablesX, numTablesY);
+  {% if has_stage %}
+    drawSeats(initialState, numTablesX, numTablesY, true);
+  {% else %}
+    drawSeats(initialState, numTablesX, numTablesY, false);
+  {% endif %}
 
   for (var i = 0; i < changes.length; i++) {
     updateSeatRadii(changes[i], i);
