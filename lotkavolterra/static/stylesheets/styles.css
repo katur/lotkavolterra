@@ -124,9 +124,7 @@ body#run-simulation {
     margin-bottom: 13.33333px; }
   #run-simulation #final-states .table-snapshot {
     font-size: 15px;
-    float: left;
-    margin-bottom: 20px;
-    margin-right: 20px; }
+    margin-bottom: 20px; }
     #run-simulation #final-states .table-snapshot:last-child {
       margin-bottom: 0; }
     #run-simulation #final-states .table-snapshot .group {
