@@ -19,4 +19,4 @@ except Exception as e:
     pass
 
 
-from lotkavolterra import views
+from . import views

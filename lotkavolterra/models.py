@@ -1,7 +1,7 @@
 import random
 from enum import Enum
 
-from lotkavolterra.interactions import interact
+from .interactions import interact
 
 OVERPOPULATION_FACTOR = 10
 

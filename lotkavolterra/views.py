@@ -3,10 +3,10 @@ from os.path import isfile, join
 
 from flask import render_template, request
 
-from lotkavolterra import app
-from lotkavolterra.models import (Luncheon, Table, Group, get_random_group,
-                                  OVERPOPULATION_FACTOR)
-from lotkavolterra.utils import listdir_json
+from . import app
+from .models import (Luncheon, Table, Group, get_random_group,
+                     OVERPOPULATION_FACTOR)
+from .utils import listdir_json
 
 
 # Default simulation parameters
