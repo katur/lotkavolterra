@@ -61,12 +61,21 @@ function drawSeats(seats, numTablesX, numTablesY, hasStage) {
 
   if (hasStage) {
     svg.append("rect")
-      .attr("x", svgWidth * .4)
-      .attr("width", svgWidth * .2)
-      .attr("height", svgHeight * .2)
-      .style("fill", "none")
-      .style("stroke-width", "1")
-      .style("stroke", "#000");
+      .attr("x", svgWidth * .38)
+      .attr("width", svgWidth * .24)
+      .attr("height", svgHeight * .24)
+      .style("fill", "#B7A897")
+      .style("stroke-width", "2")
+      .style("opacity", OPACITY)
+      .style("stroke", "#735535");
+
+    svg.append("text")
+      .text("STAGE")
+      .attr("x", svgWidth * .5)
+      .attr("y", svgHeight * .12)
+      .attr("text-anchor", "middle")
+      .attr("alignment-baseline", "middle")
+      .attr("font-size", TEXT_SIZE + 5);
   }
 }
 
