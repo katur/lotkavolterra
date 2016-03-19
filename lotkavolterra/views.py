@@ -16,7 +16,6 @@ DEFAULTS = {
     'num_seats': 10,  # This one used for test case simulations only
 }
 
-INPUT_DIR = 'input'
 RANDOM = 'Random'
 ALTERNATING = 'Alternating'
 HALVES = 'Halves'
@@ -35,8 +34,8 @@ def list_simulations():
     """
     Render the page listing the simulations.
     """
-    filenames = [f for f in listdir_json(INPUT_DIR)
-                 if isfile(join(INPUT_DIR, f))]
+    filenames = [f for f in listdir_json(app.config['INPUT_DIR'])
+                 if isfile(join(app.config['INPUT_DIR'], f))]
     simulations = [f.split('.')[0] for f in filenames]
 
     context = {
@@ -72,7 +71,7 @@ def run_simulation():
     has_stage = 'stage' in request.args
 
     # Read the input file
-    with open(join(INPUT_DIR, simulation + '.json'), 'r') as f:
+    with open(join(app.config['INPUT_DIR'], simulation + '.json'), 'r') as f:
         json_data = json.loads(f.read())
 
     # Create the luncheon object

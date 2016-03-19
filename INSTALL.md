@@ -7,10 +7,10 @@
 git clone https://github.com/katur/lotkavolterra.git
 ```
 
-To proceed, you'll have to add a localsettings file:
+To proceed, you'll have to add a local config.py file that specifies
+INPUT_DIR as an absolute path:
 ```
-vi lotkavolterra/localsettings.py
-# Set DEBUG=True in dev, or DEBUG=False in production
+vi instance/config.py
 ```
 
 

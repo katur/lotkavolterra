@@ -4,7 +4,7 @@ input/
 
 
 # Local or private settings
-*localsettings.py
+instance/
 
 
 # Compiled and temporary files

@@ -1,7 +1,5 @@
-from localsettings import DEBUG
-
-from lotkavolterra.views import app
+from lotkavolterra import app
 
 
-if __name__ == "__main__":
-    app.run(debug=DEBUG)
+if __name__ == '__main__':
+    app.run(debug=app.config['DEBUG'])
