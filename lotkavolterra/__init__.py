@@ -189,9 +189,6 @@ def _populate_test_table(table, simulation, num_seats, population_size):
               'Georgia', 'Heidi', 'Indigo', 'Jack',)
 
     for i in range(num_seats):
-        pk = i
-        index = i
-
         try:
             name = PEOPLE[i]
         except IndexError:
@@ -215,7 +212,7 @@ def _populate_test_table(table, simulation, num_seats, population_size):
         else:
             raise ValueError('Unknown test simulation')
 
-        table.insert(pk, index, name, group, population_size)
+        table.insert(i, i, name, group, population_size)
 
 
 ############
