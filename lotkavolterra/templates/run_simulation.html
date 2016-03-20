@@ -18,21 +18,17 @@
 
 	socket.on('server hello', function() {
 		console.log('Server said hello');
-		setTimeout(function(){
-			socket.emit('client hello');
-			console.log('After 1s, I said hello');
-		}, 2000);
+    socket.emit('client hello');
 	});
 
 	socket.on('server hello back', function() {
-		console.log('Server said hello back');
+		console.log('Server said hello back to my hello');
 	});
 
   const OVERPOPULATION_FACTOR = {{ OVERPOPULATION_FACTOR }};
   var numTablesX = {{ luncheon.num_tables_x }};
   var numTablesY = {{ luncheon.num_tables_y }};
   var initialState = {{ initial_state|safe }};
-  var changes = {{ changes|safe }};
 
   {% if has_stage %}
     drawSeats(initialState, numTablesX, numTablesY, true);
@@ -40,9 +36,16 @@
     drawSeats(initialState, numTablesX, numTablesY, false);
   {% endif %}
 
+  var changes = {{ changes|safe }};
   for (var i = 0; i < changes.length; i++) {
     updateSeatRadii(changes[i], i);
   }
+
+  /*
+  setTimeout(function() {
+    location.reload();
+  }, TRANSITION_DURATION * changes.length + 200);
+  */
 </script>
 
 <div id="final-states" class="page-section">
