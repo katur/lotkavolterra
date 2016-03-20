@@ -1,3 +1,4 @@
+from enum import Enum
 import json
 from os.path import isfile, join
 
@@ -12,9 +13,6 @@ DEFAULTS = {
     'population_size': 1000,
     'num_seats': 10,  # This one used for test case simulations only
 }
-RANDOM = 'Random'
-ALTERNATING = 'Alternating'
-HALVES = 'Halves'
 
 app = Flask(__name__, instance_relative_config=True)
 
@@ -53,21 +51,6 @@ def list_simulations():
         'defaults': DEFAULTS,
     }
     return render_template('list_simulations.html', **context)
-
-
-@app.route("/list-test-simulations")
-def list_test_simulations():
-    """
-    Render the page listing the test case simulations.
-    """
-    simulations = (RANDOM, ALTERNATING, HALVES,)
-
-    context = {
-        'simulations': simulations,
-        'defaults': DEFAULTS,
-        'show_num_seats': True,
-    }
-    return render_template('list_test_simulations.html', **context)
 
 
 @app.route("/run-simulation/")
@@ -135,6 +118,28 @@ def run_simulation():
     return render_template('run_simulation.html', **context)
 
 
+class TestSimulation(Enum):
+    """
+    A type of test simulation.
+    """
+    random, alternating, halves = range(3)
+
+
+@app.route("/list-test-simulations")
+def list_test_simulations():
+    """
+    Render the page listing the test case simulations.
+    """
+    simulations = [t.name for t in TestSimulation]
+
+    context = {
+        'simulations': simulations,
+        'defaults': DEFAULTS,
+        'show_num_seats': True,
+    }
+    return render_template('list_test_simulations.html', **context)
+
+
 @app.route("/test-simulation/")
 def run_test_simulation():
     """
@@ -143,7 +148,7 @@ def run_test_simulation():
     This is very similar to run_simulation, but instead of parsing
     a json file it creates a test table based on rules.
     """
-    simulation = request.args['simulation']
+    simulation = TestSimulation[request.args['simulation']]
     num_generations = int(request.args['num_generations'])
     population_size = int(request.args['population_size'])
     num_seats = int(request.args['num_seats'])
@@ -165,12 +170,12 @@ def run_test_simulation():
         'initial_state': initial_state,
         'changes': changes,
 
-        # For the GET param form
+        # Needed to set the GET param form
         'num_generations': num_generations,
         'population_size': population_size,
         'num_seats': num_seats,
 
-        # For size calculations
+        # Needed for drawing calculations
         'OVERPOPULATION_FACTOR': OVERPOPULATION_FACTOR,
     }
 
@@ -193,23 +198,25 @@ def _populate_test_table(table, simulation, num_seats, population_size):
         except IndexError:
             name = 'Person{}'.format(i)
 
-        if simulation == RANDOM:
-            table.insert(pk, index, name, get_random_group(),
-                         population_size)
+        if simulation == TestSimulation.random:
+            group = get_random_group()
 
-        elif simulation == ALTERNATING:
+        elif simulation == TestSimulation.alternating:
             if i % 2 == 0:
                 group = Group.pack
             else:
                 group = Group.herd
 
-            table.insert(pk, index, name, group, population_size)
-
-        elif simulation == HALVES:
+        elif simulation == TestSimulation.halves:
             if i < (num_seats / 2):
-                table.insert(pk, index, name, Group.pack, population_size)
+                group = Group.pack
             else:
-                table.insert(pk, index, name, Group.herd, population_size)
+                group = Group.herd
+
+        else:
+            raise ValueError('Unknown test simulation')
+
+        table.insert(pk, index, name, group, population_size)
 
 
 ############
