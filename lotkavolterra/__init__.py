@@ -3,6 +3,7 @@ import json
 import os
 
 from flask import Flask, render_template, request
+from flask.ext.socketio import SocketIO
 
 from .models import (Luncheon, Table, Group, get_random_group,
                      OVERPOPULATION_FACTOR)
@@ -13,6 +14,11 @@ DEFAULTS = {
     'population_size': 1000,
     'num_seats': 10,  # This one used for test case simulations only
 }
+
+
+######################
+# Set up application #
+######################
 
 app = Flask(__name__, instance_relative_config=True)
 
@@ -28,6 +34,12 @@ try:
 except:
     pass
 
+socketio = SocketIO(app)
+
+
+###########################
+# Define views and routes #
+###########################
 
 @app.route("/")
 def home():
