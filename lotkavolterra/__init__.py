@@ -25,7 +25,7 @@ app.config.from_pyfile('config.py')
 # Load configuration specified in environment variable, if any
 try:
     app.config.from_envvar('APP_CONFIG_FILE')
-except Exception as e:
+except:
     pass
 
 
@@ -198,10 +198,7 @@ def _populate_test_table(table, simulation, num_seats, population_size):
         except IndexError:
             name = 'Person{}'.format(i)
 
-        if simulation == TestSimulation.random:
-            group = get_random_group()
-
-        elif simulation == TestSimulation.alternating:
+        if simulation == TestSimulation.alternating:
             if i % 2 == 0:
                 group = Group.pack
             else:
@@ -214,7 +211,7 @@ def _populate_test_table(table, simulation, num_seats, population_size):
                 group = Group.herd
 
         else:
-            raise ValueError('Unknown test simulation')
+            group = get_random_group()
 
         table.insert(i, i, name, group, population_size)
 
