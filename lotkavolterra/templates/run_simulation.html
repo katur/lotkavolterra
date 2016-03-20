@@ -13,7 +13,21 @@
   </svg>
 </div>
 
-<script charset="utf-8">
+<script type="text/javascript" charset="utf-8">
+  var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+	socket.on('server hello', function() {
+		console.log('Server said hello');
+		setTimeout(function(){
+			socket.emit('client hello');
+			console.log('After 1s, I said hello');
+		}, 2000);
+	});
+
+	socket.on('server hello back', function() {
+		console.log('Server said hello back');
+	});
+
   const OVERPOPULATION_FACTOR = {{ OVERPOPULATION_FACTOR }};
   var numTablesX = {{ luncheon.num_tables_x }};
   var numTablesY = {{ luncheon.num_tables_y }};
