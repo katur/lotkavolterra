@@ -1,6 +1,6 @@
 from enum import Enum
 import json
-from os.path import isfile, join
+import os
 
 from flask import Flask, render_template, request
 
@@ -42,9 +42,12 @@ def list_simulations():
     """
     Render the page listing the simulations.
     """
-    simulations = [f.split('.')[0]
-                   for f in listdir_json(app.config['INPUT_DIR'])
-                   if isfile(join(app.config['INPUT_DIR'], f))]
+    simulations = [
+        os.path.splitext(filename)[0]
+        for filename in listdir_json(app.config['INPUT_DIR'])
+        if os.path.isfile(os.path.join(app.config['INPUT_DIR'], filename))
+    ]
+
     context = {
         'simulations': simulations,
         'defaults': DEFAULTS,
@@ -63,7 +66,8 @@ def run_simulation():
     has_stage = 'stage' in request.args
 
     # Read the input file
-    with open(join(app.config['INPUT_DIR'], simulation + '.json'), 'r') as f:
+    filename = os.path.join(app.config['INPUT_DIR'], simulation + '.json')
+    with open(filename, 'r') as f:
         json_data = json.loads(f.read())
 
     # Create the luncheon object
