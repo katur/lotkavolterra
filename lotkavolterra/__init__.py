@@ -42,10 +42,9 @@ def list_simulations():
     """
     Render the page listing the simulations.
     """
-    filenames = [f for f in listdir_json(app.config['INPUT_DIR'])
-                 if isfile(join(app.config['INPUT_DIR'], f))]
-    simulations = [f.split('.')[0] for f in filenames]
-
+    simulations = [f.split('.')[0]
+                   for f in listdir_json(app.config['INPUT_DIR'])
+                   if isfile(join(app.config['INPUT_DIR'], f))]
     context = {
         'simulations': simulations,
         'defaults': DEFAULTS,
