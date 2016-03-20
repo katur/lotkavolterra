@@ -98,7 +98,7 @@ def run_simulation():
                         json_luncheon['num_tables_x'],
                         json_luncheon['num_tables_y'])
 
-    # Incrementing per-person primary key
+    # Per-person primary key
     pk = 0
 
     # Populate tables from the json input
