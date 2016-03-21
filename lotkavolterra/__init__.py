@@ -147,7 +147,6 @@ def list_test_simulations():
     context = {
         'simulations': simulations,
         'defaults': DEFAULTS,
-        'show_num_seats': True,
     }
     return render_template('list_test_simulations.html', **context)
 

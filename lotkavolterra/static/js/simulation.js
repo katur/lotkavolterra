@@ -21,7 +21,7 @@ const TABLE_SPACE_TO_RADIUS_FACTOR = 1/3;
  *
  * Call this to draw the initial state.
  */
-function drawSeats(seats, numTablesX, numTablesY, hasStage) {
+function drawSeats(seats, numTablesX, numTablesY, showStage) {
   var svg = d3.select("svg");
 
   // Calculate svg height from width.
@@ -59,21 +59,22 @@ function drawSeats(seats, numTablesX, numTablesY, hasStage) {
   addCircles(el);
   addText(el);
 
-  if (hasStage) {
+  var stageSize = 0.2;
+
+  if (showStage) {
     svg.append("rect")
-      .attr("x", svgWidth * .38)
-      .attr("width", svgWidth * .24)
-      .attr("height", svgHeight * .24)
-      .style("fill", "#B7A897")
-      .style("stroke-width", "2")
-      .style("opacity", OPACITY)
-      .style("stroke", "#735535");
+      .attr("x", svgWidth * (0.5 - stageSize / 2))
+      .attr("width", svgWidth * stageSize)
+      .attr("height", svgHeight * stageSize)
+      .style("fill", "#bbb")
+      .style("opacity", OPACITY);
 
     svg.append("text")
       .text("STAGE")
-      .attr("x", svgWidth * .5)
-      .attr("y", svgHeight * .12)
+      .attr("x", svgWidth * 0.5)
+      .attr("y", svgHeight * (stageSize / 2))
       .attr("text-anchor", "middle")
+      .attr("fill", "#999")
       .attr("alignment-baseline", "middle")
       .attr("font-size", TEXT_SIZE + 5);
   }
