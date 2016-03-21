@@ -41,9 +41,9 @@ def interact(x, y):
     """
     logging.debug('{} and {} now interacting'.format(x, y))
 
-    # If a or b is a colony, set temporarily to a pack or herd
+    # If x or y is a colony, set temporarily to a pack or herd
     x_was_colony = x.change_group_if_colony()
-    y_was_colony = x.change_group_if_colony()
+    y_was_colony = y.change_group_if_colony()
 
     if x_was_colony:
         logging.debug('\tColony {} acting as {}'.format(x, x.group.name))
@@ -75,4 +75,4 @@ def interact(x, y):
         x.set_to_colony()
 
     if y_was_colony:
-        x.set_to_colony()
+        y.set_to_colony()

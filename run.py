@@ -1,5 +1,5 @@
-from lotkavolterra import app, socketio
+from lotkavolterra import app
 
 
 if __name__ == '__main__':
-    socketio.run(app)
+    app.run()

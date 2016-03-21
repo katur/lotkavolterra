@@ -3,7 +3,6 @@ import json
 import os
 
 from flask import Flask, render_template, request
-from flask.ext.socketio import SocketIO, emit
 
 from .models import (Luncheon, Table, Group, get_random_group,
                      OVERPOPULATION_FACTOR)
@@ -34,8 +33,6 @@ try:
 except:
     pass
 
-socketio = SocketIO(app)
-
 
 ###########################
 # Define views and routes #
@@ -47,16 +44,6 @@ def home():
     Render the homepage.
     """
     return render_template('home.html')
-
-
-@socketio.on('connect')
-def connect1():
-    emit('server hello')
-
-
-@socketio.on('client hello')
-def connect2():
-    emit('server hello back')
 
 
 @app.route("/list-simulations/")
