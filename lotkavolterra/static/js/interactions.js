@@ -1,6 +1,3 @@
-const GROWTH_RATE = 0.10;
-const COMPETITIVE_COIN_WEIGHT = 0.667;
-
 /**
 Have a pack and a herd compete.
 
@@ -9,14 +6,14 @@ followed by population increase for the winner and population decline
 for the loser.
 */
 function compete(pack, herd) {
-  f = Coin.flip(COMPETITIVE_COIN_WEIGHT);
+  f = Coin.flip(constants.COMPETITIVE_COIN_WEIGHT);
 
   if (f == Coin.HEADS) {
-    pack.increasePopulation(GROWTH_RATE);
-    herd.decreasePopulation(GROWTH_RATE);
+    pack.increasePopulation(constants.GROWTH_RATE);
+    herd.decreasePopulation(constants.GROWTH_RATE);
   } else {
-    pack.decreasePopulation(GROWTH_RATE);
-    herd.increasePopulation(GROWTH_RATE);
+    pack.decreasePopulation(constants.GROWTH_RATE);
+    herd.increasePopulation(constants.GROWTH_RATE);
   }
 }
 
@@ -32,18 +29,18 @@ From there, the type of interaction depends on the types of x and y
 (the cases include two herds, two packs, one of each).
 */
 
-window.interact: function(x, y) {
+function interact(x, y) {
   // If x or y is a colony, set temporarily to a pack or herd
   xWasColony = x.changeGroupIfColony();
   yWasColony = y.changeGroupIfColony();
 
   // Now the interaction falls into 4 cases
   if (x.isHerd() and y.isHerd()) {
-    x.increasePopulation(GROWTH_RATE);
-    y.increasePopulation(GROWTH_RATE);
+    x.increasePopulation(constants.GROWTH_RATE);
+    y.increasePopulation(constants.GROWTH_RATE);
   } else if (x.isPack() and y.isPack()) {
-    x.decreasePopulation(GROWTH_RATE);
-    y.decreasePopulation(GROWTH_RATE);
+    x.decreasePopulation(constants.GROWTH_RATE);
+    y.decreasePopulation(constants.GROWTH_RATE);
   } else if (x.isPack()) {
     compete(pack=x, herd=y);
   } else {
@@ -58,4 +55,8 @@ window.interact: function(x, y) {
   if (yWasColony) {
     y.setToColony();
   }
+}
+
+window.interactions = {
+  interact: interact,
 }

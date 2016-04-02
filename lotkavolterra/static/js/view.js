@@ -1,17 +1,3 @@
-// Simple maths
-const PI = Math.PI;
-const CIRCLE_RADIANS = 2 * PI;
-
-// Transition / style
-const OPACITY = 0.5;
-const TEXT_SIZE = 10;
-const EASING_FXN = "easeOutCubic";
-const TRANSITION_DURATION = 500;
-
-// Sizing factors
-const TABLE_SPACE_TO_RADIUS_FACTOR = 1/3;
-
-
 /*************************
  * Luncheon-wide helpers *
  *************************/
@@ -32,7 +18,7 @@ function drawSeats(seats, numTablesX, numTablesY, hasStage) {
 
   // Calculate the space each table can take up in both x and y dimensions.
   var tableSpace = svgWidth / numTablesX;
-  var tableRadius = tableSpace * TABLE_SPACE_TO_RADIUS_FACTOR;
+  var tableRadius = tableSpace * constants.TABLE_SPACE_TO_RADIUS_FACTOR;
 
   // Add these extra attributes to the seat.
   // Use underscores to resemble the rest of the Python-derived attributes.
@@ -66,7 +52,7 @@ function drawSeats(seats, numTablesX, numTablesY, hasStage) {
       .attr("height", svgHeight * .24)
       .style("fill", "#B7A897")
       .style("stroke-width", "2")
-      .style("opacity", OPACITY)
+      .style("opacity", constants.OPACITY)
       .style("stroke", "#735535");
 
     svg.append("text")
@@ -75,7 +61,7 @@ function drawSeats(seats, numTablesX, numTablesY, hasStage) {
       .attr("y", svgHeight * .12)
       .attr("text-anchor", "middle")
       .attr("alignment-baseline", "middle")
-      .attr("font-size", TEXT_SIZE + 5);
+      .attr("font-size", contants.TEXT_SIZE + 5);
   }
 }
 
@@ -86,11 +72,11 @@ function updateSeatRadii(changes, iteration) {
   d3.select("svg")
     .selectAll("circle")
     .transition()
-    .duration(TRANSITION_DURATION)
+    .duration(constants.TRANSITION_DURATION)
     .delay(function(d) {
-      return iteration * TRANSITION_DURATION;
+      return iteration * constants.TRANSITION_DURATION;
     })
-    .ease(EASING_FXN)
+    .ease(constants.EASING_FXN)
     .attr("r", function(d) {
       d.population_size = changes[d.pk];
       return getRadius(d);
@@ -113,7 +99,7 @@ function addCircles(el) {
     .style("fill", function(d) {
       return getColor(d);
     })
-    .style("opacity", OPACITY);
+    .style("opacity", constants.OPACITY);
 }
 
 /**
@@ -126,7 +112,7 @@ function addText(el) {
     })
     .attr("text-anchor", "middle")
     .attr("alignment-baseline", "middle")
-    .attr("font-size", TEXT_SIZE);
+    .attr("font-size", constants.TEXT_SIZE);
 }
 
 
@@ -138,13 +124,13 @@ function addText(el) {
  * Get the coordinates of a seat.
  */
 function getCoordinates(seat) {
-  var step = CIRCLE_RADIANS / seat.table_seat_count;
+  var step = constants.CIRCLE_RADIANS / seat.table_seat_count;
   var angle = seat.index * step;
 
   // Skew angle slightly so that tables with an even number of seats
   // don't have horizontally-aligned seats at the top and bottom
   // of the circle (better since text runs horizontally)
-  angle = (angle + (step / 2)) % CIRCLE_RADIANS;
+  angle = (angle + (step / 2)) % constants.CIRCLE_RADIANS;
 
   // Table coordinates, shifted such that relative table positions
   // 0 and 1 are moved a half-table inward from the svg edges.
@@ -164,9 +150,9 @@ function getCoordinates(seat) {
  * Get the radius of a seat based on its current population size.
  */
 function getRadius(seat) {
-  var current = getRadiusFromArea(seat.population_size);
-  var max = getRadiusFromArea(seat.initial_population_size *
-                              OVERPOPULATION_FACTOR);
+  var current = utils.getRadiusFromArea(seat.population_size);
+  var max = utils.getRadiusFromArea(
+    seat.initial_population_size * constants.OVERPOPULATION_FACTOR);
   var relative = current / max;
 
   // Allow seats to get as big as the table at their largest
@@ -195,16 +181,4 @@ function getPattern(seat) {
     return "url(#red)";
   else if (seat.group == "colony")
     return "url(#blue)";
-}
-
-
-/*******************
- * General helpers *
- *******************/
-
-/**
- * Get a circle's radius from its area.
- */
-function getRadiusFromArea(area) {
-  return Math.sqrt(area / PI);
 }
