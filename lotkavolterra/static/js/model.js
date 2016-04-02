@@ -286,7 +286,7 @@ function Seat(params) {
    * Returns true if this seat was initially a colony (now changed to
    * pack or herd).
    *
-   * Returns False if this seat was not initally a colony (unchanged).
+   * Returns false if this seat was not initally a colony (unchanged).
    */
   this.changeGroupIfColony = function() {
     if (!this.isColony()) {
