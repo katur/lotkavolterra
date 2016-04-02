@@ -1,7 +1,7 @@
 /**
-A luncheon, made up of Tables, to take part in the simulation.
-*/
-window.Luncheon = function(params) {
+ * A luncheon, made up of Tables, to take part in the simulation.
+ */
+function Luncheon(params) {
   this.name = params.name;
   this.numTablesX = params.numTablesX;
   this.numTablesY = paramsnumTablesY;
@@ -12,17 +12,18 @@ window.Luncheon = function(params) {
   };
 
   /**
-  Add a table to this luncheon.
-  */
+   * Add a table to this luncheon.
+   */
   this.addTable = function(table) {
     this.tables.push(table);
   };
 
   /**
-  Run generations of the simulation.
-
-  I.e., all active neighbors interact once.
-  */
+   * Run a generation of the simulation.
+   *
+   * Optionally pass in the number of generations that it should run;
+   * defaults to 1.
+   */
   this.allSeatsInteract = function(numGenerations) {
     if (numGenerations === undefined) {
       numGenerations = 1;
@@ -37,8 +38,8 @@ window.Luncheon = function(params) {
   };
 
   /**
-  Export the current state of all seats at the luncheon.
-  */
+   * Export the current state of all seats at the luncheon.
+   */
   this.exportSeatStates = function() {
     var seatStates = [];
 
@@ -52,8 +53,8 @@ window.Luncheon = function(params) {
   };
 
   /**
-  Export a mapping from seat pk to seat size for all seats at the luncheon.
-  */
+   * Export a mapping from pk to size for all seats at the luncheon.
+   */
   this.exportSeatSizes = function() {
     // Create a true prototype-less dictionary
     seatSizes = Object.create(null);
@@ -69,14 +70,15 @@ window.Luncheon = function(params) {
 
     return seatSizes;
   };
+}
 
 
 /**
-A table to take part in the simulation.
-
-A table is a circlular doubly linked list of Seats.
-*/
-window.Table = function(params) {
+ * A table to take part in the simulation.
+ *
+ * A table is a circlular doubly linked list of Seats.
+ */
+function Table(params) {
   this.number = params.number || 0;
   this.name = params.name || "Test";
 
@@ -93,8 +95,8 @@ window.Table = function(params) {
   };
 
   /**
-  Insert a new seat at the head of this table.
-  */
+   * Insert a new seat at the head of this table.
+   */
   this.insert = function(params) {
     params.table = this;
     newSeat = new Seat(params);
@@ -117,8 +119,8 @@ window.Table = function(params) {
   };
 
   /**
-  Get all seats at this table.
-  */
+   * Get all seats at this table.
+   */
   this.getAllSeats = function() {
     var seats = [];
 
@@ -135,17 +137,15 @@ window.Table = function(params) {
     }
 
     return seats;
-  }
-
+  };
 
   // TODO: consider having the three functions below not call getAllSeats()
-
 
   /**
    * Have all seats at this table interact for numGenerations.
    */
   this.allSeatsInteract = function(numGenerations) {
-    if (numGenerations === undefined)) {
+    if (numGenerations === undefined) {
       numGenerations = 1;
     }
 
@@ -189,17 +189,18 @@ window.Table = function(params) {
 
     return sizes;
   };
+}
 
 
 /**
-A seat at a Table.
-
-Each seat can be assigned a group (Pack, Herd, Colony) and a
-population size.
-
-A seat is connected to both adjacent seats, in a double-linked list
-fashion.
-*/
+ * A Seat at a Table.
+ *
+ * Each seat can be assigned a group (Pack, Herd, Colony) and a
+ * population size.
+ *
+ * A seat is connected to both adjacent seats, in circular doubly-linked
+ * list fashion.
+ */
 function Seat(params) {
   this.pk = params.pk;  // Unique identifier across tables
   this.index = params.index;  // Position within the table
@@ -224,18 +225,17 @@ function Seat(params) {
   };
 
   /**
-  Export the current state this seat.
-
-  Includes all information necessary to pass the seat to the front
-  end, such that the frontn end can render it, including its
-  position.
-  */
+   * Export the current state this seat.
+   *
+   * Includes all information necessary to pass the seat to the front
+   * end, such that the frontn end can render it, including its position.
+   */
   this.exportState = function() {
     // Create a true prototype-less dictionary
     state = Object.create(null);
     state.pk = this.pk;
     state.index = this.index;
-    state.name = this.formatName());
+    state.name = this.formatName();
     state.group = this.group.name;
     state.populationSize = this.populationSize;
     state.initialPopulationSize = this.initialPopulationSize;
@@ -267,35 +267,35 @@ function Seat(params) {
 
   /** Determine if this seat is a herd. */
   this.isHerd = function() {
-    return this.group === Group.HERD;
+    return this.group === constants.Group.HERD;
   };
 
   /** Determine if this seat is a pack. */
   this.isPack = function() {
-    return this.group === Group.PACK;
+    return this.group === constants.Group.PACK;
   };
 
   /** Determine if this seat is a colony. */
   this.isColony = function() {
-    return this.group === Group.COLONY;
+    return this.group === constants.Group.COLONY;
   };
 
   /**
-  If this seat is a colony, change it randomly to a pack or herd.
-
-  Returns True if this seat was a colony initially (now changed to
-  pack or herd).
-
-  Returns False if this seat was not a colony initially (so was not
-  changed).
-  */
+   * If this seat is a colony, change it randomly to a pack or herd.
+   *
+   * Returns true if this seat was initially a colony (now changed to
+   * pack or herd).
+   *
+   * Returns False if this seat was not initally a colony (unchanged).
+   */
   this.changeGroupIfColony = function() {
     if (!this.isColony()) {
-      return False
+      return false;
+    }
 
-    this.group = getRandomChoice([Group.PACK, Group.HERD]);
+    this.group = getRandomChoice([constants.Group.PACK, constants.Group.HERD]);
 
-    return True;
+    return true;
   };
 
   /**
@@ -304,12 +304,10 @@ function Seat(params) {
    * Use this to restore a seat after calling changeGroupIfColony().
    */
   this.setToColony = function() {
-    this.group = Group.COLONY;
+    this.group = constants.Group.COLONY;
   };
 
-  /**
-  Increase this seat's population size by growthRate.
-  */
+  /** Increase this seat's population size by growthRate. */
   this.increasePopulation = function(growthRate) {
     change = Math.round(this.populationSize * growthRate);
     this.populationSize += change;
@@ -321,9 +319,7 @@ function Seat(params) {
     }
   };
 
-  /**
-  Decrease this seat's population size by growthRate.
-  */
+  /** Decrease this seat's population size by growthRate. */
   this.decreasePopulation = function(growthRate) {
     change = Math.round(this.populationSize * growthRate);
     this.populationSize -= change;
@@ -334,21 +330,19 @@ function Seat(params) {
     }
   };
 
-  /**
-  Determine if this seat has become extinct.
-  */
+  /** Determine if this seat has become extinct. */
   this.isExtinct = function() {
     return this.populationSize === 0;
   };
 
   /**
-  Get the next interactor for this seat.
-
-  Returns null if this seat is extinct, or if this seat is the only
-  node left.
-  */
-  this.getNextInteractor(this) {
-    if this.isExtinct() {
+   * Get the next interactor for this seat.
+   *
+   * Returns null if this seat is extinct, or if this seat is the only
+   * node left.
+   */
+  this.getNextInteractor = function() {
+    if (this.isExtinct()) {
       return null;
     }
 
@@ -367,12 +361,17 @@ function Seat(params) {
     return interactor;
   };
 
-  /**
-  Interact with the next defined interactor.
-  */
-  this.interactWithNextInteractor(this) {
+  /** Interact with the next defined interactor. */
+  this.interactWithNextInteractor = function() {
     interactor = this.getNextInteractor();
     if (interactor) {
       interactions.interact(this, interactor);
     }
   };
+}
+
+window.model = {
+  Luncheon: Luncheon,
+  Table: Table,
+  Seat: Seat
+};

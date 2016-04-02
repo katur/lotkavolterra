@@ -35,10 +35,10 @@ function interact(x, y) {
   yWasColony = y.changeGroupIfColony();
 
   // Now the interaction falls into 4 cases
-  if (x.isHerd() and y.isHerd()) {
+  if (x.isHerd() && y.isHerd()) {
     x.increasePopulation(constants.GROWTH_RATE);
     y.increasePopulation(constants.GROWTH_RATE);
-  } else if (x.isPack() and y.isPack()) {
+  } else if (x.isPack() && y.isPack()) {
     x.decreasePopulation(constants.GROWTH_RATE);
     y.decreasePopulation(constants.GROWTH_RATE);
   } else if (x.isPack()) {
@@ -58,5 +58,5 @@ function interact(x, y) {
 }
 
 window.interactions = {
-  interact: interact,
-}
+  interact: interact
+};

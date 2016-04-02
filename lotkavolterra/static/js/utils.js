@@ -12,4 +12,4 @@ window.utils = {
   getRadiusFromArea: function(area) {
     return Math.sqrt(area / Math.PI);
   }
-}
+};
