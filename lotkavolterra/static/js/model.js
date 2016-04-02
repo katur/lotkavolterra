@@ -4,7 +4,7 @@
 function Luncheon(params) {
   this.name = params.name;
   this.numTablesX = params.numTablesX;
-  this.numTablesY = paramsnumTablesY;
+  this.numTablesY = params.numTablesY;
   this.tables = [];
 
   this.toString = function() {
