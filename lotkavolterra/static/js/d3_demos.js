@@ -6,6 +6,11 @@ const DEMO_EASING_FXN = "easeOutCubic";
 const DEMO_OPACITY = 0.5;
 
 
+function getRandomRadius() {
+  return Math.random() * DEMO_MAX_NODE_RADIUS;
+}
+
+
 function createSVG() {
   d3.select("body")
     .append("svg")
@@ -21,7 +26,7 @@ function drawRandomCircles(numCircles) {
   for (i = 0; i < numCircles; i++) {
     cx = Math.random() * (DEMO_SVG_WIDTH - 2*r) + r;
     cy = Math.random() * (DEMO_SVG_HEIGHT - 2*r) + r;
-    drawCircle(cx, cy);
+    drawCircle(cx, cy, getRandomRadius());
   }
 
   colorAllCirclesRandomly();
@@ -52,7 +57,7 @@ function drawCircleOfCircles(outerX, outerY, outerRadius, numCircles) {
   for (var i = 0; i < circleEnd; i += circleStep) {
     innerX = outerX + outerRadius * Math.cos(i);
     innerY = outerY + outerRadius * Math.sin(i);
-    drawCircle(innerX, innerY);
+    drawCircle(innerX, innerY, DEMO_MAX_NODE_RADIUS / 1.5);
   }
 }
 
@@ -74,7 +79,7 @@ function changeAllRadiiRandomly() {
     .duration(DEMO_TRANSITION_DURATION)
     .ease(DEMO_EASING_FXN)
     .attr("r", function() {
-      return Math.random() * DEMO_MAX_NODE_RADIUS;
+      return getRandomRadius();
     })
     .each("end", changeAllRadiiRandomly);
 }
