@@ -12,45 +12,18 @@
 </div>
 
 <script type="text/javascript" charset="utf-8">
-	// Get JSON
-	var request = new XMLHttpRequest();
-	request.open(
-		"GET",
-		"{{ url_for('static', filename='json/' ~ simulation ~ '.json') }}",
-		true
-	);
+  runSimulation({
+    jsonURL:
+      "{{ url_for('static', filename='json/' ~ simulation ~ '.json') }}",
+    populationSize: {{ population_size }},
+    numGenerations: {{ num_generations }},
 
-	request.onload = function() {
-		if (request.status >= 200 && request.status < 400) {
-			// Success!
-			var data = JSON.parse(request.responseText);
-			var luncheon = createLuncheon({
-				data: data,
-				populationSize: {{ population_size }}
-			});
-
-			runSimulation({
-				luncheon: luncheon,
-				numGenerations: {{ num_generations }},
-
-				{% if has_stage %}
-					hasStage: true
-				{% else %}
-					hasStage: false
-				{% endif %}
-			});
-
-		} else {
-			// We reached our target server, but it returned an error
-		}
-	};
-
-	request.onerror = function() {
-		// There was a connection error of some sort
-	};
-
-	request.send();
-
+    {% if has_stage %}
+      hasStage: true
+    {% else %}
+      hasStage: false
+    {% endif %}
+  });
 </script>
 
 {% endblock %}
