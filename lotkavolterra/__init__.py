@@ -58,8 +58,8 @@ def list_simulations():
     """
     simulations = [
         os.path.splitext(filename)[0]
-        for filename in _listdir_json(os.path.join(app.static_folder, 'input'))
-        if os.path.isfile(os.path.join(app.static_folder, 'input', filename))
+        for filename in _listdir_json(os.path.join(app.static_folder, 'json'))
+        if os.path.isfile(os.path.join(app.static_folder, 'json', filename))
     ]
 
     context = {
@@ -94,7 +94,7 @@ def run_simulation():
     has_stage = 'stage' in request.args
 
     # Read the input file
-    filename = os.path.join(app.config['INPUT_DIR'], simulation + '.json')
+    filename = os.path.join(app.static_folder, 'json', simulation + '.json')
     with open(filename, 'r') as f:
         json_data = f.read()
 
