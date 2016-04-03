@@ -130,17 +130,3 @@ def run_test_simulation():
     }
 
     return render_template('run_test_simulation.html', **context)
-
-
-############
-# D3 Demos #
-############
-
-@app.route("/d3-demo/circles-of-circles/")
-def d3_demo_circles_of_circles():
-    return render_template('d3_demo_circles_of_circles.html')
-
-
-@app.route("/d3-demo/random-circles/")
-def d3_demo_random_circles():
-    return render_template('d3_demo_random_circles.html')
