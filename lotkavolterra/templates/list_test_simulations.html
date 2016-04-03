@@ -6,7 +6,7 @@
   <h4>Test case simulations</h4>
 
   <form method="GET" action="{{ url_for('run_test_simulation') }}">
-    {% with show_num_seats = True %}
+    {% with show_num_seats=True %}
     {% include 'parameters.html' %}
     {% endwith %}
 

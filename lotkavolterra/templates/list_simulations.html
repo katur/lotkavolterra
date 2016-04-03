@@ -6,7 +6,9 @@
   <h4>Input based simulations</h4>
 
   <form method="GET" action="{{ url_for('run_simulation') }}">
+    {% with show_stage_option=True %}
     {% include 'parameters.html' %}
+    {% endwith %}
     <button type="submit">Submit</button>
   </form>
 </div>
