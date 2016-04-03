@@ -11,26 +11,46 @@
   <svg width="100%"></svg>
 </div>
 
-<script
-  src="{{ url_for('static', filename='input/' ~ simulation ~ '.json') }}"
-  charset="utf-8"></script>
-
 <script type="text/javascript" charset="utf-8">
-  var luncheon = createLuncheon({
-    data: data,
-    populationSize: {{ population_size }}
-  });
+	// Get JSON
+	var request = new XMLHttpRequest();
+	request.open(
+		"GET",
+		"{{ url_for('static', filename='json/' ~ simulation ~ '.json') }}",
+		true
+	);
 
-  runSimulation({
-    luncheon: luncheon,
-    numGenerations: {{ num_generations }},
+	request.onload = function() {
+		if (request.status >= 200 && request.status < 400) {
+			// Success!
+			var data = JSON.parse(request.responseText);
+			var luncheon = createLuncheon({
+				data: data,
+				populationSize: {{ population_size }}
+			});
 
-    {% if has_stage %}
-      hasStage: true
-    {% else %}
-      hasStage: false
-    {% endif %}
-  });
+			runSimulation({
+				luncheon: luncheon,
+				numGenerations: {{ num_generations }},
+
+				{% if has_stage %}
+					hasStage: true
+				{% else %}
+					hasStage: false
+				{% endif %}
+			});
+
+		} else {
+			// We reached our target server, but it returned an error
+		}
+	};
+
+	request.onerror = function() {
+		// There was a connection error of some sort
+	};
+
+	request.send();
+
 </script>
 
 {% endblock %}
