@@ -12,14 +12,17 @@
 </div>
 
 <script type="text/javascript" charset="utf-8">
-  var params = {
+  var luncheon = createTestLuncheon({
     simulation: "{{ simulation }}",
-    numGenerations: {{ num_generations }},
-    populationSize: {{ population_size }},
-    numSeats: {{ num_seats }}
-  };
+    numSeats: {{ num_seats }},
+    populationSize: {{ population_size }}
+  });
 
-  runTestSimulation(params);
+  runSimulation({
+    luncheon: luncheon,
+    numGenerations: {{ num_generations }},
+    hasStage: false
+  });
 </script>
 
 {% endblock %}

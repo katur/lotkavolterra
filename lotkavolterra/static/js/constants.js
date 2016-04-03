@@ -51,5 +51,11 @@ window.constants = {
         return this.TAILS;
       }
     }
-  }
+  },
+
+  PERSON_NAMES: [
+    'Alice', 'Bob', 'Carol', 'Django', 'Erlich', 'Freddy',
+    'Georgia', 'Heidi', 'Indigo', 'Jack'
+  ]
+
 };

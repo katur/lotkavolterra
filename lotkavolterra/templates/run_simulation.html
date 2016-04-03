@@ -16,20 +16,21 @@
   charset="utf-8"></script>
 
 <script type="text/javascript" charset="utf-8">
-  var params = {
-    simulation: "{{ simulation }}",
-    numGenerations: {{ num_generations }},
-    populationSize: {{ population_size }},
+  var luncheon = createLuncheon({
     data: data,
+    populationSize: {{ population_size }}
+  });
+
+  runSimulation({
+    luncheon: luncheon,
+    numGenerations: {{ num_generations }},
 
     {% if has_stage %}
       hasStage: true
     {% else %}
       hasStage: false
     {% endif %}
-  };
-
-  runSimulation(params);
+  });
 </script>
 
 {% endblock %}

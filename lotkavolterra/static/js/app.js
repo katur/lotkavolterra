@@ -1,13 +1,7 @@
-const PERSON_NAMES = [
-  'Alice', 'Bob', 'Carol', 'Django', 'Erlich', 'Freddy',
-  'Georgia', 'Heidi', 'Indigo', 'Jack'
-]
-
-
 /**
- * Run the simulation from an input file.
+ * Create luncheon from an input file.
  */
-function runSimulation(params) {
+function createLuncheon(params) {
   // Create the luncheon object
   var luncheon = new Luncheon({
     name: params.data.luncheon.name,
@@ -23,6 +17,7 @@ function runSimulation(params) {
 
   for (var i = 0; i < jsonTables.length; i++) {
     var table = new Table(jsonTables[i]);
+
     var jsonPeople = jsonTables[i].people;
     for (var j = 0; j < jsonPeople.length; j++) {
       table.insert({
@@ -38,30 +33,15 @@ function runSimulation(params) {
 
     luncheon.addTable(table)
   }
-
-  var initialState = luncheon.exportSeatStates();
-
-  drawSeats(initialState, luncheon.numTablesX, luncheon.numTablesY,
-            params.hasStage);
-  var changes = [];
-  for (var i = 0; i < params.numGenerations; i++) {
-    luncheon.allSeatsInteract();
-    changes.push(luncheon.exportSeatSizes());
-  }
-
-  for (var i = 0; i < changes.length; i++) {
-    updateSeatRadii(changes[i], i);
-  }
+  return luncheon;
 }
 
 
 /**
- * Run a test simulation.
- *
- * This is very similar to run_simulation, but instead of parsing
- * a json file it creates a test table based on rules.
+ * Create single-table luncheon with seats that are assigned based on
+ * rules (e.g. random, alternating, halves).
  */
-function runTestSimulation(params) {
+function createTestLuncheon(params) {
   var luncheon = new Luncheon({
     name: params.simulation,
     numTablesX: 2,
@@ -96,23 +76,31 @@ function runTestSimulation(params) {
     table.insert({
       pk: i,
       index: i,
-      name: PERSON_NAMES[i] || "Person " + i,
+      name: constants.PERSON_NAMES[i] || "Person " + i,
       group: group,
       populationSize: params.populationSize
     });
   }
 
   luncheon.addTable(table);
+  return luncheon;
+}
 
-  var numTablesX = luncheon.numTablesX;
-  var numTablesY = luncheon.numTablesY;
-  var initialState = luncheon.exportSeatStates();
-  drawSeats(initialState, numTablesX, numTablesY, true);
 
-  var changes = []
+/**
+ * Run the simulation.
+ */
+function runSimulation(params) {
+  // Draw initial state
+  var initialState = params.luncheon.exportSeatStates();
+  drawSeats(initialState, params.luncheon.numTablesX,
+            params.luncheon.numTablesY, params.hasStage);
+
+  // Draw generations of the simulation
+  var changes = [];
   for (var i = 0; i < params.numGenerations; i++) {
-    luncheon.allSeatsInteract();
-    changes.push(luncheon.exportSeatSizes());
+    params.luncheon.allSeatsInteract();
+    changes.push(params.luncheon.exportSeatSizes());
   }
 
   for (var i = 0; i < changes.length; i++) {
