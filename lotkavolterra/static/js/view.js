@@ -1,3 +1,7 @@
+var utils = require("./utils.js");
+var constants = require("./constants.js");
+
+
 /**
  * Draw all seats.
  *
@@ -185,7 +189,7 @@ function getPattern(seat) {
 }
 
 
-window.view = {
+module.exports = {
   drawSeats: drawSeats,
   updateSeatRadii: updateSeatRadii
 }

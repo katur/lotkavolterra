@@ -25,7 +25,7 @@ To set up, assuming [Gulp.js](http://gulpjs.com/) is installed on the system,
 run the following in the project root (which will install the
 <package.json> dependencies in a git-ignored directory called `node_modules`):
 ```
-npm install --dev-save
+npm install
 ```
 
 To start the gulp build script, run the following in the project root:

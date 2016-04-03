@@ -1,4 +1,7 @@
-window.constants = {
+var utils = require("./utils.js");
+
+
+module.exports = {
   // Model
   GROWTH_RATE: 0.10,
   COMPETITIVE_COIN_WEIGHT: 0.667,

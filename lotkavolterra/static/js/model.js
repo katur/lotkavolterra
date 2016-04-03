@@ -1,3 +1,8 @@
+var utils = require("./utils.js");
+var constants = require("./constants.js");
+var interactions = require("./interactions.js");
+
+
 /**
  * A luncheon, made up of Tables, to take part in the simulation.
  */
@@ -382,7 +387,7 @@ function Seat(params) {
 }
 
 
-window.model = {
+module.exports = {
   Luncheon: Luncheon,
   Table: Table
 };

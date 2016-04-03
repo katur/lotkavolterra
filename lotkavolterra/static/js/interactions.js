@@ -1,3 +1,6 @@
+var constants = require("./constants.js");
+
+
 /**
 Have a pack and a herd compete.
 
@@ -57,6 +60,6 @@ function interact(x, y) {
   }
 }
 
-window.interactions = {
+module.exports = {
   interact: interact
 };

@@ -1,4 +1,4 @@
-window.utils = {
+module.exports = {
   /**
    * Return a random element from an array of choices.
    */
