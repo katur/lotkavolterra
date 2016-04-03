@@ -57,5 +57,4 @@ window.constants = {
     'Alice', 'Bob', 'Carol', 'Django', 'Erlich', 'Freddy',
     'Georgia', 'Heidi', 'Indigo', 'Jack'
   ]
-
 };

@@ -1,7 +1,3 @@
-/*************************
- * Luncheon-wide helpers *
- *************************/
-
 /**
  * Draw all seats.
  *
@@ -65,6 +61,7 @@ function drawSeats(seats, numTablesX, numTablesY, hasStage) {
   }
 }
 
+
 /**
  * Update seat radii according to changes.
  */
@@ -101,6 +98,7 @@ function addCircles(el) {
     })
     .style("opacity", constants.OPACITY);
 }
+
 
 /**
  * Add the text elements.
@@ -146,6 +144,7 @@ function getCoordinates(seat) {
   return [seatX, seatY];
 }
 
+
 /**
  * Get the radius of a seat based on its current population size.
  */
@@ -159,6 +158,7 @@ function getRadius(seat) {
   return relative * seat.tableRadius;
 }
 
+
 /**
  * Get the fill color of seat based on its group.
  */
@@ -171,6 +171,7 @@ function getColor(seat) {
     return "blue";
 }
 
+
 /**
  * Get the fill pattern of a seat based on its group.
  */
@@ -181,4 +182,10 @@ function getPattern(seat) {
     return "url(#red)";
   else if (seat.group == "colony")
     return "url(#blue)";
+}
+
+
+window.view = {
+  drawSeats: drawSeats,
+  updateSeatRadii: updateSeatRadii
 }

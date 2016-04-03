@@ -381,6 +381,7 @@ function Seat(params) {
   };
 }
 
+
 window.model = {
   Luncheon: Luncheon,
   Table: Table,
