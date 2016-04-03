@@ -42,7 +42,10 @@ def home():
     return render_template('home.html')
 
 
-def listdir_json(path):
+def _listdir_json(path):
+    """
+    List only the .json files in path.
+    """
     for f in listdir(path):
         if not f.startswith('.') and f.endswith('.json'):
             yield f
@@ -55,8 +58,8 @@ def list_simulations():
     """
     simulations = [
         os.path.splitext(filename)[0]
-        for filename in listdir_json(app.config['INPUT_DIR'])
-        if os.path.isfile(os.path.join(app.config['INPUT_DIR'], filename))
+        for filename in _listdir_json(os.path.join(app.static_folder, 'input'))
+        if os.path.isfile(os.path.join(app.static_folder, 'input', filename))
     ]
 
     context = {

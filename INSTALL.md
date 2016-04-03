@@ -7,12 +7,6 @@
 git clone https://github.com/katur/lotkavolterra.git
 ```
 
-To proceed, you'll have to add a local config.py file that specifies
-INPUT_DIR as an absolute path:
-```
-vi instance/config.py
-```
-
 
 ## Install the dependencies
 
