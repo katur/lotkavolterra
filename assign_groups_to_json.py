@@ -1,8 +1,8 @@
 import argparse
+from collections import OrderedDict
 import json
+import random
 import sys
-
-from lotkavolterra.models import get_random_group
 
 
 parser = argparse.ArgumentParser(
@@ -14,12 +14,12 @@ parser.add_argument('infile', type=argparse.FileType('r'),
 
 args = parser.parse_args()
 
-data = json.load(args.infile)
+# Preserve order of json by using an OrderedDict
+data = json.load(args.infile, object_pairs_hook=OrderedDict)
 
 for table in data['luncheon']['tables']:
     for person in table['people']:
         if 'group' not in person:
-            group = get_random_group()
-            person['group'] = group.name
+            person['group'] = random.choice(['HERD', 'PACK', 'COLONY'])
 
 json.dump(data, sys.stdout, indent=2)
