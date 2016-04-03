@@ -3,23 +3,23 @@
  *
  * Call this to draw the initial state.
  */
-function drawSeats(seats, numTablesX, numTablesY, hasStage) {
+function drawSeats(params) {
   var svg = d3.select("svg");
 
   // Calculate svg height from width.
   var svgWidth = parseInt(svg.style("width"), 10);
-  var hwRatio = numTablesY / numTablesX;
+  var hwRatio = params.numTablesY / params.numTablesX;
   var svgHeight = svgWidth * hwRatio;
   svg.style("height", svgHeight);
 
   // Calculate the space each table can take up in both x and y dimensions.
-  var tableSpace = svgWidth / numTablesX;
+  var tableSpace = svgWidth / params.numTablesX;
   var tableRadius = tableSpace * constants.TABLE_SPACE_TO_RADIUS_FACTOR;
 
   // Add these extra attributes to the seat.
   // Use underscores to resemble the rest of the Python-derived attributes.
-  for (var i = 0; i < seats.length; i++) {
-    seat = seats[i];
+  for (var i = 0; i < params.seats.length; i++) {
+    seat = params.seats[i];
     seat.svgWidth = svgWidth;
     seat.svgHeight = svgHeight;
     seat.tableSpace = tableSpace;
@@ -30,7 +30,7 @@ function drawSeats(seats, numTablesX, numTablesY, hasStage) {
   // these elents will hold both a circle and a text box.
   var el = svg
     .selectAll("g")
-    .data(seats)
+    .data(params.seats)
     .enter()
     .append("g")
     .attr("transform", function(d) {
@@ -41,7 +41,7 @@ function drawSeats(seats, numTablesX, numTablesY, hasStage) {
   addCircles(el);
   addText(el);
 
-  if (hasStage) {
+  if (params.hasStage) {
     svg.append("rect")
       .attr("x", svgWidth * .38)
       .attr("width", svgWidth * .24)

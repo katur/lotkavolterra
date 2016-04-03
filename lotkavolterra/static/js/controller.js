@@ -92,9 +92,12 @@ function initializeTestLuncheon(params) {
  */
 function runGenerations(params) {
   // Draw initial state
-  var initialState = params.luncheon.exportSeatStates();
-  drawSeats(initialState, params.luncheon.numTablesX,
-            params.luncheon.numTablesY, params.hasStage);
+  view.drawSeats({
+    seats: params.luncheon.exportSeatStates(),
+    numTablesX: params.luncheon.numTablesX,
+    numTablesY: params.luncheon.numTablesY,
+    hasStage: params.hasStage
+  });
 
   // Draw generations of the simulation
   var changes = [];
