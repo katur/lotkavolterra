@@ -1,5 +1,6 @@
 var utils = require("./utils.js");
 var constants = require("./constants.js");
+var d3 = require("d3");
 
 
 /**
