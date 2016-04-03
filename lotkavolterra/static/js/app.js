@@ -1,252 +1,121 @@
-from enum import Enum
-import json
-import os
+const PERSON_NAMES = [
+  'Alice', 'Bob', 'Carol', 'Django', 'Erlich', 'Freddy',
+  'Georgia', 'Heidi', 'Indigo', 'Jack'
+]
 
-from flask import Flask, render_template, request
-from flask.ext.socketio import SocketIO, emit
 
-from .models import (Luncheon, Table, Group, get_random_group,
-                     OVERPOPULATION_FACTOR)
-from .utils import listdir_json
+/**
+ * Run the simulation from an input file.
+ */
+function runSimulation(params) {
+  // Create the luncheon object
+  var luncheon = new Luncheon({
+    name: params.data.luncheon.name,
+    numTablesX: params.data.luncheon.numTablesX,
+    numTablesY: params.data.luncheon.numTablesY
+  });
 
-DEFAULTS = {
-  'num_generations': 25,
-  'population_size': 1000,
-  'num_seats': 10,  // This one used for test case simulations only
+  // Per-person primary key
+  var pk = 0
+
+  // Create the tables and add to luncheon
+  var jsonTables = params.data.luncheon.tables;
+
+  for (var i = 0; i < jsonTables.length; i++) {
+    var table = new Table(jsonTables[i]);
+    var jsonPeople = jsonTables[i].people;
+    for (var j = 0; j < jsonPeople.length; j++) {
+      table.insert({
+        pk: pk,
+        index: j,
+        name: jsonPeople[j].name,
+        group: jsonPeople[j].group || constants.Group.getRandom(),
+        populationSize: params.populationSize
+      });
+
+      pk += 1;
+    }
+
+    luncheon.addTable(table)
+  }
+
+  var initialState = luncheon.exportSeatStates();
+
+  drawSeats(initialState, luncheon.numTablesX, luncheon.numTablesY,
+            params.hasStage);
+  var changes = [];
+  for (var i = 0; i < params.numGenerations; i++) {
+    luncheon.allSeatsInteract();
+    changes.push(luncheon.exportSeatSizes());
+  }
+
+  for (var i = 0; i < changes.length; i++) {
+    updateSeatRadii(changes[i], i);
+  }
 }
 
 
-/**********************
- * Set up application *
- **********************/
-
-app = Flask(__name__, instance_relative_config=True)
-
-// Load the default configuration
-app.config.from_object('config.default')
-
-// Load the instance / local configuration
-app.config.from_pyfile('config.py')
-
-// Load configuration specified in environment variable, if any
-try:
-    app.config.from_envvar('APP_CONFIG_FILE')
-except:
-    pass
-
-socketio = SocketIO(app)
-
-
-/***************************
- * Define views and routes *
- ***************************/
-
 /**
-Render the homepage.
-*/
-@app.route('/')
-def home():
-    return render_template('home.html')
+ * Run a test simulation.
+ *
+ * This is very similar to run_simulation, but instead of parsing
+ * a json file it creates a test table based on rules.
+ */
+function runTestSimulation(params) {
+  var luncheon = new Luncheon({
+    name: params.simulation,
+    numTablesX: 2,
+    numTablesY: 2
+  });
 
+  var table = new Table({
+    x: 0.5,
+    y: 0.25
+  });
 
-@socketio.on('connect')
-def connect1():
-    emit('server hello')
+  var group;
+  for (var i = 0; i < params.numSeats; i++) {
+    if (params.simulation === "alternating") {
+      if (i % 2 === 0) {
+        group = constants.Group.PACK;
+      } else {
+        group = constants.Group.HERD;
+      }
 
+    } else if (params.simulation === "halves") {
+      if (i < (params.numSeats / 2)) {
+        group = constants.Group.PACK;
+      } else {
+        group = constants.Group.HERD;
+      }
 
-@socketio.on('client hello')
-def connect2():
-    emit('server hello back')
-
-
-/**
-Render the page listing the simulations.
-*/
-@app.route('/list-simulations/')
-def list_simulations():
-    simulations = [
-        os.path.splitext(filename)[0]
-        for filename in listdir_json(app.config['INPUT_DIR'])
-        if os.path.isfile(os.path.join(app.config['INPUT_DIR'], filename))
-    ]
-
-    context = {
-        'simulations': simulations,
-        'defaults': DEFAULTS,
-    }
-    return render_template('list_simulations.html', **context)
-
-
-/**
-Run the simulation from an input file.
-*/
-@app.route('/run-simulation/')
-def run_simulation():
-    simulation = request.args['simulation']
-    num_generations = int(request.args['num_generations'])
-    population_size = int(request.args['population_size'])
-    has_stage = 'stage' in request.args
-
-    // Read the input file
-    filename = os.path.join(app.config['INPUT_DIR'], simulation + '.json')
-    with open(filename, 'r') as f:
-        json_data = json.loads(f.read())
-
-    // Create the luncheon object
-    json_luncheon = json_data['luncheon']
-    luncheon = Luncheon(json_luncheon['name'],
-                        json_luncheon['num_tables_x'],
-                        json_luncheon['num_tables_y'])
-
-    // Per-person primary key
-    pk = 0
-
-    // Populate tables from the json input
-    for json_table in json_luncheon['tables']:
-        table = Table(**json_table)
-
-        for index, person in enumerate(json_table['people']):
-            try:
-                group = Group[person['group']]
-            except KeyError:
-                group = get_random_group()
-
-            table.insert(pk, index, person['name'],
-                         group, population_size)
-            pk += 1
-
-        luncheon.add_table(table)
-
-    // Save initial state
-    initial_state = luncheon.export_seat_states()
-
-    // Interact for num_generations
-    changes = []
-    for generation in range(num_generations):
-        luncheon.all_seats_interact()
-        changes.append(luncheon.export_seat_sizes())
-
-    context = {
-        'luncheon': luncheon,
-        'has_stage': has_stage,
-        'initial_state': initial_state,
-        'changes': changes,
-
-        // For the GET param form
-        'num_generations': num_generations,
-        'population_size': population_size,
-
-        // For size calculations
-        'OVERPOPULATION_FACTOR': OVERPOPULATION_FACTOR,
+    } else {
+      group = constants.Group.getRandom();
     }
 
-    return render_template('run_simulation.html', **context)
+    table.insert({
+      pk: i,
+      index: i,
+      name: PERSON_NAMES[i] || "Person " + i,
+      group: group,
+      populationSize: params.populationSize
+    });
+  }
 
+  luncheon.addTable(table);
 
-/**
-A type of test simulation.
-*/
-class TestSimulation(Enum):
-    random, alternating, halves = range(3)
+  var numTablesX = luncheon.numTablesX;
+  var numTablesY = luncheon.numTablesY;
+  var initialState = luncheon.exportSeatStates();
+  drawSeats(initialState, numTablesX, numTablesY, true);
 
+  var changes = []
+  for (var i = 0; i < params.numGenerations; i++) {
+    luncheon.allSeatsInteract();
+    changes.push(luncheon.exportSeatSizes());
+  }
 
-/**
-Render the page listing the test case simulations.
-*/
-@app.route('/list-test-simulations')
-def list_test_simulations():
-    simulations = [t.name for t in TestSimulation]
-
-    context = {
-        'simulations': simulations,
-        'defaults': DEFAULTS,
-        'show_num_seats': True,
-    }
-    return render_template('list_test_simulations.html', **context)
-
-
-/**
-Run a test simulation.
-
-This is very similar to run_simulation, but instead of parsing
-a json file it creates a test table based on rules.
-*/
-@app.route('/test-simulation/')
-def run_test_simulation():
-    simulation = TestSimulation[request.args['simulation']]
-    num_generations = int(request.args['num_generations'])
-    population_size = int(request.args['population_size'])
-    num_seats = int(request.args['num_seats'])
-
-    luncheon = Luncheon(simulation, 2, 2)
-    table = Table(x=0.5, y=0.25)
-    _populate_test_table(table, simulation, num_seats, population_size)
-    luncheon.add_table(table)
-
-    initial_state = luncheon.export_seat_states()
-
-    changes = []
-    for generation in range(num_generations):
-        luncheon.all_seats_interact()
-        changes.append(luncheon.export_seat_sizes())
-
-    context = {
-        'luncheon': luncheon,
-        'initial_state': initial_state,
-        'changes': changes,
-
-        // Needed to set the GET param form
-        'num_generations': num_generations,
-        'population_size': population_size,
-        'num_seats': num_seats,
-
-        // Needed for drawing calculations
-        'OVERPOPULATION_FACTOR': OVERPOPULATION_FACTOR,
-    }
-
-    return render_template('run_simulation.html', **context)
-
-
-/**
-Helper function to populate a test table for a test simulation.
-**/
-def _populate_test_table(table, simulation, num_seats, population_size):
-    PEOPLE = ('Alice', 'Bob', 'Carol', 'Django', 'Erlich', 'Freddy',
-              'Georgia', 'Heidi', 'Indigo', 'Jack',)
-
-    for i in range(num_seats):
-        try:
-            name = PEOPLE[i]
-        except IndexError:
-            name = 'Person{}'.format(i)
-
-        if simulation == TestSimulation.alternating:
-            if i % 2 == 0:
-                group = Group.pack
-            else:
-                group = Group.herd
-
-        elif simulation == TestSimulation.halves:
-            if i < (num_seats / 2):
-                group = Group.pack
-            else:
-                group = Group.herd
-
-        else:
-            group = get_random_group()
-
-        table.insert(i, i, name, group, population_size)
-
-
-/************
- * D3 Demos *
- ************/
-
-@app.route('/d3-demo/circles-of-circles/')
-def d3_demo_circles_of_circles():
-    return render_template('d3_demo_circles_of_circles.html')
-
-
-@app.route('/d3-demo/random-circles/')
-def d3_demo_random_circles():
-    return render_template('d3_demo_random_circles.html')
+  for (var i = 0; i < changes.length; i++) {
+    updateSeatRadii(changes[i], i);
+  }
+}

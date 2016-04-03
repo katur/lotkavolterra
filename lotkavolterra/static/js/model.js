@@ -83,8 +83,16 @@ function Table(params) {
   this.name = params.name || "Test";
 
   // Relative position in space
-  this.x = params.x || 0.5;
-  this.y = params.y || 0.5;
+  this.x = params.x;
+  this.y = params.y;
+
+  if (this.x === undefined) {
+    this.x = 0.5;
+  }
+
+  if (this.y === undefined) {
+    this.y = 0.5;
+  }
 
   // Table is initially empty
   this.head = null;
@@ -184,7 +192,7 @@ function Table(params) {
     var i, seat;
     for (i = 0; i < seats.length; i++) {
       seat = seats[i];
-      size[seat.pk] = seat.populationSize;
+      sizes[seat.pk] = seat.populationSize;
     }
 
     return sizes;
@@ -207,13 +215,13 @@ function Seat(params) {
   this.name = params.name;
   this.group = params.group;
   this.populationSize = params.populationSize;
-  this.initialpopulationSize = params.populationSize;
+  this.initialPopulationSize = params.populationSize;
   this.table = params.table;
   this.nextSeat = params.nextSeat;
   this.previousSeat = params.previousSeat;
 
   this.toString = function() {
-    return this.group.name + " " + this.name;
+    return this.group + " " + this.name;
   };
 
   this.formatName = function() {
@@ -236,7 +244,7 @@ function Seat(params) {
     state.pk = this.pk;
     state.index = this.index;
     state.name = this.formatName();
-    state.group = this.group.name;
+    state.group = this.group;
     state.populationSize = this.populationSize;
     state.initialPopulationSize = this.initialPopulationSize;
     state.tableX = this.table.x;
@@ -293,7 +301,10 @@ function Seat(params) {
       return false;
     }
 
-    this.group = getRandomChoice([constants.Group.PACK, constants.Group.HERD]);
+    this.group = utils.getRandomChoice([
+      constants.Group.PACK,
+      constants.Group.HERD
+    ]);
 
     return true;
   };

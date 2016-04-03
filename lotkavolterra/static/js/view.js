@@ -24,10 +24,10 @@ function drawSeats(seats, numTablesX, numTablesY, hasStage) {
   // Use underscores to resemble the rest of the Python-derived attributes.
   for (var i = 0; i < seats.length; i++) {
     seat = seats[i];
-    seat["svg_width"] = svgWidth;
-    seat["svg_height"] = svgHeight;
-    seat["table_space"] = tableSpace;
-    seat["table_radius"] = tableRadius;
+    seat.svgWidth = svgWidth;
+    seat.svgHeight = svgHeight;
+    seat.tableSpace = tableSpace;
+    seat.tableRadius = tableRadius;
   }
 
   // Create and position the group elents (g tags). Each one of
@@ -61,7 +61,7 @@ function drawSeats(seats, numTablesX, numTablesY, hasStage) {
       .attr("y", svgHeight * .12)
       .attr("text-anchor", "middle")
       .attr("alignment-baseline", "middle")
-      .attr("font-size", contants.TEXT_SIZE + 5);
+      .attr("font-size", constants.TEXT_SIZE + 5);
   }
 }
 
@@ -78,7 +78,7 @@ function updateSeatRadii(changes, iteration) {
     })
     .ease(constants.EASING_FXN)
     .attr("r", function(d) {
-      d.population_size = changes[d.pk];
+      d.populationSize = changes[d.pk];
       return getRadius(d);
     });
 }
@@ -124,7 +124,7 @@ function addText(el) {
  * Get the coordinates of a seat.
  */
 function getCoordinates(seat) {
-  var step = constants.CIRCLE_RADIANS / seat.table_seat_count;
+  var step = constants.CIRCLE_RADIANS / seat.tableSeatCount;
   var angle = seat.index * step;
 
   // Skew angle slightly so that tables with an even number of seats
@@ -134,14 +134,14 @@ function getCoordinates(seat) {
 
   // Table coordinates, shifted such that relative table positions
   // 0 and 1 are moved a half-table inward from the svg edges.
-  var tableX = (seat.table_x * (seat.svg_width - seat.table_space)) +
-               (seat.table_space / 2);
-  var tableY = (seat.table_y * (seat.svg_height - seat.table_space)) +
-               (seat.table_space / 2);
+  var tableX = (seat.tableX * (seat.svgWidth - seat.tableSpace)) +
+               (seat.tableSpace / 2);
+  var tableY = (seat.tableY * (seat.svgHeight - seat.tableSpace)) +
+               (seat.tableSpace / 2);
 
   // Seat coordinates now just trigonometry
-  var seatX = tableX + (seat.table_radius * Math.cos(angle));
-  var seatY = tableY + (seat.table_radius * Math.sin(angle));
+  var seatX = tableX + (seat.tableRadius * Math.cos(angle));
+  var seatY = tableY + (seat.tableRadius * Math.sin(angle));
 
   return [seatX, seatY];
 }
@@ -150,24 +150,24 @@ function getCoordinates(seat) {
  * Get the radius of a seat based on its current population size.
  */
 function getRadius(seat) {
-  var current = utils.getRadiusFromArea(seat.population_size);
+  var current = utils.getRadiusFromArea(seat.populationSize);
   var max = utils.getRadiusFromArea(
-    seat.initial_population_size * constants.OVERPOPULATION_FACTOR);
+    seat.initialPopulationSize * constants.OVERPOPULATION_FACTOR);
   var relative = current / max;
 
   // Allow seats to get as big as the table at their largest
-  return relative * seat.table_radius;
+  return relative * seat.tableRadius;
 }
 
 /**
  * Get the fill color of seat based on its group.
  */
 function getColor(seat) {
-  if (seat.group == "herd")
+  if (seat.group === "HERD")
     return "green";
-  else if (seat.group == "pack")
+  else if (seat.group === "PACK")
     return "red";
-  else if (seat.group == "colony")
+  else if (seat.group === "COLONY")
     return "blue";
 }
 

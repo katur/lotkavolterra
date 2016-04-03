@@ -11,25 +11,15 @@
   <svg width="100%"></svg>
 </div>
 
-<script
-  src="{{ url_for('static', filename='json/' ~ simulation ~ '.json') }}"
-  charset="utf-8"></script>
-
 <script type="text/javascript" charset="utf-8">
   var params = {
     simulation: "{{ simulation }}",
     numGenerations: {{ num_generations }},
     populationSize: {{ population_size }},
-    data: data,
-
-    {% if has_stage %}
-      hasStage: true
-    {% else %}
-      hasStage: false
-    {% endif %}
+    numSeats: {{ num_seats }}
   };
 
-  runSimulation(params);
+  runTestSimulation(params);
 </script>
 
 {% endblock %}

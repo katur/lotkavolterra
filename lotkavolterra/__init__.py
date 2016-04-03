@@ -1,12 +1,8 @@
-from enum import Enum
-import json
 import os
+from os import listdir
 
 from flask import Flask, render_template, request
 
-from .models import (Luncheon, Table, Group, get_random_group,
-                     OVERPOPULATION_FACTOR)
-from .utils import listdir_json
 
 DEFAULTS = {
     'num_generations': 25,
@@ -46,6 +42,12 @@ def home():
     return render_template('home.html')
 
 
+def listdir_json(path):
+    for f in listdir(path):
+        if not f.startswith('.') and f.endswith('.json'):
+            yield f
+
+
 @app.route("/list-simulations/")
 def list_simulations():
     """
@@ -64,6 +66,20 @@ def list_simulations():
     return render_template('list_simulations.html', **context)
 
 
+@app.route("/list-test-simulations")
+def list_test_simulations():
+    """
+    Render the page listing the test case simulations.
+    """
+    simulations = ['random', 'alternating', 'halves']
+
+    context = {
+        'simulations': simulations,
+        'defaults': DEFAULTS,
+    }
+    return render_template('list_test_simulations.html', **context)
+
+
 @app.route("/run-simulation/")
 def run_simulation():
     """
@@ -77,78 +93,17 @@ def run_simulation():
     # Read the input file
     filename = os.path.join(app.config['INPUT_DIR'], simulation + '.json')
     with open(filename, 'r') as f:
-        json_data = json.loads(f.read())
-
-    # Create the luncheon object
-    json_luncheon = json_data['luncheon']
-    luncheon = Luncheon(json_luncheon['name'],
-                        json_luncheon['num_tables_x'],
-                        json_luncheon['num_tables_y'])
-
-    # Per-person primary key
-    pk = 0
-
-    # Populate tables from the json input
-    for json_table in json_luncheon['tables']:
-        table = Table(**json_table)
-
-        for index, person in enumerate(json_table['people']):
-            try:
-                group = Group[person['group']]
-            except KeyError:
-                group = get_random_group()
-
-            table.insert(pk, index, person['name'],
-                         group, population_size)
-            pk += 1
-
-        luncheon.add_table(table)
-
-    # Save initial state
-    initial_state = luncheon.export_seat_states()
-
-    # Interact for num_generations
-    changes = []
-    for generation in range(num_generations):
-        luncheon.all_seats_interact()
-        changes.append(luncheon.export_seat_sizes())
+        json_data = f.read()
 
     context = {
-        'luncheon': luncheon,
-        'has_stage': has_stage,
-        'initial_state': initial_state,
-        'changes': changes,
-
-        # For the GET param form
+        'simulation': simulation,
         'num_generations': num_generations,
         'population_size': population_size,
-
-        # For size calculations
-        'OVERPOPULATION_FACTOR': OVERPOPULATION_FACTOR,
+        'has_stage': has_stage,
+        'json_data': json_data,
     }
 
     return render_template('run_simulation.html', **context)
-
-
-class TestSimulation(Enum):
-    """
-    A type of test simulation.
-    """
-    random, alternating, halves = range(3)
-
-
-@app.route("/list-test-simulations")
-def list_test_simulations():
-    """
-    Render the page listing the test case simulations.
-    """
-    simulations = [t.name for t in TestSimulation]
-
-    context = {
-        'simulations': simulations,
-        'defaults': DEFAULTS,
-    }
-    return render_template('list_test_simulations.html', **context)
 
 
 @app.route("/test-simulation/")
@@ -159,69 +114,19 @@ def run_test_simulation():
     This is very similar to run_simulation, but instead of parsing
     a json file it creates a test table based on rules.
     """
-    simulation = TestSimulation[request.args['simulation']]
+    simulation = request.args['simulation']
     num_generations = int(request.args['num_generations'])
     population_size = int(request.args['population_size'])
     num_seats = int(request.args['num_seats'])
 
-    luncheon = Luncheon(simulation, 2, 2)
-    table = Table(x=0.5, y=0.25)
-    _populate_test_table(table, simulation, num_seats, population_size)
-    luncheon.add_table(table)
-
-    initial_state = luncheon.export_seat_states()
-
-    changes = []
-    for generation in range(num_generations):
-        luncheon.all_seats_interact()
-        changes.append(luncheon.export_seat_sizes())
-
     context = {
-        'luncheon': luncheon,
-        'initial_state': initial_state,
-        'changes': changes,
-
-        # Needed to set the GET param form
+        'simulation': simulation,
         'num_generations': num_generations,
         'population_size': population_size,
         'num_seats': num_seats,
-
-        # Needed for drawing calculations
-        'OVERPOPULATION_FACTOR': OVERPOPULATION_FACTOR,
     }
 
-    return render_template('run_simulation.html', **context)
-
-
-def _populate_test_table(table, simulation, num_seats, population_size):
-    """
-    Helper function to populate a test table for a test simulation.
-    """
-    PEOPLE = ('Alice', 'Bob', 'Carol', 'Django', 'Erlich', 'Freddy',
-              'Georgia', 'Heidi', 'Indigo', 'Jack',)
-
-    for i in range(num_seats):
-        try:
-            name = PEOPLE[i]
-        except IndexError:
-            name = 'Person{}'.format(i)
-
-        if simulation == TestSimulation.alternating:
-            if i % 2 == 0:
-                group = Group.pack
-            else:
-                group = Group.herd
-
-        elif simulation == TestSimulation.halves:
-            if i < (num_seats / 2):
-                group = Group.pack
-            else:
-                group = Group.herd
-
-        else:
-            group = get_random_group()
-
-        table.insert(i, i, name, group, population_size)
+    return render_template('run_test_simulation.html', **context)
 
 
 ############

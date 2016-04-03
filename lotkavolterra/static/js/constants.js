@@ -21,11 +21,11 @@ window.constants = {
     COLONY: "COLONY",
 
     getRandom: function() {
-      return getRandomChoice([this.PACK, this.HERD, this.COLONY]);
+      return utils.getRandomChoice([this.PACK, this.HERD, this.COLONY]);
     },
 
     getRandomPackOrHerd: function() {
-      return getRandomChoice([this.PACK, this.HERD]);
+      return utils.getRandomChoice([this.PACK, this.HERD]);
     }
   },
 

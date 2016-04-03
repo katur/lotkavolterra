@@ -1,6 +1,11 @@
 # Project-specific Node.js packages (e.g. gulp)
 node_modules/
-input/
+
+
+# Input
+*.json
+*.csv
+*.xls
 
 
 # Local or private settings

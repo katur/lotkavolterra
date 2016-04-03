@@ -6,9 +6,9 @@ followed by population increase for the winner and population decline
 for the loser.
 */
 function compete(pack, herd) {
-  f = Coin.flip(constants.COMPETITIVE_COIN_WEIGHT);
+  f = constants.Coin.flip(constants.COMPETITIVE_COIN_WEIGHT);
 
-  if (f == Coin.HEADS) {
+  if (f == constants.Coin.HEADS) {
     pack.increasePopulation(constants.GROWTH_RATE);
     herd.decreasePopulation(constants.GROWTH_RATE);
   } else {
