@@ -76,7 +76,7 @@ function createTestLuncheon(params) {
     table.insert({
       pk: i,
       index: i,
-      name: constants.PERSON_NAMES[i] || "Person " + i,
+      name: constants.PERSON_NAMES[i] || "Person" + i,
       group: group,
       populationSize: params.populationSize
     });
