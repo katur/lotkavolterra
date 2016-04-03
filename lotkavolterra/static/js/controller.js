@@ -3,7 +3,7 @@
  */
 function initializeLuncheon(params) {
   // Create the luncheon object
-  var luncheon = new Luncheon({
+  var luncheon = new model.Luncheon({
     name: params.data.luncheon.name,
     numTablesX: params.data.luncheon.numTablesX,
     numTablesY: params.data.luncheon.numTablesY
@@ -16,7 +16,7 @@ function initializeLuncheon(params) {
   var jsonTables = params.data.luncheon.tables;
 
   for (var i = 0; i < jsonTables.length; i++) {
-    var table = new Table(jsonTables[i]);
+    var table = new model.Table(jsonTables[i]);
 
     var jsonPeople = jsonTables[i].people;
     for (var j = 0; j < jsonPeople.length; j++) {
@@ -42,13 +42,13 @@ function initializeLuncheon(params) {
  * rules (e.g. random, alternating, halves).
  */
 function initializeTestLuncheon(params) {
-  var luncheon = new Luncheon({
+  var luncheon = new model.Luncheon({
     name: params.simulation,
     numTablesX: 2,
     numTablesY: 2
   });
 
-  var table = new Table({
+  var table = new model.Table({
     x: 0.5,
     y: 0.25
   });
@@ -104,7 +104,7 @@ function runGenerations(params) {
   }
 
   for (var i = 0; i < changes.length; i++) {
-    updateSeatRadii(changes[i], i);
+    view.updateSeatRadii(changes[i], i);
   }
 }
 
