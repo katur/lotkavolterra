@@ -2,20 +2,16 @@
 
 {% block content %}
 
-<div class="page-section">
-  <h4>View simulations</h4>
+<ul>
+  <li>
+    <a href="{{ url_for('list_simulations') }}">
+      Input based simulations</a>
+  </li>
 
-  <ul>
-    <li>
-      <a href="{{ url_for('list_simulations') }}">
-        Input based simulations</a>
-    </li>
-
-    <li>
-      <a href="{{ url_for('list_test_simulations') }}">
-        Test case simulations</a>
-    </li>
-  <ul>
-</div>
+  <li>
+    <a href="{{ url_for('list_test_simulations') }}">
+      Test case simulations</a>
+  </li>
+<ul>
 
 {% endblock %}
