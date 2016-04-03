@@ -183,8 +183,8 @@ data = {
     'luncheon': {
         'name': 'Black Rock Luncheon: 2015',
         'tables': table_list,
-        'num_tables_x': NUM_TABLES_X,
-        'num_tables_y': NUM_TABLES_Y,
+        'numTablesX': NUM_TABLES_X,
+        'numTablesY': NUM_TABLES_Y,
     }
 }
 
