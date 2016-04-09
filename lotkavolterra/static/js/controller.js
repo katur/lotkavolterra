@@ -93,9 +93,9 @@ function initializeTestLuncheon(params) {
 
 
 /**
- * Run generations of the simulation.
+ * Draw the luncheon initially
  */
-function runGenerations(params) {
+function drawInitialState(params) {
   // Draw initial state
   view.drawSeats({
     seats: params.luncheon.exportSeatStates(),
@@ -103,7 +103,13 @@ function runGenerations(params) {
     numTablesY: params.luncheon.numTablesY,
     hasStage: params.hasStage
   });
+}
 
+
+/**
+ * Run generations of the simulation.
+ */
+function runGenerations(params) {
   // Draw generations of the simulation
   var changes = [];
   for (var i = 0; i < params.numGenerations; i++) {
@@ -120,5 +126,6 @@ function runGenerations(params) {
 module.exports = {
   initializeLuncheon: initializeLuncheon,
   initializeTestLuncheon: initializeTestLuncheon,
+  drawInitialState: drawInitialState,
   runGenerations: runGenerations
 }

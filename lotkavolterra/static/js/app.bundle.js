@@ -62,10 +62,14 @@
 					populationSize: params.populationSize
 				});
 
+	      controller.drawInitialState({
+	        luncheon: luncheon,
+	        hasStage: params.hasStage
+	      });
+
 				controller.runGenerations({
 					luncheon: luncheon,
-					numGenerations: params.numGenerations,
-	        hasStage: params.hasStage
+					numGenerations: params.numGenerations
 				});
 
 			} else {
@@ -91,10 +95,14 @@
 	    populationSize: params.populationSize
 	  });
 
+	  controller.drawInitialState({
+	    luncheon: luncheon,
+	    hasStage: false
+	  });
+
 	  controller.runGenerations({
 	    luncheon: luncheon,
-	    numGenerations: params.numGenerations,
-	    hasStage: false
+	    numGenerations: params.numGenerations
 	  });
 	}
 
@@ -204,9 +212,9 @@
 
 
 	/**
-	 * Run generations of the simulation.
+	 * Draw the luncheon initially
 	 */
-	function runGenerations(params) {
+	function drawInitialState(params) {
 	  // Draw initial state
 	  view.drawSeats({
 	    seats: params.luncheon.exportSeatStates(),
@@ -214,7 +222,13 @@
 	    numTablesY: params.luncheon.numTablesY,
 	    hasStage: params.hasStage
 	  });
+	}
 
+
+	/**
+	 * Run generations of the simulation.
+	 */
+	function runGenerations(params) {
 	  // Draw generations of the simulation
 	  var changes = [];
 	  for (var i = 0; i < params.numGenerations; i++) {
@@ -231,6 +245,7 @@
 	module.exports = {
 	  initializeLuncheon: initializeLuncheon,
 	  initializeTestLuncheon: initializeTestLuncheon,
+	  drawInitialState: drawInitialState,
 	  runGenerations: runGenerations
 	}
 

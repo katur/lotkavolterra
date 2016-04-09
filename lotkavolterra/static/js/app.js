@@ -16,10 +16,14 @@ function runSimulation(params) {
 				populationSize: params.populationSize
 			});
 
+      controller.drawInitialState({
+        luncheon: luncheon,
+        hasStage: params.hasStage
+      });
+
 			controller.runGenerations({
 				luncheon: luncheon,
-				numGenerations: params.numGenerations,
-        hasStage: params.hasStage
+				numGenerations: params.numGenerations
 			});
 
 		} else {
@@ -45,10 +49,14 @@ function runTestSimulation(params) {
     populationSize: params.populationSize
   });
 
+  controller.drawInitialState({
+    luncheon: luncheon,
+    hasStage: false
+  });
+
   controller.runGenerations({
     luncheon: luncheon,
-    numGenerations: params.numGenerations,
-    hasStage: false
+    numGenerations: params.numGenerations
   });
 }
 
