@@ -21,7 +21,7 @@ function runSimulation(params) {
         hasStage: params.hasStage
       });
 
-			controller.runGenerations({
+			controller.runGeneration({
 				luncheon: luncheon,
 				numGenerations: params.numGenerations
 			});
@@ -54,7 +54,7 @@ function runTestSimulation(params) {
     hasStage: false
   });
 
-  controller.runGenerations({
+  controller.runGeneration({
     luncheon: luncheon,
     numGenerations: params.numGenerations
   });

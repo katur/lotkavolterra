@@ -107,19 +107,13 @@ function drawInitialState(params) {
 
 
 /**
- * Run generations of the simulation.
+ * Do next generation of the simulation.
  */
-function runGenerations(params) {
-  // Draw generations of the simulation
-  var changes = [];
-  for (var i = 0; i < params.numGenerations; i++) {
-    params.luncheon.allSeatsInteract();
-    changes.push(params.luncheon.exportSeatSizes());
-  }
-
-  for (var i = 0; i < changes.length; i++) {
-    view.updateSeatRadii(changes[i], i);
-  }
+function runGeneration(params) {
+  // TODO: use params.numGenerations
+  params.luncheon.allSeatsInteract();
+  change = params.luncheon.exportSeatSizes();
+  view.updateSeatRadii(change, runGeneration, params);
 }
 
 
@@ -127,5 +121,5 @@ module.exports = {
   initializeLuncheon: initializeLuncheon,
   initializeTestLuncheon: initializeTestLuncheon,
   drawInitialState: drawInitialState,
-  runGenerations: runGenerations
+  runGeneration: runGeneration
 }

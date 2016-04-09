@@ -67,7 +67,7 @@
 	        hasStage: params.hasStage
 	      });
 
-				controller.runGenerations({
+				controller.runGeneration({
 					luncheon: luncheon,
 					numGenerations: params.numGenerations
 				});
@@ -100,7 +100,7 @@
 	    hasStage: false
 	  });
 
-	  controller.runGenerations({
+	  controller.runGeneration({
 	    luncheon: luncheon,
 	    numGenerations: params.numGenerations
 	  });
@@ -226,19 +226,13 @@
 
 
 	/**
-	 * Run generations of the simulation.
+	 * Do next generation of the simulation.
 	 */
-	function runGenerations(params) {
-	  // Draw generations of the simulation
-	  var changes = [];
-	  for (var i = 0; i < params.numGenerations; i++) {
-	    params.luncheon.allSeatsInteract();
-	    changes.push(params.luncheon.exportSeatSizes());
-	  }
-
-	  for (var i = 0; i < changes.length; i++) {
-	    view.updateSeatRadii(changes[i], i);
-	  }
+	function runGeneration(params) {
+	  // TODO: use params.numGenerations
+	  params.luncheon.allSeatsInteract();
+	  change = params.luncheon.exportSeatSizes();
+	  view.updateSeatRadii(change, runGeneration, params);
 	}
 
 
@@ -246,7 +240,7 @@
 	  initializeLuncheon: initializeLuncheon,
 	  initializeTestLuncheon: initializeTestLuncheon,
 	  drawInitialState: drawInitialState,
-	  runGenerations: runGenerations
+	  runGeneration: runGeneration
 	}
 
 
@@ -884,20 +878,23 @@
 
 
 	/**
-	 * Update seat radii according to changes.
+	 * Update seat radii according to change.
 	 */
-	function updateSeatRadii(changes, iteration) {
+	function updateSeatRadii(change, callback, callbackParams) {
 	  d3.select("svg")
 	    .selectAll("circle")
 	    .transition()
 	    .duration(constants.TRANSITION_DURATION)
-	    .delay(function(d) {
-	      return iteration * constants.TRANSITION_DURATION;
-	    })
 	    .ease(constants.EASING_FXN)
 	    .attr("r", function(d) {
-	      d.populationSize = changes[d.pk];
+	      d.populationSize = change[d.pk];
 	      return getRadius(d);
+	    })
+	    .each("end", function(d, i) {
+	      // Calling the model to run the next generation is only needed once
+	      if (i == 0) {
+	        callback(callbackParams);
+	      }
 	    });
 	}
 

@@ -68,20 +68,23 @@ function drawSeats(params) {
 
 
 /**
- * Update seat radii according to changes.
+ * Update seat radii according to change.
  */
-function updateSeatRadii(changes, iteration) {
+function updateSeatRadii(change, callback, callbackParams) {
   d3.select("svg")
     .selectAll("circle")
     .transition()
     .duration(constants.TRANSITION_DURATION)
-    .delay(function(d) {
-      return iteration * constants.TRANSITION_DURATION;
-    })
     .ease(constants.EASING_FXN)
     .attr("r", function(d) {
-      d.populationSize = changes[d.pk];
+      d.populationSize = change[d.pk];
       return getRadius(d);
+    })
+    .each("end", function(d, i) {
+      // Calling the model to run the next generation is only needed once
+      if (i == 0) {
+        callback(callbackParams);
+      }
     });
 }
 
