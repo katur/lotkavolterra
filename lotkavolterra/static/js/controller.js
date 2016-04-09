@@ -22,8 +22,8 @@ function initializeLuncheon(params) {
 
   for (var i = 0; i < jsonTables.length; i++) {
     var table = new model.Table(jsonTables[i]);
-
     var jsonPeople = jsonTables[i].people;
+
     for (var j = 0; j < jsonPeople.length; j++) {
       table.insert({
         pk: pk,
