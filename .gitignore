@@ -1,6 +1,7 @@
 # Project-specific Node.js packages (e.g. gulp)
 node_modules/
 input/
+*.json
 
 
 # Local or private settings
