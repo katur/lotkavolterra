@@ -16,12 +16,11 @@ Description coming soon.
 
 ## Code
 
-Code is in [Python](https://www.python.org/),
+Code is mainly in Javascript.
+
+Website is in [Python](https://www.python.org/),
 using the [Flask microframework](http://flask.pocoo.org/).
 
 CSS is in [SASS](http://sass-lang.com/).
 
 For the visualization, I am using [D3](http://d3js.org).
-
-For the communication between backend and frontend, I am considering a
-[WebSocket](https://en.wikipedia.org/wiki/WebSocket)-based approach.
