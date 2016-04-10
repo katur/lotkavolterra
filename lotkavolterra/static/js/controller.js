@@ -95,7 +95,7 @@ function initializeTestLuncheon(params) {
 /**
  * Draw the luncheon initially
  */
-function drawInitialState(params) {
+function drawLuncheon(params) {
   // Draw initial state
   view.drawSeats({
     seats: params.luncheon.exportSeatStates(),
@@ -110,16 +110,18 @@ function drawInitialState(params) {
  * Do next generation of the simulation.
  */
 function runGeneration(params) {
-  // TODO: use params.numGenerations
   params.luncheon.allSeatsInteract();
   change = params.luncheon.exportSeatSizes();
-  view.updateSeatRadii(change, runGeneration, params);
+
+  if (params.luncheon.generation <= params.numGenerations) {
+    view.updateSeatRadii(change, runGeneration, params);
+  }
 }
 
 
 module.exports = {
   initializeLuncheon: initializeLuncheon,
   initializeTestLuncheon: initializeTestLuncheon,
-  drawInitialState: drawInitialState,
+  drawLuncheon: drawLuncheon,
   runGeneration: runGeneration
 }
