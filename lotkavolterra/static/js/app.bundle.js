@@ -69,7 +69,8 @@
 
 				controller.runGeneration({
 					luncheon: luncheon,
-					numGenerations: params.numGenerations
+					numGenerations: params.numGenerations,
+	        repeat: true
 				});
 
 			} else {
@@ -229,10 +230,13 @@
 	 * Do next generation of the simulation.
 	 */
 	function runGeneration(params) {
-	  params.luncheon.allSeatsInteract();
-	  change = params.luncheon.exportSeatSizes();
-
 	  if (params.luncheon.generation <= params.numGenerations) {
+	    params.luncheon.allSeatsInteract();
+	    change = params.luncheon.exportSeatSizes();
+	    view.updateSeatRadii(change, runGeneration, params);
+	  } else if (params.repeat) {
+	    params.luncheon.reset();
+	    change = params.luncheon.exportSeatSizes();
 	    view.updateSeatRadii(change, runGeneration, params);
 	  }
 	}
@@ -388,6 +392,15 @@
 	    }
 	  };
 
+	  /** Set all seats at this luncheon to initial population size. */
+	  this.reset = function() {
+	    for (var i = 0; i < this.tables.length; i++) {
+	      this.tables[i].reset();
+	    }
+
+	    this.generation = 0;
+	  };
+
 	  /**
 	   * Export the current state of all seats at the luncheon.
 	   */
@@ -515,6 +528,15 @@
 	      for (j = 0; j < seats.length; j++) {
 	        seats[j].interactWithNextInteractor();
 	      }
+	    }
+	  };
+
+	  /** Set all seats at this table to initial population size. */
+	  this.reset = function() {
+	    var seats = this.getAllSeats();
+
+	    for (var i = 0; i < seats.length; i++) {
+	      seats[i].reset();
 	    }
 	  };
 
@@ -729,6 +751,11 @@
 	    if (interactor) {
 	      interactions.interact(this, interactor);
 	    }
+	  };
+
+	  /** Reset this seat to its initial population size. */
+	  this.reset = function() {
+	    this.populationSize = this.initialPopulationSize;
 	  };
 	}
 

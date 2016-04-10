@@ -110,10 +110,13 @@ function drawLuncheon(params) {
  * Do next generation of the simulation.
  */
 function runGeneration(params) {
-  params.luncheon.allSeatsInteract();
-  change = params.luncheon.exportSeatSizes();
-
   if (params.luncheon.generation <= params.numGenerations) {
+    params.luncheon.allSeatsInteract();
+    change = params.luncheon.exportSeatSizes();
+    view.updateSeatRadii(change, runGeneration, params);
+  } else if (params.repeat) {
+    params.luncheon.reset();
+    change = params.luncheon.exportSeatSizes();
     view.updateSeatRadii(change, runGeneration, params);
   }
 }

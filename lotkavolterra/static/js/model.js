@@ -46,6 +46,15 @@ function Luncheon(params) {
     }
   };
 
+  /** Set all seats at this luncheon to initial population size. */
+  this.reset = function() {
+    for (var i = 0; i < this.tables.length; i++) {
+      this.tables[i].reset();
+    }
+
+    this.generation = 0;
+  };
+
   /**
    * Export the current state of all seats at the luncheon.
    */
@@ -173,6 +182,15 @@ function Table(params) {
       for (j = 0; j < seats.length; j++) {
         seats[j].interactWithNextInteractor();
       }
+    }
+  };
+
+  /** Set all seats at this table to initial population size. */
+  this.reset = function() {
+    var seats = this.getAllSeats();
+
+    for (var i = 0; i < seats.length; i++) {
+      seats[i].reset();
     }
   };
 
@@ -387,6 +405,11 @@ function Seat(params) {
     if (interactor) {
       interactions.interact(this, interactor);
     }
+  };
+
+  /** Reset this seat to its initial population size. */
+  this.reset = function() {
+    this.populationSize = this.initialPopulationSize;
   };
 }
 
