@@ -12,6 +12,9 @@ function Luncheon(params) {
   this.numTablesY = params.numTablesY;
   this.tables = [];
 
+  // Number of current generation
+  this.generation = 0;
+
   this.toString = function() {
     return "Luncheon " + this.name;
   };
@@ -39,6 +42,7 @@ function Luncheon(params) {
       for (j = 0; j < this.tables.length; j++) {
         this.tables[j].allSeatsInteract();
       }
+      this.generation += 1;
     }
   };
 

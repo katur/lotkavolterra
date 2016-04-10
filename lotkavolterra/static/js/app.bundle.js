@@ -62,7 +62,7 @@
 					populationSize: params.populationSize
 				});
 
-	      controller.drawInitialState({
+	      controller.drawLuncheon({
 	        luncheon: luncheon,
 	        hasStage: params.hasStage
 	      });
@@ -95,7 +95,7 @@
 	    populationSize: params.populationSize
 	  });
 
-	  controller.drawInitialState({
+	  controller.drawLuncheon({
 	    luncheon: luncheon,
 	    hasStage: false
 	  });
@@ -214,7 +214,7 @@
 	/**
 	 * Draw the luncheon initially
 	 */
-	function drawInitialState(params) {
+	function drawLuncheon(params) {
 	  // Draw initial state
 	  view.drawSeats({
 	    seats: params.luncheon.exportSeatStates(),
@@ -229,10 +229,12 @@
 	 * Do next generation of the simulation.
 	 */
 	function runGeneration(params) {
-	  // TODO: use params.numGenerations
 	  params.luncheon.allSeatsInteract();
 	  change = params.luncheon.exportSeatSizes();
-	  view.updateSeatRadii(change, runGeneration, params);
+
+	  if (params.luncheon.generation <= params.numGenerations) {
+	    view.updateSeatRadii(change, runGeneration, params);
+	  }
 	}
 
 
@@ -352,6 +354,9 @@
 	  this.numTablesY = params.numTablesY;
 	  this.tables = [];
 
+	  // Number of current generation
+	  this.generation = 0;
+
 	  this.toString = function() {
 	    return "Luncheon " + this.name;
 	  };
@@ -379,6 +384,7 @@
 	      for (j = 0; j < this.tables.length; j++) {
 	        this.tables[j].allSeatsInteract();
 	      }
+	      this.generation += 1;
 	    }
 	  };
 
@@ -891,7 +897,7 @@
 	      return getRadius(d);
 	    })
 	    .each("end", function(d, i) {
-	      // Calling the model to run the next generation is only needed once
+	      // The callback is only needed once over all nodes
 	      if (i == 0) {
 	        callback(callbackParams);
 	      }

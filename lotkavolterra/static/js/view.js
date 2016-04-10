@@ -81,7 +81,7 @@ function updateSeatRadii(change, callback, callbackParams) {
       return getRadius(d);
     })
     .each("end", function(d, i) {
-      // Calling the model to run the next generation is only needed once
+      // The callback is only needed once over all nodes
       if (i == 0) {
         callback(callbackParams);
       }

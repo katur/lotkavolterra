@@ -16,7 +16,7 @@ function runSimulation(params) {
 				populationSize: params.populationSize
 			});
 
-      controller.drawInitialState({
+      controller.drawLuncheon({
         luncheon: luncheon,
         hasStage: params.hasStage
       });
@@ -49,7 +49,7 @@ function runTestSimulation(params) {
     populationSize: params.populationSize
   });
 
-  controller.drawInitialState({
+  controller.drawLuncheon({
     luncheon: luncheon,
     hasStage: false
   });
