@@ -70,7 +70,7 @@
 				controller.runGeneration({
 					luncheon: luncheon,
 					numGenerations: params.numGenerations,
-	        repeat: true
+	        repeat: params.repeat
 				});
 
 			} else {
@@ -104,7 +104,7 @@
 	  controller.runGeneration({
 	    luncheon: luncheon,
 	    numGenerations: params.numGenerations,
-	    repeat: true
+	    repeat: params.repeat
 	  });
 	}
 

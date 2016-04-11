@@ -66,28 +66,29 @@ def home():
     return render_template('home.html', **context)
 
 
+def get_common_params(request):
+    return {
+        'simulation': request.args['simulation'],
+        'num_generations': int(request.args['num_generations']),
+        'population_size': int(request.args['population_size']),
+        'repeat': 'repeat' in request.args,
+    }
+
+
 @app.route("/run-simulation/")
 def run_simulation():
     """
     Run the simulation from an input file.
     """
-    simulation = request.args['simulation']
-    num_generations = int(request.args['num_generations'])
-    population_size = int(request.args['population_size'])
-    has_stage = 'stage' in request.args
+    context = get_common_params(request)
+    context['has_stage'] = 'stage' in request.args
 
     # Read the input file
-    filename = os.path.join(app.static_folder, 'json', simulation + '.json')
-    with open(filename, 'r') as f:
-        json_data = f.read()
+    filename = os.path.join(app.static_folder, 'json',
+                            context['simulation'] + '.json')
 
-    context = {
-        'simulation': simulation,
-        'num_generations': num_generations,
-        'population_size': population_size,
-        'has_stage': has_stage,
-        'json_data': json_data,
-    }
+    with open(filename, 'r') as f:
+        context['json_data'] = f.read()
 
     return render_template('run_simulation.html', **context)
 
@@ -100,16 +101,6 @@ def run_test_simulation():
     This is very similar to run_simulation, but instead of parsing
     a json file it creates a test table based on rules.
     """
-    simulation = request.args['simulation']
-    num_generations = int(request.args['num_generations'])
-    population_size = int(request.args['population_size'])
-    num_seats = int(request.args['num_seats'])
-
-    context = {
-        'simulation': simulation,
-        'num_generations': num_generations,
-        'population_size': population_size,
-        'num_seats': num_seats,
-    }
-
+    context = get_common_params(request)
+    context['num_seats'] = int(request.args['num_seats'])
     return render_template('run_test_simulation.html', **context)

@@ -14,12 +14,8 @@
       "{{ url_for('static', filename='json/' ~ simulation ~ '.json') }}",
     populationSize: {{ population_size }},
     numGenerations: {{ num_generations }},
-
-    {% if has_stage %}
-      hasStage: true
-    {% else %}
-      hasStage: false
-    {% endif %}
+    hasStage: {% if has_stage %}true{% else %}false{% endif %},
+    repeat: {% if repeat %}true{% else %}false{% endif %}
   });
 </script>
 

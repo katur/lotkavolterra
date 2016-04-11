@@ -1,6 +1,4 @@
 {% extends 'base.html' %}
-
-
 {% block body_id %}run-testi-simulation{% endblock %}
 
 
@@ -15,7 +13,8 @@
     simulation: "{{ simulation }}",
     numSeats: {{ num_seats }},
     populationSize: {{ population_size }},
-    numGenerations: {{ num_generations }}
+    numGenerations: {{ num_generations }},
+    repeat: {% if repeat %}true{% else %}false{% endif %}
   });
 </script>
 

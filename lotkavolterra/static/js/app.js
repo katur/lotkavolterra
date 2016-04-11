@@ -24,7 +24,7 @@ function runSimulation(params) {
 			controller.runGeneration({
 				luncheon: luncheon,
 				numGenerations: params.numGenerations,
-        repeat: true
+        repeat: params.repeat
 			});
 
 		} else {
@@ -58,7 +58,7 @@ function runTestSimulation(params) {
   controller.runGeneration({
     luncheon: luncheon,
     numGenerations: params.numGenerations,
-    repeat: true
+    repeat: params.repeat
   });
 }
 
