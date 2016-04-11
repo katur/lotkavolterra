@@ -30,17 +30,9 @@ except:
     pass
 
 
-###########################
-# Define views and routes #
-###########################
-
-@app.route("/")
-def home():
-    """
-    Render the homepage.
-    """
-    return render_template('home.html')
-
+###########
+# Helpers #
+###########
 
 def _listdir_json(path):
     """
@@ -51,36 +43,27 @@ def _listdir_json(path):
             yield f
 
 
-@app.route("/list-simulations/")
-def list_simulations():
+###########################
+# Define views and routes #
+###########################
+
+@app.route("/")
+def home():
     """
-    Render the page listing the simulations.
+    Render the homepage.
     """
-    simulations = [
+    input_simulations = [
         os.path.splitext(filename)[0]
         for filename in _listdir_json(os.path.join(app.static_folder, 'json'))
         if os.path.isfile(os.path.join(app.static_folder, 'json', filename))
     ]
 
     context = {
-        'simulations': simulations,
+        'input_simulations': input_simulations,
+        'test_simulations': ['random', 'alternating', 'halves'],
         'defaults': DEFAULTS,
     }
-    return render_template('list_simulations.html', **context)
-
-
-@app.route("/list-test-simulations")
-def list_test_simulations():
-    """
-    Render the page listing the test case simulations.
-    """
-    simulations = ['random', 'alternating', 'halves']
-
-    context = {
-        'simulations': simulations,
-        'defaults': DEFAULTS,
-    }
-    return render_template('list_test_simulations.html', **context)
+    return render_template('home.html', **context)
 
 
 @app.route("/run-simulation/")

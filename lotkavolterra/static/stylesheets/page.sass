@@ -11,7 +11,7 @@ body#run-simulation
   margin-bottom: $whitespace
 
 
-#page-title
+.page-title
   margin-bottom: $whitespace / 2
 
 
@@ -20,8 +20,19 @@ body#run-simulation
 
 
 .page-section
-  @include clearfix
   margin-bottom: $whitespace
+
+
+.page-subsection
+  margin-bottom: $whitespace / 2
+
+
+p
+  margin-bottom: $whitespace / 4
+
+
+.page-section, .page-subsection, p
+  @include clearfix
 
   &:last-child
     margin-bottom: 0

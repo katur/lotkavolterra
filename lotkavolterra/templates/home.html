@@ -1,17 +1,111 @@
-{% extends 'base_title.html' %}
+{% extends 'base.html' %}
+{% block body_id %}home{% endblock %}
+
 
 {% block content %}
 
-<ul>
-  <li>
-    <a href="{{ url_for('list_simulations') }}">
-      Input based simulations</a>
-  </li>
+<a href="{{ url_for('home') }}">
+  <h1 id="site-title">Lotka-Volterra Project</h1>
+</a>
 
-  <li>
-    <a href="{{ url_for('list_test_simulations') }}">
-      Test case simulations</a>
-  </li>
-<ul>
+<div class="page-section">
+	<h2 class="page-title">Lotka-Volterra</h2>
+
+  <p>
+    Everyone knows that predator and prey populations change
+    in response to each other.
+    Scientists have developed models to show what happens to these
+    populations over time, including one called Lotka-Volterra.
+  </p>
+
+  <p>
+    The Lotka-Volterra model is just two simple equations,
+    based on equally simple assumptions  that do not factor
+    in overpopulation or other natural complexities.
+    The prey population, given ample food, grows exponentially on its own,
+    but is negatively affected by encountering predators.
+    The predator population, relying on prey for food,
+    declines exponentially on its own,
+    but is positively affected by encountering prey.
+    This creates a cycle that can continue indefinitely.
+  </p>
+
+  <p>
+    Lotka-Volterra has been useful in describing some real natural
+    populations, such as moose and wolves in Isle Royale National
+    Park in Lake Superior.
+    It also has surprising applications in other areas,
+    such as economics, speciation, resource competition,
+    and epidemiology.
+  </p>
+</div>
+
+<div class="page-section">
+	<h2 class="page-title">The Simulation</h2>
+
+  <p>
+    We developed a thought exercise to show how models can be used in
+    the real world: a computer simulation that applies a predator-prey
+    model to the guests at this luncheon. You will see it running on a
+    screen at times during the event.
+  </p>
+
+  <p>
+    Each guest has been randomly assigned to be one of three populations,
+    all of which exist in Black Rock Forest: Eastern coyotes, wild
+    turkeys, or Eurasian boars.
+    Eurasian boars are an invasive species, which, as in nature,
+    throws a monkey wrench into the works by competing with
+    native species for resources.
+  </p>
+
+  <p>
+    Over time, even as you eat your lunch, the population you represent
+    will be interacting with the two populations sitting next to you,
+    according to rules inspired by the Lotka-Volterra model but with
+    some added complexities.
+    You can see your bubble on the screen grow or shrink
+    as your population responds to these interactions.
+    A population will go extinct if it gets too small or gets too
+    big and explodes.
+    Fortunately, you yourself will not explode.
+  </p>
+
+  <p>
+    If you’re lucky, your table will survive for many generations,
+    the populations keeping one another in check.
+    But some tables will be wiped out quickly from an imbalanced dynamic.
+    Extinction may be forever in the real world, but here,
+    the simulation periodically starts over,
+    and the outcome may be different each time.
+  </p>
+</div>
+
+<div class="page-section">
+	<h2 class="page-title">View Examples</h2>
+
+  <div class="page-subsection">
+    <h4 class="page-subtitle">Input-based simulations</h4>
+
+    <form method="GET" action="{{ url_for('run_simulation') }}">
+      {% with show_stage_option=True, simulations=input_simulations %}
+      {% include 'parameters.html' %}
+      {% endwith %}
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div class="page-subsection">
+    <h4 class="page-subtitle">Test case simulations</h4>
+
+    <form method="GET" action="{{ url_for('run_test_simulation') }}">
+      {% with show_num_seats=True, simulations=test_simulations %}
+      {% include 'parameters.html' %}
+      {% endwith %}
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
 
 {% endblock %}
