@@ -5,7 +5,7 @@ from flask import Flask, render_template, request
 
 
 DEFAULTS = {
-    'num_generations': 25,
+    'num_generations': 50,
     'population_size': 1000,
     'num_seats': 10,  # This one used for test case simulations only
 }
