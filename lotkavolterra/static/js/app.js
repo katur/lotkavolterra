@@ -4,7 +4,7 @@ var controller = require("./controller.js");
 /**
  * Create and run input-based simulation.
  */
-function runSimulation(params) {
+function launchSimulation(params) {
 	// Make AJAX request for JSON input
 	var request = new XMLHttpRequest();
 	request.open("GET", params.jsonURL, true);
@@ -43,7 +43,7 @@ function runSimulation(params) {
 /**
  * Create and run test simulation.
  */
-function runTestSimulation(params) {
+function launchTestSimulation(params) {
   var luncheon = controller.initializeTestLuncheon({
     simulation: params.simulation,
     numSeats: params.numSeats,
@@ -64,6 +64,6 @@ function runTestSimulation(params) {
 
 
 window.lotkavolterra = {
-  runSimulation: runSimulation,
-  runTestSimulation: runTestSimulation
+  launchSimulation: launchSimulation,
+  launchTestSimulation: launchTestSimulation
 }
