@@ -97,8 +97,7 @@
 	  });
 
 	  controller.drawLuncheon({
-	    luncheon: luncheon,
-	    hasStage: false
+	    luncheon: luncheon
 	  });
 
 	  controller.runGeneration({
@@ -222,8 +221,11 @@
 	    seats: params.luncheon.exportSeatStates(),
 	    numTablesX: params.luncheon.numTablesX,
 	    numTablesY: params.luncheon.numTablesY,
-	    hasStage: params.hasStage
 	  });
+
+	  if (params.hasStage) {
+	    view.drawStage();
+	  }
 	}
 
 
@@ -890,25 +892,29 @@
 
 	  addCircles(el);
 	  addText(el);
+	}
 
-	  if (params.hasStage) {
-	    svg.append("rect")
-	      .attr("x", svgWidth * .38)
-	      .attr("width", svgWidth * .24)
-	      .attr("height", svgHeight * .24)
-	      .style("fill", "#B7A897")
-	      .style("stroke-width", "2")
-	      .style("opacity", constants.OPACITY)
-	      .style("stroke", "#735535");
+	function drawStage() {
+	  var svg = d3.select("svg");
+	  var svgWidth = parseInt(svg.style("width"), 10);
+	  var svgHeight = parseInt(svg.style("height"), 10);
+	  var stageSize = 0.2;
 
-	    svg.append("text")
-	      .text("STAGE")
-	      .attr("x", svgWidth * .5)
-	      .attr("y", svgHeight * .12)
-	      .attr("text-anchor", "middle")
-	      .attr("alignment-baseline", "middle")
-	      .attr("font-size", constants.TEXT_SIZE + 5);
-	  }
+	  svg.append("rect")
+	    .attr("x", svgWidth * (0.5 - stageSize / 2))
+	    .attr("width", svgWidth * stageSize)
+	    .attr("height", svgHeight * stageSize)
+	    .style("fill", "#bbb")
+	    .style("opacity", constants.OPACITY);
+
+	  svg.append("text")
+	    .text("STAGE")
+	    .attr("x", svgWidth * 0.5)
+	    .attr("y", svgHeight * (stageSize / 2))
+	    .attr("text-anchor", "middle")
+	    .attr("alignment-baseline", "middle")
+	    .attr("fill", "#999")
+	    .attr("font-size", constants.TEXT_SIZE + 5);
 	}
 
 
@@ -1051,6 +1057,7 @@
 
 	module.exports = {
 	  drawSeats: drawSeats,
+	  drawStage: drawStage,
 	  updateSeatRadii: updateSeatRadii,
 	}
 

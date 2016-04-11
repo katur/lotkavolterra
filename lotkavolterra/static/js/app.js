@@ -51,8 +51,7 @@ function launchTestSimulation(params) {
   });
 
   controller.drawLuncheon({
-    luncheon: luncheon,
-    hasStage: false
+    luncheon: luncheon
   });
 
   controller.runGeneration({

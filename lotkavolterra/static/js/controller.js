@@ -101,8 +101,11 @@ function drawLuncheon(params) {
     seats: params.luncheon.exportSeatStates(),
     numTablesX: params.luncheon.numTablesX,
     numTablesY: params.luncheon.numTablesY,
-    hasStage: params.hasStage
   });
+
+  if (params.hasStage) {
+    view.drawStage();
+  }
 }
 
 
