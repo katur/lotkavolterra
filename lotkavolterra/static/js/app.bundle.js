@@ -238,7 +238,7 @@
 	  } else if (params.repeat) {
 	    params.luncheon.reset();
 	    change = params.luncheon.exportSeatSizes();
-	    view.updateSeatRadii(change, runGeneration, params);
+	    view.updateSeatRadii(change, runGeneration, params, true);
 	  }
 	}
 
@@ -268,6 +268,7 @@
 	  TEXT_SIZE: 10,
 	  EASING_FXN: "easeOutCubic",
 	  TRANSITION_DURATION: 500,
+	  BETWEEN_TRIAL_DELAY: 1000,
 	  TABLE_SPACE_TO_RADIUS_FACTOR: 1/3,
 	  CIRCLE_RADIANS: 2 * Math.PI,
 
@@ -914,11 +915,22 @@
 	/**
 	 * Update seat radii according to change.
 	 */
-	function updateSeatRadii(change, callback, callbackParams) {
+	function updateSeatRadii(change, callback, callbackParams, reset) {
+	  var duration, delay;
+
+	  if (reset) {
+	    duration = 0;
+	    delay = constants.BETWEEN_TRIAL_DELAY;
+	  } else {
+	    duration = constants.TRANSITION_DURATION;
+	    delay = 0;
+	  }
+
 	  d3.select("svg")
 	    .selectAll("circle")
 	    .transition()
-	    .duration(constants.TRANSITION_DURATION)
+	    .duration(duration)
+	    .delay(delay)
 	    .ease(constants.EASING_FXN)
 	    .attr("r", function(d) {
 	      d.populationSize = change[d.pk];
@@ -1039,7 +1051,7 @@
 
 	module.exports = {
 	  drawSeats: drawSeats,
-	  updateSeatRadii: updateSeatRadii
+	  updateSeatRadii: updateSeatRadii,
 	}
 
 

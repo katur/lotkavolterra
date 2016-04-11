@@ -117,7 +117,7 @@ function runGeneration(params) {
   } else if (params.repeat) {
     params.luncheon.reset();
     change = params.luncheon.exportSeatSizes();
-    view.updateSeatRadii(change, runGeneration, params);
+    view.updateSeatRadii(change, runGeneration, params, true);
   }
 }
 

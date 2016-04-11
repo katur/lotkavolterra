@@ -70,11 +70,22 @@ function drawSeats(params) {
 /**
  * Update seat radii according to change.
  */
-function updateSeatRadii(change, callback, callbackParams) {
+function updateSeatRadii(change, callback, callbackParams, reset) {
+  var duration, delay;
+
+  if (reset) {
+    duration = 0;
+    delay = constants.BETWEEN_TRIAL_DELAY;
+  } else {
+    duration = constants.TRANSITION_DURATION;
+    delay = 0;
+  }
+
   d3.select("svg")
     .selectAll("circle")
     .transition()
-    .duration(constants.TRANSITION_DURATION)
+    .duration(duration)
+    .delay(delay)
     .ease(constants.EASING_FXN)
     .attr("r", function(d) {
       d.populationSize = change[d.pk];
@@ -195,5 +206,5 @@ function getPattern(seat) {
 
 module.exports = {
   drawSeats: drawSeats,
-  updateSeatRadii: updateSeatRadii
+  updateSeatRadii: updateSeatRadii,
 }
