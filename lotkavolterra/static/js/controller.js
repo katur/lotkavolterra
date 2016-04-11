@@ -103,7 +103,7 @@ function drawLuncheon(params) {
     numTablesY: params.luncheon.numTablesY,
   });
 
-  view.drawGenerationCounter();
+  view.drawCounters();
 
   if (params.hasStage) {
     view.drawStage();
@@ -131,6 +131,7 @@ function runGeneration(params) {
 
   view.updateSeatRadii({
     'change': params.luncheon.exportSeatSizes(),
+    'trial': params.luncheon.trial,
     'generation': params.luncheon.generation,
     'callback': runGeneration,
     'callbackParams': params,

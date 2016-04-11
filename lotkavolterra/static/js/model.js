@@ -12,7 +12,8 @@ function Luncheon(params) {
   this.numTablesY = params.numTablesY;
   this.tables = [];
 
-  // Number of current generation
+  // Current trial and generation
+  this.trial = 0;
   this.generation = 0;
 
   this.toString = function() {
@@ -53,6 +54,7 @@ function Luncheon(params) {
     }
 
     this.generation = 0;
+    this.trial += 1;
   };
 
   /**

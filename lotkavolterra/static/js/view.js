@@ -78,18 +78,26 @@ function drawStage() {
 /**
  * Draw the generation counter.
  */
-function drawGenerationCounter() {
+function drawCounters() {
   var svg = d3.select("svg");
   var svgWidth = parseInt(svg.style("width"), 10);
   var svgHeight = parseInt(svg.style("height"), 10);
 
   svg.append("text")
-    .attr("id", "generationCounter")
-    .text("0")
-    .attr("x", svgWidth - 25)
-    .attr("y", 25)
+    .attr("id", "trialCounter")
+    .text("Trial 0")
+    .attr("x", svgWidth - 10)
+    .attr("y", 20)
     .attr("text-anchor", "end")
-    .attr("font-size", constants.TEXT_SIZE + 5);
+    .attr("font-size", constants.TEXT_SIZE + 3);
+
+  svg.append("text")
+    .attr("id", "generationCounter")
+    .text("Generation 0")
+    .attr("x", svgWidth - 10)
+    .attr("y", 40)
+    .attr("text-anchor", "end")
+    .attr("font-size", constants.TEXT_SIZE + 3);
 }
 
 
@@ -121,7 +129,13 @@ function updateSeatRadii(params) {
       // The callback is only needed once over all nodes
       if (i == 0) {
         d3.select("#generationCounter")
-          .text(params.generation);
+          .text("Generation " + params.generation);
+
+        if (params.reset) {
+          d3.select("#trialCounter")
+            .text("Trial " + params.trial);
+        }
+
         params.callback(params.callbackParams);
       }
     });
@@ -235,6 +249,6 @@ function getPattern(seat) {
 module.exports = {
   drawSeats: drawSeats,
   drawStage: drawStage,
-  drawGenerationCounter: drawGenerationCounter,
+  drawCounters: drawCounters,
   updateSeatRadii: updateSeatRadii
 }
