@@ -47,6 +47,10 @@ function drawSeats(params) {
   addText(el);
 }
 
+
+/**
+ * Draw the stage.
+ */
 function drawStage() {
   var svg = d3.select("svg");
   var svgWidth = parseInt(svg.style("width"), 10);
@@ -211,5 +215,5 @@ function getPattern(seat) {
 module.exports = {
   drawSeats: drawSeats,
   drawStage: drawStage,
-  updateSeatRadii: updateSeatRadii,
+  updateSeatRadii: updateSeatRadii
 }

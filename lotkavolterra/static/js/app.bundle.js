@@ -270,7 +270,7 @@
 	  TEXT_SIZE: 10,
 	  EASING_FXN: "easeOutCubic",
 	  TRANSITION_DURATION: 500,
-	  BETWEEN_TRIAL_DELAY: 1000,
+	  BETWEEN_TRIAL_DELAY: 2000,
 	  TABLE_SPACE_TO_RADIUS_FACTOR: 1/3,
 	  CIRCLE_RADIANS: 2 * Math.PI,
 
@@ -894,6 +894,10 @@
 	  addText(el);
 	}
 
+
+	/**
+	 * Draw the stage.
+	 */
 	function drawStage() {
 	  var svg = d3.select("svg");
 	  var svgWidth = parseInt(svg.style("width"), 10);
@@ -1058,7 +1062,7 @@
 	module.exports = {
 	  drawSeats: drawSeats,
 	  drawStage: drawStage,
-	  updateSeatRadii: updateSeatRadii,
+	  updateSeatRadii: updateSeatRadii
 	}
 
 
