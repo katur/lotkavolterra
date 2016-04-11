@@ -76,12 +76,30 @@ function drawStage() {
 
 
 /**
- * Update seat radii according to change.
+ * Draw the generation counter.
  */
-function updateSeatRadii(change, callback, callbackParams, reset) {
+function drawGenerationCounter() {
+  var svg = d3.select("svg");
+  var svgWidth = parseInt(svg.style("width"), 10);
+  var svgHeight = parseInt(svg.style("height"), 10);
+
+  svg.append("text")
+    .attr("id", "generationCounter")
+    .text("0")
+    .attr("x", svgWidth - 25)
+    .attr("y", 25)
+    .attr("text-anchor", "end")
+    .attr("font-size", constants.TEXT_SIZE + 5);
+}
+
+
+/**
+ * Update seat radii.
+ */
+function updateSeatRadii(params) {
   var duration, delay;
 
-  if (reset) {
+  if (params.reset) {
     duration = 0;
     delay = constants.BETWEEN_TRIAL_DELAY;
   } else {
@@ -96,13 +114,15 @@ function updateSeatRadii(change, callback, callbackParams, reset) {
     .delay(delay)
     .ease(constants.EASING_FXN)
     .attr("r", function(d) {
-      d.populationSize = change[d.pk];
+      d.populationSize = params.change[d.pk];
       return getRadius(d);
     })
     .each("end", function(d, i) {
       // The callback is only needed once over all nodes
       if (i == 0) {
-        callback(callbackParams);
+        d3.select("#generationCounter")
+          .text(params.generation);
+        params.callback(params.callbackParams);
       }
     });
 }
@@ -215,5 +235,6 @@ function getPattern(seat) {
 module.exports = {
   drawSeats: drawSeats,
   drawStage: drawStage,
+  drawGenerationCounter: drawGenerationCounter,
   updateSeatRadii: updateSeatRadii
 }

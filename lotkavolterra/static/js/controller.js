@@ -103,6 +103,8 @@ function drawLuncheon(params) {
     numTablesY: params.luncheon.numTablesY,
   });
 
+  view.drawGenerationCounter();
+
   if (params.hasStage) {
     view.drawStage();
   }
@@ -113,15 +115,27 @@ function drawLuncheon(params) {
  * Do next generation of the simulation.
  */
 function runGeneration(params) {
-  if (params.luncheon.generation <= params.numGenerations) {
+  var reset;
+
+  if (params.luncheon.generation < params.numGenerations) {
     params.luncheon.allSeatsInteract();
-    change = params.luncheon.exportSeatSizes();
-    view.updateSeatRadii(change, runGeneration, params);
+    reset = false;
+
   } else if (params.repeat) {
     params.luncheon.reset();
-    change = params.luncheon.exportSeatSizes();
-    view.updateSeatRadii(change, runGeneration, params, true);
+    reset = true;
+
+  } else {
+    return;
   }
+
+  view.updateSeatRadii({
+    'change': params.luncheon.exportSeatSizes(),
+    'generation': params.luncheon.generation,
+    'callback': runGeneration,
+    'callbackParams': params,
+    'reset': reset
+  });
 }
 
 
