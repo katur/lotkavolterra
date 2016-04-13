@@ -57,14 +57,17 @@
 
 		request.onload = function() {
 			if (request.status >= 200 && request.status < 400) {  // Success
-				var luncheon = controller.initializeLuncheon({
-					data: JSON.parse(request.responseText),
+				jsonData = JSON.parse(request.responseText);
+
+	      var luncheon = controller.initializeLuncheon({
+					data: jsonData,
 					populationSize: params.populationSize
 				});
 
 	      controller.drawLuncheon({
 	        luncheon: luncheon,
-	        hasStage: params.hasStage
+	        showStage: jsonData.luncheon.showStage,
+	        showSpecies: jsonData.luncheon.showSpecies
 	      });
 
 				controller.runGeneration({
@@ -97,7 +100,8 @@
 	  });
 
 	  controller.drawLuncheon({
-	    luncheon: luncheon
+	    luncheon: luncheon,
+	    showSpecies: true
 	  });
 
 	  controller.runGeneration({
@@ -201,8 +205,8 @@
 	    table.insert({
 	      pk: i,
 	      index: i,
-	      name: constants.PERSON_NAMES[i] || "Person" + i,
 	      group: group,
+	      name: constants.PERSON_NAMES[i] || "Person" + i,
 	      populationSize: params.populationSize
 	    });
 	  }
@@ -221,11 +225,12 @@
 	    seats: params.luncheon.exportSeatStates(),
 	    numTablesX: params.luncheon.numTablesX,
 	    numTablesY: params.luncheon.numTablesY,
+	    showSpecies: params.showSpecies
 	  });
 
 	  view.drawCounters();
 
-	  if (params.hasStage) {
+	  if (params.showStage) {
 	    view.drawStage();
 	  }
 	}
@@ -305,6 +310,12 @@
 	    getRandomPackOrHerd: function() {
 	      return utils.getRandomChoice([this.PACK, this.HERD]);
 	    }
+	  },
+
+	  Species: {
+	    HERD: "Wild Turkey",
+	    PACK: "Eastern Coyote",
+	    COLONY: "Eurasian Boar"
 	  },
 
 	  Coin: {
@@ -626,6 +637,14 @@
 	    return this.name.split(/\s+/)[0];
 	  };
 
+	  this.getSpecies = function() {
+	    return constants.Species[this.group];
+	  };
+
+	  this.getShortSpecies = function() {
+	   return this.getSpecies().split(/\s+/)[1];
+	  }
+
 	  /**
 	   * Export the current state this seat.
 	   *
@@ -638,6 +657,7 @@
 	    state.pk = this.pk;
 	    state.index = this.index;
 	    state.name = this.formatName();
+	    state.species = this.getShortSpecies();
 	    state.group = this.group;
 	    state.populationSize = this.populationSize;
 	    state.initialPopulationSize = this.initialPopulationSize;
@@ -908,7 +928,7 @@
 	    });
 
 	  addCircles(el);
-	  addText(el);
+	  addText(el, params.showSpecies);
 	}
 
 
@@ -1028,10 +1048,14 @@
 	/**
 	 * Add the text elements.
 	 */
-	function addText(el) {
+	function addText(el, showSpecies) {
 	  el.append("text")
 	    .text(function(d){
-	      return d.name;
+	      if (showSpecies) {
+	        return d.species;
+	      } else {
+	        return d.name;
+	      }
 	    })
 	    .attr("text-anchor", "middle")
 	    .attr("alignment-baseline", "middle")

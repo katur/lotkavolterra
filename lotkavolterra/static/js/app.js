@@ -11,14 +11,17 @@ function launchSimulation(params) {
 
 	request.onload = function() {
 		if (request.status >= 200 && request.status < 400) {  // Success
-			var luncheon = controller.initializeLuncheon({
-				data: JSON.parse(request.responseText),
+			jsonData = JSON.parse(request.responseText);
+
+      var luncheon = controller.initializeLuncheon({
+				data: jsonData,
 				populationSize: params.populationSize
 			});
 
       controller.drawLuncheon({
         luncheon: luncheon,
-        hasStage: params.hasStage
+        showStage: jsonData.luncheon.showStage,
+        showSpecies: jsonData.luncheon.showSpecies
       });
 
 			controller.runGeneration({
@@ -51,7 +54,8 @@ function launchTestSimulation(params) {
   });
 
   controller.drawLuncheon({
-    luncheon: luncheon
+    luncheon: luncheon,
+    showSpecies: true
   });
 
   controller.runGeneration({

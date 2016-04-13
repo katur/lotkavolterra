@@ -33,6 +33,12 @@ module.exports = {
     }
   },
 
+  Species: {
+    HERD: "Wild Turkey",
+    PACK: "Eastern Coyote",
+    COLONY: "Eurasian Boar"
+  },
+
   Coin: {
     HEADS: "HEADS",
     TAILS: "TAILS",

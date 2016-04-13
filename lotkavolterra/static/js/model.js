@@ -261,6 +261,14 @@ function Seat(params) {
     return this.name.split(/\s+/)[0];
   };
 
+  this.getSpecies = function() {
+    return constants.Species[this.group];
+  };
+
+  this.getShortSpecies = function() {
+   return this.getSpecies().split(/\s+/)[1];
+  }
+
   /**
    * Export the current state this seat.
    *
@@ -273,6 +281,7 @@ function Seat(params) {
     state.pk = this.pk;
     state.index = this.index;
     state.name = this.formatName();
+    state.species = this.getShortSpecies();
     state.group = this.group;
     state.populationSize = this.populationSize;
     state.initialPopulationSize = this.initialPopulationSize;

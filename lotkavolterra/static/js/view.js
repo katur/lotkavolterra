@@ -44,7 +44,7 @@ function drawSeats(params) {
     });
 
   addCircles(el);
-  addText(el);
+  addText(el, params.showSpecies);
 }
 
 
@@ -164,10 +164,14 @@ function addCircles(el) {
 /**
  * Add the text elements.
  */
-function addText(el) {
+function addText(el, showSpecies) {
   el.append("text")
     .text(function(d){
-      return d.name;
+      if (showSpecies) {
+        return d.species;
+      } else {
+        return d.name;
+      }
     })
     .attr("text-anchor", "middle")
     .attr("alignment-baseline", "middle")

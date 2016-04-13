@@ -81,8 +81,8 @@ function initializeTestLuncheon(params) {
     table.insert({
       pk: i,
       index: i,
-      name: constants.PERSON_NAMES[i] || "Person" + i,
       group: group,
+      name: constants.PERSON_NAMES[i] || "Person" + i,
       populationSize: params.populationSize
     });
   }
@@ -101,11 +101,12 @@ function drawLuncheon(params) {
     seats: params.luncheon.exportSeatStates(),
     numTablesX: params.luncheon.numTablesX,
     numTablesY: params.luncheon.numTablesY,
+    showSpecies: params.showSpecies
   });
 
   view.drawCounters();
 
-  if (params.hasStage) {
+  if (params.showStage) {
     view.drawStage();
   }
 }
