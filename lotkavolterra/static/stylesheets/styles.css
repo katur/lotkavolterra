@@ -91,7 +91,9 @@ table td, table th {
     margin-right: 0; }
 
 body {
-  padding: 40px;
+  padding: 40px; }
+
+body#home {
   background: #eee; }
 
 body#run-simulation {
