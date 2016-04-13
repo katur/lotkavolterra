@@ -283,6 +283,7 @@
 	module.exports = {
 	  // Model
 	  GROWTH_RATE: 0.10,
+	  NONCOMPETITIVE_GROWTH_RATE: 0.10 * 0.33,
 	  COMPETITIVE_COIN_WEIGHT: 0.667,
 
 	  // View
@@ -852,11 +853,11 @@
 
 	  // Now the interaction falls into 4 cases
 	  if (x.isHerd() && y.isHerd()) {
-	    x.increasePopulation(constants.GROWTH_RATE);
-	    y.increasePopulation(constants.GROWTH_RATE);
+	    x.increasePopulation(constants.NONCOMPETITIVE_GROWTH_RATE);
+	    y.increasePopulation(constants.NONCOMPETITIVE_GROWTH_RATE);
 	  } else if (x.isPack() && y.isPack()) {
-	    x.decreasePopulation(constants.GROWTH_RATE);
-	    y.decreasePopulation(constants.GROWTH_RATE);
+	    x.decreasePopulation(constants.NONCOMPETITIVE_GROWTH_RATE);
+	    y.decreasePopulation(constants.NONCOMPETITIVE_GROWTH_RATE);
 	  } else if (x.isPack()) {
 	    compete(pack=x, herd=y);
 	  } else {
