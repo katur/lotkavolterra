@@ -9,16 +9,16 @@ var view = require("./view.js");
 function initializeLuncheon(params) {
   // Create the luncheon object
   var luncheon = new model.Luncheon({
-    name: params.data.luncheon.name,
-    numTablesX: params.data.luncheon.numTablesX,
-    numTablesY: params.data.luncheon.numTablesY
+    name: params.data.name,
+    numTablesX: params.data.numTablesX,
+    numTablesY: params.data.numTablesY
   });
 
   // Per-person primary key
   var pk = 0
 
   // Create the tables and add to luncheon
-  var jsonTables = params.data.luncheon.tables;
+  var jsonTables = params.data.tables;
 
   for (var i = 0; i < jsonTables.length; i++) {
     var table = new model.Table(jsonTables[i]);

@@ -17,7 +17,7 @@ args = parser.parse_args()
 # Preserve order of json by using an OrderedDict
 data = json.load(args.infile, object_pairs_hook=OrderedDict)
 
-for table in data['luncheon']['tables']:
+for table in data['tables']:
     for person in table['people']:
         if 'group' not in person:
             person['group'] = random.choice(['HERD', 'PACK', 'COLONY'])

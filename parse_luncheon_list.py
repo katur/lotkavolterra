@@ -180,12 +180,10 @@ for table_number, table in sorted(tables.iteritems()):
     table_list.append(table)
 
 data = {
-    'luncheon': {
-        'name': 'Black Rock Luncheon: 2015',
-        'tables': table_list,
-        'numTablesX': NUM_TABLES_X,
-        'numTablesY': NUM_TABLES_Y,
-    }
+    'name': 'Black Rock Luncheon: 2015',
+    'tables': table_list,
+    'numTablesX': NUM_TABLES_X,
+    'numTablesY': NUM_TABLES_Y,
 }
 
 json.dump(data, sys.stdout, indent=2)

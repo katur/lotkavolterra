@@ -20,8 +20,8 @@ function launchSimulation(params) {
 
       controller.drawLuncheon({
         luncheon: luncheon,
-        showStage: jsonData.luncheon.showStage,
-        showSpecies: jsonData.luncheon.showSpecies
+        showStage: jsonData.showStage,
+        showSpecies: jsonData.showSpecies
       });
 
 			controller.runGeneration({
