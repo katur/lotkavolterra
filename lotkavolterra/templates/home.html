@@ -85,17 +85,6 @@
 	<h2 class="page-title">View Examples</h2>
 
   <div class="page-subsection">
-    <h4 class="page-subtitle">Input-based simulations</h4>
-
-    <form method="GET" action="{{ url_for('run_simulation') }}">
-      {% with show_stage_option=True, simulations=input_simulations %}
-      {% include 'parameters.html' %}
-      {% endwith %}
-      <button type="submit">Submit</button>
-    </form>
-  </div>
-
-  <div class="page-subsection">
     <h4 class="page-subtitle">Test case simulations</h4>
 
     <form method="GET" action="{{ url_for('run_test_simulation') }}">
@@ -103,6 +92,17 @@
       {% include 'parameters.html' %}
       {% endwith %}
 
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <div class="page-subsection">
+    <h4 class="page-subtitle">Input-based simulations</h4>
+
+    <form method="GET" action="{{ url_for('run_simulation') }}">
+      {% with show_stage_option=True, simulations=input_simulations %}
+      {% include 'parameters.html' %}
+      {% endwith %}
       <button type="submit">Submit</button>
     </form>
   </div>
