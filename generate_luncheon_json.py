@@ -18,7 +18,7 @@ parser.add_argument('json_file', type=argparse.FileType('r'),
 args = parser.parse_args()
 
 
-# Read necessary data from the json file
+# Parse the JSON file
 json_data = json.load(args.json_file)
 LUNCHEON_NAME = json_data["name"]
 NUM_TABLES_X = json_data["numTablesX"]
@@ -33,8 +33,8 @@ def add_grid_coords(table_number, table):
     table['y'] = (num / NUM_TABLES_X) / (NUM_TABLES_Y - 1.0)
 
 
-# Create dictionary keyed on table number
-tables = {}
+# Parse the CSV file
+tables = {}  # Keyed on table number
 
 for i, row in enumerate(csv.DictReader(args.csv_file)):
     person_name = row['FIRST NAME'] + ' ' + row['LAST NAME']
@@ -45,6 +45,7 @@ for i, row in enumerate(csv.DictReader(args.csv_file)):
         raise ValueError('Error in row {}: value missing'
                          .format(i))
 
+    # Fetch table if the table has already been created
     try:
         table = tables[table_number]
 
@@ -55,8 +56,8 @@ for i, row in enumerate(csv.DictReader(args.csv_file)):
                 'Error in row {}: Table {} inconsistenty {} and {}'
                 .format(i, table_number, previous_name, table_name))
 
+    # Add table if first occurrence
     except KeyError:
-        # Add table if first occurrence
         table = OrderedDict()
         table['number'] = table_number
         table['name'] = table_name
@@ -73,7 +74,7 @@ for table_number, table in sorted(tables.iteritems()):
     table_list.append(table)
 
 
-# Create overall output json
+# Create net output
 data = OrderedDict()
 data['name'] = LUNCHEON_NAME
 data['numTablesX'] = NUM_TABLES_X
