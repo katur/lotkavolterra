@@ -93,12 +93,6 @@ table td, table th {
 body {
   padding: 40px; }
 
-body#home {
-  background: #eee; }
-
-body#run-simulation {
-  padding: 0; }
-
 #site-title {
   margin-bottom: 40px; }
 
@@ -123,3 +117,11 @@ p {
   clear: both; }
 .page-section:last-child, .page-subsection:last-child, p:last-child {
   margin-bottom: 0; }
+
+#home {
+  background: #eee; }
+  #home .text {
+    max-width: 750px; }
+
+#simulation, #test-simulation {
+  padding: 0; }

@@ -179,7 +179,7 @@
 
 	  var table = new model.Table({
 	    x: 0.5,
-	    y: 0.25
+	    y: 0.1
 	  });
 
 	  var group;
