@@ -1,136 +1,42 @@
 import argparse
+from collections import OrderedDict
 import csv
 import json
 import sys
-
-NUM_TABLES_X = 8
-NUM_TABLES_Y = 4
-
-TABLE_COORDS = {
-    1: (
-        0.0,
-        0.1666666666666667,
-    ),
-    2: (
-        0.14285714285714285,
-        0.0,
-    ),
-    3: (
-        0.2857142857142857,
-        0.1666666666666667,
-    ),
-    4: (
-        0.42857142857142855,
-        0.33333333333333333,
-    ),
-    5: (
-        0.5714285714285714,
-        0.33333333333333333,
-    ),
-    6: (
-        0.7142857142857143,
-        0.0,
-    ),
-    7: (
-        0.8571428571428571,
-        0.0,
-    ),
-    8: (
-        1.0,
-        0.1666666666666667,
-    ),
-    9: (
-        0.0,
-        0.5,
-    ),
-    10: (
-        0.14285714285714285,
-        0.33333333333333333,
-    ),
-    11: (
-        0.2857142857142857,
-        0.5,
-    ),
-    12: (
-        0.42857142857142855,
-        0.6666666666666667,
-    ),
-    13: (
-        0.5714285714285714,
-        0.6666666666666667,
-    ),
-    14: (
-        0.7142857142857143,
-        0.33333333333333333,
-    ),
-    15: (
-        0.8571428571428571,
-        0.33333333333333333,
-    ),
-    16: (
-        1.0,
-        0.5,
-    ),
-    17: (
-        0.0,
-        0.83333333333333333,
-    ),
-    18: (
-        0.14285714285714285,
-        0.66666666666666666,
-    ),
-    19: (
-        0.2857142857142857,
-        0.8333333333333333,
-    ),
-    20: (
-        0.42857142857142855,
-        1.0,
-    ),
-    21: (
-        0.5714285714285714,
-        1.0,
-    ),
-    22: (
-        0.7142857142857143,
-        0.66666666666666666,
-    ),
-    23: (
-        0.8571428571428571,
-        0.66666666666666666,
-    ),
-    24: (
-        1.0,
-        0.83333333333333333,
-    ),
-    25: (
-        0.14285714285714285,
-        1.0,
-    ),
-    26: (
-        0.7142857142857143,
-        1.0,
-    ),
-    27: (
-        0.8571428571428571,
-        1.0,
-    )
-}
 
 
 parser = argparse.ArgumentParser(
     description="Create JSON of last year's attendees")
 
-parser.add_argument('infile', type=argparse.FileType('r'),
-                    help="CSV of last year's attendees")
+parser.add_argument('csv_file', type=argparse.FileType('r'),
+                    help='CSV of luncheon attendees')
+
+parser.add_argument('json_file', type=argparse.FileType('r'),
+                    help=('JSON of additional luncheon attributes: '
+                          'name, table coordinates, etc.'))
 
 args = parser.parse_args()
 
 
-# Create dictionary keyed on table number, value table name and people
+# Read necessary data from the json file
+json_data = json.load(args.json_file)
+LUNCHEON_NAME = json_data["name"]
+NUM_TABLES_X = json_data["numTablesX"]
+NUM_TABLES_Y = json_data["numTablesY"]
+TABLE_COORDS = json_data["tableCoords"]
+
+
+# Antiquated way to calculate coordinate, to get a perfect grid
+def add_grid_coords(table_number, table):
+    num = table_number - 1  # Go from 1-indexed to 0-indexed
+    table['x'] = (num % NUM_TABLES_X) / (NUM_TABLES_X - 1.0)
+    table['y'] = (num / NUM_TABLES_X) / (NUM_TABLES_Y - 1.0)
+
+
+# Create dictionary keyed on table number
 tables = {}
 
-for i, row in enumerate(csv.DictReader(args.infile)):
+for i, row in enumerate(csv.DictReader(args.csv_file)):
     person_name = row['FIRST NAME'] + ' ' + row['LAST NAME']
     table_number = int(row['Table'])
     table_name = row['TABLE HOST']
@@ -151,39 +57,26 @@ for i, row in enumerate(csv.DictReader(args.infile)):
 
     except KeyError:
         # Add table if first occurrence
-        table = {}
-        tables[table_number] = table
+        table = OrderedDict()
         table['number'] = table_number
         table['name'] = table_name
+        table['x'], table['y'] = TABLE_COORDS[str(table_number)]
         table['people'] = []
+        tables[table_number] = table
 
     table['people'].append({'name': person_name})
 
 
-def add_grid_coords(table_number, table):
-    num = table_number - 1  # Go from 1-indexed to 0-indexed
-    table['x'] = (num % NUM_TABLES_X) / (NUM_TABLES_X - 1.0)
-    table['y'] = (num / NUM_TABLES_X) / (NUM_TABLES_Y - 1.0)
-
-
-def add_manual_coords(table_number, table):
-    x, y = TABLE_COORDS[table_number]
-    table['x'] = x
-    table['y'] = y
-
-
 # Tranform dictionary to a list, sorted by table number
 table_list = []
-
 for table_number, table in sorted(tables.iteritems()):
-    add_manual_coords(table_number, table)
     table_list.append(table)
 
-data = {
-    'name': 'Black Rock Luncheon: 2015',
-    'tables': table_list,
-    'numTablesX': NUM_TABLES_X,
-    'numTablesY': NUM_TABLES_Y,
-}
 
+# Create overall output json
+data = OrderedDict()
+data['name'] = LUNCHEON_NAME
+data['numTablesX'] = NUM_TABLES_X
+data['numTablesY'] = NUM_TABLES_Y
+data['tables'] = table_list
 json.dump(data, sys.stdout, indent=2)
