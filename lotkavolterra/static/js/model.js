@@ -278,6 +278,7 @@ function Seat(params) {
   this.exportState = function() {
     // Create a true prototype-less dictionary
     state = Object.create(null);
+
     state.pk = this.pk;
     state.index = this.index;
     state.name = this.formatName();
