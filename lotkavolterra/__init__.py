@@ -39,7 +39,7 @@ def _listdir_json(path):
     List only the .json files in path.
     """
     for f in listdir(path):
-        if not f.startswith('.') and f.endswith('.json'):
+        if f.endswith('.json') and not f.startswith('.'):
             yield f
 
 
@@ -52,12 +52,8 @@ def home():
     """
     Render the homepage.
     """
-    input_simulations = [
-        os.path.splitext(filename)[0]
-        for filename in _listdir_json(os.path.join(app.static_folder, 'json'))
-        if os.path.isfile(os.path.join(app.static_folder, 'json', filename))
-    ]
-
+    input_filenames = _listdir_json(os.path.join(app.static_folder, 'json'))
+    input_simulations = [os.path.splitext(f)[0] for f in input_filenames]
     input_simulations.sort()
 
     context = {
