@@ -37,7 +37,8 @@ def add_grid_coords(table_number, table):
 tables = {}  # Keyed on table number
 
 for i, row in enumerate(csv.DictReader(args.csv_file)):
-    person_name = row['FIRST NAME'] + ' ' + row['LAST NAME']
+    # Ignore last name to preserve anonymity in the served json file
+    person_name = row['FIRST NAME']  # + ' ' + row['LAST NAME']
     table_number = int(row['Table'])
     table_name = row['TABLE HOST']
 
