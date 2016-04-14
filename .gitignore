@@ -1,9 +1,9 @@
 # Project-specific Node.js packages (e.g. gulp)
 node_modules/
+lotkavolterra/static/json
 
 
 # Input
-*.json
 *.csv
 *.xls
 
