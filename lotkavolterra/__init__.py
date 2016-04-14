@@ -58,6 +58,8 @@ def home():
         if os.path.isfile(os.path.join(app.static_folder, 'json', filename))
     ]
 
+    input_simulations.sort()
+
     context = {
         'input_simulations': input_simulations,
         'test_simulations': ['random', 'alternating', 'halves'],
