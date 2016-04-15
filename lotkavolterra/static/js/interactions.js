@@ -12,8 +12,8 @@ function compete(pack, herd) {
   f = constants.Coin.flip(constants.COMPETITIVE_COIN_WEIGHT);
 
   if (f == constants.Coin.HEADS) {
-    pack.increasePopulation(constants.GROWTH_RATE);
-    herd.decreasePopulation(constants.GROWTH_RATE);
+    pack.increasePopulation(constants.GROWTH_RATE * 2);
+    herd.decreasePopulation(constants.GROWTH_RATE * 2);
   } else {
     pack.decreasePopulation(constants.GROWTH_RATE);
     herd.increasePopulation(constants.GROWTH_RATE);
@@ -39,11 +39,11 @@ function interact(x, y) {
 
   // Now the interaction falls into 4 cases
   if (x.isHerd() && y.isHerd()) {
-    x.increasePopulation(constants.NONCOMPETITIVE_GROWTH_RATE);
-    y.increasePopulation(constants.NONCOMPETITIVE_GROWTH_RATE);
+    x.increasePopulation(constants.GROWTH_RATE);
+    y.increasePopulation(constants.GROWTH_RATE);
   } else if (x.isPack() && y.isPack()) {
-    x.decreasePopulation(constants.NONCOMPETITIVE_GROWTH_RATE);
-    y.decreasePopulation(constants.NONCOMPETITIVE_GROWTH_RATE);
+    x.decreasePopulation(constants.GROWTH_RATE);
+    y.decreasePopulation(constants.GROWTH_RATE);
   } else if (x.isPack()) {
     compete(pack=x, herd=y);
   } else {
