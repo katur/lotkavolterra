@@ -156,3 +156,5 @@ p {
 #simulation, #test-simulation {
   padding: 0;
   background: #eee; }
+  #simulation svg, #test-simulation svg {
+    width: 100%; }
