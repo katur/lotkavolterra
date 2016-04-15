@@ -1,6 +1,3 @@
-import os
-from os import listdir
-
 from flask import Flask, render_template, request
 
 
@@ -31,19 +28,6 @@ except:
     pass
 
 
-###########
-# Helpers #
-###########
-
-def _listdir_json(path):
-    """
-    List only the .json files in path.
-    """
-    for f in listdir(path):
-        if f.endswith('.json') and not f.startswith('.'):
-            yield f
-
-
 ###########################
 # Define views and routes #
 ###########################
@@ -53,12 +37,8 @@ def home():
     """
     Render the homepage.
     """
-    input_filenames = _listdir_json(os.path.join(app.static_folder, 'json'))
-    input_simulations = [os.path.splitext(f)[0] for f in input_filenames]
-    input_simulations.sort()
-
     context = {
-        'input_simulations': input_simulations,
+        'input_simulations': app.config['INPUT_SIMULATIONS'],
         'test_simulations': TEST_SIMULATIONS,
         'defaults': DEFAULTS,
     }

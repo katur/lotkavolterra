@@ -121,8 +121,8 @@
             <option value="{{ simulation }}">{{ simulation }}</option>
             {% endfor %}
 
-            {% for simulation in input_simulations %}
-            <option value="{{ simulation }}">{{ simulation }}</option>
+            {% for name, file in input_simulations %}
+            <option value="{{ file }}">{{ name }}</option>
             {% endfor %}
           </select>
         </td>

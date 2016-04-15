@@ -30,7 +30,7 @@
     numGenerations: {{ num_generations }},
     repeat: repeat,
     jsonURL:
-      "{{ url_for('static', filename='json/' ~ simulation ~ '.json') }}"
+      "{{ url_for('static', filename='json/' ~ simulation) }}"
   });
   {% endif %}
 </script>
