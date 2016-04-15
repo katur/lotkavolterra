@@ -15,12 +15,24 @@
 <svg class="simulation"></svg>
 
 <script type="text/javascript" charset="utf-8">
-  lotkavolterra.launchSimulation({
-    jsonURL:
-      "{{ url_for('static', filename='json/' ~ simulation ~ '.json') }}",
+  var repeat = {% if repeat %}true{% else %}false{% endif %}
+
+  {% if is_test%}
+  lotkavolterra.launchTestSimulation({
     numGenerations: {{ num_generations }},
-    repeat: {% if repeat %}true{% else %}false{% endif %}
+    repeat: repeat,
+    simulation: "{{ simulation }}",
+    numSeats: {{ num_seats }}
   });
+
+  {% else %}
+  lotkavolterra.launchSimulation({
+    numGenerations: {{ num_generations }},
+    repeat: repeat,
+    jsonURL:
+      "{{ url_for('static', filename='json/' ~ simulation ~ '.json') }}"
+  });
+  {% endif %}
 </script>
 
 {% endblock %}

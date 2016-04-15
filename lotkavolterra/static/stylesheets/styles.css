@@ -91,32 +91,21 @@ table td, table th {
     margin-right: 0; }
 
 body {
-  padding: 40px; }
+  padding: 40px;
+  background: #eee; }
 
-#site-title {
-  margin-bottom: 40px; }
-
-.page-title {
-  margin-bottom: 20px; }
-
-.page-subtitle {
-  margin-bottom: 10px; }
+.page-section:after, p:after {
+  content: "";
+  display: table;
+  clear: both; }
+.page-section:last-child, p:last-child {
+  margin-bottom: 0; }
 
 .page-section {
   margin-bottom: 40px; }
 
-.page-subsection {
+.page-title, p {
   margin-bottom: 20px; }
-
-p {
-  margin-bottom: 20px; }
-
-.page-section:after, .page-subsection:after, p:after {
-  content: "";
-  display: table;
-  clear: both; }
-.page-section:last-child, .page-subsection:last-child, p:last-child {
-  margin-bottom: 0; }
 
 .simulation circle {
   opacity: 0.5; }
@@ -152,39 +141,37 @@ p {
     right: 10px;
     font-size: 13px; }
 
-#home {
-  background: #eee; }
-  #home .page-section {
-    max-width: 750px;
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto; }
-  #home .animal-photos {
-    padding: 20px 0;
-    margin-bottom: 20px;
-    text-align: center; }
-    #home .animal-photos img {
-      display: inline-block;
-      width: 170px;
-      height: 170px;
-      margin: 0 12px;
-      border-width: 17px;
-      border-style: solid;
-      border-radius: 100%; }
-      #home .animal-photos img.predator {
-        border-color: rgba(255, 0, 0, 0.5); }
-      #home .animal-photos img.prey {
-        border-color: rgba(0, 136, 0, 0.5); }
-      #home .animal-photos img.invasive {
-        border-color: rgba(0, 0, 255, 0.5); }
-  #home .example-simulation svg {
-    width: 75%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: -20px; }
-    @media (max-width: 600px) {
-      #home .example-simulation svg {
-        width: 100%; } }
-  #home .attribution {
-    font-size: 16px; }
+#home .page-section {
+  max-width: 750px;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto; }
+#home .animal-photos {
+  padding: 20px 0;
+  margin-bottom: 20px;
+  text-align: center; }
+  #home .animal-photos img {
+    display: inline-block;
+    width: 170px;
+    height: 170px;
+    margin: 0 12px;
+    border-width: 17px;
+    border-style: solid;
+    border-radius: 100%; }
+    #home .animal-photos img.predator {
+      border-color: rgba(255, 0, 0, 0.5); }
+    #home .animal-photos img.prey {
+      border-color: rgba(0, 136, 0, 0.5); }
+    #home .animal-photos img.invasive {
+      border-color: rgba(0, 0, 255, 0.5); }
+#home .example-simulation .simulation {
+  width: 75%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -20px; }
+  @media (max-width: 600px) {
+    #home .example-simulation .simulation {
+      width: 100%; } }
+#home .attribution {
+  font-size: 16px; }

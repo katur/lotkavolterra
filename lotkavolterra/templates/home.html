@@ -111,28 +111,52 @@
 <div class="page-section">
 	<h2 class="page-title">View Examples</h2>
 
-  <div class="page-subsection">
-    <h4 class="page-subtitle">Test case simulations</h4>
+  <form method="GET" action="{{ url_for('run_simulation') }}">
+    <table>
+      <tr>
+        <td>Simulation</td>
+        <td>
+          <select name="simulation">
+            {% for simulation in test_simulations %}
+              <option value="{{ simulation }}">{{ simulation }}</option>
+            {% endfor %}
 
-    <form method="GET" action="{{ url_for('run_test_simulation') }}">
-      {% with show_num_seats=True, simulations=test_simulations %}
-      {% include 'parameters.html' %}
-      {% endwith %}
+            {% for simulation in input_simulations %}
+              <option value="{{ simulation }}">{{ simulation }}</option>
+            {% endfor %}
+          </select>
+        </td>
+      </tr>
 
-      <button type="submit">Submit</button>
-    </form>
-  </div>
+      <tr>
+        <td>Number of seats</td>
+        <td>
+          <input name="num_seats"
+                 value="{{ defaults.num_seats }}">
+          </input>
+        </td>
+      </tr>
 
-  <div class="page-subsection">
-    <h4 class="page-subtitle">Input-based simulations</h4>
+      <tr>
+        <td>Number of generations</td>
+        <td>
+          <input name="num_generations"
+                 value="{{ defaults.num_generations }}">
+          </input>
+        </td>
+      </tr>
 
-    <form method="GET" action="{{ url_for('run_simulation') }}">
-      {% with show_stage_option=True, simulations=input_simulations %}
-      {% include 'parameters.html' %}
-      {% endwith %}
-      <button type="submit">Submit</button>
-    </form>
-  </div>
+      <tr>
+        <td>Repeat?</td>
+        <td>
+          <input type="checkbox" name="repeat">
+          </input>
+        </td>
+      </tr>
+    </table>
+
+    <button type="submit">Submit</button>
+  </form>
 </div>
 
 <div class="page-section attribution">

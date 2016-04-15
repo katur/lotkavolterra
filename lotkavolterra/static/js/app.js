@@ -20,8 +20,7 @@ function launchSimulation(params) {
       controller.drawLuncheon({
         luncheon: luncheon,
         showStage: jsonData.showStage,
-        showSpecies: jsonData.showSpecies,
-        hideCounters: params.hideCounters
+        showSpecies: jsonData.showSpecies
       });
 
 			controller.runGeneration({
@@ -54,6 +53,7 @@ function launchTestSimulation(params) {
 
   controller.drawLuncheon({
     luncheon: luncheon,
+    showStage: false,
     showSpecies: true
   });
 

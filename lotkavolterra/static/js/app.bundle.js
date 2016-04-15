@@ -66,8 +66,7 @@
 	      controller.drawLuncheon({
 	        luncheon: luncheon,
 	        showStage: jsonData.showStage,
-	        showSpecies: jsonData.showSpecies,
-	        hideCounters: params.hideCounters
+	        showSpecies: jsonData.showSpecies
 	      });
 
 				controller.runGeneration({
@@ -100,6 +99,7 @@
 
 	  controller.drawLuncheon({
 	    luncheon: luncheon,
+	    showStage: false,
 	    showSpecies: true
 	  });
 
