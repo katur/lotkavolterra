@@ -128,10 +128,14 @@ p {
   #home .animal-photos {
     margin-bottom: 20px; }
   #home .example-simulation svg {
+    width: 75%;
     display: block;
     margin-left: auto;
     margin-right: auto;
     margin-top: -20px; }
+    @media (max-width: 600px) {
+      #home .example-simulation svg {
+        width: 100%; } }
   #home .animal-photos {
     text-align: center; }
     #home .animal-photos img {

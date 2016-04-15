@@ -12,10 +12,14 @@
 
   .example-simulation
     svg
+      width: 75%
       display: block
       margin-left: auto
       margin-right: auto
       margin-top: -$whitespace / 2
+
+      @media (max-width: 600px)
+        width: 100%
 
   .animal-photos
     text-align: center
