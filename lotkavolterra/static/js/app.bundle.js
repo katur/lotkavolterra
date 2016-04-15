@@ -1100,21 +1100,6 @@
 	}
 
 
-	/**
-	 * Get the fill color of seat based on its group.
-	 *
-	 * TODO: add a class and style this with css a la homepage key
-	 */
-	function getColor(seat) {
-	  if (seat.group === "HERD")
-	    return "008000";
-	  else if (seat.group === "PACK")
-	    return "FF0000";
-	  else if (seat.group === "COLONY")
-	    return "0000FF";
-	}
-
-
 	module.exports = {
 	  drawSeats: drawSeats,
 	  drawStage: drawStage,
