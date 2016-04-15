@@ -60,8 +60,7 @@
 				jsonData = JSON.parse(request.responseText);
 
 	      var luncheon = controller.initializeLuncheon({
-					data: jsonData,
-					populationSize: params.populationSize
+					data: jsonData
 				});
 
 	      controller.drawLuncheon({
@@ -96,8 +95,7 @@
 	function launchTestSimulation(params) {
 	  var luncheon = controller.initializeTestLuncheon({
 	    simulation: params.simulation,
-	    numSeats: params.numSeats,
-	    populationSize: params.populationSize
+	    numSeats: params.numSeats
 	  });
 
 	  controller.drawLuncheon({
@@ -154,8 +152,7 @@
 	        pk: pk,
 	        index: j,
 	        name: jsonPeople[j].name,
-	        group: jsonPeople[j].group || constants.Group.getRandom(),
-	        populationSize: params.populationSize
+	        group: jsonPeople[j].group || constants.Group.getRandom()
 	      });
 
 	      pk += 1;
@@ -207,8 +204,7 @@
 	      pk: i,
 	      index: i,
 	      group: group,
-	      name: constants.PERSON_NAMES[i] || "Person" + i,
-	      populationSize: params.populationSize
+	      name: constants.PERSON_NAMES[i] || "Person" + i
 	    });
 	  }
 
@@ -282,11 +278,17 @@
 
 	var utils = __webpack_require__(3);
 
+	const INITIAL_POPULATION_SIZE = 1000;
+	const OVERPOPULATION_FACTOR = 10;
 
 	module.exports = {
 	  // Model
 	  GROWTH_RATE: 0.05,
 	  COMPETITIVE_COIN_WEIGHT: 0.667,
+	  INITIAL_POPULATION_SIZE: INITIAL_POPULATION_SIZE,
+
+	  // Both model and view
+	  OVERPOPULATION_SIZE: INITIAL_POPULATION_SIZE * OVERPOPULATION_FACTOR,
 
 	  // View
 	  EASING_FXN: "easeOutCubic",
@@ -294,9 +296,6 @@
 	  BETWEEN_TRIAL_DELAY: 2000,
 	  TABLE_SPACE_TO_RADIUS_FACTOR: 1/3,
 	  CIRCLE_RADIANS: 2 * Math.PI,
-
-	  // Both model and view
-	  OVERPOPULATION_FACTOR: 10,
 
 	  // Enums
 	  Group: {
@@ -620,8 +619,7 @@
 	  this.index = params.index;  // Position within the table
 	  this.name = params.name;
 	  this.group = params.group;
-	  this.populationSize = params.populationSize;
-	  this.initialPopulationSize = params.populationSize;
+	  this.populationSize = constants.INITIAL_POPULATION_SIZE;
 	  this.table = params.table;
 	  this.nextSeat = params.nextSeat;
 	  this.previousSeat = params.previousSeat;
@@ -662,7 +660,6 @@
 	    state.species = this.getShortSpecies();
 	    state.group = this.group;
 	    state.populationSize = this.populationSize;
-	    state.initialPopulationSize = this.initialPopulationSize;
 	    state.tableX = this.table.x;
 	    state.tableY = this.table.y;
 	    state.tableSeatCount = this.table.seatCount;
@@ -740,8 +737,7 @@
 	    this.populationSize += change;
 
 	    // Extinction from overpopulation
-	    if (this.populationSize >=
-	        (constants.OVERPOPULATION_FACTOR * this.initialPopulationSize)) {
+	    if (this.populationSize >= constants.OVERPOPULATION_SIZE) {
 	      this.populationSize = 0;
 	    }
 	  };
@@ -798,7 +794,7 @@
 
 	  /** Reset this seat to its initial population size. */
 	  this.reset = function() {
-	    this.populationSize = this.initialPopulationSize;
+	    this.populationSize = constants.INITIAL_POPULATION_SIZE;
 	  };
 	}
 
@@ -1096,8 +1092,7 @@
 	 */
 	function getRadius(seat) {
 	  var current = utils.getRadiusFromArea(seat.populationSize);
-	  var max = utils.getRadiusFromArea(
-	    seat.initialPopulationSize * constants.OVERPOPULATION_FACTOR);
+	  var max = utils.getRadiusFromArea(constants.OVERPOPULATION_SIZE);
 	  var relative = current / max;
 
 	  // Allow seats to get as big as the table at their largest

@@ -29,8 +29,7 @@ function initializeLuncheon(params) {
         pk: pk,
         index: j,
         name: jsonPeople[j].name,
-        group: jsonPeople[j].group || constants.Group.getRandom(),
-        populationSize: params.populationSize
+        group: jsonPeople[j].group || constants.Group.getRandom()
       });
 
       pk += 1;
@@ -82,8 +81,7 @@ function initializeTestLuncheon(params) {
       pk: i,
       index: i,
       group: group,
-      name: constants.PERSON_NAMES[i] || "Person" + i,
-      populationSize: params.populationSize
+      name: constants.PERSON_NAMES[i] || "Person" + i
     });
   }
 

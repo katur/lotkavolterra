@@ -210,8 +210,7 @@ function getCoordinates(seat) {
  */
 function getRadius(seat) {
   var current = utils.getRadiusFromArea(seat.populationSize);
-  var max = utils.getRadiusFromArea(
-    seat.initialPopulationSize * constants.OVERPOPULATION_FACTOR);
+  var max = utils.getRadiusFromArea(constants.OVERPOPULATION_SIZE);
   var relative = current / max;
 
   // Allow seats to get as big as the table at their largest

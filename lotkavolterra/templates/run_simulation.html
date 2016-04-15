@@ -10,7 +10,6 @@
   lotkavolterra.launchSimulation({
     jsonURL:
       "{{ url_for('static', filename='json/' ~ simulation ~ '.json') }}",
-    populationSize: {{ population_size }},
     numGenerations: {{ num_generations }},
     repeat: {% if repeat %}true{% else %}false{% endif %}
   });

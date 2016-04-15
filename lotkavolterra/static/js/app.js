@@ -14,8 +14,7 @@ function launchSimulation(params) {
 			jsonData = JSON.parse(request.responseText);
 
       var luncheon = controller.initializeLuncheon({
-				data: jsonData,
-				populationSize: params.populationSize
+				data: jsonData
 			});
 
       controller.drawLuncheon({
@@ -50,8 +49,7 @@ function launchSimulation(params) {
 function launchTestSimulation(params) {
   var luncheon = controller.initializeTestLuncheon({
     simulation: params.simulation,
-    numSeats: params.numSeats,
-    populationSize: params.populationSize
+    numSeats: params.numSeats
   });
 
   controller.drawLuncheon({

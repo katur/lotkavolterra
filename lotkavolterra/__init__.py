@@ -6,7 +6,6 @@ from flask import Flask, render_template, request
 
 DEFAULTS = {
     'num_generations': 50,
-    'population_size': 1000,
     'num_seats': 10,  # This one used for test case simulations only
 }
 
@@ -68,7 +67,6 @@ def get_common_params(request):
     return {
         'simulation': request.args['simulation'],
         'num_generations': int(request.args['num_generations']),
-        'population_size': int(request.args['population_size']),
         'repeat': 'repeat' in request.args,
     }
 

@@ -1,10 +1,16 @@
 var utils = require("./utils.js");
 
+const INITIAL_POPULATION_SIZE = 1000;
+const OVERPOPULATION_FACTOR = 10;
 
 module.exports = {
   // Model
   GROWTH_RATE: 0.05,
   COMPETITIVE_COIN_WEIGHT: 0.667,
+  INITIAL_POPULATION_SIZE: INITIAL_POPULATION_SIZE,
+
+  // Both model and view
+  OVERPOPULATION_SIZE: INITIAL_POPULATION_SIZE * OVERPOPULATION_FACTOR,
 
   // View
   EASING_FXN: "easeOutCubic",
@@ -12,9 +18,6 @@ module.exports = {
   BETWEEN_TRIAL_DELAY: 2000,
   TABLE_SPACE_TO_RADIUS_FACTOR: 1/3,
   CIRCLE_RADIANS: 2 * Math.PI,
-
-  // Both model and view
-  OVERPOPULATION_FACTOR: 10,
 
   // Enums
   Group: {

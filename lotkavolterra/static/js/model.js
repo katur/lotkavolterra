@@ -243,8 +243,7 @@ function Seat(params) {
   this.index = params.index;  // Position within the table
   this.name = params.name;
   this.group = params.group;
-  this.populationSize = params.populationSize;
-  this.initialPopulationSize = params.populationSize;
+  this.populationSize = constants.INITIAL_POPULATION_SIZE;
   this.table = params.table;
   this.nextSeat = params.nextSeat;
   this.previousSeat = params.previousSeat;
@@ -285,7 +284,6 @@ function Seat(params) {
     state.species = this.getShortSpecies();
     state.group = this.group;
     state.populationSize = this.populationSize;
-    state.initialPopulationSize = this.initialPopulationSize;
     state.tableX = this.table.x;
     state.tableY = this.table.y;
     state.tableSeatCount = this.table.seatCount;
@@ -363,8 +361,7 @@ function Seat(params) {
     this.populationSize += change;
 
     // Extinction from overpopulation
-    if (this.populationSize >=
-        (constants.OVERPOPULATION_FACTOR * this.initialPopulationSize)) {
+    if (this.populationSize >= constants.OVERPOPULATION_SIZE) {
       this.populationSize = 0;
     }
   };
@@ -421,7 +418,7 @@ function Seat(params) {
 
   /** Reset this seat to its initial population size. */
   this.reset = function() {
-    this.populationSize = this.initialPopulationSize;
+    this.populationSize = constants.INITIAL_POPULATION_SIZE;
   };
 }
 
