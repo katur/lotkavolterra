@@ -90,25 +90,6 @@ table td, table th {
   .three-columns .column:last-child {
     margin-right: 0; }
 
-svg circle {
-  opacity: 0.5; }
-svg .HERD {
-  fill: #008800; }
-svg .PACK {
-  fill: #FF0000; }
-svg .COLONY {
-  fill: #0000FF; }
-svg .circle-text {
-  font-size: 10px;
-  text-anchor: middle;
-  alignment-baseline: middle; }
-svg .stage {
-  opacity: 0.5;
-  fill: #bbb; }
-svg .stage-text {
-  fill: #999;
-  font-size: 15px; }
-
 body {
   padding: 40px; }
 
@@ -137,6 +118,31 @@ p {
 .page-section:last-child, .page-subsection:last-child, p:last-child {
   margin-bottom: 0; }
 
+svg circle {
+  opacity: 0.5; }
+svg .HERD {
+  fill: #008800; }
+svg .PACK {
+  fill: #FF0000; }
+svg .COLONY {
+  fill: #0000FF; }
+svg .circle-text {
+  font-size: 10px;
+  text-anchor: middle;
+  alignment-baseline: middle; }
+svg .stage {
+  fill: #bbb;
+  opacity: 0.5; }
+svg .stage-text {
+  fill: #999;
+  font-size: 15px; }
+
+#simulation, #test-simulation {
+  padding: 0;
+  background: #eee; }
+  #simulation svg, #test-simulation svg {
+    width: 100%; }
+
 #home {
   background: #eee; }
   #home .page-section {
@@ -145,6 +151,7 @@ p {
     margin-right: auto;
     margin-left: auto; }
   #home .animal-photos {
+    padding: 20px 0;
     margin-bottom: 20px; }
   #home .example-simulation svg {
     width: 75%;
@@ -171,9 +178,3 @@ p {
         border-color: rgba(0, 136, 0, 0.5); }
       #home .animal-photos img.invasive {
         border-color: rgba(0, 0, 255, 0.5); }
-
-#simulation, #test-simulation {
-  padding: 0;
-  background: #eee; }
-  #simulation svg, #test-simulation svg {
-    width: 100%; }
