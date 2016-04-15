@@ -66,6 +66,15 @@ function initializeTestLuncheon(params) {
         group = constants.Group.HERD;
       }
 
+    } else if (params.simulation === "alternating3") {
+      if (i % 3 === 0) {
+        group = constants.Group.PACK;
+      } else if (i % 3 === 1) {
+        group = constants.Group.HERD;
+      } else {
+        group = constants.Group.COLONY;
+      }
+
     } else if (params.simulation === "halves") {
       if (i < (params.numSeats / 2)) {
         group = constants.Group.PACK;
