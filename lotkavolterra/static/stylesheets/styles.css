@@ -161,17 +161,7 @@ p {
     margin-left: auto; }
   #home .animal-photos {
     padding: 20px 0;
-    margin-bottom: 20px; }
-  #home .example-simulation svg {
-    width: 75%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: -20px; }
-    @media (max-width: 600px) {
-      #home .example-simulation svg {
-        width: 100%; } }
-  #home .animal-photos {
+    margin-bottom: 20px;
     text-align: center; }
     #home .animal-photos img {
       display: inline-block;
@@ -187,3 +177,14 @@ p {
         border-color: rgba(0, 136, 0, 0.5); }
       #home .animal-photos img.invasive {
         border-color: rgba(0, 0, 255, 0.5); }
+  #home .example-simulation svg {
+    width: 75%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -20px; }
+    @media (max-width: 600px) {
+      #home .example-simulation svg {
+        width: 100%; } }
+  #home .attribution {
+    font-size: 16px; }

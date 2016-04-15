@@ -10,19 +10,6 @@
   .animal-photos
     padding: $whitespace / 2 0
     margin-bottom: $whitespace / 2
-
-  .example-simulation
-    svg
-      width: 75%
-      display: block
-      margin-left: auto
-      margin-right: auto
-      margin-top: -$whitespace / 2
-
-      @media (max-width: 600px)
-        width: 100%
-
-  .animal-photos
     text-align: center
 
     img
@@ -43,3 +30,17 @@
 
       &.invasive
         border-color: rgba($colony-color, $opacity)
+
+  .example-simulation
+    svg
+      width: 75%
+      display: block
+      margin-left: auto
+      margin-right: auto
+      margin-top: -$whitespace / 2
+
+      @media (max-width: 600px)
+        width: 100%
+
+  .attribution
+    font-size: $base-font-size - 2
