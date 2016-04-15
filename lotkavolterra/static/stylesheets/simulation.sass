@@ -12,7 +12,7 @@
     fill: $colony-color
 
   .circle-text
-    font-size: 10px
+    font-size: $simulation-font-size
     text-anchor: middle
     alignment-baseline: middle
 
@@ -22,7 +22,7 @@
 
   .stage-text
     fill: #999
-    font-size: 15px
+    font-size: $simulation-font-size + 5
 
 
 #run-simulation
@@ -34,11 +34,15 @@
 
   .home-nav, .counters
     position: absolute
-    top: 10px
-    font-size: 13px
+    top: 5px
+    padding: $bubble-padding
+    border-radius: $bubble-border-radius
+    background: #ddd
+    opacity: 0.9
+    font-size: $simulation-font-size + 2
 
   .home-nav
-    left: 10px
+    left: 5px
 
   .counters
-    right: 10px
+    right: 5px
