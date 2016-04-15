@@ -902,7 +902,7 @@
 	  var svgWidth = parseInt(svg.style("width"), 10);
 	  var hwRatio = params.numTablesY / params.numTablesX;
 	  var svgHeight = svgWidth * hwRatio;
-	  svg.style("height", svgHeight);
+	  svg.attr("height", svgHeight);
 
 	  // Calculate the space each table can take up in both x and y dimensions.
 	  var tableSpace = svgWidth / params.numTablesX;
