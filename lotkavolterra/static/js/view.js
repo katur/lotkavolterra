@@ -87,7 +87,7 @@ function drawCounters() {
     .attr("x", svgWidth - 10)
     .attr("y", 20)
     .attr("text-anchor", "end")
-    .attr("font-size", constants.TEXT_SIZE + 3);
+    .attr("font-size", 13);
 
   svg.append("text")
     .attr("id", "generationCounter")
@@ -95,7 +95,7 @@ function drawCounters() {
     .attr("x", svgWidth - 10)
     .attr("y", 40)
     .attr("text-anchor", "end")
-    .attr("font-size", constants.TEXT_SIZE + 3);
+    .attr("font-size", 13);
 }
 
 

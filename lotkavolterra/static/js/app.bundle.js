@@ -289,7 +289,6 @@
 	  COMPETITIVE_COIN_WEIGHT: 0.667,
 
 	  // View
-	  TEXT_SIZE: 10,
 	  EASING_FXN: "easeOutCubic",
 	  TRANSITION_DURATION: 500,
 	  BETWEEN_TRIAL_DELAY: 2000,
@@ -974,7 +973,7 @@
 	    .attr("x", svgWidth - 10)
 	    .attr("y", 20)
 	    .attr("text-anchor", "end")
-	    .attr("font-size", constants.TEXT_SIZE + 3);
+	    .attr("font-size", 13);
 
 	  svg.append("text")
 	    .attr("id", "generationCounter")
@@ -982,7 +981,7 @@
 	    .attr("x", svgWidth - 10)
 	    .attr("y", 40)
 	    .attr("text-anchor", "end")
-	    .attr("font-size", constants.TEXT_SIZE + 3);
+	    .attr("font-size", 13);
 	}
 
 
