@@ -7,7 +7,6 @@ module.exports = {
   COMPETITIVE_COIN_WEIGHT: 0.667,
 
   // View
-  OPACITY: 0.5,
   TEXT_SIZE: 10,
   EASING_FXN: "easeOutCubic",
   TRANSITION_DURATION: 500,

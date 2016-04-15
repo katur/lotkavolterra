@@ -90,6 +90,25 @@ table td, table th {
   .three-columns .column:last-child {
     margin-right: 0; }
 
+svg circle {
+  opacity: 0.5; }
+svg .HERD {
+  fill: #008800; }
+svg .PACK {
+  fill: #FF0000; }
+svg .COLONY {
+  fill: #0000FF; }
+svg .circle-text {
+  font-size: 10px;
+  text-anchor: middle;
+  alignment-baseline: middle; }
+svg .stage {
+  opacity: 0.5;
+  fill: #bbb; }
+svg .stage-text {
+  fill: #999;
+  font-size: 15px; }
+
 body {
   padding: 40px; }
 

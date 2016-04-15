@@ -289,7 +289,6 @@
 	  COMPETITIVE_COIN_WEIGHT: 0.667,
 
 	  // View
-	  OPACITY: 0.5,
 	  TEXT_SIZE: 10,
 	  EASING_FXN: "easeOutCubic",
 	  TRANSITION_DURATION: 500,
@@ -946,20 +945,18 @@
 	  var stageSize = 0.2;
 
 	  svg.append("rect")
+	    .classed("stage", true)
 	    .attr("x", svgWidth * (0.5 - stageSize / 2))
 	    .attr("width", svgWidth * stageSize)
-	    .attr("height", svgHeight * stageSize)
-	    .style("fill", "#bbb")
-	    .style("opacity", constants.OPACITY);
+	    .attr("height", svgHeight * stageSize);
 
 	  svg.append("text")
+	    .classed("stage-text", true)
 	    .text("STAGE")
 	    .attr("x", svgWidth * 0.5)
 	    .attr("y", svgHeight * (stageSize / 2))
 	    .attr("text-anchor", "middle")
 	    .attr("alignment-baseline", "middle")
-	    .attr("fill", "#999")
-	    .attr("font-size", constants.TEXT_SIZE + 5);
 	}
 
 
@@ -1039,13 +1036,12 @@
 	 */
 	function addCircles(el) {
 	  el.append("circle")
+	    .attr("class", function(d) {
+	      return d.group;
+	    })
 	    .attr("r", function(d) {
 	      return getRadius(d);
-	    })
-	    .style("fill", function(d) {
-	      return getColor(d);
-	    })
-	    .style("opacity", constants.OPACITY);
+	    });
 	}
 
 
@@ -1054,16 +1050,14 @@
 	 */
 	function addText(el, showSpecies) {
 	  el.append("text")
+	    .classed("circle-text", true)
 	    .text(function(d){
 	      if (showSpecies) {
 	        return d.species;
 	      } else {
 	        return d.name;
 	      }
-	    })
-	    .attr("text-anchor", "middle")
-	    .attr("alignment-baseline", "middle")
-	    .attr("font-size", constants.TEXT_SIZE);
+	    });
 	}
 
 
