@@ -29,6 +29,12 @@
       &.invasive
         border-color: rgba($colony-color, $opacity)
 
+      @media (max-width: $mobile-breakpoint-large)
+        width: 120px
+        height: 120px
+
+        border-width: 12px
+
   .example-simulation
     .simulation
       width: 75%
@@ -41,9 +47,17 @@
         width: 100%
 
   form
+    font-size: $base-font-size - 2
+
+    @media (max-width: $mobile-breakpoint-large)
+      font-size: $base-font-size - 4
+
     button
       margin-top: 10px
 
 
   .attribution
     font-size: $base-font-size - 4
+
+    @media (max-width: $mobile-breakpoint-large)
+      font-size: $base-font-size - 6

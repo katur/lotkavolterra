@@ -1,6 +1,12 @@
 body
+  background: $site-background
   padding: $whitespace
-  background: #eee
+
+  @media (max-width: $mobile-breakpoint-large)
+    padding: $whitespace / 2
+
+  @media (max-width: $mobile-breakpoint-small)
+    padding: $whitespace / 4
 
 
 .page-section, p

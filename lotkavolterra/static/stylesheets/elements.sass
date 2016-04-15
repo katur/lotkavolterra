@@ -17,13 +17,14 @@ table
 
 
 form
-  font-size: $base-font-size - 2
-
   button, input, select
     padding: 6px
     border: none
     border-radius: 3px
     font-size: $base-font-size - 4
+
+    @media (max-width: $mobile-breakpoint-large)
+      font-size: $base-font-size - 6
 
   input, select
     background: #f8f8f8
@@ -31,18 +32,8 @@ form
 
   button
     background: $brown
-    color: #eee
+    color: $site-background
 
     &:hover
       background: lighten($brown, 20%)
       cursor: pointer
-
-
-.three-columns
-  .column
-    float: left
-    width: 30%
-    margin-right: 5%
-
-    &:last-child
-      margin-right: 0

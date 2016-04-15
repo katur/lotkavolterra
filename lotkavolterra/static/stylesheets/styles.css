@@ -53,6 +53,12 @@ body {
   font-family: "Helvetica Neue", Helvetica, sans-serif;
   font-weight: 200;
   letter-spacing: 0.5px; }
+  @media (max-width: 600px) {
+    body {
+      font-size: 16px; } }
+  @media (max-width: 330px) {
+    body {
+      font-size: 15px; } }
 
 h1, h2, h3, h4 {
   font-weight: 100;
@@ -81,33 +87,33 @@ table td {
   padding-right: 12px;
   padding-bottom: 6px; }
 
-form {
-  font-size: 16px; }
-  form button, form input, form select {
-    padding: 6px;
-    border: none;
-    border-radius: 3px;
-    font-size: 14px; }
-  form input, form select {
-    background: #f8f8f8;
-    border: 1px solid #ddd; }
-  form button {
-    background: #908459;
-    color: #eee; }
-    form button:hover {
-      background: #bcb393;
-      cursor: pointer; }
-
-.three-columns .column {
-  float: left;
-  width: 30%;
-  margin-right: 5%; }
-  .three-columns .column:last-child {
-    margin-right: 0; }
+form button, form input, form select {
+  padding: 6px;
+  border: none;
+  border-radius: 3px;
+  font-size: 14px; }
+  @media (max-width: 600px) {
+    form button, form input, form select {
+      font-size: 12px; } }
+form input, form select {
+  background: #f8f8f8;
+  border: 1px solid #ddd; }
+form button {
+  background: #908459;
+  color: #eee; }
+  form button:hover {
+    background: #bcb393;
+    cursor: pointer; }
 
 body {
-  padding: 40px;
-  background: #eee; }
+  background: #eee;
+  padding: 40px; }
+  @media (max-width: 600px) {
+    body {
+      padding: 20px; } }
+  @media (max-width: 330px) {
+    body {
+      padding: 10px; } }
 
 .page-section:after, p:after {
   content: "";
@@ -178,6 +184,11 @@ body {
       border-color: rgba(0, 136, 0, 0.5); }
     #home .animal-photos img.invasive {
       border-color: rgba(0, 0, 255, 0.5); }
+    @media (max-width: 600px) {
+      #home .animal-photos img {
+        width: 120px;
+        height: 120px;
+        border-width: 12px; } }
 #home .example-simulation .simulation {
   width: 75%;
   display: block;
@@ -187,7 +198,15 @@ body {
   @media (max-width: 600px) {
     #home .example-simulation .simulation {
       width: 100%; } }
-#home form button {
-  margin-top: 10px; }
+#home form {
+  font-size: 16px; }
+  @media (max-width: 600px) {
+    #home form {
+      font-size: 14px; } }
+  #home form button {
+    margin-top: 10px; }
 #home .attribution {
   font-size: 14px; }
+  @media (max-width: 600px) {
+    #home .attribution {
+      font-size: 12px; } }
