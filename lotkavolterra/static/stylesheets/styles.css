@@ -117,7 +117,7 @@ body {
   margin-bottom: 0; }
 
 .page-section {
-  margin-bottom: 40px; }
+  margin-bottom: 60px; }
 
 .page-title, p {
   margin-bottom: 20px; }
@@ -190,5 +190,4 @@ body {
 #home form button {
   margin-top: 10px; }
 #home .attribution {
-  padding-top: 40px;
   font-size: 14px; }
