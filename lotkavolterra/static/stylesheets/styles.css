@@ -89,7 +89,8 @@ form {
     border-radius: 3px;
     font-size: 14px; }
   form input, form select {
-    background: #f8f8f8; }
+    background: #f8f8f8;
+    border: 1px solid #ddd; }
   form button {
     background: #908459;
     color: #eee; }
