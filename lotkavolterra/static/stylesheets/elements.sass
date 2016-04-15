@@ -11,12 +11,30 @@
 
 
 table
-  thead
-    font-variant: small-caps
+  td
+    padding-right: 12px
+    padding-bottom: 6px
 
-  td, th
-    border: 1px solid #ddd
-    padding: 4px 6px
+
+form
+  font-size: $base-font-size - 2
+
+  button, input, select
+    padding: 6px
+    border: none
+    border-radius: 3px
+    font-size: $base-font-size - 4
+
+  input, select
+    background: #ddd
+
+  button
+    background: $brown
+    color: #eee
+
+    &:hover
+      background: lighten($brown, 20%)
+      cursor: pointer
 
 
 .three-columns

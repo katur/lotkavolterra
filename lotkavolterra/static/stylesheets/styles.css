@@ -72,16 +72,30 @@ h4 {
   font-size: 24px; }
 
 a {
-  color: #86b75c;
+  color: #908459;
   text-decoration: none; }
   a:hover {
-    color: #b9af8e; }
+    color: #bcb393; }
 
-table thead {
-  font-variant: small-caps; }
-table td, table th {
-  border: 1px solid #ddd;
-  padding: 4px 6px; }
+table td {
+  padding-right: 12px;
+  padding-bottom: 6px; }
+
+form {
+  font-size: 16px; }
+  form button, form input, form select {
+    padding: 6px;
+    border: none;
+    border-radius: 3px;
+    font-size: 14px; }
+  form input, form select {
+    background: #ddd; }
+  form button {
+    background: #908459;
+    color: #eee; }
+    form button:hover {
+      background: #bcb393;
+      cursor: pointer; }
 
 .three-columns .column {
   float: left;
@@ -133,13 +147,12 @@ body {
     width: 100%; }
   #run-simulation .home-nav, #run-simulation .counters {
     position: absolute;
-    top: 10px; }
-  #run-simulation .home-nav {
-    left: 10px;
-    font-size: 15px; }
-  #run-simulation .counters {
-    right: 10px;
+    top: 10px;
     font-size: 13px; }
+  #run-simulation .home-nav {
+    left: 10px; }
+  #run-simulation .counters {
+    right: 10px; }
 
 #home .page-section {
   max-width: 750px;
@@ -152,10 +165,10 @@ body {
   text-align: center; }
   #home .animal-photos img {
     display: inline-block;
-    width: 170px;
-    height: 170px;
-    margin: 0 12px;
-    border-width: 17px;
+    width: 160px;
+    height: 160px;
+    margin: 0 16px;
+    border-width: 16px;
     border-style: solid;
     border-radius: 100%; }
     #home .animal-photos img.predator {
@@ -173,5 +186,8 @@ body {
   @media (max-width: 600px) {
     #home .example-simulation .simulation {
       width: 100%; } }
+#home form button {
+  margin-top: 10px; }
 #home .attribution {
-  font-size: 16px; }
+  padding-top: 40px;
+  font-size: 14px; }

@@ -114,34 +114,36 @@
   <form method="GET" action="{{ url_for('run_simulation') }}">
     <table>
       <tr>
-        <td>Simulation</td>
+        <td>Simulation:</td>
         <td>
-          <select name="simulation">
+          <select id="simulation-select" name="simulation">
             {% for simulation in test_simulations %}
-              <option value="{{ simulation }}">{{ simulation }}</option>
+            <option value="{{ simulation }}">{{ simulation }}</option>
             {% endfor %}
 
             {% for simulation in input_simulations %}
-              <option value="{{ simulation }}">{{ simulation }}</option>
+            <option value="{{ simulation }}">{{ simulation }}</option>
             {% endfor %}
           </select>
         </td>
       </tr>
 
       <tr>
-        <td>Number of seats</td>
+        <td>Number of seats:</td>
         <td>
           <input name="num_seats"
-                 value="{{ defaults.num_seats }}">
+                 value="{{ defaults.num_seats }}"
+                 size="4">
           </input>
         </td>
       </tr>
 
       <tr>
-        <td>Number of generations</td>
+        <td>Number of generations:</td>
         <td>
           <input name="num_generations"
-                 value="{{ defaults.num_generations }}">
+                 value="{{ defaults.num_generations }}"
+                 size="4">
           </input>
         </td>
       </tr>
@@ -155,7 +157,7 @@
       </tr>
     </table>
 
-    <button type="submit">Submit</button>
+    <button class="submit" type="submit">Submit</button>
   </form>
 </div>
 
