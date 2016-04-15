@@ -24,3 +24,14 @@ using the [Flask microframework](http://flask.pocoo.org/).
 CSS is in [SASS](http://sass-lang.com/).
 
 For the visualization, I am using [D3](http://d3js.org).
+
+
+## Photographs
+
+Eastern Coyote photograph by ForestWander Nature Photography;
+found on Wikimedia Commons.
+
+Wild Turkey photograph by [Laura Erickson](http://www.lauraerickson.com).
+
+Eurasian Boar photograph by Valentin Panzirsch;
+found on Wikimedia Commons.

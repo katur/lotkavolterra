@@ -226,27 +226,16 @@ function getRadius(seat) {
 
 /**
  * Get the fill color of seat based on its group.
+ *
+ * TODO: add a class and style this with css a la homepage key
  */
 function getColor(seat) {
   if (seat.group === "HERD")
-    return "green";
+    return "008000";
   else if (seat.group === "PACK")
-    return "red";
+    return "FF0000";
   else if (seat.group === "COLONY")
-    return "blue";
-}
-
-
-/**
- * Get the fill pattern of a seat based on its group.
- */
-function getPattern(seat) {
-  if (seat.group == "herd")
-    return "url(#green)";
-  else if (seat.group == "pack")
-    return "url(#red)";
-  else if (seat.group == "colony")
-    return "url(#blue)";
+    return "0000FF";
 }
 
 

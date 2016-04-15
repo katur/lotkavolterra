@@ -109,7 +109,7 @@ body {
   margin-bottom: 20px; }
 
 p {
-  margin-bottom: 10px; }
+  margin-bottom: 20px; }
 
 .page-section:after, .page-subsection:after, p:after {
   content: "";
@@ -120,8 +120,34 @@ p {
 
 #home {
   background: #eee; }
-  #home .text {
-    max-width: 750px; }
+  #home .page-section {
+    max-width: 750px;
+    margin-right: auto;
+    margin-left: auto; }
+  #home .animal-photos {
+    margin-bottom: 20px; }
+  #home .example-simulation svg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -20px; }
+  #home .animal-photos {
+    text-align: center; }
+    #home .animal-photos img {
+      display: inline-block;
+      width: 170px;
+      height: 170px;
+      margin: 0 12px;
+      border-width: 17px;
+      border-style: solid;
+      border-radius: 100%; }
+      #home .animal-photos img.predator {
+        border-color: rgba(255, 0, 0, 0.5); }
+      #home .animal-photos img.prey {
+        border-color: rgba(0, 136, 0, 0.5); }
+      #home .animal-photos img.invasive {
+        border-color: rgba(0, 0, 255, 0.5); }
 
 #simulation, #test-simulation {
-  padding: 0; }
+  padding: 0;
+  background: #eee; }
