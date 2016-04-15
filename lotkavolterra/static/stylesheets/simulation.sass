@@ -1,4 +1,4 @@
-svg
+.simulation
   circle
     opacity: $opacity
 
@@ -25,9 +25,21 @@ svg
     font-size: 15px
 
 
-#simulation, #test-simulation
+#run-simulation
   padding: 0
   background: #eee
 
-  svg
+  .simulation
     width: 100%
+
+  .home-nav, .counters
+    position: absolute
+    top: 10px
+
+  .home-nav
+    left: 10px
+    font-size: 15px
+
+  .counters
+    right: 10px
+    font-size: 13px

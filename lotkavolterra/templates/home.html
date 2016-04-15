@@ -85,15 +85,15 @@
 		</iframe>
 		-->
 
-    <svg></svg>
+    <svg class="simulation"></svg>
+
 		<script type="text/javascript" charset="utf-8">
 			lotkavolterra.launchSimulation({
 				jsonURL:
 					"{{ url_for('static', filename='json/single-1.json') }}",
 					populationSize: 1000,
    				numGenerations: 40,
-					repeat: true,
-					hideCounters: true
+					repeat: true
 			});
 		</script>
   </div>

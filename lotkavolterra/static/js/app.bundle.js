@@ -225,10 +225,6 @@
 	    showSpecies: params.showSpecies
 	  });
 
-	  if (!params.hideCounters) {
-	    view.drawCounters();
-	  }
-
 	  if (params.showStage) {
 	    view.drawStage();
 	  }
@@ -956,32 +952,6 @@
 
 
 	/**
-	 * Draw the generation counter.
-	 */
-	function drawCounters() {
-	  var svg = d3.select("svg");
-	  var svgWidth = parseInt(svg.style("width"), 10);
-	  var svgHeight = parseInt(svg.style("height"), 10);
-
-	  svg.append("text")
-	    .attr("id", "trialCounter")
-	    .text("Trial 0")
-	    .attr("x", svgWidth - 10)
-	    .attr("y", 20)
-	    .attr("text-anchor", "end")
-	    .attr("font-size", 13);
-
-	  svg.append("text")
-	    .attr("id", "generationCounter")
-	    .text("Generation 0")
-	    .attr("x", svgWidth - 10)
-	    .attr("y", 40)
-	    .attr("text-anchor", "end")
-	    .attr("font-size", 13);
-	}
-
-
-	/**
 	 * Update seat radii.
 	 */
 	function updateSeatRadii(params) {
@@ -1008,11 +978,12 @@
 	    .each("end", function(d, i) {
 	      // The callback is only needed once over all nodes
 	      if (i == 0) {
-	        d3.select("#generationCounter")
+	        // TODO: cache the selection of the counters
+	        d3.select(".generation-counter")
 	          .text("Generation " + params.generation);
 
 	        if (params.reset) {
-	          d3.select("#trialCounter")
+	          d3.select(".trial-counter")
 	            .text("Trial " + params.trial);
 	        }
 
@@ -1103,7 +1074,6 @@
 	module.exports = {
 	  drawSeats: drawSeats,
 	  drawStage: drawStage,
-	  drawCounters: drawCounters,
 	  updateSeatRadii: updateSeatRadii
 	}
 

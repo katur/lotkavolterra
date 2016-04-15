@@ -102,10 +102,6 @@ function drawLuncheon(params) {
     showSpecies: params.showSpecies
   });
 
-  if (!params.hideCounters) {
-    view.drawCounters();
-  }
-
   if (params.showStage) {
     view.drawStage();
   }

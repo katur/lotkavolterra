@@ -118,30 +118,39 @@ p {
 .page-section:last-child, .page-subsection:last-child, p:last-child {
   margin-bottom: 0; }
 
-svg circle {
+.simulation circle {
   opacity: 0.5; }
-svg .HERD {
+.simulation .HERD {
   fill: #008800; }
-svg .PACK {
+.simulation .PACK {
   fill: #FF0000; }
-svg .COLONY {
+.simulation .COLONY {
   fill: #0000FF; }
-svg .circle-text {
+.simulation .circle-text {
   font-size: 10px;
   text-anchor: middle;
   alignment-baseline: middle; }
-svg .stage {
+.simulation .stage {
   fill: #bbb;
   opacity: 0.5; }
-svg .stage-text {
+.simulation .stage-text {
   fill: #999;
   font-size: 15px; }
 
-#simulation, #test-simulation {
+#run-simulation {
   padding: 0;
   background: #eee; }
-  #simulation svg, #test-simulation svg {
+  #run-simulation .simulation {
     width: 100%; }
+  #run-simulation .home-nav, #run-simulation .counters {
+    position: absolute;
+    top: 10px; }
+  #run-simulation .home-nav {
+    left: 10px;
+    font-size: 15px; }
+  #run-simulation .counters {
+    right: 10px;
+    font-size: 13px; }
 
 #home {
   background: #eee; }
