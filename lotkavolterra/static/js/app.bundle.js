@@ -171,13 +171,13 @@
 	function initializeTestLuncheon(params) {
 	  var luncheon = new model.Luncheon({
 	    name: params.simulation,
-	    numTablesX: 2,
-	    numTablesY: 2
+	    numTablesX: 2.8,
+	    numTablesY: 1.4
 	  });
 
 	  var table = new model.Table({
 	    x: 0.5,
-	    y: 0.1
+	    y: 0.5
 	  });
 
 	  var group;
