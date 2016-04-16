@@ -59,7 +59,7 @@ function initializeTestLuncheon(params) {
 
   var group;
   for (var i = 0; i < params.numSeats; i++) {
-    if (params.simulation === "alternating") {
+    if (params.simulation === "alternating2") {
       if (i % 2 === 0) {
         group = constants.Group.PACK;
       } else {

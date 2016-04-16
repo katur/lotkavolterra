@@ -6,7 +6,7 @@ DEFAULTS = {
     'num_seats': 10,  # This one used for test case simulations only
 }
 
-TEST_SIMULATIONS = ['random', 'alternating', 'alternating3', 'halves']
+TEST_SIMULATIONS = ['random', 'alternating2', 'alternating3', 'halves']
 
 
 ######################
