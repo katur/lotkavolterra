@@ -621,10 +621,6 @@
 	  this.nextSeat = params.nextSeat;
 	  this.previousSeat = params.previousSeat;
 
-	  this.formatName = function() {
-	    return this.getFirstName();
-	  };
-
 	  this.getFirstName = function() {
 	    return this.name.split(/\s+/)[0];
 	  };
@@ -649,7 +645,7 @@
 
 	    state.pk = this.pk;
 	    state.index = this.index;
-	    state.name = this.formatName();
+	    state.name = this.getFirstName();
 	    state.species = this.getShortSpecies();
 	    state.group = this.group;
 	    state.populationSize = this.populationSize;
