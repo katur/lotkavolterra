@@ -104,7 +104,7 @@ function initializeTestLuncheon(params) {
  */
 function drawLuncheon(params) {
   // Draw initial state
-  view.drawSeats({
+  var circles = view.drawSeats({
     seats: params.luncheon.exportSeatStates(),
     numTablesX: params.luncheon.numTablesX,
     numTablesY: params.luncheon.numTablesY,
@@ -114,6 +114,8 @@ function drawLuncheon(params) {
   if (params.showStage) {
     view.drawStage();
   }
+
+  return circles;
 }
 
 
@@ -141,7 +143,8 @@ function runGeneration(params) {
     'generation': params.luncheon.generation,
     'callback': runGeneration,
     'callbackParams': params,
-    'reset': reset
+    'reset': reset,
+    'circles': params.circles
   });
 }
 

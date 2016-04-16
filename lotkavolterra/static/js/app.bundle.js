@@ -64,7 +64,7 @@
 					data: jsonData
 				});
 
-	      controller.drawLuncheon({
+	      var circles = controller.drawLuncheon({
 	        luncheon: luncheon,
 	        showStage: jsonData.showStage,
 	        showSpecies: jsonData.showSpecies
@@ -73,7 +73,8 @@
 				controller.runGeneration({
 					luncheon: luncheon,
 					numGenerations: params.numGenerations,
-	        repeat: params.repeat
+	        repeat: params.repeat,
+	        circles: circles
 				});
 
 			} else {
@@ -98,7 +99,7 @@
 	    numSeats: params.numSeats
 	  });
 
-	  controller.drawLuncheon({
+	  var circles = controller.drawLuncheon({
 	    luncheon: luncheon,
 	    showStage: false,
 	    showSpecies: true
@@ -107,7 +108,8 @@
 	  controller.runGeneration({
 	    luncheon: luncheon,
 	    numGenerations: params.numGenerations,
-	    repeat: params.repeat
+	    repeat: params.repeat,
+	    circles: circles
 	  });
 	}
 
@@ -282,7 +284,7 @@
 	 */
 	function drawLuncheon(params) {
 	  // Draw initial state
-	  view.drawSeats({
+	  var circles = view.drawSeats({
 	    seats: params.luncheon.exportSeatStates(),
 	    numTablesX: params.luncheon.numTablesX,
 	    numTablesY: params.luncheon.numTablesY,
@@ -292,6 +294,8 @@
 	  if (params.showStage) {
 	    view.drawStage();
 	  }
+
+	  return circles;
 	}
 
 
@@ -319,7 +323,8 @@
 	    'generation': params.luncheon.generation,
 	    'callback': runGeneration,
 	    'callbackParams': params,
-	    'reset': reset
+	    'reset': reset,
+	    'circles': params.circles
 	  });
 	}
 
@@ -957,20 +962,36 @@
 	    seat.tableRadius = tableRadius;
 	  }
 
-	  // Create and position the group elents (g tags). Each one of
-	  // these elents will hold both a circle and a text box.
-	  var el = svg
-	    .selectAll("g")
+	  // Add the circle elements.
+	  var circles = svg.selectAll("circle")
 	    .data(params.seats)
 	    .enter()
-	    .append("g")
-	    .attr("transform", function(d) {
-	      coords = getCoordinates(d);
-	      return "translate("+coords[0]+","+coords[1]+")"
+	    .append("circle")
+	    .each(function(d, i) {
+	      var coords = getCoordinates(d);
+	      d3.select(this)
+	        .attr("cx", coords[0])
+	        .attr("cy", coords[1])
+	        .attr("r", getRadius(d))
+	        .classed(d.group, true);
 	    });
 
-	  addCircles(el);
-	  addText(el, params.showSpecies);
+
+	  // Add the text elements.
+	  svg.selectAll("text")
+	    .data(params.seats)
+	    .enter()
+	    .append("text")
+	    .each(function(d, i) {
+	      var coords = getCoordinates(d);
+	      d3.select(this)
+	        .attr("x", coords[0])
+	        .attr("y", coords[1])
+	        .text(params.showSpecies ? d.species : d.name)
+	        .classed("circle-text", true);
+	    });
+
+	  return circles;
 	}
 
 
@@ -1013,8 +1034,7 @@
 	    delay = 0;
 	  }
 
-	  d3.select("svg")
-	    .selectAll("circle")
+	  params.circles
 	    .transition()
 	    .duration(duration)
 	    .delay(delay)
@@ -1044,36 +1064,6 @@
 	/*******************
 	 * Drawing helpers *
 	 *******************/
-
-	/**
-	 * Add the circle elements.
-	 */
-	function addCircles(el) {
-	  el.append("circle")
-	    .attr("class", function(d) {
-	      return d.group;
-	    })
-	    .attr("r", function(d) {
-	      return getRadius(d);
-	    });
-	}
-
-
-	/**
-	 * Add the text elements.
-	 */
-	function addText(el, showSpecies) {
-	  el.append("text")
-	    .classed("circle-text", true)
-	    .text(function(d){
-	      if (showSpecies) {
-	        return d.species;
-	      } else {
-	        return d.name;
-	      }
-	    });
-	}
-
 
 	/********************
 	 * Per-seat helpers *

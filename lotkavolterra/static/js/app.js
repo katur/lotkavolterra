@@ -18,7 +18,7 @@ function launchSimulation(params) {
 				data: jsonData
 			});
 
-      controller.drawLuncheon({
+      var circles = controller.drawLuncheon({
         luncheon: luncheon,
         showStage: jsonData.showStage,
         showSpecies: jsonData.showSpecies
@@ -27,7 +27,8 @@ function launchSimulation(params) {
 			controller.runGeneration({
 				luncheon: luncheon,
 				numGenerations: params.numGenerations,
-        repeat: params.repeat
+        repeat: params.repeat,
+        circles: circles
 			});
 
 		} else {
@@ -52,7 +53,7 @@ function launchTestSimulation(params) {
     numSeats: params.numSeats
   });
 
-  controller.drawLuncheon({
+  var circles = controller.drawLuncheon({
     luncheon: luncheon,
     showStage: false,
     showSpecies: true
@@ -61,7 +62,8 @@ function launchTestSimulation(params) {
   controller.runGeneration({
     luncheon: luncheon,
     numGenerations: params.numGenerations,
-    repeat: params.repeat
+    repeat: params.repeat,
+    circles: circles
   });
 }
 
