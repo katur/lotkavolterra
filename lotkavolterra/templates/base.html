@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta name="viewport" content="width=device-width">
+    {% block head_extras %}{% endblock %}
 
     <link href="{{ url_for('static', filename='stylesheets/styles.css') }}"
       rel="stylesheet" type="text/css" />
