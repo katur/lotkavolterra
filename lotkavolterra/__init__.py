@@ -51,15 +51,24 @@ def run_simulation():
     Run the simulation from an input file.
     """
     simulation = request.args['simulation']
+    is_test = simulation in TEST_SIMULATIONS
+
+    try:
+        num_generations = int(request.args['num_generations'])
+    except Exception:
+        num_generations = DEFAULTS['num_generations']
+
+    try:
+        num_seats = int(request.args['num_seats'])
+    except Exception:
+        num_seats = DEFAULTS['num_seats']
 
     context = {
         'simulation': simulation,
-        'num_generations': int(request.args['num_generations']),
+        'is_test': is_test,
+        'num_generations': num_generations,
+        'num_seats': num_seats,
         'repeat': 'repeat' in request.args,
-        'is_test': simulation in TEST_SIMULATIONS,
     }
-
-    if context['is_test']:
-        context['num_seats'] = int(request.args['num_seats'])
 
     return render_template('run_simulation.html', **context)
