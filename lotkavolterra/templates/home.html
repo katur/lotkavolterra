@@ -118,7 +118,10 @@
   <form method="GET" action="{{ url_for('run_simulation') }}">
     <table>
       <tr>
-        <td><label>Simulation:</label></td>
+        <td>
+          <label for="simulation-select">Simulation:</label>
+        </td>
+
         <td>
           <select id="simulation-select" name="simulation">
             {% for simulation in test_simulations %}
@@ -135,20 +138,26 @@
           </select>
         </td>
 
-				<td id="num-seats">
+				<td id="seats-input-wrapper">
 					&nbsp;with
-          <input name="num_seats"
+          <input id="seats-input"
+                 name="num_seats"
                  value="{{ defaults.num_seats }}"
                  size="4">
           </input>
-					seats
+
+          <label for="seats-input">seats</label>
 				</td>
       </tr>
 
       <tr>
-        <td><label>Generations:</label></td>
         <td>
-          <input name="num_generations"
+          <label for="generations-input">Generations:</label>
+        </td>
+
+        <td>
+          <input id="generations-input"
+                 name="num_generations"
                  value="{{ defaults.num_generations }}"
                  size="4">
           </input>
@@ -156,9 +165,12 @@
       </tr>
 
       <tr>
-        <td><label>Repeat?</label></td>
         <td>
-          <input type="checkbox" name="repeat">
+          <label for="repeat-checkbox">Repeat?</label>
+        </td>
+
+        <td>
+          <input id="repeat-checkbox" type="checkbox" name="repeat">
           </input>
         </td>
       </tr>

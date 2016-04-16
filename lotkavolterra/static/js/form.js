@@ -31,7 +31,7 @@ function toggleSeatInput(select, seatInput) {
 
 
 function initializeForm() {
-  var seatInput = document.querySelector("#num-seats");
+  var seatInput = document.querySelector("#seats-input-wrapper");
   var select = document.querySelector("#simulation-select");
 
   toggleSeatInput(select, seatInput);
