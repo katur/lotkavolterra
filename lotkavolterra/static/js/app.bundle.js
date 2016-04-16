@@ -44,7 +44,8 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var controller = __webpack_require__(1);
+	var form = __webpack_require__(1);
+	var controller = __webpack_require__(2);
 
 
 	/**
@@ -113,17 +114,67 @@
 
 	window.lotkavolterra = {
 	  launchSimulation: launchSimulation,
-	  launchTestSimulation: launchTestSimulation
+	  launchTestSimulation: launchTestSimulation,
+	  formInit: form.init
 	}
 
 
 /***/ },
 /* 1 */
+/***/ function(module, exports) {
+
+	var testSimulations
+
+
+	function addClass(el, className) {
+		if (el.classList) {
+			el.classList.add(className);
+		} else {
+			el.className += ' ' + className;
+		}
+	}
+
+
+	function removeClass(el, className) {
+		if (el.classList) {
+			el.classList.remove(className);
+		} else {
+			el.className = el.className.replace(
+					new RegExp('(^|\\b)' + className.split(' ').join('|') +
+	                   '(\\b|$)', 'gi'), ' ');
+		}
+	}
+
+
+	function initializeForm() {
+	  var numSeats = document.querySelector("#num-seats");
+	  var select = document.querySelector("#simulation-select");
+
+	  select.addEventListener("change", function() {
+	    var type = this.querySelector("option:checked")
+	        .getAttribute("data-type");
+
+	    if (type === "input") {
+	     	addClass(numSeats, "hidden");
+	    } else {
+	      removeClass(numSeats, "hidden");
+	    }
+	  });
+	}
+
+
+	module.exports = {
+	  init: initializeForm,
+	}
+
+
+/***/ },
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var constants = __webpack_require__(2);
-	var model = __webpack_require__(4);
-	var view = __webpack_require__(6);
+	var constants = __webpack_require__(3);
+	var model = __webpack_require__(5);
+	var view = __webpack_require__(7);
 
 
 	/**
@@ -278,10 +329,10 @@
 
 
 /***/ },
-/* 2 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var utils = __webpack_require__(3);
+	var utils = __webpack_require__(4);
 
 	const INITIAL_POPULATION_SIZE = 1000;
 	const OVERPOPULATION_FACTOR = 10;
@@ -355,7 +406,7 @@
 
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -376,12 +427,12 @@
 
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var utils = __webpack_require__(3);
-	var constants = __webpack_require__(2);
-	var interactions = __webpack_require__(5);
+	var utils = __webpack_require__(4);
+	var constants = __webpack_require__(3);
+	var interactions = __webpack_require__(6);
 
 
 	/**
@@ -795,10 +846,10 @@
 
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var constants = __webpack_require__(2);
+	var constants = __webpack_require__(3);
 
 
 	/**
@@ -866,12 +917,12 @@
 
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var utils = __webpack_require__(3);
-	var constants = __webpack_require__(2);
-	var d3 = __webpack_require__(7);
+	var utils = __webpack_require__(4);
+	var constants = __webpack_require__(3);
+	var d3 = __webpack_require__(8);
 
 
 	/**
@@ -1072,7 +1123,7 @@
 
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;!function() {

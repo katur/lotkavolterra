@@ -83,10 +83,6 @@ a {
   a:hover {
     color: #bcb393; }
 
-table td {
-  padding-right: 12px;
-  padding-bottom: 6px; }
-
 form button, form input, form select {
   padding: 6px;
   border: none;
@@ -207,6 +203,11 @@ body {
   @media (max-width: 600px) {
     #home form {
       font-size: 14px; } }
+  #home form .hidden {
+    display: none; }
+  #home form label {
+    display: inline-block;
+    padding: 6px 12px 6px 0; }
   #home form button {
     margin-top: 10px; }
 #home .attribution {

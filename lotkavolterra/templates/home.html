@@ -118,32 +118,35 @@
   <form method="GET" action="{{ url_for('run_simulation') }}">
     <table>
       <tr>
-        <td>Simulation:</td>
+        <td><label>Simulation:</label></td>
         <td>
           <select id="simulation-select" name="simulation">
             {% for simulation in test_simulations %}
-            <option value="{{ simulation }}">{{ simulation }}</option>
+            <option value="{{ simulation }}" data-type="test">
+              {{ simulation }}
+            </option>
             {% endfor %}
 
             {% for name, file in input_simulations %}
-            <option value="{{ file }}">{{ name }}</option>
+            <option value="{{ file }}" data-type="input">
+              {{ name }}
+            </option>
             {% endfor %}
           </select>
         </td>
-      </tr>
 
-      <tr>
-        <td>Seats:</td>
-        <td>
+				<td id="num-seats">
+					&nbsp;with
           <input name="num_seats"
                  value="{{ defaults.num_seats }}"
                  size="4">
           </input>
-        </td>
+					seats
+				</td>
       </tr>
 
       <tr>
-        <td>Generations:</td>
+        <td><label>Generations:</label></td>
         <td>
           <input name="num_generations"
                  value="{{ defaults.num_generations }}"
@@ -153,7 +156,7 @@
       </tr>
 
       <tr>
-        <td>Repeat?</td>
+        <td><label>Repeat?</label></td>
         <td>
           <input type="checkbox" name="repeat">
           </input>
@@ -163,6 +166,10 @@
 
     <button class="submit" type="submit">Submit</button>
   </form>
+
+  <script>
+    lotkavolterra.formInit();
+  </script>
 </div>
 
 <div class="page-section attribution">

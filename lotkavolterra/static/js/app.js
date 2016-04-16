@@ -1,3 +1,4 @@
+var form = require("./form.js");
 var controller = require("./controller.js");
 
 
@@ -67,5 +68,6 @@ function launchTestSimulation(params) {
 
 window.lotkavolterra = {
   launchSimulation: launchSimulation,
-  launchTestSimulation: launchTestSimulation
+  launchTestSimulation: launchTestSimulation,
+  formInit: form.init
 }
