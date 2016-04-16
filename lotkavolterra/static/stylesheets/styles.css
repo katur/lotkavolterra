@@ -144,8 +144,7 @@ body {
   font-size: 15px; }
 
 #run-simulation {
-  padding: 0;
-  background: #eee; }
+  padding: 0; }
   #run-simulation .simulation {
     width: 100%; }
   #run-simulation .home-nav, #run-simulation .counters {
