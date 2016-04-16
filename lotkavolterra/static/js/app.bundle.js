@@ -355,7 +355,7 @@
 	  OVERPOPULATION_SIZE: INITIAL_POPULATION_SIZE * OVERPOPULATION_FACTOR,
 
 	  // View
-	  EASING_FXN: "easeOutCubic",
+	  EASING_FXN: "linear",
 	  TRANSITION_DURATION: 500,
 	  BETWEEN_TRIAL_DELAY: 3000,
 	  TABLE_SPACE_TO_RADIUS_FACTOR: 1/3,
@@ -920,6 +920,7 @@
 	  svg.append("rect")
 	    .classed("stage", true)
 	    .attr("x", svgWidth * (0.5 - stageSize / 2))
+	    .attr("y", 0)
 	    .attr("width", svgWidth * stageSize)
 	    .attr("height", svgHeight * stageSize);
 

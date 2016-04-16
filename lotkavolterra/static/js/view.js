@@ -76,6 +76,7 @@ function drawStage() {
   svg.append("rect")
     .classed("stage", true)
     .attr("x", svgWidth * (0.5 - stageSize / 2))
+    .attr("y", 0)
     .attr("width", svgWidth * stageSize)
     .attr("height", svgHeight * stageSize);
 
