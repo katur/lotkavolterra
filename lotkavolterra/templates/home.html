@@ -122,13 +122,13 @@
         <td>
           <select id="simulation-select" name="simulation">
             {% for simulation in test_simulations %}
-            <option value="{{ simulation }}" data-type="test">
+            <option value="{{ simulation }}" data-type="test-based">
               {{ simulation }}
             </option>
             {% endfor %}
 
             {% for name, file in input_simulations %}
-            <option value="{{ file }}" data-type="input">
+            <option value="{{ file }}" data-type="input-based">
               {{ name }}
             </option>
             {% endfor %}

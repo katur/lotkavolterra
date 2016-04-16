@@ -1,6 +1,3 @@
-var testSimulations
-
-
 function addClass(el, className) {
 	if (el.classList) {
 		el.classList.add(className);
@@ -21,23 +18,30 @@ function removeClass(el, className) {
 }
 
 
+function toggleSeatInput(select, seatInput) {
+  var type = select.querySelector("option:checked")
+      .getAttribute("data-type");
+
+  if (type === "test-based") {
+    removeClass(seatInput, "hidden");
+  } else {
+    addClass(seatInput, "hidden");
+  }
+}
+
+
 function initializeForm() {
-  var numSeats = document.querySelector("#num-seats");
+  var seatInput = document.querySelector("#num-seats");
   var select = document.querySelector("#simulation-select");
 
-  select.addEventListener("change", function() {
-    var type = this.querySelector("option:checked")
-        .getAttribute("data-type");
+  toggleSeatInput(select, seatInput);
 
-    if (type === "input") {
-     	addClass(numSeats, "hidden");
-    } else {
-      removeClass(numSeats, "hidden");
-    }
+  select.addEventListener("change", function() {
+    toggleSeatInput(select, seatInput);
   });
 }
 
 
 module.exports = {
-  init: initializeForm,
+  init: initializeForm
 }
