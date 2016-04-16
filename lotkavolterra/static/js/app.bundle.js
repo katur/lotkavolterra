@@ -959,7 +959,6 @@
 	    .each("end", function(d, i) {
 	      // The callback is only needed once over all nodes
 	      if (i == 0) {
-	        // TODO: cache the selection of the counters
 	        d3.select(".generation-counter")
 	          .text("Generation " + params.generation);
 
@@ -974,13 +973,9 @@
 	}
 
 
-	/*******************
-	 * Drawing helpers *
-	 *******************/
-
-	/********************
-	 * Per-seat helpers *
-	 ********************/
+	/***********
+	 * Helpers *
+	 ***********/
 
 	/**
 	 * Get the coordinates of a seat.
