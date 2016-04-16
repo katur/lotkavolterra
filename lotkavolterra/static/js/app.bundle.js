@@ -397,10 +397,6 @@
 	  this.trial = 0;
 	  this.generation = 0;
 
-	  this.toString = function() {
-	    return "Luncheon " + this.name;
-	  };
-
 	  /**
 	   * Add a table to this luncheon.
 	   */
@@ -498,10 +494,6 @@
 	  // Table is initially empty
 	  this.head = null;
 	  this.seatCount = 0;
-
-	  this.toString = function() {
-	    return "Table " + this.number + ": " + this.name;
-	  };
 
 	  /**
 	   * Insert a new seat at the head of this table.
@@ -628,10 +620,6 @@
 	  this.table = params.table;
 	  this.nextSeat = params.nextSeat;
 	  this.previousSeat = params.previousSeat;
-
-	  this.toString = function() {
-	    return this.group + " " + this.name;
-	  };
 
 	  this.formatName = function() {
 	    return this.getFirstName();
