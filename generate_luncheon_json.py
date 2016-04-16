@@ -38,7 +38,7 @@ tables = {}  # Keyed on table number
 
 for i, row in enumerate(csv.DictReader(args.csv_file)):
     # Ignore last name to preserve anonymity in the served json file
-    person_name = row['FIRST NAME']  # + ' ' + row['LAST NAME']
+    person_name = row['FIRST NAME'] + ' ' + row['LAST NAME'][0]
     table_number = int(row['Table'])
     table_name = row['TABLE HOST']
 
