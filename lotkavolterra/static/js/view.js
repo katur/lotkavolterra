@@ -56,7 +56,7 @@ function drawSeats(params) {
       d3.select(this)
         .attr("x", coords[0])
         .attr("y", coords[1])
-        .text(params.showSpecies ? d.species : d.name)
+        .text(params.showSpecies ? d.shortSpecies : d.firstName)
         .classed("circle-text", true);
     });
 
@@ -109,7 +109,6 @@ function updateSeatRadii(params) {
     .delay(delay)
     .ease(constants.EASING_FXN)
     .attr("r", function(d) {
-      d.populationSize = params.change[d.pk];
       return getRadius(d);
     })
     .each("end", function(d, i) {
@@ -142,7 +141,7 @@ function updateSeatRadii(params) {
  * Get the coordinates of a seat.
  */
 function getCoordinates(seat) {
-  var step = constants.CIRCLE_RADIANS / seat.tableSeatCount;
+  var step = constants.CIRCLE_RADIANS / seat.table.seatCount;
   var angle = seat.index * step;
 
   // Skew angle slightly so that tables with an even number of seats
@@ -152,9 +151,9 @@ function getCoordinates(seat) {
 
   // Table coordinates, shifted such that relative table positions
   // 0 and 1 are moved a half-table inward from the svg edges.
-  var tableX = (seat.tableX * (seat.svgWidth - seat.tableSpace)) +
+  var tableX = (seat.table.x * (seat.svgWidth - seat.tableSpace)) +
                (seat.tableSpace / 2);
-  var tableY = (seat.tableY * (seat.svgHeight - seat.tableSpace)) +
+  var tableY = (seat.table.y * (seat.svgHeight - seat.tableSpace)) +
                (seat.tableSpace / 2);
 
   // Seat coordinates now just trigonometry

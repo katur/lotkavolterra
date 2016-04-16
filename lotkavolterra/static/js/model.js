@@ -53,39 +53,14 @@ function Luncheon(params) {
     this.trial += 1;
   };
 
-  /**
-   * Export the current state of all seats at the luncheon.
-   */
-  this.exportSeatStates = function() {
-    var seatStates = [];
-
-    var i, table;
-    for (i = 0; i < this.tables.length; i++) {
-      table = this.tables[i];
-      seatStates = seatStates.concat(table.exportSeatStates());
+  /** Get all seats at this luncheon. */
+  this.getAllSeats = function() {
+    var seats = [];
+    for (var i = 0; i < this.tables.length; i++) {
+      seats = seats.concat(this.tables[i].getAllSeats());
     }
-
-    return seatStates;
-  };
-
-  /**
-   * Export a mapping from pk to size for all seats at the luncheon.
-   */
-  this.exportSeatSizes = function() {
-    // Create a true prototype-less dictionary
-    seatSizes = Object.create(null);
-
-    var i, tableSeatSizes;
-    for (i = 0; i < this.tables.length; i++) {
-      tableSeatSizes = this.tables[i].exportSeatSizes();
-
-      for (var key in tableSeatSizes) {
-        seatSizes[key] = tableSeatSizes[key];
-      }
-    }
-
-    return seatSizes;
-  };
+    return seats;
+  }
 }
 
 
@@ -187,37 +162,6 @@ function Table(params) {
       seats[i].reset();
     }
   };
-
-  /**
-   * Export the current state of all seats at this table.
-   */
-  this.exportSeatStates = function() {
-    var seats = this.getAllSeats();
-    var states = [];
-
-    for (var i = 0; i < seats.length; i++) {
-      states.push(seats[i].exportState());
-    }
-
-    return states;
-  };
-
-  /**
-   * Export a mapping from seat.pk to seat.populationSize for all seats
-   * at this table.
-   */
-  this.exportSeatSizes = function() {
-    var seats = this.getAllSeats();
-    var sizes = {};
-
-    var i, seat;
-    for (i = 0; i < seats.length; i++) {
-      seat = seats[i];
-      sizes[seat.pk] = seat.populationSize;
-    }
-
-    return sizes;
-  };
 }
 
 
@@ -231,48 +175,18 @@ function Table(params) {
  * list fashion.
  */
 function Seat(params) {
+  // TODO: firstName and shortSpecies maybe can use "this"
   this.pk = params.pk;  // Unique identifier across tables
   this.index = params.index;  // Position within the table
   this.name = params.name;
+  this.firstName = params.name.split(/\s+/)[0];
   this.group = params.group;
+  this.species = constants.Species[params.group];
+  this.shortSpecies = constants.Species[params.group].split(/\s+/)[1];
   this.populationSize = constants.INITIAL_POPULATION_SIZE;
   this.table = params.table;
   this.nextSeat = params.nextSeat;
   this.previousSeat = params.previousSeat;
-
-  this.getFirstName = function() {
-    return this.name.split(/\s+/)[0];
-  };
-
-  this.getSpecies = function() {
-    return constants.Species[this.group];
-  };
-
-  this.getShortSpecies = function() {
-   return this.getSpecies().split(/\s+/)[1];
-  }
-
-  /**
-   * Export the current state this seat.
-   *
-   * Includes all information necessary to pass the seat to the front
-   * end, such that the frontn end can render it, including its position.
-   */
-  this.exportState = function() {
-    // Create a true prototype-less dictionary
-    state = Object.create(null);
-
-    state.pk = this.pk;
-    state.index = this.index;
-    state.name = this.getFirstName();
-    state.species = this.getShortSpecies();
-    state.group = this.group;
-    state.populationSize = this.populationSize;
-    state.tableX = this.table.x;
-    state.tableY = this.table.y;
-    state.tableSeatCount = this.table.seatCount;
-    return state;
-  };
 
   /** Get the next adjacent seat. */
   this.getNext = function() {

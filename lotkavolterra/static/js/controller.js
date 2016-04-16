@@ -105,7 +105,7 @@ function initializeTestLuncheon(params) {
 function drawLuncheon(params) {
   // Draw initial state
   var circles = view.drawSeats({
-    seats: params.luncheon.exportSeatStates(),
+    seats: params.luncheon.getAllSeats(),
     numTablesX: params.luncheon.numTablesX,
     numTablesY: params.luncheon.numTablesY,
     showSpecies: params.showSpecies
@@ -138,7 +138,6 @@ function runGeneration(params) {
   }
 
   view.updateSeatRadii({
-    'change': params.luncheon.exportSeatSizes(),
     'trial': params.luncheon.trial,
     'generation': params.luncheon.generation,
     'callback': runGeneration,

@@ -285,7 +285,7 @@
 	function drawLuncheon(params) {
 	  // Draw initial state
 	  var circles = view.drawSeats({
-	    seats: params.luncheon.exportSeatStates(),
+	    seats: params.luncheon.getAllSeats(),
 	    numTablesX: params.luncheon.numTablesX,
 	    numTablesY: params.luncheon.numTablesY,
 	    showSpecies: params.showSpecies
@@ -318,7 +318,6 @@
 	  }
 
 	  view.updateSeatRadii({
-	    'change': params.luncheon.exportSeatSizes(),
 	    'trial': params.luncheon.trial,
 	    'generation': params.luncheon.generation,
 	    'callback': runGeneration,
@@ -494,39 +493,14 @@
 	    this.trial += 1;
 	  };
 
-	  /**
-	   * Export the current state of all seats at the luncheon.
-	   */
-	  this.exportSeatStates = function() {
-	    var seatStates = [];
-
-	    var i, table;
-	    for (i = 0; i < this.tables.length; i++) {
-	      table = this.tables[i];
-	      seatStates = seatStates.concat(table.exportSeatStates());
+	  /** Get all seats at this luncheon. */
+	  this.getAllSeats = function() {
+	    var seats = [];
+	    for (var i = 0; i < this.tables.length; i++) {
+	      seats = seats.concat(this.tables[i].getAllSeats());
 	    }
-
-	    return seatStates;
-	  };
-
-	  /**
-	   * Export a mapping from pk to size for all seats at the luncheon.
-	   */
-	  this.exportSeatSizes = function() {
-	    // Create a true prototype-less dictionary
-	    seatSizes = Object.create(null);
-
-	    var i, tableSeatSizes;
-	    for (i = 0; i < this.tables.length; i++) {
-	      tableSeatSizes = this.tables[i].exportSeatSizes();
-
-	      for (var key in tableSeatSizes) {
-	        seatSizes[key] = tableSeatSizes[key];
-	      }
-	    }
-
-	    return seatSizes;
-	  };
+	    return seats;
+	  }
 	}
 
 
@@ -628,37 +602,6 @@
 	      seats[i].reset();
 	    }
 	  };
-
-	  /**
-	   * Export the current state of all seats at this table.
-	   */
-	  this.exportSeatStates = function() {
-	    var seats = this.getAllSeats();
-	    var states = [];
-
-	    for (var i = 0; i < seats.length; i++) {
-	      states.push(seats[i].exportState());
-	    }
-
-	    return states;
-	  };
-
-	  /**
-	   * Export a mapping from seat.pk to seat.populationSize for all seats
-	   * at this table.
-	   */
-	  this.exportSeatSizes = function() {
-	    var seats = this.getAllSeats();
-	    var sizes = {};
-
-	    var i, seat;
-	    for (i = 0; i < seats.length; i++) {
-	      seat = seats[i];
-	      sizes[seat.pk] = seat.populationSize;
-	    }
-
-	    return sizes;
-	  };
 	}
 
 
@@ -672,48 +615,18 @@
 	 * list fashion.
 	 */
 	function Seat(params) {
+	  // TODO: firstName and shortSpecies maybe can use "this"
 	  this.pk = params.pk;  // Unique identifier across tables
 	  this.index = params.index;  // Position within the table
 	  this.name = params.name;
+	  this.firstName = params.name.split(/\s+/)[0];
 	  this.group = params.group;
+	  this.species = constants.Species[params.group];
+	  this.shortSpecies = constants.Species[params.group].split(/\s+/)[1];
 	  this.populationSize = constants.INITIAL_POPULATION_SIZE;
 	  this.table = params.table;
 	  this.nextSeat = params.nextSeat;
 	  this.previousSeat = params.previousSeat;
-
-	  this.getFirstName = function() {
-	    return this.name.split(/\s+/)[0];
-	  };
-
-	  this.getSpecies = function() {
-	    return constants.Species[this.group];
-	  };
-
-	  this.getShortSpecies = function() {
-	   return this.getSpecies().split(/\s+/)[1];
-	  }
-
-	  /**
-	   * Export the current state this seat.
-	   *
-	   * Includes all information necessary to pass the seat to the front
-	   * end, such that the frontn end can render it, including its position.
-	   */
-	  this.exportState = function() {
-	    // Create a true prototype-less dictionary
-	    state = Object.create(null);
-
-	    state.pk = this.pk;
-	    state.index = this.index;
-	    state.name = this.getFirstName();
-	    state.species = this.getShortSpecies();
-	    state.group = this.group;
-	    state.populationSize = this.populationSize;
-	    state.tableX = this.table.x;
-	    state.tableY = this.table.y;
-	    state.tableSeatCount = this.table.seatCount;
-	    return state;
-	  };
 
 	  /** Get the next adjacent seat. */
 	  this.getNext = function() {
@@ -987,7 +900,7 @@
 	      d3.select(this)
 	        .attr("x", coords[0])
 	        .attr("y", coords[1])
-	        .text(params.showSpecies ? d.species : d.name)
+	        .text(params.showSpecies ? d.shortSpecies : d.firstName)
 	        .classed("circle-text", true);
 	    });
 
@@ -1040,7 +953,6 @@
 	    .delay(delay)
 	    .ease(constants.EASING_FXN)
 	    .attr("r", function(d) {
-	      d.populationSize = params.change[d.pk];
 	      return getRadius(d);
 	    })
 	    .each("end", function(d, i) {
@@ -1073,7 +985,7 @@
 	 * Get the coordinates of a seat.
 	 */
 	function getCoordinates(seat) {
-	  var step = constants.CIRCLE_RADIANS / seat.tableSeatCount;
+	  var step = constants.CIRCLE_RADIANS / seat.table.seatCount;
 	  var angle = seat.index * step;
 
 	  // Skew angle slightly so that tables with an even number of seats
@@ -1083,9 +995,9 @@
 
 	  // Table coordinates, shifted such that relative table positions
 	  // 0 and 1 are moved a half-table inward from the svg edges.
-	  var tableX = (seat.tableX * (seat.svgWidth - seat.tableSpace)) +
+	  var tableX = (seat.table.x * (seat.svgWidth - seat.tableSpace)) +
 	               (seat.tableSpace / 2);
-	  var tableY = (seat.tableY * (seat.svgHeight - seat.tableSpace)) +
+	  var tableY = (seat.table.y * (seat.svgHeight - seat.tableSpace)) +
 	               (seat.tableSpace / 2);
 
 	  // Seat coordinates now just trigonometry
