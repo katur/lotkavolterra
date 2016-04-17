@@ -344,6 +344,8 @@
 
 	const INITIAL_POPULATION_SIZE = 1000;
 	const OVERPOPULATION_FACTOR = 10;
+	const OVERPOPULATION_SIZE = INITIAL_POPULATION_SIZE * OVERPOPULATION_FACTOR;
+	const OVERPOPULATION_RADIUS = utils.getRadiusFromArea(OVERPOPULATION_SIZE);
 
 	module.exports = {
 	  // Model
@@ -352,7 +354,8 @@
 	  INITIAL_POPULATION_SIZE: INITIAL_POPULATION_SIZE,
 
 	  // Both model and view
-	  OVERPOPULATION_SIZE: INITIAL_POPULATION_SIZE * OVERPOPULATION_FACTOR,
+	  OVERPOPULATION_SIZE: OVERPOPULATION_SIZE,
+	  OVERPOPULATION_RADIUS: OVERPOPULATION_RADIUS,
 
 	  // View
 	  EASING_FXN: "linear",
@@ -1009,7 +1012,7 @@
 	 */
 	function getRadius(seat) {
 	  var current = utils.getRadiusFromArea(seat.populationSize);
-	  var max = utils.getRadiusFromArea(constants.OVERPOPULATION_SIZE);
+	  var max = constants.OVERPOPULATION_RADIUS;
 	  var relative = current / max;
 
 	  // Allow seats to get as big as the table at their largest
