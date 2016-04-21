@@ -8,7 +8,7 @@ var controller = require("./controller.js");
 function launchSimulation(params) {
 	// Make AJAX request for JSON input
 	var request = new XMLHttpRequest();
-  var jsonURL = "static/json/".concat(params.jsonFilename);
+  var jsonURL = "/static/json/".concat(params.jsonFilename);
 	request.open("GET", jsonURL, true);
 
 	request.onload = function() {
