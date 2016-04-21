@@ -8,7 +8,7 @@ git clone https://github.com/katur/lotkavolterra.git
 ```
 
 
-## Install the dependencies
+## Install development dependencies
 
 Webpack is used for bundling Javascripts.
 Also, CSS is in [SASS](http://sass-lang.com/), so needs to be compiled.
@@ -24,4 +24,12 @@ npm install
 To start the gulp build script, run the following in the project root:
 ```
 gulp
+```
+
+
+## Run development server
+
+Python comes with a free dev server:
+```
+python -m SimpleHTTPServer
 ```
