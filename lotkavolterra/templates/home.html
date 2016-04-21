@@ -152,12 +152,29 @@
                     halves
                   </option>
 
-                  {% for name, file in input_simulations %}
-                  <option value="{{ file }}"
-                          data-type="input-based">
-                    {{ name }}
+                  <option value="example.json" data-type="input-based">
+                    homepage
                   </option>
-                  {% endfor %}
+
+                  <option value="4table-assigned.json"
+                          data-type="input-based">
+                    4table: assigned
+                  </option>
+
+                  <option value="4table-random.json"
+                          data-type="input-based">
+                    4table: random
+                  </option>
+
+                  <option value="BRFC2015-assigned.json"
+                          data-type="input-based">
+                    BRFC2015: assigned
+                  </option>
+
+                  <option value="BRFC2015-random.json"
+                          data-type="input-based">
+                    BRFC2015: random
+                  </option>
                 </select>
 
                 <input id="simulation-type"

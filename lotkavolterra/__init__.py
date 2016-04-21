@@ -29,10 +29,7 @@ def home():
     """
     Render the homepage.
     """
-    context = {
-        'input_simulations': app.config['INPUT_SIMULATIONS'],
-    }
-    return render_template('home.html', **context)
+    return render_template('home.html')
 
 
 @app.route("/run-simulation/")
