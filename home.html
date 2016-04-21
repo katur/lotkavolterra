@@ -3,16 +3,12 @@
   <head>
     <meta name="viewport" content="width=device-width">
 
-    <link
-      href="{{ url_for('static', filename='stylesheets/styles.css') }}"
-      rel="stylesheet" type="text/css" />
+    <link href="static/stylesheets/styles.css" rel="stylesheet"
+          type="text/css">
 
-    <script src="{{ url_for('static', filename='js/app.bundle.js') }}"
-      charset="utf-8"></script>
+    <script src="static/js/app.bundle.js" charset="utf-8"></script>
 
-    <title>
-      Lotka-Volterra Project
-    </title>
+    <title>Lotka-Volterra Project</title>
   </head>
 
   <body id="home">
@@ -72,12 +68,9 @@
         </p>
 
         <div class="animal-photos">
-          <img class="predator"
-            src="{{ url_for('static', filename='images/EasternCoyote.jpg') }}">
-          <img class="prey"
-            src="{{ url_for('static', filename='images/WildTurkey.jpg') }}">
-          <img class="invasive"
-            src="{{ url_for('static', filename='images/EurasianBoar.jpg') }}">
+          <img class="predator" src="static/images/EasternCoyote.jpg">
+          <img class="prey" src="static/images/WildTurkey.jpg">
+          <img class="invasive" src="static/images/EurasianBoar.jpg">
         </div>
 
         <p>
@@ -108,14 +101,13 @@
             lotkavolterra.launchSimulation({
               numGenerations: 40,
               repeat: true,
-              jsonURL:
-                "{{ url_for('static', filename='json/homepage.json') }}"
+              jsonFilename: "homepage.json"
             });
           </script>
         </div>
 
         <p>
-          If you’re lucky, your table will survive for many generations,
+          If you're lucky, your table will survive for many generations,
           the populations keeping one another in check.
           But some tables will be wiped out quickly from an
           imbalanced dynamic.
@@ -128,7 +120,7 @@
       <div class="page-section">
         <h2 class="page-title">View Examples</h2>
 
-        <form method="GET" action="{{ url_for('run_simulation') }}">
+        <form method="GET" action="run_simulation.html">
           <table>
             <tr>
               <td>

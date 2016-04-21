@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link
-      href="{{ url_for('static', filename='stylesheets/styles.css') }}"
-      rel="stylesheet" type="text/css" />
+    <link href="static/stylesheets/styles.css" rel="stylesheet"
+          type="text/css">
 
-    <script src="{{ url_for('static', filename='js/app.bundle.js') }}"
-      charset="utf-8"></script>
+    <script src="static/js/app.bundle.js" charset="utf-8"></script>
 
-    <title>
-      Simulation | Lotka-Volterra Project
-    </title>
+    <title>Simulation | Lotka-Volterra Project</title>
   </head>
 
   <body id="run-simulation">
     <div id="content">
-      <a class="home-nav" href={{ url_for('home') }}>Home</a>
+      <a class="home-nav" href="home.html">Home</a>
 
       <div class="counters">
         <span class="trial-counter">Trial 0</span>
@@ -40,8 +36,7 @@
           lotkavolterra.launchSimulation({
             numGenerations: params.num_generations,
             repeat: repeat,
-            jsonURL:
-              "{{ url_for('static', filename='json/' ~ simulation) }}"
+            jsonFilename: params.simulation
           });
         }
       </script>

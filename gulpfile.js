@@ -3,11 +3,11 @@ var gutil = require("gulp-util");
 var sass = require("gulp-ruby-sass");
 var webpack = require("webpack");
 
-var cssDir = "./lotkavolterra/static/stylesheets/";
+var cssDir = "./static/stylesheets/";
 var sassMain = cssDir + "styles.sass";
 var sassFiles = cssDir + "**/*";
 
-var jsDir = "./lotkavolterra/static/js/";
+var jsDir = "./static/js/";
 var jsMain = jsDir + "app.js";
 var jsFiles = jsDir + "**/*";
 

@@ -1,19 +1,11 @@
 # Project-specific Node.js packages (e.g. gulp)
 node_modules/
-lotkavolterra/static/json
 
-
-# Input
-*.csv
-*.xls
-
-
-# Local or private settings
-instance/
+# Input files
+*.json
 
 
 # Compiled and temporary files
-*.pyc
 *.swp
 .sass-cache/
 *DS_Store

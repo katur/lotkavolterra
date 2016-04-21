@@ -16,10 +16,7 @@ Description coming soon.
 
 ## Code
 
-Code is mainly in Javascript.
-
-Website is in [Python](https://www.python.org/),
-using the [Flask microframework](http://flask.pocoo.org/).
+Code is in Javascript.
 
 CSS is in [SASS](http://sass-lang.com/).
 
