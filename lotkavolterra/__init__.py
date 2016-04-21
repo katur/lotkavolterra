@@ -1,14 +1,6 @@
 from flask import Flask, render_template, request
 
 
-DEFAULTS = {
-    'num_generations': 50,
-    'num_seats': 10,  # This one used for test case simulations only
-}
-
-TEST_SIMULATIONS = ['random', 'alternating2', 'alternating3', 'halves']
-
-
 ######################
 # Set up application #
 ######################
@@ -39,8 +31,6 @@ def home():
     """
     context = {
         'input_simulations': app.config['INPUT_SIMULATIONS'],
-        'test_simulations': TEST_SIMULATIONS,
-        'defaults': DEFAULTS,
     }
     return render_template('home.html', **context)
 
@@ -51,17 +41,17 @@ def run_simulation():
     Run the simulation from an input file.
     """
     simulation = request.args['simulation']
-    is_test = simulation in TEST_SIMULATIONS
+    is_test = request.args['type'] == 'test-based'
 
     try:
         num_generations = int(request.args['num_generations'])
     except Exception:
-        num_generations = DEFAULTS['num_generations']
+        num_generations = 50
 
     try:
         num_seats = int(request.args['num_seats'])
     except Exception:
-        num_seats = DEFAULTS['num_seats']
+        num_seats = 10
 
     context = {
         'simulation': simulation,

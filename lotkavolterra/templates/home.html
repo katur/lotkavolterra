@@ -136,25 +136,40 @@
 
               <td>
                 <select id="simulation-select" name="simulation">
-                  {% for simulation in test_simulations %}
-                  <option value="{{ simulation }}" data-type="test-based">
-                    {{ simulation }}
+                  <option value="random" data-type="test-based">
+                    random
                   </option>
-                  {% endfor %}
+
+                  <option value="alternating2" data-type="test-based">
+                    alternating2
+                  </option>
+
+                  <option value="alternating3" data-type="test-based">
+                    alternating3
+                  </option>
+
+                  <option value="halves" data-type="test-based">
+                    halves
+                  </option>
 
                   {% for name, file in input_simulations %}
-                  <option value="{{ file }}" data-type="input-based">
+                  <option value="{{ file }}"
+                          data-type="input-based">
                     {{ name }}
                   </option>
                   {% endfor %}
                 </select>
+
+                <input id="simulation-type"
+                       name="type"
+                       type="hidden">
               </td>
 
               <td id="seats-input-wrapper">
                 &nbsp;with
                 <input id="seats-input"
                        name="num_seats"
-                       value="{{ defaults.num_seats }}"
+                       value="10"
                        size="4">
                 </input>
 
@@ -170,7 +185,7 @@
               <td>
                 <input id="generations-input"
                        name="num_generations"
-                       value="{{ defaults.num_generations }}"
+                       value="50"
                        size="4">
                 </input>
               </td>
@@ -182,7 +197,9 @@
               </td>
 
               <td>
-                <input id="repeat-checkbox" type="checkbox" name="repeat">
+                <input id="repeat-checkbox"
+                       type="checkbox"
+                       name="repeat">
                 </input>
               </td>
             </tr>
