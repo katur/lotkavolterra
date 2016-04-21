@@ -1,39 +1,49 @@
-{% extends 'base.html' %}
-{% block body_id %}run-simulation{% endblock %}
-{% block head_title_prefix %}Simulation |{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="{{ url_for('static', filename='stylesheets/styles.css') }}"
+      rel="stylesheet" type="text/css" />
 
+    <script src="{{ url_for('static', filename='js/app.bundle.js') }}"
+      charset="utf-8"></script>
 
-{% block content %}
+    <title>
+      Simulation | Lotka-Volterra Project
+    </title>
+  </head>
 
-<a class="home-nav" href={{ url_for('home') }}>Home</a>
+  <body id="run-simulation">
+    <div id="content">
+      <a class="home-nav" href={{ url_for('home') }}>Home</a>
 
-<div class="counters">
-  <span class="trial-counter">Trial 0</span>
-  <br>
-  <span class="generation-counter">Generation 0</span>
-</div>
+      <div class="counters">
+        <span class="trial-counter">Trial 0</span>
+        <br>
+        <span class="generation-counter">Generation 0</span>
+      </div>
 
-<svg class="simulation"></svg>
+      <svg class="simulation"></svg>
 
-<script type="text/javascript" charset="utf-8">
-  var repeat = {% if repeat %}true{% else %}false{% endif %}
+      <script type="text/javascript" charset="utf-8">
+        var repeat = {% if repeat %}true{% else %}false{% endif %}
 
-  {% if is_test%}
-  lotkavolterra.launchTestSimulation({
-    numGenerations: {{ num_generations }},
-    repeat: repeat,
-    simulation: "{{ simulation }}",
-    numSeats: {{ num_seats }}
-  });
+        {% if is_test%}
+        lotkavolterra.launchTestSimulation({
+          numGenerations: {{ num_generations }},
+          repeat: repeat,
+          simulation: "{{ simulation }}",
+          numSeats: {{ num_seats }}
+        });
 
-  {% else %}
-  lotkavolterra.launchSimulation({
-    numGenerations: {{ num_generations }},
-    repeat: repeat,
-    jsonURL:
-      "{{ url_for('static', filename='json/' ~ simulation) }}"
-  });
-  {% endif %}
-</script>
-
-{% endblock %}
+        {% else %}
+        lotkavolterra.launchSimulation({
+          numGenerations: {{ num_generations }},
+          repeat: repeat,
+          jsonURL:
+            "{{ url_for('static', filename='json/' ~ simulation) }}"
+        });
+        {% endif %}
+      </script>
+    </div>
+  </body>
+</html>
