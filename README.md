@@ -1,9 +1,11 @@
 # Lotka-Volterra simulation
 
 A simulation in which packs of predators, herds of prey, and colonies
-of invasive species interact according to the rules outlined below.
+of invasive species interact according to the rules outlined at
+[rules.html](/rules.html).
 While inspired by the Lotka-Volterra equations for modeling predator-prey
-dynamics, it is not a direct representation of those continuous equations.
+dynamics, it is not a direct representation of those differential
+equations.
 
 This project is made under the guidance of, and graciously sponsored by, the
 [RiskEcon Lab at NYU](http://www.cims.nyu.edu/riskeconlab/).
