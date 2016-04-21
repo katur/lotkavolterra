@@ -1,0 +1,150 @@
+{
+  "name": "Friends",
+  "numTablesX": 2,
+  "numTablesY": 2,
+  "tables": [
+    {
+      "number": 1,
+      "name": "Cider Party",
+      "x": 0,
+      "y": 0,
+      "people": [
+        {
+          "name": "Adrian W"
+        },
+        {
+          "name": "Daniel K"
+        },
+        {
+          "name": "Eric Z"
+        },
+        {
+          "name": "Stacey L"
+        },
+        {
+          "name": "Crispen M"
+        },
+        {
+          "name": "Rosalie L"
+        },
+        {
+          "name": "Dinah Y"
+        },
+        {
+          "name": "Jim K"
+        },
+        {
+          "name": "Elizabeth K"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "name": "Pan",
+      "x": 0,
+      "y": 1,
+      "people": [
+        {
+          "name": "Zeke R"
+        },
+        {
+          "name": "Michael P. G"
+        },
+        {
+          "name": "Steve L"
+        },
+        {
+          "name": "Anne T"
+        },
+        {
+          "name": "Ze'ev S"
+        },
+        {
+          "name": "Noah S"
+        },
+        {
+          "name": "Sparkle D"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "name": "Duluth",
+      "x": 1,
+      "y": 0,
+      "people": [
+        {
+          "name": "Laura Lynn E"
+        },
+        {
+          "name": "Russell John E"
+        },
+        {
+          "name": "Thomas Elliott E"
+        },
+        {
+          "name": "Helen Elsie E"
+        },
+        {
+          "name": "Toast Richard E"
+        },
+        {
+          "name": "Amy W"
+        },
+        {
+          "name": "Pepper G"
+        },
+        {
+          "name": "Gaelynn W"
+        },
+        {
+          "name": "Ashlie B"
+        },
+        {
+          "name": "Heidi S"
+        },
+        {
+          "name": "Josh B"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "name": "Famous",
+      "x": 1,
+      "y": 1,
+      "people": [
+        {
+          "name": "Angela Davis"
+        },
+        {
+          "name": "Billie Holiday"
+        },
+        {
+          "name": "Crispin Glover"
+        },
+        {
+          "name": "Django Reinhardt"
+        },
+        {
+          "name": "Ewan McGregor"
+        },
+        {
+          "name": "Frank Gehry"
+        },
+        {
+          "name": "Georgia O'Keeffe"
+        },
+        {
+          "name": "Herbert Hoover"
+        },
+        {
+          "name": "Iggy Pop"
+        },
+        {
+          "name": "Jean-Claude Van Damme"
+        }
+      ]
+    }
+  ]
+}

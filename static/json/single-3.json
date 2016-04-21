@@ -1,0 +1,57 @@
+{
+  "name": "Small Table",
+  "numTablesX": 2.8,
+  "numTablesY": 1.4,
+  "showStage": false,
+  "showSpecies": true,
+  "tables": [
+    {
+      "number": 1,
+      "name": "Small Table",
+      "x": 0.5,
+      "y": 0.5,
+      "people": [
+        {
+          "group": "HERD",
+          "name": "A"
+        },
+        {
+          "group": "COLONY",
+          "name": "B"
+        },
+        {
+          "group": "COLONY",
+          "name": "C"
+        },
+        {
+          "group": "PACK",
+          "name": "D"
+        },
+        {
+          "group": "HERD",
+          "name": "E"
+        },
+        {
+          "group": "HERD",
+          "name": "F"
+        },
+        {
+          "group": "PACK",
+          "name": "G"
+        },
+        {
+          "group": "HERD",
+          "name": "H"
+        },
+        {
+          "group": "PACK",
+          "name": "I"
+        },
+        {
+          "group": "PACK",
+          "name": "J"
+        }
+      ]
+    }
+  ]
+}

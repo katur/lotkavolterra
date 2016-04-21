@@ -1,0 +1,187 @@
+{
+  "name": "Friends",
+  "numTablesX": 2,
+  "numTablesY": 2,
+  "tables": [
+    {
+      "number": 1,
+      "name": "Cider Party",
+      "x": 0,
+      "y": 0,
+      "people": [
+        {
+          "group": "COLONY",
+          "name": "Adrian W"
+        },
+        {
+          "group": "PACK",
+          "name": "Daniel K"
+        },
+        {
+          "group": "PACK",
+          "name": "Eric Z"
+        },
+        {
+          "group": "COLONY",
+          "name": "Stacey L"
+        },
+        {
+          "group": "HERD",
+          "name": "Crispen M"
+        },
+        {
+          "group": "HERD",
+          "name": "Rosalie K"
+        },
+        {
+          "group": "COLONY",
+          "name": "Dinah Y"
+        },
+        {
+          "group": "PACK",
+          "name": "Jim K"
+        },
+        {
+          "group": "COLONY",
+          "name": "Elizabeth K"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "name": "Pan",
+      "x": 0,
+      "y": 1,
+      "people": [
+        {
+          "group": "COLONY",
+          "name": "Zeke R"
+        },
+        {
+          "group": "PACK",
+          "name": "Michael P. G"
+        },
+        {
+          "group": "HERD",
+          "name": "Steve L"
+        },
+        {
+          "group": "HERD",
+          "name": "Anne T"
+        },
+        {
+          "group": "HERD",
+          "name": "Ze'ev S"
+        },
+        {
+          "group": "HERD",
+          "name": "Noah S"
+        },
+        {
+          "group": "COLONY",
+          "name": "Sparkle D"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "name": "Duluth",
+      "x": 1,
+      "y": 0,
+      "people": [
+        {
+          "group": "COLONY",
+          "name": "Laura Lynn E"
+        },
+        {
+          "group": "PACK",
+          "name": "Russell John E"
+        },
+        {
+          "group": "PACK",
+          "name": "Thomas Elliott E"
+        },
+        {
+          "group": "COLONY",
+          "name": "Helen Elsie E"
+        },
+        {
+          "group": "HERD",
+          "name": "Toast Richard E"
+        },
+        {
+          "group": "PACK",
+          "name": "Amy W"
+        },
+        {
+          "group": "HERD",
+          "name": "Pepper G"
+        },
+        {
+          "group": "COLONY",
+          "name": "Gaelynn W"
+        },
+        {
+          "group": "HERD",
+          "name": "Ashlie B"
+        },
+        {
+          "group": "COLONY",
+          "name": "Heidi S"
+        },
+        {
+          "group": "HERD",
+          "name": "Josh B"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "name": "Famous",
+      "x": 1,
+      "y": 1,
+      "people": [
+        {
+          "group": "HERD",
+          "name": "Angela Davis"
+        },
+        {
+          "group": "COLONY",
+          "name": "Billie Holiday"
+        },
+        {
+          "group": "PACK",
+          "name": "Crispin Glover"
+        },
+        {
+          "group": "COLONY",
+          "name": "Django Reinhardt"
+        },
+        {
+          "group": "COLONY",
+          "name": "Ewan McGregor"
+        },
+        {
+          "group": "HERD",
+          "name": "Frank Gehry"
+        },
+        {
+          "group": "HERD",
+          "name": "Georgia O'Keeffe"
+        },
+        {
+          "group": "COLONY",
+          "name": "Herbert Hoover"
+        },
+        {
+          "group": "HERD",
+          "name": "Iggy Pop"
+        },
+        {
+          "group": "COLONY",
+          "name": "Jean-Claude Van Damme"
+        }
+      ]
+    }
+  ]
+}

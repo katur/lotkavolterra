@@ -1,0 +1,1017 @@
+{
+  "name": "Black Rock Luncheon: 2015",
+  "numTablesX": 8,
+  "numTablesY": 4,
+  "showStage": true,
+  "showSpecies": false,
+  "tables": [
+    {
+      "number": 1,
+      "name": "Land",
+      "x": 0.0,
+      "y": 0.0,
+      "people": [
+        {
+          "name": "Shoshanna"
+        },
+        {
+          "name": "Yakov"
+        },
+        {
+          "name": "Vernonika"
+        },
+        {
+          "name": "Thomas"
+        },
+        {
+          "name": "Matt"
+        },
+        {
+          "name": "Martin"
+        },
+        {
+          "name": "Douglas"
+        },
+        {
+          "name": "Marlena"
+        },
+        {
+          "name": "MJ"
+        },
+        {
+          "name": "Christine"
+        },
+        {
+          "name": "Lisa-Ann"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "name": "Browning School",
+      "x": 0.14285714285714285,
+      "y": 0.0,
+      "people": [
+        {
+          "name": "Cynthia"
+        },
+        {
+          "name": "Barry"
+        },
+        {
+          "name": "Steve"
+        },
+        {
+          "name": "Jeffrey"
+        },
+        {
+          "name": "Valerie"
+        },
+        {
+          "name": "Graziano"
+        },
+        {
+          "name": "Chris"
+        },
+        {
+          "name": "Lara"
+        },
+        {
+          "name": "Samuel"
+        },
+        {
+          "name": "Shilpa"
+        },
+        {
+          "name": "Jayesh"
+        },
+        {
+          "name": "Michael"
+        },
+        {
+          "name": "Tania"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "name": "Gottdiener",
+      "x": 0.2857142857142857,
+      "y": 0.1666666666666667,
+      "people": [
+        {
+          "name": "Maria"
+        },
+        {
+          "name": "Alexander"
+        },
+        {
+          "name": "Julia"
+        },
+        {
+          "name": "Krista"
+        },
+        {
+          "name": "Anne"
+        },
+        {
+          "name": "Betty"
+        },
+        {
+          "name": "Gabby"
+        },
+        {
+          "name": "Dustin"
+        },
+        {
+          "name": "Kate"
+        },
+        {
+          "name": "Melodie"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "name": "Golden, S",
+      "x": 0.42857142857142855,
+      "y": 0.3333333333333333,
+      "people": [
+        {
+          "name": "Michael"
+        },
+        {
+          "name": "Sibyl"
+        },
+        {
+          "name": "Anne"
+        },
+        {
+          "name": "Robin"
+        },
+        {
+          "name": "Melissa"
+        },
+        {
+          "name": "Scott"
+        },
+        {
+          "name": "Neil deGrasse"
+        },
+        {
+          "name": "Chip"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "name": "Schuster",
+      "x": 0.5714285714285714,
+      "y": 0.3333333333333333,
+      "people": [
+        {
+          "name": "Rebecca"
+        },
+        {
+          "name": "Dale"
+        },
+        {
+          "name": "Adriana"
+        },
+        {
+          "name": "George"
+        },
+        {
+          "name": "Matthew"
+        },
+        {
+          "name": "Kim"
+        },
+        {
+          "name": "Sarah"
+        },
+        {
+          "name": "Matt"
+        },
+        {
+          "name": "William"
+        },
+        {
+          "name": "Francie"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "name": "Griffin",
+      "x": 0.7142857142857143,
+      "y": 0.1666666666666667,
+      "people": [
+        {
+          "name": "Gardner"
+        },
+        {
+          "name": "Rebecca"
+        },
+        {
+          "name": "Amy"
+        },
+        {
+          "name": "Kevin"
+        },
+        {
+          "name": "Zoe"
+        },
+        {
+          "name": "Shirley"
+        },
+        {
+          "name": "Lisbeth"
+        },
+        {
+          "name": "August"
+        },
+        {
+          "name": "Rafael"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "name": "Glaser",
+      "x": 0.8571428571428571,
+      "y": 0.0,
+      "people": [
+        {
+          "name": "Eileen"
+        },
+        {
+          "name": "Bill"
+        },
+        {
+          "name": "Michael"
+        },
+        {
+          "name": "Ivan"
+        },
+        {
+          "name": "Robert"
+        },
+        {
+          "name": "Mary Grace"
+        },
+        {
+          "name": "Thomas"
+        },
+        {
+          "name": "Caroline"
+        },
+        {
+          "name": "Anne"
+        },
+        {
+          "name": "Russell"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "name": "Ammirato",
+      "x": 1.0,
+      "y": 0.1666666666666667,
+      "people": [
+        {
+          "name": "Philip"
+        },
+        {
+          "name": "Veronica"
+        },
+        {
+          "name": "Caitlin"
+        },
+        {
+          "name": "Guest"
+        },
+        {
+          "name": "Deborah"
+        },
+        {
+          "name": "Katy"
+        },
+        {
+          "name": "Bette"
+        },
+        {
+          "name": "Neil"
+        },
+        {
+          "name": "Katie"
+        },
+        {
+          "name": "Maire"
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "name": "CPC",
+      "x": 0.0,
+      "y": 0.3333333333333333,
+      "people": [
+        {
+          "name": "Brie"
+        },
+        {
+          "name": "Douglas"
+        },
+        {
+          "name": "Emily"
+        },
+        {
+          "name": "Terri"
+        },
+        {
+          "name": "Terri"
+        },
+        {
+          "name": "Vanessa"
+        },
+        {
+          "name": "Russell"
+        },
+        {
+          "name": "Abby"
+        },
+        {
+          "name": "Maura"
+        },
+        {
+          "name": "Jessica"
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "name": "Stern",
+      "x": 0.14285714285714285,
+      "y": 0.3333333333333333,
+      "people": [
+        {
+          "name": "David"
+        },
+        {
+          "name": "Anthony"
+        },
+        {
+          "name": "Jim"
+        },
+        {
+          "name": "Richard"
+        },
+        {
+          "name": "Cathy"
+        },
+        {
+          "name": "Bea"
+        },
+        {
+          "name": "Linda"
+        },
+        {
+          "name": "John"
+        },
+        {
+          "name": "Sandra"
+        },
+        {
+          "name": "Guest"
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "name": "Kaplan",
+      "x": 0.2857142857142857,
+      "y": 0.5,
+      "people": [
+        {
+          "name": "Richard"
+        },
+        {
+          "name": "Sheridan"
+        },
+        {
+          "name": "Helene"
+        },
+        {
+          "name": "Mark"
+        },
+        {
+          "name": "Sam"
+        },
+        {
+          "name": "Janet"
+        },
+        {
+          "name": "Amelia"
+        },
+        {
+          "name": "Bret"
+        },
+        {
+          "name": "Martin"
+        },
+        {
+          "name": "Emilie"
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "name": "Golden, C.",
+      "x": 0.42857142857142855,
+      "y": 0.6666666666666667,
+      "people": [
+        {
+          "name": "Catherine"
+        },
+        {
+          "name": "Paul"
+        },
+        {
+          "name": "Jim"
+        },
+        {
+          "name": "Caryn"
+        },
+        {
+          "name": "Micah"
+        },
+        {
+          "name": "K.C."
+        },
+        {
+          "name": "Mitchell"
+        },
+        {
+          "name": "Joel"
+        },
+        {
+          "name": "Tupper"
+        },
+        {
+          "name": "Paola"
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "name": "Kappagoda",
+      "x": 0.5714285714285714,
+      "y": 0.6666666666666667,
+      "people": [
+        {
+          "name": "Stephanie"
+        },
+        {
+          "name": "Bob"
+        },
+        {
+          "name": "Samantha"
+        },
+        {
+          "name": "Eric"
+        },
+        {
+          "name": "David K.A."
+        },
+        {
+          "name": "Marie"
+        },
+        {
+          "name": "Peter"
+        },
+        {
+          "name": "Paul"
+        },
+        {
+          "name": "Dana"
+        },
+        {
+          "name": "Caitlin"
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "name": "Donnelley",
+      "x": 0.7142857142857143,
+      "y": 0.5,
+      "people": [
+        {
+          "name": "Vivian"
+        },
+        {
+          "name": "Nancy"
+        },
+        {
+          "name": "Terryanne"
+        },
+        {
+          "name": "Ann"
+        },
+        {
+          "name": "Brian"
+        },
+        {
+          "name": "Marge"
+        },
+        {
+          "name": "Jeffrey"
+        },
+        {
+          "name": "Elizabeth"
+        },
+        {
+          "name": "Paula"
+        },
+        {
+          "name": "Ann"
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "name": "Colas-Ohrstrom",
+      "x": 0.8571428571428571,
+      "y": 0.3333333333333333,
+      "people": [
+        {
+          "name": "Sibyl"
+        },
+        {
+          "name": "Peter"
+        },
+        {
+          "name": "Maryanne"
+        },
+        {
+          "name": "Valerie"
+        },
+        {
+          "name": "Kristina"
+        },
+        {
+          "name": "Helen"
+        },
+        {
+          "name": "Kathryn"
+        },
+        {
+          "name": "Gerry"
+        },
+        {
+          "name": "Kristina"
+        },
+        {
+          "name": "Michael"
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "name": "Dalton",
+      "x": 1.0,
+      "y": 0.5,
+      "people": [
+        {
+          "name": "Angelo"
+        },
+        {
+          "name": "Lotus"
+        },
+        {
+          "name": "Shaday"
+        },
+        {
+          "name": "Kate"
+        },
+        {
+          "name": "Will"
+        },
+        {
+          "name": "Jerry"
+        },
+        {
+          "name": "Andrew"
+        },
+        {
+          "name": "Evie"
+        },
+        {
+          "name": "Rachel"
+        },
+        {
+          "name": "Jeff"
+        },
+        {
+          "name": "Michael Sloan"
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "name": "Staff",
+      "x": 0.0,
+      "y": 0.6666666666666666,
+      "people": [
+        {
+          "name": "John"
+        },
+        {
+          "name": "Barbara"
+        },
+        {
+          "name": "Jack"
+        },
+        {
+          "name": "Emily"
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "name": "Redden",
+      "x": 0.14285714285714285,
+      "y": 0.6666666666666666,
+      "people": [
+        {
+          "name": "Lindley"
+        },
+        {
+          "name": "Jackie"
+        },
+        {
+          "name": "John"
+        },
+        {
+          "name": "David"
+        },
+        {
+          "name": "Jeannette"
+        },
+        {
+          "name": "Clare"
+        },
+        {
+          "name": "Stephen"
+        },
+        {
+          "name": "Guest"
+        },
+        {
+          "name": "Guest"
+        },
+        {
+          "name": "Millie"
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "name": "Bloomberg",
+      "x": 0.2857142857142857,
+      "y": 0.8333333333333333,
+      "people": [
+        {
+          "name": "Victoria"
+        },
+        {
+          "name": "Dylan"
+        },
+        {
+          "name": "Kathryn"
+        },
+        {
+          "name": "Eric"
+        },
+        {
+          "name": "Jinying"
+        },
+        {
+          "name": "Zef"
+        },
+        {
+          "name": "Gideon"
+        },
+        {
+          "name": "Jean"
+        },
+        {
+          "name": "Shadoe Genesis"
+        },
+        {
+          "name": "Veronica"
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "name": "Dann",
+      "x": 0.42857142857142855,
+      "y": 1.0,
+      "people": [
+        {
+          "name": "Elias"
+        },
+        {
+          "name": "Geoff"
+        },
+        {
+          "name": "Bruce"
+        },
+        {
+          "name": "Robert"
+        },
+        {
+          "name": "Susan"
+        },
+        {
+          "name": "Donna"
+        },
+        {
+          "name": "Sylvia"
+        },
+        {
+          "name": "Paul"
+        },
+        {
+          "name": "Christie"
+        },
+        {
+          "name": "Josephine"
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "name": "Hudson Valley",
+      "x": 0.5714285714285714,
+      "y": 1.0,
+      "people": [
+        {
+          "name": "JoAnn"
+        },
+        {
+          "name": "Ed"
+        },
+        {
+          "name": "Kathy"
+        },
+        {
+          "name": "Jim"
+        },
+        {
+          "name": "Marjorie"
+        },
+        {
+          "name": "Guest"
+        },
+        {
+          "name": "Lars"
+        },
+        {
+          "name": "Fred"
+        },
+        {
+          "name": "Katrina"
+        },
+        {
+          "name": "Jean"
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "name": "Stillman",
+      "x": 0.7142857142857143,
+      "y": 0.8333333333333333,
+      "people": [
+        {
+          "name": "Steve"
+        },
+        {
+          "name": "Joan"
+        },
+        {
+          "name": "David"
+        },
+        {
+          "name": "Linda"
+        },
+        {
+          "name": "Helen"
+        },
+        {
+          "name": "Jerry"
+        },
+        {
+          "name": "Linda"
+        },
+        {
+          "name": "Nat"
+        },
+        {
+          "name": "Irene"
+        },
+        {
+          "name": "Tracy"
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "name": "OSI",
+      "x": 0.8571428571428571,
+      "y": 0.6666666666666666,
+      "people": [
+        {
+          "name": "Peter"
+        },
+        {
+          "name": "Tally"
+        },
+        {
+          "name": "Kim"
+        },
+        {
+          "name": "Kathleen"
+        },
+        {
+          "name": "Becky"
+        },
+        {
+          "name": "Gigi"
+        },
+        {
+          "name": "Terrance"
+        },
+        {
+          "name": "Guthrie"
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "name": "Teachers College",
+      "x": 1.0,
+      "y": 0.8333333333333334,
+      "people": [
+        {
+          "name": "O.Roger"
+        },
+        {
+          "name": "Christopher"
+        },
+        {
+          "name": "Nathan"
+        },
+        {
+          "name": "Mitzi"
+        },
+        {
+          "name": "Ann"
+        },
+        {
+          "name": "Kristine"
+        },
+        {
+          "name": "Yolanda"
+        },
+        {
+          "name": "Laura"
+        },
+        {
+          "name": "Nancy"
+        },
+        {
+          "name": "Lalitha"
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "name": "Reed",
+      "x": 0.14285714285714285,
+      "y": 1.0,
+      "people": [
+        {
+          "name": "Scott"
+        },
+        {
+          "name": "Jon"
+        },
+        {
+          "name": "Brenda"
+        },
+        {
+          "name": "Guest"
+        },
+        {
+          "name": "Swati"
+        },
+        {
+          "name": "Desi"
+        },
+        {
+          "name": "Ben"
+        },
+        {
+          "name": "Amani"
+        },
+        {
+          "name": "Stephanie"
+        },
+        {
+          "name": "Andreas"
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "name": "Earth Institute",
+      "x": 0.8571428571428571,
+      "y": 1.0,
+      "people": [
+        {
+          "name": "Anna"
+        },
+        {
+          "name": "Brendan"
+        },
+        {
+          "name": "Roseanne"
+        },
+        {
+          "name": "Adela"
+        },
+        {
+          "name": "Kevin"
+        },
+        {
+          "name": "Jenna"
+        },
+        {
+          "name": "Art"
+        },
+        {
+          "name": "Marc"
+        },
+        {
+          "name": "Richard"
+        },
+        {
+          "name": "Sara"
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "name": "Calhoun",
+      "x": 0.0,
+      "y": 1.0,
+      "people": [
+        {
+          "name": "Barbara"
+        },
+        {
+          "name": "Chef"
+        },
+        {
+          "name": "Kim"
+        },
+        {
+          "name": "Francesco"
+        },
+        {
+          "name": "Joan"
+        },
+        {
+          "name": "Raul"
+        },
+        {
+          "name": "David"
+        },
+        {
+          "name": "Beth"
+        },
+        {
+          "name": "Kristin"
+        },
+        {
+          "name": "Alba"
+        }
+      ]
+    }
+  ]
+}

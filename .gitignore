@@ -1,9 +1,6 @@
 # Project-specific Node.js packages (e.g. gulp)
 node_modules/
 
-# Input files
-*.json
-
 
 # Compiled and temporary files
 *.swp
