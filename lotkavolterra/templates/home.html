@@ -3,7 +3,8 @@
   <head>
     <meta name="viewport" content="width=device-width">
 
-    <link href="{{ url_for('static', filename='stylesheets/styles.css') }}"
+    <link
+      href="{{ url_for('static', filename='stylesheets/styles.css') }}"
       rel="stylesheet" type="text/css" />
 
     <script src="{{ url_for('static', filename='js/app.bundle.js') }}"
@@ -105,10 +106,10 @@
 
           <script type="text/javascript" charset="utf-8">
             lotkavolterra.launchSimulation({
+              numGenerations: 40,
+              repeat: true,
               jsonURL:
-                "{{ url_for('static', filename='json/homepage.json') }}",
-                numGenerations: 40,
-                repeat: true
+                "{{ url_for('static', filename='json/homepage.json') }}"
             });
           </script>
         </div>

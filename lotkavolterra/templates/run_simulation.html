@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link href="{{ url_for('static', filename='stylesheets/styles.css') }}"
+    <link
+      href="{{ url_for('static', filename='stylesheets/styles.css') }}"
       rel="stylesheet" type="text/css" />
 
     <script src="{{ url_for('static', filename='js/app.bundle.js') }}"
@@ -25,24 +26,24 @@
       <svg class="simulation"></svg>
 
       <script type="text/javascript" charset="utf-8">
-        var repeat = {% if repeat %}true{% else %}false{% endif %}
+        var params = lotkavolterra.getSearchParams();
+        var repeat = params.repeat ? true : false;
 
-        {% if is_test%}
-        lotkavolterra.launchTestSimulation({
-          numGenerations: {{ num_generations }},
-          repeat: repeat,
-          simulation: "{{ simulation }}",
-          numSeats: {{ num_seats }}
-        });
-
-        {% else %}
-        lotkavolterra.launchSimulation({
-          numGenerations: {{ num_generations }},
-          repeat: repeat,
-          jsonURL:
-            "{{ url_for('static', filename='json/' ~ simulation) }}"
-        });
-        {% endif %}
+        if (params.type === "test-based") {
+          lotkavolterra.launchTestSimulation({
+            numGenerations: params.num_generations,
+            repeat: repeat,
+            simulation: params.simulation,
+            numSeats: params.num_seats
+          });
+        } else {
+          lotkavolterra.launchSimulation({
+            numGenerations: params.num_generations,
+            repeat: repeat,
+            jsonURL:
+              "{{ url_for('static', filename='json/' ~ simulation) }}"
+          });
+        }
       </script>
     </div>
   </body>

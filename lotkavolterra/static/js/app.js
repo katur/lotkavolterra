@@ -71,5 +71,6 @@ function launchTestSimulation(params) {
 window.lotkavolterra = {
   launchSimulation: launchSimulation,
   launchTestSimulation: launchTestSimulation,
-  formInit: form.init
+  formInit: form.init,
+  getSearchParams: form.getSearchParams,
 }

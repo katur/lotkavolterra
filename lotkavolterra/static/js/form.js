@@ -45,6 +45,28 @@ function initializeForm() {
 }
 
 
+function transformToAssocArray(paramString) {
+	var paramArray = paramString.split("&");
+	var params = {};
+	for (var i = 0; i < paramArray.length; i++) {
+		var tuple = paramArray[i].split("=");
+		params[tuple[0]] = tuple[1];
+	}
+	return params;
+}
+
+
+function getSearchParams() {
+	var paramString = window.location.search.substr(1);
+	if (paramString != null && paramString != "") {
+		return transformToAssocArray(paramString);
+	} else {
+		return {};
+	}
+}
+
+
 module.exports = {
-  init: initializeForm
+  init: initializeForm,
+	getSearchParams: getSearchParams
 }
