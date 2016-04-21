@@ -124,30 +124,30 @@ body {
 .page-title, p {
   margin-bottom: 20px; }
 
-.simulation circle {
+.simulation-svg circle {
   opacity: 0.5; }
-.simulation .HERD {
+.simulation-svg .HERD {
   fill: #008800; }
-.simulation .PACK {
+.simulation-svg .PACK {
   fill: #FF0000; }
-.simulation .COLONY {
+.simulation-svg .COLONY {
   fill: #0000FF; }
-.simulation .circle-text {
+.simulation-svg .circle-text {
   font-size: 10px;
   text-anchor: middle;
   alignment-baseline: middle; }
-.simulation .stage {
+.simulation-svg .stage {
   fill: #bbb;
   opacity: 0.5; }
-.simulation .stage-text {
+.simulation-svg .stage-text {
   fill: #999;
   font-size: 15px; }
 
-#run-simulation {
+#simulation {
   padding: 0; }
-  #run-simulation .simulation {
+  #simulation .simulation-svg {
     width: 100%; }
-  #run-simulation .home-nav, #run-simulation .counters {
+  #simulation .home-nav, #simulation .counters {
     position: absolute;
     top: 5px;
     padding: 6px;
@@ -155,9 +155,9 @@ body {
     background: #ddd;
     opacity: 0.9;
     font-size: 12px; }
-  #run-simulation .home-nav {
+  #simulation .home-nav {
     left: 5px; }
-  #run-simulation .counters {
+  #simulation .counters {
     right: 5px; }
 
 #home .page-section {
@@ -188,14 +188,14 @@ body {
         width: 120px;
         height: 120px;
         border-width: 12px; } }
-#home .example-simulation .simulation {
+#home .example-simulation .simulation-svg {
   width: 75%;
   display: block;
   margin-left: auto;
   margin-right: auto;
   margin-top: -20px; }
   @media (max-width: 600px) {
-    #home .example-simulation .simulation {
+    #home .example-simulation .simulation-svg {
       width: 100%; } }
 #home form {
   font-size: 16px; }
