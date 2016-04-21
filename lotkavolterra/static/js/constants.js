@@ -38,9 +38,9 @@ module.exports = {
   },
 
   Species: {
-    HERD: "Wild Turkey",
-    PACK: "Eastern Coyote",
-    COLONY: "Eurasian Boar"
+    HERD: "Wild Turkeys",
+    PACK: "Eastern Coyotes",
+    COLONY: "Eurasian Boars"
   },
 
   Coin: {
