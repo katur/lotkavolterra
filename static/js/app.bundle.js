@@ -46,6 +46,7 @@
 
 	var form = __webpack_require__(1);
 	var controller = __webpack_require__(2);
+	var debugging = __webpack_require__(9);
 
 
 	/**
@@ -115,11 +116,21 @@
 	}
 
 
+	function launchDebuggingSimulation(params) {
+	  debugging.drawRandomCircles({
+	    numCircles: params.numCircles
+	  });
+
+	  debugging.updateRandomCircles();
+	}
+
+
 	window.lotkavolterra = {
 	  launchSimulation: launchSimulation,
 	  launchTestSimulation: launchTestSimulation,
 	  formInit: form.init,
 	  getSearchParams: form.getSearchParams,
+	  launchDebuggingSimulation: launchDebuggingSimulation
 	}
 
 
@@ -10612,6 +10623,68 @@
 	  });
 	  if (true) this.d3 = d3, !(__WEBPACK_AMD_DEFINE_FACTORY__ = (d3), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)); else if (typeof module === "object" && module.exports) module.exports = d3; else this.d3 = d3;
 	}();
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var d3 = __webpack_require__(8);
+
+
+	function drawRandomCircles(params) {
+	  var svg = d3.select("svg");
+
+	  // Calculate svg height from width.
+	  var svgWidth = parseInt(svg.style("width"), 10);
+	  var hwRatio = 1/2;
+	  var svgHeight = svgWidth * hwRatio;
+	  svg.attr("height", svgHeight);
+
+	  // Calculate the space each table can take up in both x and y dimensions.
+	  var tableSpace = svgWidth / 8
+	  var tableRadius = tableSpace * 1/3;
+
+	  var seats = [];
+	  for (var i = 0; i < params.numCircles; i++) {
+	    seats.push(i);
+	  }
+
+	  // Add the circle elements.
+	  var circles = svg.selectAll("circle")
+	    .data(seats)
+	    .enter()
+	    .append("circle")
+	    .each(function(d, i) {
+	      d3.select(this)
+	        .attr("cx", Math.random() * svgWidth)
+	        .attr("cy", Math.random() * svgHeight)
+	        .attr("r", Math.random() * 30);
+	    });
+	}
+
+
+	function updateRandomCircles() {
+	  var svg = d3.select("svg");
+	  var circles = svg.selectAll("circle")
+	    .transition()
+	    .duration(500)
+	    .ease("linear")
+	    .attr("r", function(d) {
+	      return Math.random() * 30;
+	    })
+	    .each("end", function(d, i) {
+	      if (i == 0) {
+	        console.log("Starting over");
+	        updateRandomCircles();
+	      }
+	    });
+	}
+
+	module.exports = {
+	  drawRandomCircles: drawRandomCircles,
+	  updateRandomCircles: updateRandomCircles
+	}
+
 
 /***/ }
 /******/ ]);

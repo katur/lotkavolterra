@@ -1,5 +1,6 @@
 var form = require("./form.js");
 var controller = require("./controller.js");
+var debugging = require("./debugging.js");
 
 
 /**
@@ -69,9 +70,19 @@ function launchTestSimulation(params) {
 }
 
 
+function launchDebuggingSimulation(params) {
+  debugging.drawRandomCircles({
+    numCircles: params.numCircles
+  });
+
+  debugging.updateRandomCircles();
+}
+
+
 window.lotkavolterra = {
   launchSimulation: launchSimulation,
   launchTestSimulation: launchTestSimulation,
   formInit: form.init,
   getSearchParams: form.getSearchParams,
+  launchDebuggingSimulation: launchDebuggingSimulation
 }
