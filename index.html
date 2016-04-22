@@ -86,25 +86,15 @@
           Fortunately, you yourself will not explode.
         </p>
 
-        <div class="example-simulation">
-          <!--
-          <iframe
-              src="https://player.vimeo.com/video/162919815?autoplay=1&loop=1&badge=0&byline=0&portrait=0&title=0"
-              width="640" height="556" frameborder="0"
-              webkitallowfullscreen mozallowfullscreen allowfullscreen>
-          </iframe>
-          -->
+        <svg class="simulation-svg"></svg>
 
-          <svg class="simulation-svg"></svg>
-
-          <script type="text/javascript" charset="utf-8">
-            lotkavolterra.launchSimulation({
-              numGenerations: 40,
-              repeat: true,
-              jsonFilename: "homepage.json"
-            });
-          </script>
-        </div>
+        <script type="text/javascript" charset="utf-8">
+          lotkavolterra.launchSimulation({
+            numGenerations: 40,
+            repeat: true,
+            jsonFilename: "homepage.json"
+          });
+        </script>
 
         <p>
           If you're lucky, your table will survive for many generations,
