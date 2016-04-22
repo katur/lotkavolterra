@@ -116,11 +116,11 @@
 	}
 
 
-	function launchDebuggingSimulation(params) {
-	  debugging.drawRandomCircles({
-	    numCircles: params.numCircles
-	  });
-
+	/**
+	 * Create and run D3 animation for debugging.
+	 */
+	function launchDebuggingAnimation(params) {
+	  debugging.drawRandomCircles(params);
 	  debugging.updateRandomCircles();
 	}
 
@@ -128,9 +128,9 @@
 	window.lotkavolterra = {
 	  launchSimulation: launchSimulation,
 	  launchTestSimulation: launchTestSimulation,
+	  launchDebuggingAnimation: launchDebuggingAnimation,
 	  formInit: form.init,
-	  getSearchParams: form.getSearchParams,
-	  launchDebuggingSimulation: launchDebuggingSimulation
+	  getSearchParams: form.getSearchParams
 	}
 
 
@@ -10673,7 +10673,7 @@
 	      return Math.random() * 30;
 	    })
 	    .each("end", function(d, i) {
-	      if (i == 0) {
+	      if (i === 0) {
 	        console.log("Starting over");
 	        updateRandomCircles();
 	      }

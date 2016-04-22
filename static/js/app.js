@@ -70,11 +70,11 @@ function launchTestSimulation(params) {
 }
 
 
-function launchDebuggingSimulation(params) {
-  debugging.drawRandomCircles({
-    numCircles: params.numCircles
-  });
-
+/**
+ * Create and run D3 animation for debugging.
+ */
+function launchDebuggingAnimation(params) {
+  debugging.drawRandomCircles(params);
   debugging.updateRandomCircles();
 }
 
@@ -82,7 +82,7 @@ function launchDebuggingSimulation(params) {
 window.lotkavolterra = {
   launchSimulation: launchSimulation,
   launchTestSimulation: launchTestSimulation,
+  launchDebuggingAnimation: launchDebuggingAnimation,
   formInit: form.init,
-  getSearchParams: form.getSearchParams,
-  launchDebuggingSimulation: launchDebuggingSimulation
+  getSearchParams: form.getSearchParams
 }

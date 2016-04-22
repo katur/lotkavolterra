@@ -43,7 +43,7 @@ function updateRandomCircles() {
       return Math.random() * 30;
     })
     .each("end", function(d, i) {
-      if (i == 0) {
+      if (i === 0) {
         console.log("Starting over");
         updateRandomCircles();
       }
