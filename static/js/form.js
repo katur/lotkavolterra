@@ -22,12 +22,12 @@ function toggleSeatInput(select, seatInput, simulationType) {
   var type = select.querySelector("option:checked")
       .getAttribute("data-type");
 
-  if (type === "test-based") {
-    removeClass(seatInput, "hidden");
-    simulationType.setAttribute("value", "test-based");
-  } else {
+  if (type === "input") {
     addClass(seatInput, "hidden");
-    simulationType.setAttribute("value", "input-based");
+    simulationType.setAttribute("value", "input");
+  } else {
+    removeClass(seatInput, "hidden");
+    simulationType.setAttribute("value", "test");
   }
 }
 

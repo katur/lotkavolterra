@@ -151,12 +151,12 @@
 	  var type = select.querySelector("option:checked")
 	      .getAttribute("data-type");
 
-	  if (type === "test-based") {
-	    removeClass(seatInput, "hidden");
-	    simulationType.setAttribute("value", "test-based");
-	  } else {
+	  if (type === "input") {
 	    addClass(seatInput, "hidden");
-	    simulationType.setAttribute("value", "input-based");
+	    simulationType.setAttribute("value", "input");
+	  } else {
+	    removeClass(seatInput, "hidden");
+	    simulationType.setAttribute("value", "test");
 	  }
 	}
 
@@ -939,32 +939,6 @@
 
 
 	/**
-	 * Draw the stage.
-	 */
-	function drawStage() {
-	  var svg = d3.select("svg");
-	  var svgWidth = parseInt(svg.style("width"), 10);
-	  var svgHeight = parseInt(svg.style("height"), 10);
-	  var stageSize = 0.2;
-
-	  svg.append("rect")
-	    .classed("stage", true)
-	    .attr("x", svgWidth * (0.5 - stageSize / 2))
-	    .attr("y", 0)
-	    .attr("width", svgWidth * stageSize)
-	    .attr("height", svgHeight * stageSize);
-
-	  svg.append("text")
-	    .classed("stage-text", true)
-	    .text("STAGE")
-	    .attr("x", svgWidth * 0.5)
-	    .attr("y", svgHeight * (stageSize / 2))
-	    .attr("text-anchor", "middle")
-	    .attr("alignment-baseline", "middle")
-	}
-
-
-	/**
 	 * Update seat radii.
 	 */
 	function updateSeatRadii(params) {
@@ -1000,6 +974,32 @@
 	        params.callback(params.callbackParams);
 	      }
 	    });
+	}
+
+
+	/**
+	 * Draw the stage.
+	 */
+	function drawStage() {
+	  var svg = d3.select("svg");
+	  var svgWidth = parseInt(svg.style("width"), 10);
+	  var svgHeight = parseInt(svg.style("height"), 10);
+	  var stageSize = 0.2;
+
+	  svg.append("rect")
+	    .classed("stage", true)
+	    .attr("x", svgWidth * (0.5 - stageSize / 2))
+	    .attr("y", 0)
+	    .attr("width", svgWidth * stageSize)
+	    .attr("height", svgHeight * stageSize);
+
+	  svg.append("text")
+	    .classed("stage-text", true)
+	    .text("STAGE")
+	    .attr("x", svgWidth * 0.5)
+	    .attr("y", svgHeight * (stageSize / 2))
+	    .attr("text-anchor", "middle")
+	    .attr("alignment-baseline", "middle")
 	}
 
 

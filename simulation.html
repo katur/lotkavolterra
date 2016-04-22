@@ -25,18 +25,18 @@
         var params = lotkavolterra.getSearchParams();
         var repeat = params.repeat ? true : false;
 
-        if (params.type === "test-based") {
-          lotkavolterra.launchTestSimulation({
-            numGenerations: params.num_generations,
-            repeat: repeat,
-            simulation: params.simulation,
-            numSeats: params.num_seats
-          });
-        } else {
+        if (params.type === "input") {
           lotkavolterra.launchSimulation({
-            numGenerations: params.num_generations,
+            numGenerations: params.generations,
             repeat: repeat,
             jsonFilename: params.simulation
+          });
+        } else {
+          lotkavolterra.launchTestSimulation({
+            numGenerations: params.generations,
+            repeat: repeat,
+            simulation: params.simulation,
+            numSeats: params.seats
           });
         }
       </script>
