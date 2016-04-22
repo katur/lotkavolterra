@@ -141,7 +141,8 @@ body {
   opacity: 0.5; }
 .simulation-svg .stage-text {
   fill: #999;
-  font-size: 15px; }
+  font-size: 19px;
+  letter-spacing: 1px; }
 
 #simulation {
   background: white;
