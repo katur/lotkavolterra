@@ -9,7 +9,7 @@ var debugging = require("./debugging.js");
 function launchSimulation(params) {
 	// Make AJAX request for JSON input
 	var request = new XMLHttpRequest();
-  var jsonURL = "/static/json/".concat(params.jsonFilename);
+  var jsonURL = "/static/json/".concat(params.simulation);
 	request.open("GET", jsonURL, true);
 
 	request.onload = function() {
@@ -23,12 +23,13 @@ function launchSimulation(params) {
       var circles = controller.drawLuncheon({
         luncheon: luncheon,
         showStage: jsonData.showStage,
-        showSpecies: jsonData.showSpecies
+        showSpecies: jsonData.showSpecies,
+        noText: params.noText
       });
 
 			controller.runGeneration({
 				luncheon: luncheon,
-				numGenerations: params.numGenerations,
+				numGenerations: params.generations,
         repeat: params.repeat,
         circles: circles
 			});
@@ -52,18 +53,19 @@ function launchSimulation(params) {
 function launchTestSimulation(params) {
   var luncheon = controller.initializeTestLuncheon({
     simulation: params.simulation,
-    numSeats: params.numSeats
+    numSeats: params.seats
   });
 
   var circles = controller.drawLuncheon({
     luncheon: luncheon,
     showStage: false,
-    showSpecies: true
+    showSpecies: true,
+    noText: params.noText
   });
 
   controller.runGeneration({
     luncheon: luncheon,
-    numGenerations: params.numGenerations,
+    numGenerations: params.generations,
     repeat: params.repeat,
     circles: circles
   });

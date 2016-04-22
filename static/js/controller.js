@@ -108,7 +108,8 @@ function drawLuncheon(params) {
     seats: params.luncheon.getAllSeats(),
     numTablesX: params.luncheon.numTablesX,
     numTablesY: params.luncheon.numTablesY,
-    showSpecies: params.showSpecies
+    showSpecies: params.showSpecies,
+    noText: params.noText
   });
 
   if (params.showStage) {

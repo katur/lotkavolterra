@@ -46,19 +46,21 @@ function drawSeats(params) {
     });
 
 
-  // Add the text elements.
-  svg.selectAll("text")
-    .data(params.seats)
-    .enter()
-    .append("text")
-    .each(function(d, i) {
-      var coords = getCoordinates(d);
-      d3.select(this)
-        .attr("x", coords[0])
-        .attr("y", coords[1])
-        .text(params.showSpecies ? d.shortSpecies : d.firstName)
-        .classed("circle-text", true);
-    });
+  if (!params.noText) {
+    // Add the text elements.
+    svg.selectAll("text")
+      .data(params.seats)
+      .enter()
+      .append("text")
+      .each(function(d, i) {
+        var coords = getCoordinates(d);
+        d3.select(this)
+          .attr("x", coords[0])
+          .attr("y", coords[1])
+          .text(params.showSpecies ? d.shortSpecies : d.firstName)
+          .classed("circle-text", true);
+      });
+  }
 
   return circles;
 }

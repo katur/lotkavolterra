@@ -25,21 +25,11 @@
 
       <script type="text/javascript" charset="utf-8">
         var params = lotkavolterra.getSearchParams();
-        var repeat = params.repeat ? true : false;
 
         if (params.type === "input") {
-          lotkavolterra.launchSimulation({
-            numGenerations: params.generations,
-            repeat: repeat,
-            jsonFilename: params.simulation
-          });
+          lotkavolterra.launchSimulation(params);
         } else {
-          lotkavolterra.launchTestSimulation({
-            numGenerations: params.generations,
-            repeat: repeat,
-            simulation: params.simulation,
-            numSeats: params.seats
-          });
+          lotkavolterra.launchTestSimulation(params);
         }
       </script>
     </div>

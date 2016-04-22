@@ -55,7 +55,7 @@
 	function launchSimulation(params) {
 		// Make AJAX request for JSON input
 		var request = new XMLHttpRequest();
-	  var jsonURL = "/static/json/".concat(params.jsonFilename);
+	  var jsonURL = "/static/json/".concat(params.simulation);
 		request.open("GET", jsonURL, true);
 
 		request.onload = function() {
@@ -69,12 +69,13 @@
 	      var circles = controller.drawLuncheon({
 	        luncheon: luncheon,
 	        showStage: jsonData.showStage,
-	        showSpecies: jsonData.showSpecies
+	        showSpecies: jsonData.showSpecies,
+	        noText: params.noText
 	      });
 
 				controller.runGeneration({
 					luncheon: luncheon,
-					numGenerations: params.numGenerations,
+					numGenerations: params.generations,
 	        repeat: params.repeat,
 	        circles: circles
 				});
@@ -98,18 +99,19 @@
 	function launchTestSimulation(params) {
 	  var luncheon = controller.initializeTestLuncheon({
 	    simulation: params.simulation,
-	    numSeats: params.numSeats
+	    numSeats: params.seats
 	  });
 
 	  var circles = controller.drawLuncheon({
 	    luncheon: luncheon,
 	    showStage: false,
-	    showSpecies: true
+	    showSpecies: true,
+	    noText: params.noText
 	  });
 
 	  controller.runGeneration({
 	    luncheon: luncheon,
-	    numGenerations: params.numGenerations,
+	    numGenerations: params.generations,
 	    repeat: params.repeat,
 	    circles: circles
 	  });
@@ -326,7 +328,8 @@
 	    seats: params.luncheon.getAllSeats(),
 	    numTablesX: params.luncheon.numTablesX,
 	    numTablesY: params.luncheon.numTablesY,
-	    showSpecies: params.showSpecies
+	    showSpecies: params.showSpecies,
+	    noText: params.noText
 	  });
 
 	  if (params.showStage) {
@@ -931,19 +934,21 @@
 	    });
 
 
-	  // Add the text elements.
-	  svg.selectAll("text")
-	    .data(params.seats)
-	    .enter()
-	    .append("text")
-	    .each(function(d, i) {
-	      var coords = getCoordinates(d);
-	      d3.select(this)
-	        .attr("x", coords[0])
-	        .attr("y", coords[1])
-	        .text(params.showSpecies ? d.shortSpecies : d.firstName)
-	        .classed("circle-text", true);
-	    });
+	  if (!params.noText) {
+	    // Add the text elements.
+	    svg.selectAll("text")
+	      .data(params.seats)
+	      .enter()
+	      .append("text")
+	      .each(function(d, i) {
+	        var coords = getCoordinates(d);
+	        d3.select(this)
+	          .attr("x", coords[0])
+	          .attr("y", coords[1])
+	          .text(params.showSpecies ? d.shortSpecies : d.firstName)
+	          .classed("circle-text", true);
+	      });
+	  }
 
 	  return circles;
 	}
