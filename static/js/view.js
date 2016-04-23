@@ -108,24 +108,23 @@ function updateSeatRadii(params) {
 /**
  * Draw the stage.
  */
-function drawStage() {
+function drawStage(params) {
   var svg = d3.select("svg");
   var svgWidth = parseInt(svg.style("width"), 10);
   var svgHeight = parseInt(svg.style("height"), 10);
-  var stageSize = 0.2;
 
   svg.append("rect")
     .classed("stage", true)
-    .attr("x", svgWidth * (0.5 - stageSize / 2))
-    .attr("y", 0)
-    .attr("width", svgWidth * stageSize)
-    .attr("height", svgHeight * stageSize);
+    .attr("x", svgWidth * (0.5 - params.stageWidth / 2))
+    .attr("y", svgHeight * params.stageY)
+    .attr("width", svgWidth * params.stageWidth)
+    .attr("height", svgHeight * params.stageHeight);
 
   svg.append("text")
     .classed("stage-text", true)
     .text("STAGE")
     .attr("x", svgWidth * 0.5)
-    .attr("y", svgHeight * (stageSize / 2))
+    .attr("y", svgHeight * (params.stageY + params.stageHeight / 2))
     .attr("text-anchor", "middle")
     .attr("alignment-baseline", "middle")
 }

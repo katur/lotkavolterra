@@ -113,7 +113,11 @@ function drawLuncheon(params) {
   });
 
   if (params.showStage) {
-    view.drawStage();
+    view.drawStage({
+      stageWidth: params.stageWidth,
+      stageHeight: params.stageHeight,
+      stageY: params.stageY
+    });
   }
 
   return circles;

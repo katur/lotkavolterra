@@ -2,8 +2,11 @@
   "name": "Black Rock Luncheon: 2015",
   "numTablesX": 8,
   "numTablesY": 5,
-  "showStage": true,
   "showSpecies": false,
+  "showStage": true,
+  "stageWidth": 0.2,
+  "stageHeight": 0.17,
+  "stageY": 0.1,
   "tables": [
     {
       "number": 1,
