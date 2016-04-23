@@ -48,7 +48,7 @@ function initializeLuncheon(params) {
 function initializeTestLuncheon(params) {
   var luncheon = new model.Luncheon({
     name: params.simulation,
-    numTablesX: 2.8,
+    numTablesX: 2.2,
     numTablesY: 1.4
   });
 
