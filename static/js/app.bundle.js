@@ -44,7 +44,8 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var form = __webpack_require__(1);
+	var utils = __webpack_require__(1);
+	var form = __webpack_require__(2);
 	var controller = __webpack_require__(3);
 	var debugging = __webpack_require__(9);
 
@@ -138,75 +139,12 @@
 	  launchTestSimulation: launchTestSimulation,
 	  launchDebuggingAnimation: launchDebuggingAnimation,
 	  formInit: form.init,
-	  getSearchParams: form.getSearchParams
+	  getSearchParams: utils.getSearchParams
 	}
 
 
 /***/ },
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var utils = __webpack_require__(2);
-
-
-	function initializeForm() {
-	  var seatInput = document.querySelector("#seats-input-wrapper");
-	  var select = document.querySelector("#simulation-select");
-	  var simulationType = document.querySelector("#simulation-type");
-
-	  toggleSeatInput(select, seatInput, simulationType);
-
-	  select.addEventListener("change", function() {
-	    toggleSeatInput(select, seatInput, simulationType);
-	  });
-	}
-
-
-	function transformToAssocArray(paramString) {
-	  var paramArray = paramString.split("&");
-	  var params = {};
-	  for (var i = 0; i < paramArray.length; i++) {
-	    var tuple = paramArray[i].split("=");
-	    params[tuple[0]] = tuple[1];
-	  }
-	  return params;
-	}
-
-
-	function getSearchParams() {
-	  var paramString = window.location.search.substr(1);
-	  if (paramString != null && paramString != "") {
-	    return transformToAssocArray(paramString);
-	  } else {
-	    return {};
-	  }
-	}
-
-
-	// Helpers
-
-	function toggleSeatInput(select, seatInput, simulationType) {
-	  var type = select.querySelector("option:checked")
-	      .getAttribute("data-type");
-
-	  if (type === "input") {
-	    utils.addClass(seatInput, "hidden");
-	    simulationType.setAttribute("value", "input");
-	  } else {
-	    utils.removeClass(seatInput, "hidden");
-	    simulationType.setAttribute("value", "test");
-	  }
-	}
-
-
-	module.exports = {
-	  init: initializeForm,
-	  getSearchParams: getSearchParams
-	}
-
-
-/***/ },
-/* 2 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -246,9 +184,82 @@
 	          new RegExp('(^|\\b)' + className.split(' ').join('|') +
 	                     '(\\b|$)', 'gi'), ' ');
 	    }
+	  },
+
+	  /**
+	   * Get GET parameters as a dictionary.
+	   */
+	  getSearchParams: function() {
+	    var paramString = window.location.search.substr(1);
+	    if (paramString != null && paramString != "") {
+	      return transformToDictionary(paramString);
+	    } else {
+	      return {};
+	    }
 	  }
 
 	};
+
+
+	/***********
+	 * Helpers *
+	 ***********/
+
+	function transformToDictionary(paramString) {
+	  var paramArray = paramString.split("&");
+	  var params = {};
+	  for (var i = 0; i < paramArray.length; i++) {
+	    var tuple = paramArray[i].split("=");
+	    params[tuple[0]] = tuple[1];
+	  }
+	  return params;
+	}
+
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var utils = __webpack_require__(1);
+
+
+	module.exports = {
+	  /**
+	   * Initialize the simulation form.
+	   */
+	  init: function() {
+	    var select = document.querySelector("#simulation-select");
+	    var simulationType = document.querySelector("#simulation-type");
+	    var seatInput = document.querySelector("#seats-input-wrapper");
+
+	    toggleFormType(select, simulationType, seatInput);
+
+	    select.addEventListener("change", function() {
+	      toggleFormType(select, simulationType, seatInput);
+	    });
+	  }
+	};
+
+
+	/***********
+	 * Helpers *
+	 ***********/
+
+	/**
+	 * Toggle the value of simulationType and the visibility of seatInput.
+	 */
+	function toggleFormType(select, simulationType, seatInput) {
+	  var type = select.querySelector("option:checked")
+	      .getAttribute("data-type");
+
+	  if (type === "input") {
+	    utils.addClass(seatInput, "hidden");
+	    simulationType.setAttribute("value", "input");
+	  } else {
+	    utils.removeClass(seatInput, "hidden");
+	    simulationType.setAttribute("value", "test");
+	  }
+	}
 
 
 /***/ },
@@ -427,7 +438,7 @@
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var utils = __webpack_require__(2);
+	var utils = __webpack_require__(1);
 
 	const INITIAL_POPULATION_SIZE = 1000;
 	const OVERPOPULATION_FACTOR = 10;
@@ -507,7 +518,7 @@
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var utils = __webpack_require__(2);
+	var utils = __webpack_require__(1);
 	var constants = __webpack_require__(4);
 	var interactions = __webpack_require__(6);
 
@@ -911,7 +922,7 @@
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var utils = __webpack_require__(2);
+	var utils = __webpack_require__(1);
 	var constants = __webpack_require__(4);
 	var d3 = __webpack_require__(8);
 

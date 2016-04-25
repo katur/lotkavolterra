@@ -1,43 +1,32 @@
 var utils = require("./utils.js");
 
 
-function initializeForm() {
-  var seatInput = document.querySelector("#seats-input-wrapper");
-  var select = document.querySelector("#simulation-select");
-  var simulationType = document.querySelector("#simulation-type");
+module.exports = {
+  /**
+   * Initialize the simulation form.
+   */
+  init: function() {
+    var select = document.querySelector("#simulation-select");
+    var simulationType = document.querySelector("#simulation-type");
+    var seatInput = document.querySelector("#seats-input-wrapper");
 
-  toggleSeatInput(select, seatInput, simulationType);
+    toggleFormType(select, simulationType, seatInput);
 
-  select.addEventListener("change", function() {
-    toggleSeatInput(select, seatInput, simulationType);
-  });
-}
-
-
-function transformToAssocArray(paramString) {
-  var paramArray = paramString.split("&");
-  var params = {};
-  for (var i = 0; i < paramArray.length; i++) {
-    var tuple = paramArray[i].split("=");
-    params[tuple[0]] = tuple[1];
+    select.addEventListener("change", function() {
+      toggleFormType(select, simulationType, seatInput);
+    });
   }
-  return params;
-}
+};
 
 
-function getSearchParams() {
-  var paramString = window.location.search.substr(1);
-  if (paramString != null && paramString != "") {
-    return transformToAssocArray(paramString);
-  } else {
-    return {};
-  }
-}
+/***********
+ * Helpers *
+ ***********/
 
-
-// Helpers
-
-function toggleSeatInput(select, seatInput, simulationType) {
+/**
+ * Toggle the value of simulationType and the visibility of seatInput.
+ */
+function toggleFormType(select, simulationType, seatInput) {
   var type = select.querySelector("option:checked")
       .getAttribute("data-type");
 
@@ -48,10 +37,4 @@ function toggleSeatInput(select, seatInput, simulationType) {
     utils.removeClass(seatInput, "hidden");
     simulationType.setAttribute("value", "test");
   }
-}
-
-
-module.exports = {
-  init: initializeForm,
-  getSearchParams: getSearchParams
 }

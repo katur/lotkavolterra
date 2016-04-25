@@ -1,3 +1,4 @@
+var utils = require("./utils.js");
 var form = require("./form.js");
 var controller = require("./controller.js");
 var debugging = require("./debugging.js");
@@ -92,5 +93,5 @@ window.lotkavolterra = {
   launchTestSimulation: launchTestSimulation,
   launchDebuggingAnimation: launchDebuggingAnimation,
   formInit: form.init,
-  getSearchParams: form.getSearchParams
+  getSearchParams: utils.getSearchParams
 }
