@@ -670,7 +670,7 @@
 	  this.pk = params.pk;  // Unique identifier across tables
 	  this.index = params.index;  // Position within the table
 	  this.name = params.name;
-	  this.firstName = params.name.split(/\s+/)[0];
+	  this.firstName = params.name ? params.name.split(/\s+/)[0] : "";
 	  this.group = params.group;
 	  this.species = constants.Species[params.group];
 	  this.shortSpecies = constants.Species[params.group].split(/\s+/)[1];

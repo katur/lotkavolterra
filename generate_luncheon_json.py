@@ -82,7 +82,7 @@ else:
 
         # For each seat
         for j in range(1, 11):
-            table['people'].append({'name': '{}:{}'.format(i, j)})
+            table['people'].append({})
 
         table_list.append(table)
 
