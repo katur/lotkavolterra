@@ -45,7 +45,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var form = __webpack_require__(1);
-	var controller = __webpack_require__(2);
+	var controller = __webpack_require__(3);
 	var debugging = __webpack_require__(9);
 
 
@@ -144,40 +144,9 @@
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	function addClass(el, className) {
-	  if (el.classList) {
-	    el.classList.add(className);
-	  } else {
-	    el.className += ' ' + className;
-	  }
-	}
-
-
-	function removeClass(el, className) {
-	  if (el.classList) {
-	    el.classList.remove(className);
-	  } else {
-	    el.className = el.className.replace(
-	        new RegExp('(^|\\b)' + className.split(' ').join('|') +
-	                   '(\\b|$)', 'gi'), ' ');
-	  }
-	}
-
-
-	function toggleSeatInput(select, seatInput, simulationType) {
-	  var type = select.querySelector("option:checked")
-	      .getAttribute("data-type");
-
-	  if (type === "input") {
-	    addClass(seatInput, "hidden");
-	    simulationType.setAttribute("value", "input");
-	  } else {
-	    removeClass(seatInput, "hidden");
-	    simulationType.setAttribute("value", "test");
-	  }
-	}
+	var utils = __webpack_require__(2);
 
 
 	function initializeForm() {
@@ -214,6 +183,22 @@
 	}
 
 
+	// Helpers
+
+	function toggleSeatInput(select, seatInput, simulationType) {
+	  var type = select.querySelector("option:checked")
+	      .getAttribute("data-type");
+
+	  if (type === "input") {
+	    utils.addClass(seatInput, "hidden");
+	    simulationType.setAttribute("value", "input");
+	  } else {
+	    utils.removeClass(seatInput, "hidden");
+	    simulationType.setAttribute("value", "test");
+	  }
+	}
+
+
 	module.exports = {
 	  init: initializeForm,
 	  getSearchParams: getSearchParams
@@ -222,9 +207,55 @@
 
 /***/ },
 /* 2 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  /**
+	   * Return a random element from an array of choices.
+	   */
+	  getRandomChoice: function(choices) {
+	    return choices[Math.floor(Math.random() * choices.length)];
+	  },
+
+	  /**
+	   * Get a circle's radius from its area.
+	   */
+	  getRadiusFromArea: function(area) {
+	    return Math.sqrt(area / Math.PI);
+	  },
+
+	  /**
+	   * Add a class to an HTML element.
+	   */
+	  addClass: function(el, className) {
+	    if (el.classList) {
+	      el.classList.add(className);
+	    } else {
+	      el.className += ' ' + className;
+	    }
+	  },
+
+	  /**
+	   * Remove a class from an HTML element.
+	   */
+	  removeClass: function(el, className) {
+	    if (el.classList) {
+	      el.classList.remove(className);
+	    } else {
+	      el.className = el.className.replace(
+	          new RegExp('(^|\\b)' + className.split(' ').join('|') +
+	                     '(\\b|$)', 'gi'), ' ');
+	    }
+	  }
+
+	};
+
+
+/***/ },
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var constants = __webpack_require__(3);
+	var constants = __webpack_require__(4);
 	var model = __webpack_require__(5);
 	var view = __webpack_require__(7);
 
@@ -393,10 +424,10 @@
 
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var utils = __webpack_require__(4);
+	var utils = __webpack_require__(2);
 
 	const INITIAL_POPULATION_SIZE = 1000;
 	const OVERPOPULATION_FACTOR = 10;
@@ -473,32 +504,11 @@
 
 
 /***/ },
-/* 4 */
-/***/ function(module, exports) {
-
-	module.exports = {
-	  /**
-	   * Return a random element from an array of choices.
-	   */
-	  getRandomChoice: function(choices) {
-	    return choices[Math.floor(Math.random() * choices.length)];
-	  },
-
-	  /**
-	   * Get a circle's radius from its area.
-	   */
-	  getRadiusFromArea: function(area) {
-	    return Math.sqrt(area / Math.PI);
-	  }
-	};
-
-
-/***/ },
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var utils = __webpack_require__(4);
-	var constants = __webpack_require__(3);
+	var utils = __webpack_require__(2);
+	var constants = __webpack_require__(4);
 	var interactions = __webpack_require__(6);
 
 
@@ -830,7 +840,7 @@
 /* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var constants = __webpack_require__(3);
+	var constants = __webpack_require__(4);
 
 
 	/**
@@ -901,8 +911,8 @@
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var utils = __webpack_require__(4);
-	var constants = __webpack_require__(3);
+	var utils = __webpack_require__(2);
+	var constants = __webpack_require__(4);
 	var d3 = __webpack_require__(8);
 
 

@@ -1,35 +1,4 @@
-function addClass(el, className) {
-  if (el.classList) {
-    el.classList.add(className);
-  } else {
-    el.className += ' ' + className;
-  }
-}
-
-
-function removeClass(el, className) {
-  if (el.classList) {
-    el.classList.remove(className);
-  } else {
-    el.className = el.className.replace(
-        new RegExp('(^|\\b)' + className.split(' ').join('|') +
-                   '(\\b|$)', 'gi'), ' ');
-  }
-}
-
-
-function toggleSeatInput(select, seatInput, simulationType) {
-  var type = select.querySelector("option:checked")
-      .getAttribute("data-type");
-
-  if (type === "input") {
-    addClass(seatInput, "hidden");
-    simulationType.setAttribute("value", "input");
-  } else {
-    removeClass(seatInput, "hidden");
-    simulationType.setAttribute("value", "test");
-  }
-}
+var utils = require("./utils.js");
 
 
 function initializeForm() {
@@ -62,6 +31,22 @@ function getSearchParams() {
     return transformToAssocArray(paramString);
   } else {
     return {};
+  }
+}
+
+
+// Helpers
+
+function toggleSeatInput(select, seatInput, simulationType) {
+  var type = select.querySelector("option:checked")
+      .getAttribute("data-type");
+
+  if (type === "input") {
+    utils.addClass(seatInput, "hidden");
+    simulationType.setAttribute("value", "input");
+  } else {
+    utils.removeClass(seatInput, "hidden");
+    simulationType.setAttribute("value", "test");
   }
 }
 
