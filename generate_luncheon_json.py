@@ -23,6 +23,9 @@ json_data = json.load(args.json_file)
 LUNCHEON_NAME = json_data["name"]
 NUM_TABLES_X = json_data["numTablesX"]
 NUM_TABLES_Y = json_data["numTablesY"]
+STAGE_WIDTH = json_data["stageWidth"]
+STAGE_HEIGHT = json_data["stageHeight"]
+STAGE_Y = json_data["stageY"]
 TABLE_COORDS = json_data["tableCoords"]
 
 
@@ -94,8 +97,8 @@ data['numTablesX'] = NUM_TABLES_X
 data['numTablesY'] = NUM_TABLES_Y
 data['showSpecies'] = False
 data['showStage'] = True
-data['stageWidth'] = 0.2
-data['stageHeight'] = 0.17
-data['stageY'] = 0.1
+data['stageWidth'] = STAGE_WIDTH
+data['stageHeight'] = STAGE_HEIGHT
+data['stageY'] = STAGE_Y
 data['tables'] = table_list
 json.dump(data, sys.stdout, indent=2)

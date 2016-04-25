@@ -5,8 +5,8 @@
   "showSpecies": false,
   "showStage": true,
   "stageWidth": 0.2,
-  "stageHeight": 0.17,
-  "stageY": 0.1,
+  "stageHeight": 0.15,
+  "stageY": 0.125,
   "tables": [
     {
       "number": 1,
