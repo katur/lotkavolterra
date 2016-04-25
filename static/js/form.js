@@ -1,20 +1,20 @@
 function addClass(el, className) {
-	if (el.classList) {
-		el.classList.add(className);
-	} else {
-		el.className += ' ' + className;
-	}
+  if (el.classList) {
+    el.classList.add(className);
+  } else {
+    el.className += ' ' + className;
+  }
 }
 
 
 function removeClass(el, className) {
-	if (el.classList) {
-		el.classList.remove(className);
-	} else {
-		el.className = el.className.replace(
-				new RegExp('(^|\\b)' + className.split(' ').join('|') +
+  if (el.classList) {
+    el.classList.remove(className);
+  } else {
+    el.className = el.className.replace(
+        new RegExp('(^|\\b)' + className.split(' ').join('|') +
                    '(\\b|$)', 'gi'), ' ');
-	}
+  }
 }
 
 
@@ -46,27 +46,27 @@ function initializeForm() {
 
 
 function transformToAssocArray(paramString) {
-	var paramArray = paramString.split("&");
-	var params = {};
-	for (var i = 0; i < paramArray.length; i++) {
-		var tuple = paramArray[i].split("=");
-		params[tuple[0]] = tuple[1];
-	}
-	return params;
+  var paramArray = paramString.split("&");
+  var params = {};
+  for (var i = 0; i < paramArray.length; i++) {
+    var tuple = paramArray[i].split("=");
+    params[tuple[0]] = tuple[1];
+  }
+  return params;
 }
 
 
 function getSearchParams() {
-	var paramString = window.location.search.substr(1);
-	if (paramString != null && paramString != "") {
-		return transformToAssocArray(paramString);
-	} else {
-		return {};
-	}
+  var paramString = window.location.search.substr(1);
+  if (paramString != null && paramString != "") {
+    return transformToAssocArray(paramString);
+  } else {
+    return {};
+  }
 }
 
 
 module.exports = {
   init: initializeForm,
-	getSearchParams: getSearchParams
+  getSearchParams: getSearchParams
 }

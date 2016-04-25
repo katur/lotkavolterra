@@ -53,18 +53,18 @@
 	 * Create and run input-based simulation.
 	 */
 	function launchSimulation(params) {
-		// Make AJAX request for JSON input
-		var request = new XMLHttpRequest();
+	  // Make AJAX request for JSON input
+	  var request = new XMLHttpRequest();
 	  var jsonURL = "/static/json/".concat(params.simulation);
-		request.open("GET", jsonURL, true);
+	  request.open("GET", jsonURL, true);
 
-		request.onload = function() {
-			if (request.status >= 200 && request.status < 400) {  // Success
-				jsonData = JSON.parse(request.responseText);
+	  request.onload = function() {
+	    if (request.status >= 200 && request.status < 400) {  // Success
+	      jsonData = JSON.parse(request.responseText);
 
 	      var luncheon = controller.initializeLuncheon({
-					data: jsonData
-				});
+	        data: jsonData
+	      });
 
 	      var circles = controller.drawLuncheon({
 	        luncheon: luncheon,
@@ -77,24 +77,24 @@
 	        stageY: jsonData.stageY
 	      });
 
-				controller.runGeneration({
-					luncheon: luncheon,
+	      controller.runGeneration({
+	        luncheon: luncheon,
 	        showStats: params.showStats,
-					numGenerations: params.generations,
+	        numGenerations: params.generations,
 	        repeat: params.repeat,
 	        circles: circles
-				});
+	      });
 
-			} else {
-				// TODO: handle case of reached target server but returned an error
-			}
-		};
+	    } else {
+	      // TODO: handle case of reached target server but returned an error
+	    }
+	  };
 
-		request.onerror = function() {
-			// TODO: handle case of connection error of some sort
-		};
+	  request.onerror = function() {
+	    // TODO: handle case of connection error of some sort
+	  };
 
-		request.send();
+	  request.send();
 	}
 
 
@@ -147,22 +147,22 @@
 /***/ function(module, exports) {
 
 	function addClass(el, className) {
-		if (el.classList) {
-			el.classList.add(className);
-		} else {
-			el.className += ' ' + className;
-		}
+	  if (el.classList) {
+	    el.classList.add(className);
+	  } else {
+	    el.className += ' ' + className;
+	  }
 	}
 
 
 	function removeClass(el, className) {
-		if (el.classList) {
-			el.classList.remove(className);
-		} else {
-			el.className = el.className.replace(
-					new RegExp('(^|\\b)' + className.split(' ').join('|') +
+	  if (el.classList) {
+	    el.classList.remove(className);
+	  } else {
+	    el.className = el.className.replace(
+	        new RegExp('(^|\\b)' + className.split(' ').join('|') +
 	                   '(\\b|$)', 'gi'), ' ');
-		}
+	  }
 	}
 
 
@@ -194,29 +194,29 @@
 
 
 	function transformToAssocArray(paramString) {
-		var paramArray = paramString.split("&");
-		var params = {};
-		for (var i = 0; i < paramArray.length; i++) {
-			var tuple = paramArray[i].split("=");
-			params[tuple[0]] = tuple[1];
-		}
-		return params;
+	  var paramArray = paramString.split("&");
+	  var params = {};
+	  for (var i = 0; i < paramArray.length; i++) {
+	    var tuple = paramArray[i].split("=");
+	    params[tuple[0]] = tuple[1];
+	  }
+	  return params;
 	}
 
 
 	function getSearchParams() {
-		var paramString = window.location.search.substr(1);
-		if (paramString != null && paramString != "") {
-			return transformToAssocArray(paramString);
-		} else {
-			return {};
-		}
+	  var paramString = window.location.search.substr(1);
+	  if (paramString != null && paramString != "") {
+	    return transformToAssocArray(paramString);
+	  } else {
+	    return {};
+	  }
 	}
 
 
 	module.exports = {
 	  init: initializeForm,
-		getSearchParams: getSearchParams
+	  getSearchParams: getSearchParams
 	}
 
 

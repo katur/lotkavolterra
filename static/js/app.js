@@ -7,18 +7,18 @@ var debugging = require("./debugging.js");
  * Create and run input-based simulation.
  */
 function launchSimulation(params) {
-	// Make AJAX request for JSON input
-	var request = new XMLHttpRequest();
+  // Make AJAX request for JSON input
+  var request = new XMLHttpRequest();
   var jsonURL = "/static/json/".concat(params.simulation);
-	request.open("GET", jsonURL, true);
+  request.open("GET", jsonURL, true);
 
-	request.onload = function() {
-		if (request.status >= 200 && request.status < 400) {  // Success
-			jsonData = JSON.parse(request.responseText);
+  request.onload = function() {
+    if (request.status >= 200 && request.status < 400) {  // Success
+      jsonData = JSON.parse(request.responseText);
 
       var luncheon = controller.initializeLuncheon({
-				data: jsonData
-			});
+        data: jsonData
+      });
 
       var circles = controller.drawLuncheon({
         luncheon: luncheon,
@@ -31,24 +31,24 @@ function launchSimulation(params) {
         stageY: jsonData.stageY
       });
 
-			controller.runGeneration({
-				luncheon: luncheon,
+      controller.runGeneration({
+        luncheon: luncheon,
         showStats: params.showStats,
-				numGenerations: params.generations,
+        numGenerations: params.generations,
         repeat: params.repeat,
         circles: circles
-			});
+      });
 
-		} else {
-			// TODO: handle case of reached target server but returned an error
-		}
-	};
+    } else {
+      // TODO: handle case of reached target server but returned an error
+    }
+  };
 
-	request.onerror = function() {
-		// TODO: handle case of connection error of some sort
-	};
+  request.onerror = function() {
+    // TODO: handle case of connection error of some sort
+  };
 
-	request.send();
+  request.send();
 }
 
 
