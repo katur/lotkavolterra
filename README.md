@@ -24,10 +24,10 @@ Please see [INSTALL.md](INSTALL.md) for instructions on installation.
 
 ## Photographs
 
-Eastern Coyote photograph by ForestWander Nature Photography;
+Eastern coyote photograph by ForestWander Nature Photography;
 found on Wikimedia Commons.
 
-Wild Turkey photograph by [Laura Erickson](http://www.lauraerickson.com).
+Wild turkey photograph by [Laura Erickson](http://www.lauraerickson.com).
 
-Eurasian Boar photograph by Valentin Panzirsch;
+Eurasian boar photograph by Valentin Panzirsch;
 found on Wikimedia Commons.
