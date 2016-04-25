@@ -91,12 +91,14 @@ function updateSeatRadii(params) {
     .each("end", function(d, i) {
       // The callback is only needed once over all nodes
       if (i == 0) {
-        d3.select(".generation-counter")
-          .text("Generation " + params.generation);
+        if (params.showStats) {
+          d3.select(".generation-counter")
+            .text("Generation " + params.generation);
 
-        if (params.reset) {
-          d3.select(".trial-counter")
-            .text("Trial " + params.trial);
+          if (params.reset) {
+            d3.select(".trial-counter")
+              .text("Trial " + params.trial);
+          }
         }
 
         params.callback(params.callbackParams);
@@ -131,8 +133,11 @@ function drawStage(params) {
 
 
 /**
- * Make the "stats" (the generation/trial counters and the home nav
- * button) visible.
+ * Make the "stats" visible.
+ *
+ * The stats are the generation/trial counters and the home nav.
+ * The reason we wanted to be able to control their visibility is
+ * to remove them when making screen capture videos.
  */
 function displayStats(params) {
   d3.select("#stats").style("display", "block");

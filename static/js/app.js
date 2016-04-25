@@ -33,6 +33,7 @@ function launchSimulation(params) {
 
 			controller.runGeneration({
 				luncheon: luncheon,
+        showStats: params.showStats,
 				numGenerations: params.generations,
         repeat: params.repeat,
         circles: circles
@@ -69,6 +70,7 @@ function launchTestSimulation(params) {
 
   controller.runGeneration({
     luncheon: luncheon,
+    showStats: params.showStats,
     numGenerations: params.generations,
     repeat: params.repeat,
     circles: circles

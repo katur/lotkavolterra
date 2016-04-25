@@ -147,6 +147,7 @@ function runGeneration(params) {
   }
 
   view.updateSeatRadii({
+    showStats: params.showStats,
     'trial': params.luncheon.trial,
     'generation': params.luncheon.generation,
     'callback': runGeneration,
