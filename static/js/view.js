@@ -130,6 +130,15 @@ function drawStage(params) {
 }
 
 
+/**
+ * Make the "stats" (the generation/trial counters and the home nav
+ * button) visible.
+ */
+function displayStats(params) {
+  d3.select("#stats").style("display", "block");
+}
+
+
 /***********
  * Helpers *
  ***********/
@@ -177,5 +186,6 @@ function getRadius(seat) {
 module.exports = {
   drawSeats: drawSeats,
   drawStage: drawStage,
+  displayStats: displayStats,
   updateSeatRadii: updateSeatRadii
 }

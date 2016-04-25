@@ -149,18 +149,20 @@ body {
   padding: 0; }
   #simulation .simulation-svg {
     width: 100%; }
-  #simulation .home-nav, #simulation .counters {
-    position: absolute;
-    top: 5px;
-    padding: 6px;
-    border-radius: 3px;
-    background: #ddd;
-    opacity: 0.9;
-    font-size: 12px; }
-  #simulation .home-nav {
-    left: 5px; }
-  #simulation .counters {
-    right: 5px; }
+  #simulation #stats {
+    display: none; }
+    #simulation #stats .home-nav, #simulation #stats .counters {
+      position: absolute;
+      top: 5px;
+      padding: 6px;
+      border-radius: 3px;
+      background: #ddd;
+      opacity: 0.9;
+      font-size: 12px; }
+    #simulation #stats .home-nav {
+      left: 5px; }
+    #simulation #stats .counters {
+      right: 5px; }
 
 #home .page-section {
   max-width: 750px;

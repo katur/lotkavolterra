@@ -22,8 +22,9 @@ function launchSimulation(params) {
 
       var circles = controller.drawLuncheon({
         luncheon: luncheon,
-        showSpecies: jsonData.showSpecies,
+        showStats: params.showStats,
         noText: params.noText,
+        showSpecies: jsonData.showSpecies,
         showStage: jsonData.showStage,
         stageWidth: jsonData.stageWidth,
         stageHeight: jsonData.stageHeight,
@@ -61,9 +62,9 @@ function launchTestSimulation(params) {
 
   var circles = controller.drawLuncheon({
     luncheon: luncheon,
-    showSpecies: true,
+    showStats: params.showStats,
     noText: params.noText,
-    showStage: false
+    showSpecies: true
   });
 
   controller.runGeneration({

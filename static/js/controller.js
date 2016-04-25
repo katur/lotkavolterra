@@ -120,6 +120,10 @@ function drawLuncheon(params) {
     });
   }
 
+  if (params.showStats) {
+    view.displayStats();
+  }
+
   return circles;
 }
 

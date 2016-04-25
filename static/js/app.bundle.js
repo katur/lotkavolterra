@@ -68,8 +68,9 @@
 
 	      var circles = controller.drawLuncheon({
 	        luncheon: luncheon,
-	        showSpecies: jsonData.showSpecies,
+	        showStats: params.showStats,
 	        noText: params.noText,
+	        showSpecies: jsonData.showSpecies,
 	        showStage: jsonData.showStage,
 	        stageWidth: jsonData.stageWidth,
 	        stageHeight: jsonData.stageHeight,
@@ -107,9 +108,9 @@
 
 	  var circles = controller.drawLuncheon({
 	    luncheon: luncheon,
-	    showSpecies: true,
+	    showStats: params.showStats,
 	    noText: params.noText,
-	    showStage: false
+	    showSpecies: true
 	  });
 
 	  controller.runGeneration({
@@ -341,6 +342,10 @@
 	      stageHeight: params.stageHeight,
 	      stageY: params.stageY
 	    });
+	  }
+
+	  if (params.showStats) {
+	    view.displayStats();
 	  }
 
 	  return circles;
@@ -1025,6 +1030,15 @@
 	}
 
 
+	/**
+	 * Make the "stats" (the generation/trial counters and the home nav
+	 * button) visible.
+	 */
+	function displayStats(params) {
+	  d3.select("#stats").style("display", "block");
+	}
+
+
 	/***********
 	 * Helpers *
 	 ***********/
@@ -1072,6 +1086,7 @@
 	module.exports = {
 	  drawSeats: drawSeats,
 	  drawStage: drawStage,
+	  displayStats: displayStats,
 	  updateSeatRadii: updateSeatRadii
 	}
 
