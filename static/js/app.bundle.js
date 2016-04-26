@@ -64,7 +64,7 @@
 	      if (request.status >= 200 && request.status < 400) {  // Success
 	        jsonData = JSON.parse(request.responseText);
 
-	        var luncheon = controller.initializeLuncheon({
+	        var luncheon = controller.initializeInputLuncheon({
 	          data: jsonData
 	        });
 
@@ -131,7 +131,7 @@
 	   */
 	  launchDebuggingAnimation: function(params) {
 	    debugging.drawRandomCircles(params);
-	    debugging.updateRandomCircles();
+	    debugging.updateRadiiRandomly();
 	  },
 
 	  formInit: form.init,
@@ -274,7 +274,7 @@
 	  /**
 	   * Create luncheon from an input file.
 	   */
-	  initializeLuncheon: function(params) {
+	  initializeInputLuncheon: function(params) {
 	    // Create empty Luncheon object
 	    var luncheon = new model.Luncheon({
 	      name: params.data.name,
@@ -282,30 +282,7 @@
 	      numTablesY: params.data.numTablesY
 	    });
 
-	    // Per-person primary key
-	    var pk = 0
-
-	    // Create the tables and add to luncheon
-	    var jsonTables = params.data.tables;
-
-	    for (var i = 0; i < jsonTables.length; i++) {
-	      var table = new model.Table(jsonTables[i]);
-	      var jsonPeople = jsonTables[i].people;
-
-	      for (var j = 0; j < jsonPeople.length; j++) {
-	        table.insert({
-	          pk: pk,
-	          index: j,
-	          name: jsonPeople[j].name,
-	          group: jsonPeople[j].group || constants.Group.getRandom()
-	        });
-
-	        pk += 1;
-	      }
-
-	      luncheon.addTable(table)
-	    }
-
+	    populateInputLuncheon(luncheon, params.data.tables);
 	    return luncheon;
 	  },
 
@@ -321,48 +298,7 @@
 	      numTablesY: 1.4
 	    });
 
-	    var table = new model.Table({
-	      x: 0.5,
-	      y: 0.5
-	    });
-
-	    var group;
-	    for (var i = 0; i < params.numSeats; i++) {
-	      if (params.simulation === "alternating2") {
-	        if (i % 2 === 0) {
-	          group = constants.Group.PACK;
-	        } else {
-	          group = constants.Group.HERD;
-	        }
-
-	      } else if (params.simulation === "alternating3") {
-	        if (i % 3 === 0) {
-	          group = constants.Group.PACK;
-	        } else if (i % 3 === 1) {
-	          group = constants.Group.HERD;
-	        } else {
-	          group = constants.Group.COLONY;
-	        }
-
-	      } else if (params.simulation === "halves") {
-	        if (i < (params.numSeats / 2)) {
-	          group = constants.Group.PACK;
-	        } else {
-	          group = constants.Group.HERD;
-	        }
-
-	      } else {
-	        group = constants.Group.getRandom();
-	      }
-
-	      table.insert({
-	        pk: i,
-	        index: i,
-	        group: group,
-	        name: constants.PERSON_NAMES[i] || "Person" + i
-	      });
-	    }
-
+	    var table = createTestTable(params.simulation, params.numSeats);
 	    luncheon.addTable(table);
 	    return luncheon;
 	  },
@@ -406,7 +342,7 @@
 	 ***********/
 
 	/**
-	 * Do next generation of the simulation.
+	 * Do a generation of the simulation.
 	 */
 	function runGeneration(params) {
 	  var reset;
@@ -435,6 +371,74 @@
 	}
 
 
+	/**
+	 * Populate luncheon from JSON-format table information.
+	 */
+	function populateInputLuncheon(luncheon, jsonTables) {
+	  // Per-person primary key
+	  var pk = 0;
+
+	  for (var i = 0; i < jsonTables.length; i++) {
+	    var table = new model.Table(jsonTables[i]);
+	    var jsonPeople = jsonTables[i].people;
+
+	    for (var j = 0; j < jsonPeople.length; j++) {
+	      table.insert({
+	        pk: pk,
+	        index: j,
+	        name: jsonPeople[j].name,
+	        group: jsonPeople[j].group || constants.Group.getRandom()
+	      });
+
+	      pk += 1;
+	    }
+
+	    luncheon.addTable(table);
+	  }
+	}
+
+
+	/**
+	 * Create table for test simulation.
+	 */
+	function createTestTable(simulation, numSeats) {
+	  var table = new model.Table({
+	    x: 0.5,
+	    y: 0.5
+	  });
+
+	  var group;
+	  for (var i = 0; i < numSeats; i++) {
+	    if (simulation === "alternating2") {
+	      group = [constants.Group.PACK, constants.Group.HERD][i % 2];
+
+	    } else if (simulation === "alternating3") {
+	      group = [constants.Group.PACK, constants.Group.HERD,
+	               constants.Group.COLONY][i % 3];
+
+	    } else if (simulation === "halves") {
+	      if (i < (numSeats / 2)) {
+	        group = constants.Group.PACK;
+	      } else {
+	        group = constants.Group.HERD;
+	      }
+
+	    } else {
+	      group = constants.Group.getRandom();
+	    }
+
+	    table.insert({
+	      pk: i,
+	      index: i,
+	      group: group,
+	      name: constants.TEST_PERSON_NAMES[i] || "Person" + i
+	    });
+	  }
+
+	  return table;
+	}
+
+
 /***/ },
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
@@ -449,21 +453,28 @@
 
 
 	module.exports = {
-	  // Model
+	  // Model-related
 	  GROWTH_RATE: 0.05,
 	  COMPETITIVE_COIN_WEIGHT: 0.667,
 	  INITIAL_POPULATION_SIZE: INITIAL_POPULATION_SIZE,
-
-	  // Both model and view
 	  OVERPOPULATION_SIZE: OVERPOPULATION_SIZE,
-	  OVERPOPULATION_RADIUS: OVERPOPULATION_RADIUS,
 
-	  // View
+
+	  // View-related
 	  EASING_FXN: "linear",
 	  TRANSITION_DURATION: 500,
 	  BETWEEN_TRIAL_DELAY: 3000,
 	  TABLE_SPACE_TO_RADIUS_FACTOR: 1/3,
 	  CIRCLE_RADIANS: 2 * Math.PI,
+	  OVERPOPULATION_RADIUS: OVERPOPULATION_RADIUS,
+
+
+	  // For test simulation
+	  TEST_PERSON_NAMES: [
+	    'Alice', 'Bob', 'Carol', 'Django', 'Erlich', 'Freddy',
+	    'Georgia', 'Heidi', 'Indigo', 'Jack'
+	  ],
+
 
 	  // Enums
 	  Group: {
@@ -508,12 +519,7 @@
 	        return this.TAILS;
 	      }
 	    }
-	  },
-
-	  PERSON_NAMES: [
-	    'Alice', 'Bob', 'Carol', 'Django', 'Erlich', 'Freddy',
-	    'Georgia', 'Heidi', 'Indigo', 'Jack'
-	  ]
+	  }
 	};
 
 
@@ -10714,12 +10720,13 @@
 	        d3.select(this)
 	          .attr("cx", Math.random() * svgWidth)
 	          .attr("cy", Math.random() * svgHeight)
-	          .attr("r", Math.random() * 30);
+	          .attr("r", Math.random() * 30)
+	          .attr("fill", "green");
 	      });
 	  },
 
 
-	  updateRandomCircles: updateRandomCircles
+	  updateRadiiRandomly: updateRadiiRandomly
 	};
 
 
@@ -10727,7 +10734,7 @@
 	 * Helpers *
 	 ***********/
 
-	function updateRandomCircles() {
+	function updateRadiiRandomly() {
 	  var svg = d3.select("svg");
 	  var circles = svg.selectAll("circle")
 	    .transition()
@@ -10739,7 +10746,7 @@
 	    .each("end", function(d, i) {
 	      if (i === 0) {
 	        console.log("Starting over");
-	        updateRandomCircles();
+	        updateRadiiRandomly();
 	      }
 	    });
 	}

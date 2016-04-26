@@ -8,21 +8,28 @@ const OVERPOPULATION_RADIUS = utils.getRadiusFromArea(OVERPOPULATION_SIZE);
 
 
 module.exports = {
-  // Model
+  // Model-related
   GROWTH_RATE: 0.05,
   COMPETITIVE_COIN_WEIGHT: 0.667,
   INITIAL_POPULATION_SIZE: INITIAL_POPULATION_SIZE,
-
-  // Both model and view
   OVERPOPULATION_SIZE: OVERPOPULATION_SIZE,
-  OVERPOPULATION_RADIUS: OVERPOPULATION_RADIUS,
 
-  // View
+
+  // View-related
   EASING_FXN: "linear",
   TRANSITION_DURATION: 500,
   BETWEEN_TRIAL_DELAY: 3000,
   TABLE_SPACE_TO_RADIUS_FACTOR: 1/3,
   CIRCLE_RADIANS: 2 * Math.PI,
+  OVERPOPULATION_RADIUS: OVERPOPULATION_RADIUS,
+
+
+  // For test simulation
+  TEST_PERSON_NAMES: [
+    'Alice', 'Bob', 'Carol', 'Django', 'Erlich', 'Freddy',
+    'Georgia', 'Heidi', 'Indigo', 'Jack'
+  ],
+
 
   // Enums
   Group: {
@@ -67,10 +74,5 @@ module.exports = {
         return this.TAILS;
       }
     }
-  },
-
-  PERSON_NAMES: [
-    'Alice', 'Bob', 'Carol', 'Django', 'Erlich', 'Freddy',
-    'Georgia', 'Heidi', 'Indigo', 'Jack'
-  ]
+  }
 };

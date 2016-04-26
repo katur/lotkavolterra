@@ -7,7 +7,7 @@ module.exports = {
   /**
    * Create luncheon from an input file.
    */
-  initializeLuncheon: function(params) {
+  initializeInputLuncheon: function(params) {
     // Create empty Luncheon object
     var luncheon = new model.Luncheon({
       name: params.data.name,
@@ -15,30 +15,7 @@ module.exports = {
       numTablesY: params.data.numTablesY
     });
 
-    // Per-person primary key
-    var pk = 0
-
-    // Create the tables and add to luncheon
-    var jsonTables = params.data.tables;
-
-    for (var i = 0; i < jsonTables.length; i++) {
-      var table = new model.Table(jsonTables[i]);
-      var jsonPeople = jsonTables[i].people;
-
-      for (var j = 0; j < jsonPeople.length; j++) {
-        table.insert({
-          pk: pk,
-          index: j,
-          name: jsonPeople[j].name,
-          group: jsonPeople[j].group || constants.Group.getRandom()
-        });
-
-        pk += 1;
-      }
-
-      luncheon.addTable(table)
-    }
-
+    populateInputLuncheon(luncheon, params.data.tables);
     return luncheon;
   },
 
@@ -54,48 +31,7 @@ module.exports = {
       numTablesY: 1.4
     });
 
-    var table = new model.Table({
-      x: 0.5,
-      y: 0.5
-    });
-
-    var group;
-    for (var i = 0; i < params.numSeats; i++) {
-      if (params.simulation === "alternating2") {
-        if (i % 2 === 0) {
-          group = constants.Group.PACK;
-        } else {
-          group = constants.Group.HERD;
-        }
-
-      } else if (params.simulation === "alternating3") {
-        if (i % 3 === 0) {
-          group = constants.Group.PACK;
-        } else if (i % 3 === 1) {
-          group = constants.Group.HERD;
-        } else {
-          group = constants.Group.COLONY;
-        }
-
-      } else if (params.simulation === "halves") {
-        if (i < (params.numSeats / 2)) {
-          group = constants.Group.PACK;
-        } else {
-          group = constants.Group.HERD;
-        }
-
-      } else {
-        group = constants.Group.getRandom();
-      }
-
-      table.insert({
-        pk: i,
-        index: i,
-        group: group,
-        name: constants.PERSON_NAMES[i] || "Person" + i
-      });
-    }
-
+    var table = createTestTable(params.simulation, params.numSeats);
     luncheon.addTable(table);
     return luncheon;
   },
@@ -139,7 +75,7 @@ module.exports = {
  ***********/
 
 /**
- * Do next generation of the simulation.
+ * Do a generation of the simulation.
  */
 function runGeneration(params) {
   var reset;
@@ -165,4 +101,72 @@ function runGeneration(params) {
     reset: reset,
     circles: params.circles
   });
+}
+
+
+/**
+ * Populate luncheon from JSON-format table information.
+ */
+function populateInputLuncheon(luncheon, jsonTables) {
+  // Per-person primary key
+  var pk = 0;
+
+  for (var i = 0; i < jsonTables.length; i++) {
+    var table = new model.Table(jsonTables[i]);
+    var jsonPeople = jsonTables[i].people;
+
+    for (var j = 0; j < jsonPeople.length; j++) {
+      table.insert({
+        pk: pk,
+        index: j,
+        name: jsonPeople[j].name,
+        group: jsonPeople[j].group || constants.Group.getRandom()
+      });
+
+      pk += 1;
+    }
+
+    luncheon.addTable(table);
+  }
+}
+
+
+/**
+ * Create table for test simulation.
+ */
+function createTestTable(simulation, numSeats) {
+  var table = new model.Table({
+    x: 0.5,
+    y: 0.5
+  });
+
+  var group;
+  for (var i = 0; i < numSeats; i++) {
+    if (simulation === "alternating2") {
+      group = [constants.Group.PACK, constants.Group.HERD][i % 2];
+
+    } else if (simulation === "alternating3") {
+      group = [constants.Group.PACK, constants.Group.HERD,
+               constants.Group.COLONY][i % 3];
+
+    } else if (simulation === "halves") {
+      if (i < (numSeats / 2)) {
+        group = constants.Group.PACK;
+      } else {
+        group = constants.Group.HERD;
+      }
+
+    } else {
+      group = constants.Group.getRandom();
+    }
+
+    table.insert({
+      pk: i,
+      index: i,
+      group: group,
+      name: constants.TEST_PERSON_NAMES[i] || "Person" + i
+    });
+  }
+
+  return table;
 }

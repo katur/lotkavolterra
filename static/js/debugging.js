@@ -32,12 +32,13 @@ module.exports = {
         d3.select(this)
           .attr("cx", Math.random() * svgWidth)
           .attr("cy", Math.random() * svgHeight)
-          .attr("r", Math.random() * 30);
+          .attr("r", Math.random() * 30)
+          .attr("fill", "green");
       });
   },
 
 
-  updateRandomCircles: updateRandomCircles
+  updateRadiiRandomly: updateRadiiRandomly
 };
 
 
@@ -45,7 +46,7 @@ module.exports = {
  * Helpers *
  ***********/
 
-function updateRandomCircles() {
+function updateRadiiRandomly() {
   var svg = d3.select("svg");
   var circles = svg.selectAll("circle")
     .transition()
@@ -57,7 +58,7 @@ function updateRandomCircles() {
     .each("end", function(d, i) {
       if (i === 0) {
         console.log("Starting over");
-        updateRandomCircles();
+        updateRadiiRandomly();
       }
     });
 }

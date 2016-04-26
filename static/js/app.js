@@ -18,7 +18,7 @@ window.lotkavolterra = {
       if (request.status >= 200 && request.status < 400) {  // Success
         jsonData = JSON.parse(request.responseText);
 
-        var luncheon = controller.initializeLuncheon({
+        var luncheon = controller.initializeInputLuncheon({
           data: jsonData
         });
 
@@ -85,7 +85,7 @@ window.lotkavolterra = {
    */
   launchDebuggingAnimation: function(params) {
     debugging.drawRandomCircles(params);
-    debugging.updateRandomCircles();
+    debugging.updateRadiiRandomly();
   },
 
   formInit: form.init,
