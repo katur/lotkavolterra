@@ -12,54 +12,16 @@ module.exports = {
   drawSeats: function(params) {
     var svg = d3.select("svg");
 
-    // Calculate svg height from width.
-    var svgWidth = parseInt(svg.style("width"), 10);
-    var hwRatio = params.numTablesY / params.numTablesX;
-    var svgHeight = svgWidth * hwRatio;
-    svg.attr("height", svgHeight);
+    // Make certain SVG-wide calculations
+    doSvgWideCalculations(svg, params.numTablesX, params.numTablesY,
+                          params.seats);
 
-    // Calculate the space each table can take up in both x and y dimensions.
-    var tableSpace = svgWidth / params.numTablesX;
-    var tableRadius = tableSpace * constants.TABLE_SPACE_TO_RADIUS_FACTOR;
+    // Add the circle elements
+    var circles = addCircles(svg, params.seats);
 
-    // Add these extra attributes to the seat.
-    // Use underscores to resemble the rest of the Python-derived attributes.
-    for (var i = 0; i < params.seats.length; i++) {
-      seat = params.seats[i];
-      seat.svgWidth = svgWidth;
-      seat.svgHeight = svgHeight;
-      seat.tableSpace = tableSpace;
-      seat.tableRadius = tableRadius;
-    }
-
-    // Add the circle elements.
-    var circles = svg.selectAll("circle")
-      .data(params.seats)
-      .enter()
-      .append("circle")
-      .each(function(d, i) {
-        var coords = getCoordinates(d);
-        d3.select(this)
-          .attr("cx", coords[0])
-          .attr("cy", coords[1])
-          .attr("r", getRadius(d))
-          .classed(d.group, true);
-      });
-
+    // Add the text elements
     if (!params.noText) {
-      // Add the text elements.
-      svg.selectAll("text")
-        .data(params.seats)
-        .enter()
-        .append("text")
-        .each(function(d, i) {
-          var coords = getCoordinates(d);
-          d3.select(this)
-            .attr("x", coords[0])
-            .attr("y", coords[1])
-            .text(params.showSpecies ? d.shortSpecies : d.firstName)
-            .classed("circle-text", true);
-        });
+      addText(svg, params.seats, params.showSpecies);
     }
 
     return circles;
@@ -108,7 +70,6 @@ module.exports = {
    */
   updateSeatRadii: function(params) {
     var duration, delay;
-
     if (params.reset) {
       duration = 0;
       delay = constants.BETWEEN_TRIAL_DELAY;
@@ -126,20 +87,13 @@ module.exports = {
         return getRadius(d);
       })
       .each("end", function(d, i) {
-        // The callback is only needed once over all nodes
-        if (i == 0) {
-          if (params.showStats) {
-            d3.select(".generation-counter")
-              .text("Generation " + params.generation);
+        // The callback is only needed once over all circles
+        if (i != 0) { return; }
 
-            if (params.reset) {
-              d3.select(".trial-counter")
-                .text("Trial " + params.trial);
-            }
-          }
-
-          params.callback(params.callbackParams);
+        if (params.showStats) {
+          updateCounters(params.generation, params.trial, params.reset);
         }
+        params.callback(params.callbackParams);
       });
   }
 };
@@ -150,7 +104,73 @@ module.exports = {
  ***********/
 
 /**
- * Get the coordinates of a seat.
+ * Process SVG-wide stuff, including setting the height, calculating
+ * the size of tables, and binding all this information to all seats.
+ */
+function doSvgWideCalculations(svg, numTablesX, numTablesY, seats) {
+  // Set svg height based on width
+  var svgWidth = parseInt(svg.style("width"), 10);
+  var hwRatio = numTablesY / numTablesX;
+  var svgHeight = svgWidth * hwRatio;
+  svg.attr("height", svgHeight);
+
+  // Calculate the space each table can take up in both x and y dimensions
+  var tableSpace = svgWidth / numTablesX;
+  var tableRadius = tableSpace * constants.TABLE_SPACE_TO_RADIUS_FACTOR;
+
+  // Add these extra attributes to the seats for convenience later on
+  for (var i = 0; i < seats.length; i++) {
+    seat = seats[i];
+    seat.svgWidth = svgWidth;
+    seat.svgHeight = svgHeight;
+    seat.tableSpace = tableSpace;
+    seat.tableRadius = tableRadius;
+  }
+}
+
+
+/**
+ * Add circles representing seats to svg.
+ */
+function addCircles(svg, seats) {
+  return svg.selectAll("circle")
+    .data(seats)
+    .enter()
+    .append("circle")
+    .each(function(d, i) {
+      var coords = getCoordinates(d);
+      d3.select(this)
+        .attr("cx", coords[0])
+        .attr("cy", coords[1])
+        .attr("r", getRadius(d))
+        .classed(d.group, true);
+    });
+}
+
+
+/**
+ * Add text elements for seats to the svg.
+ *
+ * If showSpecies=true, show species name; otherwise, show first name.
+ */
+function addText(svg, seats, showSpecies) {
+  return svg.selectAll("text")
+    .data(seats)
+    .enter()
+    .append("text")
+    .each(function(d, i) {
+      var coords = getCoordinates(d);
+      d3.select(this)
+        .attr("x", coords[0])
+        .attr("y", coords[1])
+        .text(showSpecies ? d.shortSpecies : d.firstName)
+        .classed("circle-text", true);
+    });
+}
+
+
+/**
+ * Calculate the coordinates of a seat.
  */
 function getCoordinates(seat) {
   var step = constants.CIRCLE_RADIANS / seat.table.seatCount;
@@ -177,7 +197,7 @@ function getCoordinates(seat) {
 
 
 /**
- * Get the radius of a seat based on its current population size.
+ * Calculate the radius of a seat based on its current population size.
  */
 function getRadius(seat) {
   var current = utils.getRadiusFromArea(seat.populationSize);
@@ -186,4 +206,18 @@ function getRadius(seat) {
 
   // Allow seats to get as big as the table at their largest
   return relative * seat.tableRadius;
+}
+
+
+/**
+ * Update the trial and generation counters.
+ */
+function updateCounters(generation, trial, reset) {
+  d3.select(".generation-counter")
+    .text("Generation " + generation);
+
+  if (reset) {
+    d3.select(".trial-counter")
+      .text("Trial " + trial);
+  }
 }
