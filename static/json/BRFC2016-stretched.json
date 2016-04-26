@@ -9,46 +9,9 @@
   "stageY": 0,
   "tables": [
     {
-      "number": 1,
-      "x": 0.0,
-      "y": 0.05,
-      "people": [
-        {
-          "group": "COLONY"
-        },
-        {
-          "group": "HERD"
-        },
-        {
-          "group": "HERD"
-        },
-        {
-          "group": "COLONY"
-        },
-        {
-          "group": "PACK"
-        },
-        {
-          "group": "HERD"
-        },
-        {
-          "group": "HERD"
-        },
-        {
-          "group": "PACK"
-        },
-        {
-          "group": "COLONY"
-        },
-        {
-          "group": "COLONY"
-        }
-      ]
-    },
-    {
       "number": 2,
       "x": 0.14285714285714285,
-      "y": 0.23,
+      "y": 0.26,
       "people": [
         {
           "group": "HERD"
@@ -85,7 +48,7 @@
     {
       "number": 3,
       "x": 0.2857142857142857,
-      "y": 0.05,
+      "y": 0.1,
       "people": [
         {
           "group": "PACK"
@@ -122,7 +85,7 @@
     {
       "number": 4,
       "x": 0.42857142857142855,
-      "y": 0.23,
+      "y": 0.26,
       "people": [
         {
           "group": "HERD"
@@ -159,7 +122,7 @@
     {
       "number": 5,
       "x": 0.5714285714285714,
-      "y": 0.23,
+      "y": 0.26,
       "people": [
         {
           "group": "HERD"
@@ -196,7 +159,7 @@
     {
       "number": 6,
       "x": 0.7142857142857143,
-      "y": 0.05,
+      "y": 0.1,
       "people": [
         {
           "group": "PACK"
@@ -233,7 +196,7 @@
     {
       "number": 7,
       "x": 0.8571428571428571,
-      "y": 0.23,
+      "y": 0.26,
       "people": [
         {
           "group": "PACK"
@@ -264,87 +227,13 @@
         },
         {
           "group": "HERD"
-        }
-      ]
-    },
-    {
-      "number": 8,
-      "x": 1.0,
-      "y": 0.05,
-      "people": [
-        {
-          "group": "PACK"
-        },
-        {
-          "group": "HERD"
-        },
-        {
-          "group": "COLONY"
-        },
-        {
-          "group": "PACK"
-        },
-        {
-          "group": "HERD"
-        },
-        {
-          "group": "HERD"
-        },
-        {
-          "group": "HERD"
-        },
-        {
-          "group": "PACK"
-        },
-        {
-          "group": "PACK"
-        },
-        {
-          "group": "COLONY"
-        }
-      ]
-    },
-    {
-      "number": 9,
-      "x": 0.0,
-      "y": 0.41,
-      "people": [
-        {
-          "group": "PACK"
-        },
-        {
-          "group": "HERD"
-        },
-        {
-          "group": "COLONY"
-        },
-        {
-          "group": "HERD"
-        },
-        {
-          "group": "PACK"
-        },
-        {
-          "group": "COLONY"
-        },
-        {
-          "group": "HERD"
-        },
-        {
-          "group": "HERD"
-        },
-        {
-          "group": "COLONY"
-        },
-        {
-          "group": "COLONY"
         }
       ]
     },
     {
       "number": 10,
       "x": 0.14285714285714285,
-      "y": 0.59,
+      "y": 0.58,
       "people": [
         {
           "group": "PACK"
@@ -381,7 +270,7 @@
     {
       "number": 11,
       "x": 0.2857142857142857,
-      "y": 0.41,
+      "y": 0.42,
       "people": [
         {
           "group": "COLONY"
@@ -418,7 +307,7 @@
     {
       "number": 12,
       "x": 0.42857142857142855,
-      "y": 0.59,
+      "y": 0.58,
       "people": [
         {
           "group": "COLONY"
@@ -455,7 +344,7 @@
     {
       "number": 13,
       "x": 0.5714285714285714,
-      "y": 0.59,
+      "y": 0.58,
       "people": [
         {
           "group": "PACK"
@@ -492,7 +381,7 @@
     {
       "number": 14,
       "x": 0.7142857142857143,
-      "y": 0.41,
+      "y": 0.42,
       "people": [
         {
           "group": "PACK"
@@ -529,7 +418,7 @@
     {
       "number": 15,
       "x": 0.8571428571428571,
-      "y": 0.59,
+      "y": 0.58,
       "people": [
         {
           "group": "HERD"
@@ -560,87 +449,13 @@
         },
         {
           "group": "COLONY"
-        }
-      ]
-    },
-    {
-      "number": 16,
-      "x": 1.0,
-      "y": 0.41,
-      "people": [
-        {
-          "group": "HERD"
-        },
-        {
-          "group": "HERD"
-        },
-        {
-          "group": "PACK"
-        },
-        {
-          "group": "HERD"
-        },
-        {
-          "group": "HERD"
-        },
-        {
-          "group": "HERD"
-        },
-        {
-          "group": "HERD"
-        },
-        {
-          "group": "COLONY"
-        },
-        {
-          "group": "PACK"
-        },
-        {
-          "group": "COLONY"
-        }
-      ]
-    },
-    {
-      "number": 17,
-      "x": 0.0,
-      "y": 0.76,
-      "people": [
-        {
-          "group": "PACK"
-        },
-        {
-          "group": "HERD"
-        },
-        {
-          "group": "PACK"
-        },
-        {
-          "group": "COLONY"
-        },
-        {
-          "group": "HERD"
-        },
-        {
-          "group": "COLONY"
-        },
-        {
-          "group": "HERD"
-        },
-        {
-          "group": "PACK"
-        },
-        {
-          "group": "COLONY"
-        },
-        {
-          "group": "PACK"
         }
       ]
     },
     {
       "number": 18,
       "x": 0.14285714285714285,
-      "y": 0.94,
+      "y": 0.9,
       "people": [
         {
           "group": "COLONY"
@@ -677,7 +492,7 @@
     {
       "number": 19,
       "x": 0.2857142857142857,
-      "y": 0.76,
+      "y": 0.74,
       "people": [
         {
           "group": "HERD"
@@ -714,7 +529,7 @@
     {
       "number": 20,
       "x": 0.42857142857142855,
-      "y": 0.94,
+      "y": 0.9,
       "people": [
         {
           "group": "PACK"
@@ -751,7 +566,7 @@
     {
       "number": 21,
       "x": 0.5714285714285714,
-      "y": 0.94,
+      "y": 0.9,
       "people": [
         {
           "group": "COLONY"
@@ -788,7 +603,7 @@
     {
       "number": 22,
       "x": 0.7142857142857143,
-      "y": 0.76,
+      "y": 0.74,
       "people": [
         {
           "group": "PACK"
@@ -825,7 +640,7 @@
     {
       "number": 23,
       "x": 0.8571428571428571,
-      "y": 0.94,
+      "y": 0.9,
       "people": [
         {
           "group": "HERD"
@@ -858,11 +673,198 @@
           "group": "PACK"
         }
       ]
+    }
+  ],
+  "unused": [
+    {
+      "number": 1,
+      "x": 0.0,
+      "y": 0.1,
+      "people": [
+        {
+          "group": "COLONY"
+        },
+        {
+          "group": "HERD"
+        },
+        {
+          "group": "HERD"
+        },
+        {
+          "group": "COLONY"
+        },
+        {
+          "group": "PACK"
+        },
+        {
+          "group": "HERD"
+        },
+        {
+          "group": "HERD"
+        },
+        {
+          "group": "PACK"
+        },
+        {
+          "group": "COLONY"
+        },
+        {
+          "group": "COLONY"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "x": 1.0,
+      "y": 0.1,
+      "people": [
+        {
+          "group": "PACK"
+        },
+        {
+          "group": "HERD"
+        },
+        {
+          "group": "COLONY"
+        },
+        {
+          "group": "PACK"
+        },
+        {
+          "group": "HERD"
+        },
+        {
+          "group": "HERD"
+        },
+        {
+          "group": "HERD"
+        },
+        {
+          "group": "PACK"
+        },
+        {
+          "group": "PACK"
+        },
+        {
+          "group": "COLONY"
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "x": 0.0,
+      "y": 0.42,
+      "people": [
+        {
+          "group": "PACK"
+        },
+        {
+          "group": "HERD"
+        },
+        {
+          "group": "COLONY"
+        },
+        {
+          "group": "HERD"
+        },
+        {
+          "group": "PACK"
+        },
+        {
+          "group": "COLONY"
+        },
+        {
+          "group": "HERD"
+        },
+        {
+          "group": "HERD"
+        },
+        {
+          "group": "COLONY"
+        },
+        {
+          "group": "COLONY"
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "x": 1.0,
+      "y": 0.42,
+      "people": [
+        {
+          "group": "HERD"
+        },
+        {
+          "group": "HERD"
+        },
+        {
+          "group": "PACK"
+        },
+        {
+          "group": "HERD"
+        },
+        {
+          "group": "HERD"
+        },
+        {
+          "group": "HERD"
+        },
+        {
+          "group": "HERD"
+        },
+        {
+          "group": "COLONY"
+        },
+        {
+          "group": "PACK"
+        },
+        {
+          "group": "COLONY"
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "x": 0.0,
+      "y": 0.74,
+      "people": [
+        {
+          "group": "PACK"
+        },
+        {
+          "group": "HERD"
+        },
+        {
+          "group": "PACK"
+        },
+        {
+          "group": "COLONY"
+        },
+        {
+          "group": "HERD"
+        },
+        {
+          "group": "COLONY"
+        },
+        {
+          "group": "HERD"
+        },
+        {
+          "group": "PACK"
+        },
+        {
+          "group": "COLONY"
+        },
+        {
+          "group": "PACK"
+        }
+      ]
     },
     {
       "number": 24,
       "x": 1.0,
-      "y": 0.76,
+      "y": 0.74,
       "people": [
         {
           "group": "COLONY"
