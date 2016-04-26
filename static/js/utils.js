@@ -6,12 +6,14 @@ module.exports = {
     return choices[Math.floor(Math.random() * choices.length)];
   },
 
+
   /**
    * Get a circle's radius from its area.
    */
   getRadiusFromArea: function(area) {
     return Math.sqrt(area / Math.PI);
   },
+
 
   /**
    * Add a class to an HTML element.
@@ -23,6 +25,7 @@ module.exports = {
       el.className += ' ' + className;
     }
   },
+
 
   /**
    * Remove a class from an HTML element.
@@ -36,6 +39,7 @@ module.exports = {
                      '(\\b|$)', 'gi'), ' ');
     }
   },
+
 
   /**
    * Get GET parameters as a dictionary.
