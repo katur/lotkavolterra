@@ -163,4 +163,4 @@ module.exports = {
   initializeTestLuncheon: initializeTestLuncheon,
   drawLuncheon: drawLuncheon,
   runGeneration: runGeneration
-}
+};

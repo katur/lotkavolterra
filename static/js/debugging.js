@@ -53,4 +53,4 @@ function updateRandomCircles() {
 module.exports = {
   drawRandomCircles: drawRandomCircles,
   updateRandomCircles: updateRandomCircles
-}
+};

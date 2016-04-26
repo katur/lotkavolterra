@@ -88,4 +88,4 @@ window.lotkavolterra = {
 
   formInit: form.init,
   getSearchParams: utils.getSearchParams
-}
+};

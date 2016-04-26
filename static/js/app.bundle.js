@@ -134,7 +134,7 @@
 
 	  formInit: form.init,
 	  getSearchParams: utils.getSearchParams
-	}
+	};
 
 
 /***/ },
@@ -191,7 +191,6 @@
 	      return {};
 	    }
 	  }
-
 	};
 
 
@@ -425,7 +424,7 @@
 	  initializeTestLuncheon: initializeTestLuncheon,
 	  drawLuncheon: drawLuncheon,
 	  runGeneration: runGeneration
-	}
+	};
 
 
 /***/ },
@@ -851,12 +850,12 @@
 
 
 	/**
-	Have a pack and a herd compete.
-
-	A competition involves a coin flip weighted in favor of the predator,
-	followed by population increase for the winner and population decline
-	for the loser.
-	*/
+	 * Have a pack and a herd compete.
+	 *
+	 * A competition involves a coin flip weighted in favor of the predator,
+	 * followed by population increase for the winner and population decline
+	 * for the loser.
+	 */
 	function compete(pack, herd) {
 	  f = constants.Coin.flip(constants.COMPETITIVE_COIN_WEIGHT);
 
@@ -871,16 +870,15 @@
 
 
 	/**
-	Have seat x and seat y interact.
-
-	For each colony engaged in an interaction (x, y, or both), the colony
-	is temporarily changed to a herd or pack, based on the outcome of a fair
-	coin flip.
-
-	From there, the type of interaction depends on the types of x and y
-	(the cases include two herds, two packs, one of each).
-	*/
-
+	 * Have seat x and seat y interact.
+	 *
+	 * For each colony engaged in an interaction (x, y, or both), the colony
+	 * is temporarily changed to a herd or pack, based on the outcome of a fair
+	 * coin flip.
+	 *
+	 * From there, the type of interaction depends on the types of x and y
+	 * (the cases include two herds, two packs, one of each).
+	 */
 	function interact(x, y) {
 	  // If x or y is a colony, set temporarily to a pack or herd
 	  xWasColony = x.changeGroupIfColony();
@@ -10734,7 +10732,7 @@
 	module.exports = {
 	  drawRandomCircles: drawRandomCircles,
 	  updateRandomCircles: updateRandomCircles
-	}
+	};
 
 
 /***/ }
