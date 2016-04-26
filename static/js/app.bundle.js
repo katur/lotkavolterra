@@ -88,16 +88,17 @@
 	        });
 
 	      } else {
-	        // TODO: handle case of reached target server but returned an error
+	        // reached target server but returned an error
 	      }
 	    };
 
 	    request.onerror = function() {
-	      // TODO: handle case of connection error of some sort
+	      // connection error of some sort
 	    };
 
 	    request.send();
 	  },
+
 
 	  /**
 	   * Create and run test simulation.
@@ -124,6 +125,7 @@
 	    });
 	  },
 
+
 	  /**
 	   * Create and run D3 animation for debugging.
 	   */
@@ -149,12 +151,14 @@
 	    return choices[Math.floor(Math.random() * choices.length)];
 	  },
 
+
 	  /**
 	   * Get a circle's radius from its area.
 	   */
 	  getRadiusFromArea: function(area) {
 	    return Math.sqrt(area / Math.PI);
 	  },
+
 
 	  /**
 	   * Add a class to an HTML element.
@@ -166,6 +170,7 @@
 	      el.className += ' ' + className;
 	    }
 	  },
+
 
 	  /**
 	   * Remove a class from an HTML element.
@@ -179,6 +184,7 @@
 	                     '(\\b|$)', 'gi'), ' ');
 	    }
 	  },
+
 
 	  /**
 	   * Get GET parameters as a dictionary.
@@ -849,6 +855,51 @@
 	var constants = __webpack_require__(4);
 
 
+	module.exports = {
+	  /**
+	   * Have seat x and seat y interact.
+	   *
+	   * For each colony engaged in an interaction (x, y, or both),
+	   * the colony is temporarily changed to a herd or pack,
+	   * based on the outcome of a fair coin flip.
+	   *
+	   * From there, the type of interaction depends on the types of x and y
+	   * (the cases include two herds, two packs, one of each).
+	   */
+	  interact: function(x, y) {
+	    // If x or y is a colony, set temporarily to a pack or herd
+	    xWasColony = x.changeGroupIfColony();
+	    yWasColony = y.changeGroupIfColony();
+
+	    // Now the interaction falls into 4 cases
+	    if (x.isHerd() && y.isHerd()) {
+	      x.increasePopulation(constants.GROWTH_RATE);
+	      y.increasePopulation(constants.GROWTH_RATE);
+	    } else if (x.isPack() && y.isPack()) {
+	      x.decreasePopulation(constants.GROWTH_RATE);
+	      y.decreasePopulation(constants.GROWTH_RATE);
+	    } else if (x.isPack()) {
+	      compete(pack=x, herd=y);
+	    } else {
+	      compete(pack=y, herd=x);
+	    }
+
+	    // Restore colonies
+	    if (xWasColony) {
+	      x.setToColony();
+	    }
+
+	    if (yWasColony) {
+	      y.setToColony();
+	    }
+	  }
+	};
+
+
+	/***********
+	 * Helpers *
+	 ***********/
+
 	/**
 	 * Have a pack and a herd compete.
 	 *
@@ -867,49 +918,6 @@
 	    herd.increasePopulation(constants.GROWTH_RATE);
 	  }
 	}
-
-
-	/**
-	 * Have seat x and seat y interact.
-	 *
-	 * For each colony engaged in an interaction (x, y, or both), the colony
-	 * is temporarily changed to a herd or pack, based on the outcome of a fair
-	 * coin flip.
-	 *
-	 * From there, the type of interaction depends on the types of x and y
-	 * (the cases include two herds, two packs, one of each).
-	 */
-	function interact(x, y) {
-	  // If x or y is a colony, set temporarily to a pack or herd
-	  xWasColony = x.changeGroupIfColony();
-	  yWasColony = y.changeGroupIfColony();
-
-	  // Now the interaction falls into 4 cases
-	  if (x.isHerd() && y.isHerd()) {
-	    x.increasePopulation(constants.GROWTH_RATE);
-	    y.increasePopulation(constants.GROWTH_RATE);
-	  } else if (x.isPack() && y.isPack()) {
-	    x.decreasePopulation(constants.GROWTH_RATE);
-	    y.decreasePopulation(constants.GROWTH_RATE);
-	  } else if (x.isPack()) {
-	    compete(pack=x, herd=y);
-	  } else {
-	    compete(pack=y, herd=x);
-	  }
-
-	  // Set the colonies back
-	  if (xWasColony) {
-	    x.setToColony();
-	  }
-
-	  if (yWasColony) {
-	    y.setToColony();
-	  }
-	}
-
-	module.exports = {
-	  interact: interact
-	};
 
 
 /***/ },
