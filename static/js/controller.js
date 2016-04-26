@@ -3,130 +3,140 @@ var model = require("./model.js");
 var view = require("./view.js");
 
 
-/**
- * Create luncheon from an input file.
- */
-function initializeLuncheon(params) {
-  // Create the luncheon object
-  var luncheon = new model.Luncheon({
-    name: params.data.name,
-    numTablesX: params.data.numTablesX,
-    numTablesY: params.data.numTablesY
-  });
+module.exports = {
+  /**
+   * Create luncheon from an input file.
+   */
+  initializeLuncheon: function(params) {
+    // Create empty Luncheon object
+    var luncheon = new model.Luncheon({
+      name: params.data.name,
+      numTablesX: params.data.numTablesX,
+      numTablesY: params.data.numTablesY
+    });
 
-  // Per-person primary key
-  var pk = 0
+    // Per-person primary key
+    var pk = 0
 
-  // Create the tables and add to luncheon
-  var jsonTables = params.data.tables;
+    // Create the tables and add to luncheon
+    var jsonTables = params.data.tables;
 
-  for (var i = 0; i < jsonTables.length; i++) {
-    var table = new model.Table(jsonTables[i]);
-    var jsonPeople = jsonTables[i].people;
+    for (var i = 0; i < jsonTables.length; i++) {
+      var table = new model.Table(jsonTables[i]);
+      var jsonPeople = jsonTables[i].people;
 
-    for (var j = 0; j < jsonPeople.length; j++) {
+      for (var j = 0; j < jsonPeople.length; j++) {
+        table.insert({
+          pk: pk,
+          index: j,
+          name: jsonPeople[j].name,
+          group: jsonPeople[j].group || constants.Group.getRandom()
+        });
+
+        pk += 1;
+      }
+
+      luncheon.addTable(table)
+    }
+
+    return luncheon;
+  },
+
+
+  /**
+   * Create single-table luncheon with seats that are assigned based on
+   * rules (e.g. random, alternating, halves).
+   */
+  initializeTestLuncheon: function(params) {
+    var luncheon = new model.Luncheon({
+      name: params.simulation,
+      numTablesX: 2.2,
+      numTablesY: 1.4
+    });
+
+    var table = new model.Table({
+      x: 0.5,
+      y: 0.5
+    });
+
+    var group;
+    for (var i = 0; i < params.numSeats; i++) {
+      if (params.simulation === "alternating2") {
+        if (i % 2 === 0) {
+          group = constants.Group.PACK;
+        } else {
+          group = constants.Group.HERD;
+        }
+
+      } else if (params.simulation === "alternating3") {
+        if (i % 3 === 0) {
+          group = constants.Group.PACK;
+        } else if (i % 3 === 1) {
+          group = constants.Group.HERD;
+        } else {
+          group = constants.Group.COLONY;
+        }
+
+      } else if (params.simulation === "halves") {
+        if (i < (params.numSeats / 2)) {
+          group = constants.Group.PACK;
+        } else {
+          group = constants.Group.HERD;
+        }
+
+      } else {
+        group = constants.Group.getRandom();
+      }
+
       table.insert({
-        pk: pk,
-        index: j,
-        name: jsonPeople[j].name,
-        group: jsonPeople[j].group || constants.Group.getRandom()
+        pk: i,
+        index: i,
+        group: group,
+        name: constants.PERSON_NAMES[i] || "Person" + i
       });
-
-      pk += 1;
     }
 
-    luncheon.addTable(table)
-  }
-  return luncheon;
-}
+    luncheon.addTable(table);
+    return luncheon;
+  },
 
 
-/**
- * Create single-table luncheon with seats that are assigned based on
- * rules (e.g. random, alternating, halves).
- */
-function initializeTestLuncheon(params) {
-  var luncheon = new model.Luncheon({
-    name: params.simulation,
-    numTablesX: 2.2,
-    numTablesY: 1.4
-  });
+  /**
+   * Draw the luncheon initially
+   */
+  drawLuncheon: function(params) {
+    // Draw initial state
+    var circles = view.drawSeats({
+      seats: params.luncheon.getAllSeats(),
+      numTablesX: params.luncheon.numTablesX,
+      numTablesY: params.luncheon.numTablesY,
+      showSpecies: params.showSpecies,
+      noText: params.noText
+    });
 
-  var table = new model.Table({
-    x: 0.5,
-    y: 0.5
-  });
-
-  var group;
-  for (var i = 0; i < params.numSeats; i++) {
-    if (params.simulation === "alternating2") {
-      if (i % 2 === 0) {
-        group = constants.Group.PACK;
-      } else {
-        group = constants.Group.HERD;
-      }
-
-    } else if (params.simulation === "alternating3") {
-      if (i % 3 === 0) {
-        group = constants.Group.PACK;
-      } else if (i % 3 === 1) {
-        group = constants.Group.HERD;
-      } else {
-        group = constants.Group.COLONY;
-      }
-
-    } else if (params.simulation === "halves") {
-      if (i < (params.numSeats / 2)) {
-        group = constants.Group.PACK;
-      } else {
-        group = constants.Group.HERD;
-      }
-
-    } else {
-      group = constants.Group.getRandom();
+    if (params.showStage) {
+      view.drawStage({
+        stageWidth: params.stageWidth,
+        stageHeight: params.stageHeight,
+        stageY: params.stageY
+      });
     }
 
-    table.insert({
-      pk: i,
-      index: i,
-      group: group,
-      name: constants.PERSON_NAMES[i] || "Person" + i
-    });
-  }
+    if (params.showStats) {
+      view.displayStats();
+    }
 
-  luncheon.addTable(table);
-  return luncheon;
-}
+    return circles;
+  },
 
 
-/**
- * Draw the luncheon initially
- */
-function drawLuncheon(params) {
-  // Draw initial state
-  var circles = view.drawSeats({
-    seats: params.luncheon.getAllSeats(),
-    numTablesX: params.luncheon.numTablesX,
-    numTablesY: params.luncheon.numTablesY,
-    showSpecies: params.showSpecies,
-    noText: params.noText
-  });
+  runGeneration: runGeneration
+};
 
-  if (params.showStage) {
-    view.drawStage({
-      stageWidth: params.stageWidth,
-      stageHeight: params.stageHeight,
-      stageY: params.stageY
-    });
-  }
 
-  if (params.showStats) {
-    view.displayStats();
-  }
-
-  return circles;
-}
-
+/***********
+ * Helpers *
+ ***********/
 
 /**
  * Do next generation of the simulation.
@@ -148,19 +158,11 @@ function runGeneration(params) {
 
   view.updateSeatRadii({
     showStats: params.showStats,
-    'trial': params.luncheon.trial,
-    'generation': params.luncheon.generation,
-    'callback': runGeneration,
-    'callbackParams': params,
-    'reset': reset,
-    'circles': params.circles
+    trial: params.luncheon.trial,
+    generation: params.luncheon.generation,
+    callback: runGeneration,
+    callbackParams: params,
+    reset: reset,
+    circles: params.circles
   });
 }
-
-
-module.exports = {
-  initializeLuncheon: initializeLuncheon,
-  initializeTestLuncheon: initializeTestLuncheon,
-  drawLuncheon: drawLuncheon,
-  runGeneration: runGeneration
-};
