@@ -66,7 +66,15 @@ module.exports = {
   },
 
 
-  runGeneration: runGeneration
+  runGeneration: runGeneration,
+
+
+  /**
+   * Draw a large version of the favicon for this project.
+   */
+  drawFavicon: function(params) {
+    view.drawFavicon();
+  },
 };
 
 

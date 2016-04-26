@@ -80,6 +80,11 @@ window.lotkavolterra = {
   },
 
 
+  formInit: form.init,
+
+  getSearchParams: utils.getSearchParams,
+
+
   /**
    * Create and run D3 animation for debugging.
    */
@@ -88,6 +93,10 @@ window.lotkavolterra = {
     debugging.updateRadiiRandomly();
   },
 
-  formInit: form.init,
-  getSearchParams: utils.getSearchParams
+  /**
+   * Draw a large version of the favicon for this project.
+   */
+  drawFavicon: function(params) {
+    controller.drawFavicon();
+  }
 };

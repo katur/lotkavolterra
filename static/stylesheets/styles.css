@@ -101,6 +101,9 @@ form button {
     background: #bcb393;
     cursor: pointer; }
 
+body#favicon {
+  background: white; }
+
 body {
   background: #eee;
   padding: 40px; }

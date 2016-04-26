@@ -95,6 +95,38 @@ module.exports = {
         }
         params.callback(params.callbackParams);
       });
+  },
+
+
+  /**
+   * Draw a large version of the favicon for this project.
+   */
+  drawFavicon: function() {
+    const OFFSET = 100;
+    const SCALE = 100;
+    function favAdjust(coord) {
+      return OFFSET + (coord * SCALE);
+    }
+
+    var svg = d3.select("svg");
+    var svgWidth = parseInt(svg.style("width"), 10);
+    svg.attr("height", svgWidth);
+
+    svg.selectAll("circle")
+      .data([
+        {group: "herd", x: favAdjust(1/2), y: favAdjust(0)},
+        {group: "pack", x: favAdjust(0), y: favAdjust(Math.sqrt(3)/2)},
+        {group: "colony", x: favAdjust(1), y: favAdjust(Math.sqrt(3)/2)}
+      ])
+      .enter()
+      .append("circle")
+      .each(function(d, i) {
+        d3.select(this)
+          .attr("cx", d.x)
+          .attr("cy", d.y)
+          .attr("r", 50)
+          .classed(d.group, true);
+      });
   }
 };
 
