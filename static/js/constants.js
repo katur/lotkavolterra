@@ -1,9 +1,11 @@
 var utils = require("./utils.js");
 
+
 const INITIAL_POPULATION_SIZE = 1000;
 const OVERPOPULATION_FACTOR = 10;
 const OVERPOPULATION_SIZE = INITIAL_POPULATION_SIZE * OVERPOPULATION_FACTOR;
 const OVERPOPULATION_RADIUS = utils.getRadiusFromArea(OVERPOPULATION_SIZE);
+
 
 module.exports = {
   // Model
