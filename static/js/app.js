@@ -42,16 +42,17 @@ window.lotkavolterra = {
         });
 
       } else {
-        // TODO: handle case of reached target server but returned an error
+        // reached target server but returned an error
       }
     };
 
     request.onerror = function() {
-      // TODO: handle case of connection error of some sort
+      // connection error of some sort
     };
 
     request.send();
   },
+
 
   /**
    * Create and run test simulation.
@@ -77,6 +78,7 @@ window.lotkavolterra = {
       circles: circles
     });
   },
+
 
   /**
    * Create and run D3 animation for debugging.
