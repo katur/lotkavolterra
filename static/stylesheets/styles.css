@@ -140,9 +140,11 @@ body {
   text-anchor: middle;
   alignment-baseline: middle; }
 .simulation-svg .stage {
+  fill: #bbb;
+  opacity: 0.5; }
+.simulation-svg .stage-text {
   fill: #999; }
 .simulation-svg .stage-text {
-  fill: white;
   font-size: 19px;
   letter-spacing: 1px; }
 

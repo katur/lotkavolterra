@@ -1,3 +1,20 @@
+@mixin light-stage
+  .stage
+    fill: #bbb
+    opacity: $opacity
+
+  .stage-text
+    fill: #999
+
+
+@mixin dark-stage
+  .stage
+    fill: #999
+
+  .stage-text
+    fill: white
+
+
 .simulation-svg
   circle
     opacity: $opacity
@@ -16,14 +33,9 @@
     text-anchor: middle
     alignment-baseline: middle
 
-  .stage
-    fill: #999
-    // fill: #bbb
-    // opacity: $opacity
+  @include light-stage
 
   .stage-text
-    fill: white
-    // fill: #999
     font-size: $simulation-font-size + 9
     letter-spacing: 1px
 
