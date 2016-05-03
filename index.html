@@ -14,35 +14,57 @@
   <body id="home">
     <div id="content">
       <div class="page-section">
-        <h2 class="page-title">Lotka-Volterra</h2>
+        <h2 class="page-title">
+          A Stylized Illustration of the Lotka-Volterra Model
+        </h2>
 
         <p>
-          Everyone knows that predator and prey populations change
-          in response to each other.
-          Scientists have developed models to show what happens to these
-          populations over time, including one called Lotka-Volterra.
+          In nature, predator and prey populations interact constantly.
+          Their competitive interactions are described by mathematical
+          models that predict the dynamics of population ecology.
+          Perhaps the most seminal of these models is the
+          <em>Lotka-Volterra</em> model
+          (Lotka 1910, 1920, 1925; Volterra 1926).
         </p>
 
         <p>
-          The Lotka-Volterra model is just two simple equations,
-          based on equally simple assumptions  that do not factor
-          in overpopulation or other natural complexities.
-          The prey population, given ample food,
-          grows exponentially on its own,
-          but is negatively affected by encountering predators.
-          The predator population, relying on prey for food,
-          declines exponentially on its own,
-          but is positively affected by encountering prey.
-          This creates a cycle that can continue indefinitely.
+          The basic Lotka-Volterra model is comprised of a coupled pair
+          of fundamental equations that describe interactions,
+          typically between two competing species,
+          within a given system or setting
+          (e.g. an ecology, an economy).
+          In the classic predator-prey setting of Lotka-Volterra,
+          given ample food,
+          the prey population grows exponentially in isolation,
+          but is constrained by encountering predators.
+          Conversely, the predator population,
+          relying upon prey for food,
+          declines exponentially in the absence of sufficient prey;
+          such decline is offset by encountering a supply of
+          prey species.
+          The coupled interaction of these two equations results in a
+          cyclically fluctuating
+          &ldquo;growth and decline&rdquo;
+          dynamic that can continue indefinitely,
+          under certain conditions,
+          i.e. <em>homeostasis</em>.
         </p>
 
         <p>
-          Lotka-Volterra has been useful in describing some real natural
-          populations, such as moose and wolves in Isle Royale National
-          Park in Lake Superior.
-          It also has surprising applications in other areas,
-          such as economics, speciation, resource competition,
-          and epidemiology.
+          Over the past century or so since first proposed by
+          mathematician Alfred J. Lotka
+          (based upon the logistic equation derived in 1825 by
+          mathematician Pierre Fran&ccedil;ois Verhulst for describing
+          the role of carrying capacity and resources in population
+          dynamics),
+          Lotka-Volterra has had wide-ranging application in describing
+          the dynamics between many populations in nature
+          (e.g. interdependencies between moose and wolf populations on
+          Isle Royale in Lake Superior).
+          In addition to ecology, the general framework has been
+          applied to numerous other scientific fields
+          and disciplines, including economics, resource competition,
+          demography, population dynamics, speciation and epidemiology.
         </p>
       </div>
 
@@ -50,21 +72,30 @@
         <h2 class="page-title">The Simulation</h2>
 
         <p>
-          We developed a thought exercise to show how models can be
-          used in the real world:
-          a computer simulation that applies a predator-prey
-          model to the guests at this luncheon.
-          You will see it running on a screen at times during the event.
+          By way of illustration, we have conducted a simple
+          computational experiment in order to demonstrate in concept
+          how Lotka-Volterra type models are applied to the study of
+          population dynamics.
+          This illustrative computational experiment applies a
+          predator-prey model to attendees at the luncheon to
+          simulate how competitive interactions between species may
+          influence relative population growth.
+          Periodically, at various instances during the reception
+          and the main luncheon, the simulation will be displayed
+          on the projection screens.
         </p>
 
         <p>
-          Each guest has been randomly assigned to be one of
-          three populations, all of which exist in
+          Each attendee has been randomly (and anonymously) assigned to
+          be one of three populations,
+          each of which has been observed in or near
           <a href="http://blackrockforest.org/">Black Rock Forest</a>:
-          Eastern coyotes, wild turkeys, or Eurasian boars.
-          Eurasian boars are an invasive species, which, as in nature,
-          throws a monkey wrench into the works by competing with
-          native species for resources.
+          Eastern coyote (predator), wild turkey (prey), or
+          Eurasian boar (invasive species).
+          The Eurasian boar is generally considered to
+          be an encroaching invasive species.
+          Invasive species destabilize the ecosystem,
+          by competing with native species for resources.
         </p>
 
         <div class="animal-photos">
@@ -74,16 +105,16 @@
         </div>
 
         <p>
-          Over time, even as you eat your lunch,
-          the population you represent will be interacting
-          with the two populations sitting next to you,
-          according to rules inspired by the Lotka-Volterra
-          model but with some added complexities.
-          You can see your bubble on the screen grow or shrink
-          as your population responds to these interactions.
-          A population will go extinct if it gets too small
-          or gets too big and explodes.
-          Fortunately, you yourself will not explode.
+          Over time, the population assigned to your location (as a
+          local habitat) will interact with two adjacent populations,
+          according to rules inspired by the Lotka-Volterra framework.
+          Each &ldquo;bubble&rdquo;
+          expands and contracts with the respective
+          growth and decline of the population of its assigned species.
+          Note: the computer simulation will periodically restart
+          (after a <em>trial</em> of approximately 50 iterations),
+          with a different final outcome likely to occur at the end
+          of each trial.
         </p>
 
         <svg class="simulation-svg"></svg>
@@ -97,13 +128,16 @@
         </script>
 
         <p>
-          If you're lucky, your table will survive for many generations,
-          the populations keeping one another in check.
-          But some tables will be wiped out quickly from an
-          imbalanced dynamic.
-          Extinction may be forever in the real world, but here,
-          the simulation periodically starts over,
-          and the outcome may be different each time.
+          In essence, each table represents an ecosystem comprised of
+          local habitats, where species engage and interact by
+          competing for local resources.
+          Depending upon the initially assigned conditions
+          (i.e. adjacent locations of competing species),
+          and some degree of ongoing uncertainty,
+          some ecosystems may survive or even thrive for many
+          generations.
+          However, other ecosystems may collapse due to inherently
+          unstable conditions.
         </p>
       </div>
 

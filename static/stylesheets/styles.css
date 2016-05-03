@@ -83,6 +83,9 @@ a {
   a:hover {
     color: #bcb393; }
 
+em {
+  font-style: italic; }
+
 form button, form input, form select {
   padding: 6px;
   border: none;
