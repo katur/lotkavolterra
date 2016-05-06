@@ -152,7 +152,6 @@ body {
   letter-spacing: 1px; }
 
 #simulation {
-  background: white;
   padding: 0; }
   #simulation .simulation-svg {
     width: 100%; }
