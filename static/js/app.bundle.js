@@ -935,7 +935,7 @@
 	function compete(pack, herd) {
 	  f = constants.Coin.flip(constants.COMPETITIVE_COIN_WEIGHT);
 
-	  if (f == constants.Coin.HEADS) {
+	  if (f === constants.Coin.HEADS) {
 	    pack.increasePopulation(constants.GROWTH_RATE * 2);
 	    herd.decreasePopulation(constants.GROWTH_RATE * 2);
 	  } else {
