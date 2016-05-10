@@ -181,6 +181,11 @@ p {
       left: 5px; }
     #simulation #stats .counters {
       right: 5px; }
+      #simulation #stats .counters span {
+        float: left;
+        clear: both; }
+    #simulation #stats .trial-counter {
+      display: none; }
 
 #home .page-title {
   position: relative;

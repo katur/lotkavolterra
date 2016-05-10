@@ -68,6 +68,7 @@
 	        var circles = controller.drawLuncheon({
 	          luncheon: luncheon,
 	          showStats: params.showStats,
+	          repeat: params.repeat,
 	          noText: params.noText,
 	          showSpecies: data.showSpecies,
 	          showStage: data.showStage,
@@ -100,6 +101,7 @@
 	    var circles = controller.drawLuncheon({
 	      luncheon: luncheon,
 	      showStats: params.showStats,
+	      repeat: params.repeat,
 	      noText: params.noText,
 	      showSpecies: true
 	    });
@@ -11317,7 +11319,7 @@
 	    }
 
 	    if (params.showStats) {
-	      view.displayStats();
+	      view.displayStats({repeat: params.repeat});
 	    }
 
 	    return circles;
@@ -11996,6 +11998,10 @@
 	   */
 	  displayStats: function(params) {
 	    $("#stats").show();
+
+	    if (params.repeat) {
+	      $(".trial-counter").show();
+	    }
 	  },
 
 
@@ -12025,8 +12031,9 @@
 	        if (i != 0) { return; }
 
 	        if (params.showStats) {
-	          updateCounters(params.generation, params.trial, params.reset);
+	          updateCounters(params.generation, params.reset, params.trial);
 	        }
+
 	        params.callback(params.callbackParams);
 	      });
 	  },
@@ -12177,7 +12184,7 @@
 	/**
 	 * Update the trial and generation counters.
 	 */
-	function updateCounters(generation, trial, reset) {
+	function updateCounters(generation, reset, trial) {
 	  $(".generation-counter").text("Generation " + generation);
 
 	  if (reset) {

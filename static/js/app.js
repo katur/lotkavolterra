@@ -22,6 +22,7 @@ window.lotkavolterra = {
         var circles = controller.drawLuncheon({
           luncheon: luncheon,
           showStats: params.showStats,
+          repeat: params.repeat,
           noText: params.noText,
           showSpecies: data.showSpecies,
           showStage: data.showStage,
@@ -54,6 +55,7 @@ window.lotkavolterra = {
     var circles = controller.drawLuncheon({
       luncheon: luncheon,
       showStats: params.showStats,
+      repeat: params.repeat,
       noText: params.noText,
       showSpecies: true
     });

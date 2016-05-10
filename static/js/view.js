@@ -63,6 +63,10 @@ module.exports = {
    */
   displayStats: function(params) {
     $("#stats").show();
+
+    if (params.repeat) {
+      $(".trial-counter").show();
+    }
   },
 
 
@@ -92,8 +96,9 @@ module.exports = {
         if (i != 0) { return; }
 
         if (params.showStats) {
-          updateCounters(params.generation, params.trial, params.reset);
+          updateCounters(params.generation, params.reset, params.trial);
         }
+
         params.callback(params.callbackParams);
       });
   },
@@ -244,7 +249,7 @@ function getRadius(seat) {
 /**
  * Update the trial and generation counters.
  */
-function updateCounters(generation, trial, reset) {
+function updateCounters(generation, reset, trial) {
   $(".generation-counter").text("Generation " + generation);
 
   if (reset) {

@@ -59,7 +59,7 @@ module.exports = {
     }
 
     if (params.showStats) {
-      view.displayStats();
+      view.displayStats({repeat: params.repeat});
     }
 
     return circles;
