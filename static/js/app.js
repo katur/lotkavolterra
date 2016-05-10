@@ -84,9 +84,9 @@ window.lotkavolterra = {
   },
 
   /**
-   * Draw a large version of the favicon for this project.
+   * Draw a large version of the logo for this project.
    */
-  drawFavicon: function(params) {
-    controller.drawFavicon();
+  drawLogo: function(params) {
+    controller.drawLogo();
   }
 };

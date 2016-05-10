@@ -130,10 +130,10 @@
 	  },
 
 	  /**
-	   * Draw a large version of the favicon for this project.
+	   * Draw a large version of the logo for this project.
 	   */
-	  drawFavicon: function(params) {
-	    controller.drawFavicon();
+	  drawLogo: function(params) {
+	    controller.drawLogo();
 	  }
 	};
 
@@ -11330,10 +11330,10 @@
 
 
 	  /**
-	   * Draw a large version of the favicon for this project.
+	   * Draw the logo for this project.
 	   */
-	  drawFavicon: function(params) {
-	    view.drawFavicon();
+	  drawLogo: function(params) {
+	    view.drawLogo();
 	  },
 	};
 
@@ -12040,9 +12040,9 @@
 
 
 	  /**
-	   * Draw a large version of the favicon for this project.
+	   * Draw a large version of the logo for this project.
 	   */
-	  drawFavicon: function() {
+	  drawLogo: function() {
 	    const OFFSET = 20;
 	    const SCALE = 40;
 

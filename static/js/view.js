@@ -105,9 +105,9 @@ module.exports = {
 
 
   /**
-   * Draw a large version of the favicon for this project.
+   * Draw a large version of the logo for this project.
    */
-  drawFavicon: function() {
+  drawLogo: function() {
     const OFFSET = 20;
     const SCALE = 40;
 

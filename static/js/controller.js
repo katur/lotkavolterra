@@ -70,10 +70,10 @@ module.exports = {
 
 
   /**
-   * Draw a large version of the favicon for this project.
+   * Draw the logo for this project.
    */
-  drawFavicon: function(params) {
-    view.drawFavicon();
+  drawLogo: function(params) {
+    view.drawLogo();
   },
 };
 
