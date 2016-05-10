@@ -6,7 +6,7 @@ import sys
 
 
 parser = argparse.ArgumentParser(
-    description="Create JSON of last year's attendees")
+    description="Create JSON of attendees")
 
 parser.add_argument('json_file', type=argparse.FileType('r'),
                     help=('JSON of additional luncheon attributes: '
@@ -39,9 +39,9 @@ def create_table(number, name=None):
     return table
 
 
-# Parse the CSV file
 tables = {}  # Keyed on table number
 
+# Parse the CSV file
 if args.csv_file:
     for i, row in enumerate(csv.DictReader(args.csv_file)):
         # Ignore last name to preserve anonymity in the served json file
@@ -49,7 +49,11 @@ if args.csv_file:
         table_number = int(row['Table'])
         table_name = row['TABLE HOST']
 
-        if not person_name or not table_number or not table_name:
+        # Skip rows missing first name (these are for organization hosts)
+        if not person_name:
+            continue
+
+        if not table_number or not table_name:
             raise ValueError('Error in row {}: value missing'
                              .format(i))
 
@@ -76,6 +80,7 @@ if args.csv_file:
     for table_number, table in sorted(tables.iteritems()):
         table_list.append(table)
 
+# If no CSV file, assume 24 tables of 10 nameless people
 else:
     table_list = []
 
