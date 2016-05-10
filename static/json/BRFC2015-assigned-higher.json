@@ -1,18 +1,18 @@
 {
   "name": "Black Rock Luncheon: 2015",
   "numTablesX": 8,
-  "numTablesY": 5,
+  "numTablesY": 4,
   "showSpecies": false,
   "showStage": true,
+  "stageHeight": 0.2,
   "stageWidth": 0.2,
-  "stageHeight": 0.17,
-  "stageY": 0.1,
+  "stageY": 0,
   "tables": [
     {
       "number": 1,
       "name": "Land",
       "x": 0.0,
-      "y": 0.125,
+      "y": 0.0,
       "people": [
         {
           "name": "Shoshanna",
@@ -64,7 +64,7 @@
       "number": 2,
       "name": "Browning School",
       "x": 0.14285714285714285,
-      "y": 0.125,
+      "y": 0.0,
       "people": [
         {
           "name": "Cynthia",
@@ -124,7 +124,7 @@
       "number": 3,
       "name": "Gottdiener",
       "x": 0.2857142857142857,
-      "y": 0.25,
+      "y": 0.1666666666666667,
       "people": [
         {
           "name": "Maria",
@@ -172,7 +172,7 @@
       "number": 4,
       "name": "Golden, S",
       "x": 0.42857142857142855,
-      "y": 0.375,
+      "y": 0.3333333333333333,
       "people": [
         {
           "name": "Michael",
@@ -212,7 +212,7 @@
       "number": 5,
       "name": "Schuster",
       "x": 0.5714285714285714,
-      "y": 0.375,
+      "y": 0.3333333333333333,
       "people": [
         {
           "name": "Rebecca",
@@ -260,7 +260,7 @@
       "number": 6,
       "name": "Griffin",
       "x": 0.7142857142857143,
-      "y": 0.25,
+      "y": 0.1666666666666667,
       "people": [
         {
           "name": "Gardner",
@@ -304,7 +304,7 @@
       "number": 7,
       "name": "Glaser",
       "x": 0.8571428571428571,
-      "y": 0.125,
+      "y": 0.0,
       "people": [
         {
           "name": "Eileen",
@@ -352,7 +352,7 @@
       "number": 8,
       "name": "Ammirato",
       "x": 1.0,
-      "y": 0.25,
+      "y": 0.1666666666666667,
       "people": [
         {
           "name": "Philip",
@@ -400,7 +400,7 @@
       "number": 9,
       "name": "CPC",
       "x": 0.0,
-      "y": 0.375,
+      "y": 0.3333333333333333,
       "people": [
         {
           "name": "Brie",
@@ -448,7 +448,7 @@
       "number": 10,
       "name": "Stern",
       "x": 0.14285714285714285,
-      "y": 0.375,
+      "y": 0.3333333333333333,
       "people": [
         {
           "name": "David",
@@ -544,7 +544,7 @@
       "number": 12,
       "name": "Golden, C.",
       "x": 0.42857142857142855,
-      "y": 0.625,
+      "y": 0.6666666666666667,
       "people": [
         {
           "name": "Catherine",
@@ -592,7 +592,7 @@
       "number": 13,
       "name": "Kappagoda",
       "x": 0.5714285714285714,
-      "y": 0.625,
+      "y": 0.6666666666666667,
       "people": [
         {
           "name": "Stephanie",
@@ -688,7 +688,7 @@
       "number": 15,
       "name": "Colas-Ohrstrom",
       "x": 0.8571428571428571,
-      "y": 0.375,
+      "y": 0.3333333333333333,
       "people": [
         {
           "name": "Sibyl",
@@ -788,7 +788,7 @@
       "number": 17,
       "name": "Staff",
       "x": 0.0,
-      "y": 0.625,
+      "y": 0.6666666666666666,
       "people": [
         {
           "name": "John",
@@ -812,7 +812,7 @@
       "number": 18,
       "name": "Redden",
       "x": 0.14285714285714285,
-      "y": 0.625,
+      "y": 0.6666666666666666,
       "people": [
         {
           "name": "Lindley",
@@ -860,7 +860,7 @@
       "number": 19,
       "name": "Bloomberg",
       "x": 0.2857142857142857,
-      "y": 0.75,
+      "y": 0.8333333333333333,
       "people": [
         {
           "name": "Victoria",
@@ -908,7 +908,7 @@
       "number": 20,
       "name": "Dann",
       "x": 0.42857142857142855,
-      "y": 0.875,
+      "y": 1.0,
       "people": [
         {
           "name": "Elias",
@@ -956,7 +956,7 @@
       "number": 21,
       "name": "Hudson Valley",
       "x": 0.5714285714285714,
-      "y": 0.875,
+      "y": 1.0,
       "people": [
         {
           "name": "JoAnn",
@@ -1004,7 +1004,7 @@
       "number": 22,
       "name": "Stillman",
       "x": 0.7142857142857143,
-      "y": 0.75,
+      "y": 0.8333333333333333,
       "people": [
         {
           "name": "Steve",
@@ -1052,7 +1052,7 @@
       "number": 23,
       "name": "OSI",
       "x": 0.8571428571428571,
-      "y": 0.625,
+      "y": 0.6666666666666666,
       "people": [
         {
           "name": "Peter",
@@ -1092,7 +1092,7 @@
       "number": 24,
       "name": "Teachers College",
       "x": 1.0,
-      "y": 0.75,
+      "y": 0.8333333333333334,
       "people": [
         {
           "name": "O.Roger",
@@ -1140,7 +1140,7 @@
       "number": 25,
       "name": "Reed",
       "x": 0.14285714285714285,
-      "y": 0.875,
+      "y": 1.0,
       "people": [
         {
           "name": "Scott",
@@ -1188,7 +1188,7 @@
       "number": 26,
       "name": "Earth Institute",
       "x": 0.8571428571428571,
-      "y": 0.875,
+      "y": 1.0,
       "people": [
         {
           "name": "Anna",
@@ -1236,7 +1236,7 @@
       "number": 27,
       "name": "Calhoun",
       "x": 0.0,
-      "y": 0.875,
+      "y": 1.0,
       "people": [
         {
           "name": "Barbara",
