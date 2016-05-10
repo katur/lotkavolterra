@@ -1,3 +1,4 @@
+var $ = require("jquery");
 var utils = require("./utils.js");
 var form = require("./form.js");
 var controller = require("./controller.js");
@@ -10,27 +11,23 @@ window.lotkavolterra = {
    */
   launchSimulation: function(params) {
     // Make AJAX request for JSON input
-    var request = new XMLHttpRequest();
     var jsonURL = "/static/json/".concat(params.simulation);
-    request.open("GET", jsonURL, true);
-
-    request.onload = function() {
-      if (request.status >= 200 && request.status < 400) {  // Success
-        jsonData = JSON.parse(request.responseText);
-
+    $.ajax(jsonURL, {
+      type: "GET",
+      success: function(data) {
         var luncheon = controller.initializeInputLuncheon({
-          data: jsonData
+          data: data
         });
 
         var circles = controller.drawLuncheon({
           luncheon: luncheon,
           showStats: params.showStats,
           noText: params.noText,
-          showSpecies: jsonData.showSpecies,
-          showStage: jsonData.showStage,
-          stageWidth: jsonData.stageWidth,
-          stageHeight: jsonData.stageHeight,
-          stageY: jsonData.stageY
+          showSpecies: data.showSpecies,
+          showStage: data.showStage,
+          stageWidth: data.stageWidth,
+          stageHeight: data.stageHeight,
+          stageY: data.stageY
         });
 
         controller.runGeneration({
@@ -40,17 +37,8 @@ window.lotkavolterra = {
           repeat: params.repeat,
           circles: circles
         });
-
-      } else {
-        // reached target server but returned an error
       }
-    };
-
-    request.onerror = function() {
-      // connection error of some sort
-    };
-
-    request.send();
+    });
   },
 
 

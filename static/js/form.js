@@ -1,4 +1,4 @@
-var utils = require("./utils.js");
+var $ = require("jquery");
 
 
 module.exports = {
@@ -6,13 +6,13 @@ module.exports = {
    * Initialize the simulation form.
    */
   init: function() {
-    var select = document.querySelector("#simulation-select");
-    var simulationType = document.querySelector("#simulation-type");
-    var seatInput = document.querySelector("#seats-input-wrapper");
+    var select = $("#simulation-select");
+    var simulationType = $("#simulation-type");
+    var seatInput = $("#seats-input-wrapper");
 
     toggleFormType(select, simulationType, seatInput);
 
-    select.addEventListener("change", function() {
+    select.on("change", function() {
       toggleFormType(select, simulationType, seatInput);
     });
   }
@@ -27,14 +27,13 @@ module.exports = {
  * Toggle the value of simulationType and the visibility of seatInput.
  */
 function toggleFormType(select, simulationType, seatInput) {
-  var type = select.querySelector("option:checked")
-      .getAttribute("data-type");
+  var type = select.find("option:checked").attr("data-type");
 
   if (type === "input") {
-    utils.addClass(seatInput, "hidden");
-    simulationType.setAttribute("value", "input");
+    seatInput.addClass("hidden");
+    simulationType.attr("value", "input");
   } else {
-    utils.removeClass(seatInput, "hidden");
-    simulationType.setAttribute("value", "test");
+    seatInput.removeClass("hidden");
+    simulationType.attr("value", "test");
   }
 }

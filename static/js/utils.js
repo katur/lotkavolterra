@@ -16,32 +16,6 @@ module.exports = {
 
 
   /**
-   * Add a class to an HTML element.
-   */
-  addClass: function(el, className) {
-    if (el.classList) {
-      el.classList.add(className);
-    } else {
-      el.className += ' ' + className;
-    }
-  },
-
-
-  /**
-   * Remove a class from an HTML element.
-   */
-  removeClass: function(el, className) {
-    if (el.classList) {
-      el.classList.remove(className);
-    } else {
-      el.className = el.className.replace(
-          new RegExp('(^|\\b)' + className.split(' ').join('|') +
-                     '(\\b|$)', 'gi'), ' ');
-    }
-  },
-
-
-  /**
    * Get GET parameters as a dictionary.
    */
   getSearchParams: function() {

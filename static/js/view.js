@@ -1,6 +1,7 @@
+var $ = require("jquery");
+var d3 = require("d3");
 var utils = require("./utils.js");
 var constants = require("./constants.js");
-var d3 = require("d3");
 
 
 module.exports = {
@@ -10,11 +11,11 @@ module.exports = {
    * Call this to draw the initial state of the simulation.
    */
   drawSeats: function(params) {
-    var svg = d3.select("svg");
-
     // Make certain SVG-wide calculations
-    doSvgWideCalculations(svg, params.numTablesX, params.numTablesY,
+    doSvgWideCalculations(params.numTablesX, params.numTablesY,
                           params.seats);
+
+    var svg = d3.select("svg");
 
     // Add the circle elements
     var circles = addCircles(svg, params.seats);
@@ -61,7 +62,7 @@ module.exports = {
    * to remove them when making screen capture videos.
    */
   displayStats: function(params) {
-    d3.select("#stats").style("display", "block");
+    $("#stats").show();
   },
 
 
@@ -139,12 +140,13 @@ module.exports = {
  * Process SVG-wide stuff, including setting the height, calculating
  * the size of tables, and binding all this information to all seats.
  */
-function doSvgWideCalculations(svg, numTablesX, numTablesY, seats) {
+function doSvgWideCalculations(numTablesX, numTablesY, seats) {
   // Set svg height based on width
-  var svgWidth = parseInt(svg.style("width"), 10);
+  var svg = $("svg");
+  var svgWidth = svg.width();
   var hwRatio = numTablesY / numTablesX;
   var svgHeight = svgWidth * hwRatio;
-  svg.attr("height", svgHeight);
+  svg.height(svgHeight);
 
   // Calculate the space each table can take up in both x and y dimensions
   var tableSpace = svgWidth / numTablesX;
@@ -245,11 +247,9 @@ function getRadius(seat) {
  * Update the trial and generation counters.
  */
 function updateCounters(generation, trial, reset) {
-  d3.select(".generation-counter")
-    .text("Generation " + generation);
+  $(".generation-counter").text("Generation " + generation);
 
   if (reset) {
-    d3.select(".trial-counter")
-      .text("Trial " + trial);
+    $(".trial-counter").text("Trial " + trial);
   }
 }
