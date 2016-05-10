@@ -193,8 +193,8 @@ p {
     position: absolute;
     top: 5px;
     left: 0;
-    width: 100px;
-    height: 100px; }
+    width: 80px;
+    height: 80px; }
   @media (max-width: 450px) {
     #home .page-title {
       text-align: center; }
