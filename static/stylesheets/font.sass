@@ -1,34 +1,39 @@
+@mixin font-sizes($base)
+  font-size: $base
+
+  h1
+    font-size: $base + 14
+
+  h2
+    font-size: $base + 12
+
+  h3
+    font-size: $base + 10
+
+  h4
+    font-size: $base + 6
+
+
 body
   color: $base-font-color
-  font-size: $base-font-size
   line-height: 1.5
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
   font-weight: 200
   letter-spacing: 0.5px
 
+  @include font-sizes($base-font-size)
+
   @media (max-width: $mobile-breakpoint-large)
-    font-size: $base-font-size - 2
+    @include font-sizes($base-font-size - 2)
 
   @media (max-width: $mobile-breakpoint-small)
-    font-size: $base-font-size - 3
+    @include font-sizes($base-font-size - 3)
 
 
 h1, h2, h3, h4
   font-weight: 100
   letter-spacing: 1.5px
   color: $header-color
-
-h1
-  font-size: $base-font-size + 20
-
-h2
-  font-size: $base-font-size + 14
-
-h3
-  font-size: $base-font-size + 10
-
-h4
-  font-size: $base-font-size + 6
 
 a
   color: $brown

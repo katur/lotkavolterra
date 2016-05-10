@@ -11948,7 +11948,7 @@
 	    doSvgWideCalculations(params.numTablesX, params.numTablesY,
 	                          params.seats);
 
-	    var svg = d3.select("svg");
+	    var svg = d3.select("#simulation-svg");
 
 	    // Add the circle elements
 	    var circles = addCircles(svg, params.seats);
@@ -11966,7 +11966,7 @@
 	   * Draw the stage.
 	   */
 	  drawStage: function(params) {
-	    var svg = d3.select("svg");
+	    var svg = d3.select("#simulation-svg");
 	    var svgWidth = parseInt(svg.style("width"), 10);
 	    var svgHeight = parseInt(svg.style("height"), 10);
 
@@ -12036,21 +12036,19 @@
 	   * Draw a large version of the favicon for this project.
 	   */
 	  drawFavicon: function() {
-	    const OFFSET = 100;
-	    const SCALE = 100;
+	    const OFFSET = 20;
+	    const SCALE = 40;
+
 	    function favAdjust(coord) {
 	      return OFFSET + (coord * SCALE);
 	    }
 
-	    var svg = d3.select("svg");
-	    var svgWidth = parseInt(svg.style("width"), 10);
-	    svg.attr("height", svgWidth);
-
+	    var svg = d3.select("#logo-svg");
 	    svg.selectAll("circle")
 	      .data([
-	        {group: "herd", x: favAdjust(1/2), y: favAdjust(0)},
-	        {group: "pack", x: favAdjust(0), y: favAdjust(Math.sqrt(3)/2)},
-	        {group: "colony", x: favAdjust(1), y: favAdjust(Math.sqrt(3)/2)}
+	        {group: "HERD", x: favAdjust(1/2), y: favAdjust(0)},
+	        {group: "PACK", x: favAdjust(0), y: favAdjust(Math.sqrt(3)/2)},
+	        {group: "COLONY", x: favAdjust(1), y: favAdjust(Math.sqrt(3)/2)}
 	      ])
 	      .enter()
 	      .append("circle")
@@ -12058,7 +12056,7 @@
 	        d3.select(this)
 	          .attr("cx", d.x)
 	          .attr("cy", d.y)
-	          .attr("r", 50)
+	          .attr("r", 20)
 	          .classed(d.group, true);
 	      });
 	  }
@@ -12075,7 +12073,7 @@
 	 */
 	function doSvgWideCalculations(numTablesX, numTablesY, seats) {
 	  // Set svg height based on width
-	  var svg = $("svg");
+	  var svg = $("#simulation-svg");
 	  var svgWidth = svg.width();
 	  var hwRatio = numTablesY / numTablesX;
 	  var svgHeight = svgWidth * hwRatio;

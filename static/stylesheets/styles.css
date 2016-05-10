@@ -48,34 +48,46 @@ html {
 
 body {
   color: #444;
-  font-size: 18px;
   line-height: 1.5;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 200;
-  letter-spacing: 0.5px; }
+  letter-spacing: 0.5px;
+  font-size: 18px; }
+  body h1 {
+    font-size: 32px; }
+  body h2 {
+    font-size: 30px; }
+  body h3 {
+    font-size: 28px; }
+  body h4 {
+    font-size: 24px; }
   @media (max-width: 600px) {
     body {
-      font-size: 16px; } }
+      font-size: 16px; }
+      body h1 {
+        font-size: 30px; }
+      body h2 {
+        font-size: 28px; }
+      body h3 {
+        font-size: 26px; }
+      body h4 {
+        font-size: 22px; } }
   @media (max-width: 330px) {
     body {
-      font-size: 15px; } }
+      font-size: 15px; }
+      body h1 {
+        font-size: 29px; }
+      body h2 {
+        font-size: 27px; }
+      body h3 {
+        font-size: 25px; }
+      body h4 {
+        font-size: 21px; } }
 
 h1, h2, h3, h4 {
   font-weight: 100;
   letter-spacing: 1.5px;
   color: #555; }
-
-h1 {
-  font-size: 38px; }
-
-h2 {
-  font-size: 32px; }
-
-h3 {
-  font-size: 28px; }
-
-h4 {
-  font-size: 24px; }
 
 a {
   color: #908459;
@@ -127,7 +139,7 @@ body {
 .page-section {
   margin-bottom: 60px; }
 
-.page-title, p {
+p {
   margin-bottom: 20px; }
 
 .simulation-svg circle {
@@ -170,6 +182,29 @@ body {
     #simulation #stats .counters {
       right: 5px; }
 
+#home .page-title {
+  position: relative;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #c4c4c4;
+  margin-bottom: 60px; }
+  #home .page-title h1, #home .page-title h4 {
+    padding-left: 100px; }
+  #home .page-title #logo-svg {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    width: 100px;
+    height: 100px; }
+  @media (max-width: 450px) {
+    #home .page-title {
+      text-align: center; }
+      #home .page-title h1, #home .page-title h4 {
+        padding-left: 0; }
+      #home .page-title #logo-svg {
+        position: static;
+        margin-top: 20px; } }
+#home h2 {
+  margin-bottom: 20px; }
 #home .page-section {
   max-width: 750px;
   width: 100%;
@@ -198,14 +233,14 @@ body {
         width: 120px;
         height: 120px;
         border-width: 12px; } }
-#home .simulation-svg {
+#home #simulation-svg {
   width: 75%;
   display: block;
   margin-left: auto;
   margin-right: auto;
   margin-top: -20px; }
   @media (max-width: 600px) {
-    #home .simulation-svg {
+    #home #simulation-svg {
       width: 100%; } }
 #home form {
   font-size: 16px; }

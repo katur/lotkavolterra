@@ -13,10 +13,24 @@
 
   <body id="home">
     <div id="content">
+      <div class="page-title page-section">
+        <h1>
+          A Stylized Illustration of a Predator-Prey Model
+        </h1>
+
+        <h4>
+          For the 2016 Black Rock Forest Luncheon
+        </h4>
+
+        <svg id="logo-svg" class="simulation-svg"></svg>
+
+        <script type="text/javascript" charset="utf-8">
+          lotkavolterra.drawFavicon();
+        </script>
+      </div>
+
       <div class="page-section">
-        <h2 class="page-title">
-          A Stylized Illustration of the Lotka-Volterra Model
-        </h2>
+        <h2>The Lotka-Volterra Equations</h2>
 
         <p>
           In nature, predator and prey populations interact constantly.
@@ -69,7 +83,7 @@
       </div>
 
       <div class="page-section">
-        <h2 class="page-title">The Simulation</h2>
+        <h2>The Simulation</h2>
 
         <p>
           By way of illustration, we have conducted a simple
@@ -117,7 +131,7 @@
           of each trial.
         </p>
 
-        <svg class="simulation-svg"></svg>
+        <svg id="simulation-svg" class="simulation-svg"></svg>
 
         <script type="text/javascript" charset="utf-8">
           lotkavolterra.launchSimulation({
@@ -142,7 +156,7 @@
       </div>
 
       <div class="page-section">
-        <h2 class="page-title">View Examples</h2>
+        <h2>View Examples</h2>
 
         <form method="GET" action="simulation.html">
           <table>
