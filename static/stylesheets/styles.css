@@ -162,7 +162,7 @@ p {
 
 #simulation {
   padding: 0; }
-  #simulation .simulation-svg {
+  #simulation .simulation-svg, #simulation #simulation-canvas {
     width: 100%;
     display: block; }
   #simulation #stats {

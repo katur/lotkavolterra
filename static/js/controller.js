@@ -42,7 +42,7 @@ module.exports = {
    */
   drawLuncheon: function(params) {
     // Draw initial state
-    var circles = view.drawSeats({
+    var canvas = view.drawSeats({
       seats: params.luncheon.getAllSeats(),
       numTablesX: params.luncheon.numTablesX,
       numTablesY: params.luncheon.numTablesY,
@@ -62,7 +62,7 @@ module.exports = {
       view.displayStats({repeat: params.repeat});
     }
 
-    return circles;
+    return canvas;
   },
 
 
@@ -101,13 +101,14 @@ function runGeneration(params) {
   }
 
   view.updateSeatRadii({
+    seats: params.luncheon.getAllSeats(),
+    canvas: params.canvas,
     showStats: params.showStats,
     trial: params.luncheon.trial,
     generation: params.luncheon.generation,
     callback: runGeneration,
     callbackParams: params,
     reset: reset,
-    circles: params.circles
   });
 }
 

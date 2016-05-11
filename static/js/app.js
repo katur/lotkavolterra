@@ -1,4 +1,5 @@
 var $ = require("jquery");
+var fabric = require("fabric");
 var utils = require("./utils.js");
 var form = require("./form.js");
 var controller = require("./controller.js");
@@ -19,7 +20,7 @@ window.lotkavolterra = {
           data: data
         });
 
-        var circles = controller.drawLuncheon({
+        var canvas = controller.drawLuncheon({
           luncheon: luncheon,
           showStats: params.showStats,
           repeat: params.repeat,
@@ -33,10 +34,10 @@ window.lotkavolterra = {
 
         controller.runGeneration({
           luncheon: luncheon,
+          canvas: canvas,
           showStats: params.showStats,
           numGenerations: params.generations,
-          repeat: params.repeat,
-          circles: circles
+          repeat: params.repeat
         });
       }
     });
@@ -52,7 +53,7 @@ window.lotkavolterra = {
       numSeats: params.seats
     });
 
-    var circles = controller.drawLuncheon({
+    var canvas = controller.drawLuncheon({
       luncheon: luncheon,
       showStats: params.showStats,
       repeat: params.repeat,
@@ -62,10 +63,10 @@ window.lotkavolterra = {
 
     controller.runGeneration({
       luncheon: luncheon,
+      canvas: canvas,
       showStats: params.showStats,
       numGenerations: params.generations,
-      repeat: params.repeat,
-      circles: circles
+      repeat: params.repeat
     });
   },
 
@@ -81,6 +82,20 @@ window.lotkavolterra = {
   launchDebuggingAnimation: function(params) {
     debugging.drawRandomCircles(params);
     debugging.updateRadiiRandomly();
+  },
+
+  launchCanvasTest: function() {
+    $(document).ready(function() {
+      var canvas = new fabric.fabric.Canvas('canvas');
+      var rect = new fabric.fabric.Rect({
+        top: 100,
+        left: 100,
+        width: 100,
+        height: 100,
+        fill: 'green'
+      });
+      canvas.add(rect);
+    });
   },
 
   /**

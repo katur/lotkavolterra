@@ -1,4 +1,5 @@
 var $ = require("jquery");
+var fabric = require("fabric");
 var d3 = require("d3");
 var utils = require("./utils.js");
 var constants = require("./constants.js");
@@ -11,21 +12,21 @@ module.exports = {
    * Call this to draw the initial state of the simulation.
    */
   drawSeats: function(params) {
-    // Make certain SVG-wide calculations
-    doSvgWideCalculations(params.numTablesX, params.numTablesY,
+    // Make certain canvas-wide calculations
+    doCanvasWideCalculations(params.numTablesX, params.numTablesY,
                           params.seats);
 
-    var svg = d3.select("#simulation-svg");
+    var canvas = new fabric.fabric.Canvas("simulation-canvas");
 
     // Add the circle elements
-    var circles = addCircles(svg, params.seats);
+    addCircles(canvas, params.seats);
 
     // Add the text elements
     if (!params.noText) {
-      addText(svg, params.seats, params.showSpecies);
+      addText(canvas, params.seats, params.showSpecies);
     }
 
-    return circles;
+    return canvas;
   },
 
 
@@ -33,24 +34,29 @@ module.exports = {
    * Draw the stage.
    */
   drawStage: function(params) {
-    var svg = d3.select("#simulation-svg");
-    var svgWidth = parseInt(svg.style("width"), 10);
-    var svgHeight = parseInt(svg.style("height"), 10);
+    var canvas = $("#simulation-canvas");
+    var canvasWidth = canvas.width();
+    var canvasHeight = canvas.height();
 
-    svg.append("rect")
-      .classed("stage", true)
-      .attr("x", svgWidth * (0.5 - params.stageWidth / 2))
-      .attr("y", svgHeight * params.stageY)
-      .attr("width", svgWidth * params.stageWidth)
-      .attr("height", svgHeight * params.stageHeight);
+    var rect = new fabric.fabric.Rect({
+      top: canvasWidth * (0.5 - params.stageWidth / 2),
+      left: canvasHeight * params.stageY,
+      width: canvasWidth * params.stageWidth,
+      height: canvasHeight * params.stageHeight
+    });
 
-    svg.append("text")
-      .classed("stage-text", true)
-      .text("STAGE")
-      .attr("x", svgWidth * 0.5)
-      .attr("y", svgHeight * (params.stageY + params.stageHeight / 2))
-      .attr("text-anchor", "middle")
-      .attr("alignment-baseline", "middle");
+    canvas.add(rect);
+
+    var text = new fabric.fabric.Text("STAGE", {
+      top: canvasWidth * -.5,
+      left: canvasHeight * (params.stageY + params.stageHeight / 2),
+      originX: "center",
+      originY: "center",
+      fontSize: 10,
+      fontFamily: "Helvetica Neue"
+    });
+
+    canvas.add(text);
   },
 
 
@@ -75,6 +81,7 @@ module.exports = {
    */
   updateSeatRadii: function(params) {
     var duration, delay;
+
     if (params.reset) {
       duration = 0;
       delay = constants.BETWEEN_TRIAL_DELAY;
@@ -83,24 +90,30 @@ module.exports = {
       delay = 0;
     }
 
-    params.circles
-      .transition()
-      .duration(duration)
-      .delay(delay)
-      .ease(constants.EASING_FXN)
-      .attr("r", function(d) {
-        return getRadius(d);
-      })
-      .each("end", function(d, i) {
-        // The callback is only needed once over all circles
-        if (i != 0) { return; }
+    var circle, seat, pk;
+    for (var i = 0; i < params.seats.length; i++) {
+      seat = params.seats[i];
 
-        if (params.showStats) {
-          updateCounters(params.generation, params.reset, params.trial);
-        }
+      if (seat.pk != 0) {
+        seat.circle.animate('radius', getRadius(seat), {
+          duration: 500
+        });
+      } else {
+        seat.circle.animate('radius', getRadius(seat), {
+          duration: 500,
+          // easing: fabric.fabric.util.ease.easeInCubic,
+          easing: function(t, b, c, d) {return c*t/d + b;},
+          onChange: params.canvas.renderAll.bind(params.canvas),
+          onComplete: function() {
+            if (params.showStats) {
+              updateCounters(params.generation, params.reset, params.trial);
+            }
 
-        params.callback(params.callbackParams);
-      });
+            params.callback(params.callbackParams);
+          }
+        });
+      }
+    }
   },
 
 
@@ -143,23 +156,23 @@ module.exports = {
  * Process SVG-wide stuff, including setting the height, calculating
  * the size of tables, and binding all this information to all seats.
  */
-function doSvgWideCalculations(numTablesX, numTablesY, seats) {
+function doCanvasWideCalculations(numTablesX, numTablesY, seats) {
   // Set svg height based on width
-  var svg = $("#simulation-svg");
-  var svgWidth = svg.width();
+  var canvas = $("#simulation-canvas");
+  var canvasWidth = canvas.width();
   var hwRatio = numTablesY / numTablesX;
-  var svgHeight = svgWidth * hwRatio;
-  svg.height(svgHeight);
+  var canvasHeight = canvasWidth * hwRatio;
+  canvas.height(canvasHeight);
 
   // Calculate the space each table can take up in both x and y dimensions
-  var tableSpace = svgWidth / numTablesX;
+  var tableSpace = canvasWidth / numTablesX;
   var tableRadius = tableSpace * constants.TABLE_SPACE_TO_RADIUS_FACTOR;
 
   // Add these extra attributes to the seats for convenience later on
   for (var i = 0; i < seats.length; i++) {
     seat = seats[i];
-    seat.svgWidth = svgWidth;
-    seat.svgHeight = svgHeight;
+    seat.canvasWidth = canvasWidth;
+    seat.canvasHeight = canvasHeight;
     seat.tableSpace = tableSpace;
     seat.tableRadius = tableRadius;
   }
@@ -169,19 +182,26 @@ function doSvgWideCalculations(numTablesX, numTablesY, seats) {
 /**
  * Add circles representing seats to svg.
  */
-function addCircles(svg, seats) {
-  return svg.selectAll("circle")
-    .data(seats)
-    .enter()
-    .append("circle")
-    .each(function(d, i) {
-      var coords = getCoordinates(d);
-      d3.select(this)
-        .attr("cx", coords[0])
-        .attr("cy", coords[1])
-        .attr("r", getRadius(d))
-        .classed(d.group, true);
+function addCircles(canvas, seats) {
+  var seat, coords, radius, circle;
+
+  for (var i = 0; i < seats.length; i++) {
+    seat = seats[i];
+    coords = getCoordinates(seat);
+
+    circle = new fabric.fabric.Circle({
+      top: coords[1],
+      left: coords[0],
+      originX: "center",
+      originY: "center",
+      radius: getRadius(seat),
+      fill: getColor(seat),
+      opacity: 0.5
     });
+
+    canvas.add(circle);
+    seat.circle = circle;
+  }
 }
 
 
@@ -190,19 +210,23 @@ function addCircles(svg, seats) {
  *
  * If showSpecies=true, show species name; otherwise, show first name.
  */
-function addText(svg, seats, showSpecies) {
-  return svg.selectAll("text")
-    .data(seats)
-    .enter()
-    .append("text")
-    .each(function(d, i) {
-      var coords = getCoordinates(d);
-      d3.select(this)
-        .attr("x", coords[0])
-        .attr("y", coords[1])
-        .text(showSpecies ? d.shortSpecies : d.firstName)
-        .classed("circle-text", true);
+function addText(canvas, seats, showSpecies) {
+  var seat, coords, radius, text;
+  for (var i = 0; i < seats.length; i++) {
+    seat = seats[i];
+    coords = getCoordinates(seat);
+    text = showSpecies ? seat.shortSpecies : seat.firstName;
+
+    text = new fabric.fabric.Text(text, {
+      top: coords[1],
+      left: coords[0],
+      originX: "center",
+      originY: "center",
+      fontSize: 10,
+      fontFamily: "Helvetica Neue"
     });
+    canvas.add(text);
+  }
 }
 
 
@@ -220,9 +244,9 @@ function getCoordinates(seat) {
 
   // Table coordinates, shifted such that relative table positions
   // 0 and 1 are moved a half-table inward from the svg edges.
-  var tableX = (seat.table.x * (seat.svgWidth - seat.tableSpace)) +
+  var tableX = (seat.table.x * (seat.canvasWidth - seat.tableSpace)) +
                (seat.tableSpace / 2);
-  var tableY = (seat.table.y * (seat.svgHeight - seat.tableSpace)) +
+  var tableY = (seat.table.y * (seat.canvasHeight - seat.tableSpace)) +
                (seat.tableSpace / 2);
 
   // Seat coordinates now just trigonometry
@@ -243,6 +267,23 @@ function getRadius(seat) {
 
   // Allow seats to get as big as the table at their largest
   return relative * seat.tableRadius;
+}
+
+
+/**
+ * Get the color for a seat based on its group.
+ */
+function getColor(seat) {
+  var group = seat.group;
+  if (group === "HERD") {
+    return "green";
+  } else if (group === "PACK") {
+    return "red";
+  } else if (group === "COLONY") {
+    return "blue";
+  } else {
+    return "black";
+  }
 }
 
 
