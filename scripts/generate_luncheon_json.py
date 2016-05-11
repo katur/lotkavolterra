@@ -34,8 +34,7 @@ def create_table(number, name=None):
     table['number'] = number
     table['x'], table['y'] = TABLE_COORDS[str(number)]
     table['people'] = []
-    if name:
-        table['name'] = name
+    table['name'] = name
     return table
 
 
@@ -53,8 +52,12 @@ if args.csv_file:
         if not person_name:
             continue
 
-        if not table_number or not table_name:
-            raise ValueError('Error in row {}: value missing'
+        if not table_number:
+            raise ValueError('Error in row {}: table number missing\n'
+                             .format(i))
+
+        if not table_name:
+            sys.stderr.write('Warning in row {}: table name missing\n'
                              .format(i))
 
         # Fetch table if the table has already been created
@@ -64,8 +67,8 @@ if args.csv_file:
             # Confirm table name matches previous occurrences
             previous_name = tables[table_number]['name']
             if previous_name != table_name:
-                raise ValueError(
-                    'Error in row {}: Table {} inconsistenty {} and {}'
+                sys.stderr.write(
+                    'Warning in row {}: Table {} inconsistently {} and {}\n'
                     .format(i, table_number, previous_name, table_name))
 
         # Add table if first occurrence
