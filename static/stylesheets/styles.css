@@ -163,7 +163,8 @@ p {
 #simulation {
   padding: 0; }
   #simulation .simulation-svg {
-    width: 100%; }
+    width: 100%;
+    display: block; }
   #simulation #stats {
     display: none; }
     #simulation #stats .home-nav, #simulation #stats .counters {
