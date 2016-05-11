@@ -65,7 +65,7 @@ module.exports = {
     $("#stats").show();
 
     if (params.repeat) {
-      $(".trial-counter").show();
+      $("#trial-counter").show();
     }
   },
 
@@ -250,9 +250,9 @@ function getRadius(seat) {
  * Update the trial and generation counters.
  */
 function updateCounters(generation, reset, trial) {
-  $(".generation-counter").text("Generation " + generation);
+  $("#generation-counter").text("Generation " + generation);
 
   if (reset) {
-    $(".trial-counter").text("Trial " + trial);
+    $("#trial-counter").text("Trial " + trial);
   }
 }

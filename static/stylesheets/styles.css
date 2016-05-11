@@ -181,8 +181,8 @@ p {
       #simulation #stats .counters span {
         float: left;
         clear: both; }
-    #simulation #stats .trial-counter {
-      display: none; }
+      #simulation #stats .counters #trial-counter {
+        display: none; }
 
 #home .page-title {
   position: relative;
