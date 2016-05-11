@@ -262,3 +262,8 @@ p {
   @media (max-width: 600px) {
     #home .attribution {
       font-size: 12px; } }
+#home .disclaimer {
+  font-size: 16px; }
+  @media (max-width: 600px) {
+    #home .disclaimer {
+      font-size: 14px; } }
