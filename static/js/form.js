@@ -6,14 +6,16 @@ module.exports = {
    * Initialize the simulation form.
    */
   init: function() {
-    var select = $("#simulation-select");
-    var simulationType = $("#simulation-type");
-    var seatInput = $("#seats-input-wrapper");
+    $(document).ready(function() {
+      var select = $("#simulation-select");
+      var simulationType = $("#simulation-type");
+      var seatInput = $("#seats-input-wrapper");
 
-    toggleFormType(select, simulationType, seatInput);
-
-    select.on("change", function() {
       toggleFormType(select, simulationType, seatInput);
+
+      select.on("change", function() {
+        toggleFormType(select, simulationType, seatInput);
+      });
     });
   }
 };
