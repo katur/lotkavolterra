@@ -1,0 +1,1124 @@
+{
+  "name": "Black Rock Luncheon: 2016", 
+  "numTablesX": 8, 
+  "numTablesY": 5, 
+  "showSpecies": false, 
+  "showStage": true, 
+  "stageWidth": 0.2, 
+  "stageHeight": 0.17, 
+  "stageY": 0.1, 
+  "tables": [
+    {
+      "number": 1, 
+      "x": 0.0, 
+      "y": 0.25, 
+      "people": [
+        {
+          "name": "Shanna", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Terri", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Jean Paul", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Chris", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Vanessa", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Russell", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Lisa", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Camille", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Gal", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Melanie", 
+          "group": "COLONY"
+        }
+      ], 
+      "name": "CPC"
+    }, 
+    {
+      "number": 2, 
+      "x": 0.14285714285714285, 
+      "y": 0.125, 
+      "people": [
+        {
+          "name": "Chanda", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Kathleen", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Elizabeth", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Leslie", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Janette", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Asae", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Amelia", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Dee Dee", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Cally", 
+          "group": "COLONY"
+        }
+      ], 
+      "name": "Prounis"
+    }, 
+    {
+      "number": 3, 
+      "x": 0.2857142857142857, 
+      "y": 0.125, 
+      "people": [
+        {
+          "name": "Kate", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Gabi", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Anne", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Maria", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Emilie", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Melodie", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Betty", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Julia", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Krista", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Noah", 
+          "group": "HERD"
+        }
+      ], 
+      "name": "Gottdiener"
+    }, 
+    {
+      "number": 4, 
+      "x": 0.42857142857142855, 
+      "y": 0.375, 
+      "people": [
+        {
+          "name": "Anne", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Christie", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Scott", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Zara", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Pam", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Dylan", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Melissa", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Chip", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Bette", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Michael", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Sibyl", 
+          "group": "COLONY"
+        }
+      ], 
+      "name": "Golden, Sibyl"
+    }, 
+    {
+      "number": 5, 
+      "x": 0.5714285714285714, 
+      "y": 0.375, 
+      "people": [
+        {
+          "name": "Caitlin", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Paul", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Samantha", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "John", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Katherine", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Michael", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Paul", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Stephanie", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "David", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Allyson", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Peter", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Eric", 
+          "group": "PACK"
+        }
+      ], 
+      "name": "Kappagoda/Mordecai"
+    }, 
+    {
+      "number": 6, 
+      "x": 0.7142857142857143, 
+      "y": 0.25, 
+      "people": [
+        {
+          "name": "Barbara", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Terryanne", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Jennifer", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Sam", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Martha", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Elizabeth", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Francie", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Liam", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Kevin", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Bill", 
+          "group": "HERD"
+        }
+      ], 
+      "name": "Schuster"
+    }, 
+    {
+      "number": 7, 
+      "x": 0.8571428571428571, 
+      "y": 0.125, 
+      "people": [
+        {
+          "name": "Richard", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Tally", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Samayla", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Kim", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Lars", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Cathy", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Lys", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Richard", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Guthrie", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Toby", 
+          "group": "HERD"
+        }
+      ], 
+      "name": "Elliman"
+    }, 
+    {
+      "number": 8, 
+      "x": 1.0, 
+      "y": 0.25, 
+      "people": [
+        {
+          "name": "Barbara", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Francesco", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Joan", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Hailey", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Kristin", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Alba", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Meg", 
+          "group": "HERD"
+        }
+      ], 
+      "name": "Calhoun"
+    }, 
+    {
+      "number": 9, 
+      "x": 0.0, 
+      "y": 0.5, 
+      "people": [
+        {
+          "name": "Doug", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "MJ", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Matt", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Maya", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Amanda", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Stuart", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Karen", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Katrina", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Lynn", 
+          "group": "COLONY"
+        }
+      ], 
+      "name": "Land"
+    }, 
+    {
+      "number": 10, 
+      "x": 0.14285714285714285, 
+      "y": 0.375, 
+      "people": [
+        {
+          "name": "Christine", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "May", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Sheridan", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Andrew", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Amy", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Christopher", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Cynthia", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Larry", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Hedy", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Steve", 
+          "group": "PACK"
+        }
+      ], 
+      "name": "Browning"
+    }, 
+    {
+      "number": 11, 
+      "x": 0.2857142857142857, 
+      "y": 0.375, 
+      "people": [
+        {
+          "name": "Eileen", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Ezra", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Bill", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Lisa", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Ivan", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Steve", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Jill", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Anne", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Dan", 
+          "group": "COLONY"
+        }
+      ], 
+      "name": "Glaser"
+    }, 
+    {
+      "number": 12, 
+      "x": 0.42857142857142855, 
+      "y": 0.625, 
+      "people": [
+        {
+          "name": "Linda", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Peter", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Brian", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Maryanne", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Valerie", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Yasaman", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Wright", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Gerry", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Tanya", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Min", 
+          "group": "PACK"
+        }
+      ], 
+      "name": "Colas-Ohrstrom"
+    }, 
+    {
+      "number": 13, 
+      "x": 0.5714285714285714, 
+      "y": 0.625, 
+      "people": [
+        {
+          "name": "Philip", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Nancy", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Hart", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Steve", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Lydia", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Rich", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Susan", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Prudence", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Linda", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Whit", 
+          "group": "COLONY"
+        }
+      ], 
+      "name": "Stillman"
+    }, 
+    {
+      "number": 14, 
+      "x": 0.7142857142857143, 
+      "y": 0.5, 
+      "people": [
+        {
+          "name": "Brienne", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Dominic", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Allison", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Bruce", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Marjorie", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Gurnee", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Steven", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "David", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Sylvia", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Lisa", 
+          "group": "HERD"
+        }
+      ], 
+      "name": "Stern"
+    }, 
+    {
+      "number": 15, 
+      "x": 0.8571428571428571, 
+      "y": 0.375, 
+      "people": [
+        {
+          "name": "Yurij", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Gregory", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Peter", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Victoria", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Rick", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Marianna", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Julie", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Eric", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Veronica", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Julia", 
+          "group": "COLONY"
+        }
+      ], 
+      "name": "Bloomberg"
+    }, 
+    {
+      "number": 16, 
+      "x": 1.0, 
+      "y": 0.5, 
+      "people": [
+        {
+          "name": "Kelvina", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Gordon", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Paula", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Lotus", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Tracy", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Kate", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "David", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Wendy", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Andrew", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Branden", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Robert", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Michael Sloan", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Emily", 
+          "group": "COLONY"
+        }
+      ], 
+      "name": "Dalton"
+    }, 
+    {
+      "number": 17, 
+      "x": 0.0, 
+      "y": 0.75, 
+      "people": [
+        {
+          "name": "Geoff", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Kathleen", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Anne", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Brian", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Jennifer", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Maria", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Bret", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Martin", 
+          "group": "PACK"
+        }
+      ], 
+      "name": "Barnard"
+    }, 
+    {
+      "number": 18, 
+      "x": 0.14285714285714285, 
+      "y": 0.625, 
+      "people": [
+        {
+          "name": "Sarah", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Brian", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Catherine", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Diane", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Elizabeth", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Micah", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Matt", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Julie", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Lisbeth", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Caroline", 
+          "group": "PACK"
+        }
+      ], 
+      "name": "NYBG"
+    }, 
+    {
+      "number": 19, 
+      "x": 0.2857142857142857, 
+      "y": 0.625, 
+      "people": [
+        {
+          "name": "James", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Anne", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Frederick", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "David", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Jeannette", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Stephen", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Clare", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Marina", 
+          "group": "HERD"
+        }
+      ], 
+      "name": "Redden"
+    }, 
+    {
+      "number": 20, 
+      "x": 0.42857142857142855, 
+      "y": 0.875, 
+      "people": [
+        {
+          "name": "Brendan", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Stuart", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Adela", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Anna", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Kevin", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Jenna", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Shahid", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Michael", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Sara", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Maria", 
+          "group": "PACK"
+        }
+      ], 
+      "name": "Earth Institute"
+    }, 
+    {
+      "number": 21, 
+      "x": 0.5714285714285714, 
+      "y": 0.875, 
+      "people": [
+        {
+          "name": "Aurelie", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Christopher", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Nathan", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Felicia", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Sandra", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Mitzi", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Kristine", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Nancy", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Eddie", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Lalitha", 
+          "group": "HERD"
+        }
+      ], 
+      "name": "Teachers College"
+    }, 
+    {
+      "number": 22, 
+      "x": 0.7142857142857143, 
+      "y": 0.75, 
+      "people": [
+        {
+          "name": "Steve", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Alix", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Emily", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Elias", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Gardner", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Mike", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Ryan", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Paul", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Josephine", 
+          "group": "COLONY"
+        }
+      ], 
+      "name": "Avenues"
+    }, 
+    {
+      "number": 23, 
+      "x": 0.8571428571428571, 
+      "y": 0.625, 
+      "people": [
+        {
+          "name": "Barbara", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Drew", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Ed", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Klara", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Katie", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Luisa", 
+          "group": "PACK"
+        }
+      ], 
+      "name": "The Staff"
+    }, 
+    {
+      "number": 25, 
+      "x": 0.21428571428, 
+      "y": 0.875, 
+      "people": [
+        {
+          "name": "Deborah", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Jonathan", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Mary", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Amani", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Guest", 
+          "group": "COLONY"
+        }, 
+        {
+          "name": "Guest", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Guest", 
+          "group": "PACK"
+        }, 
+        {
+          "name": "Christie Ann", 
+          "group": "HERD"
+        }, 
+        {
+          "name": "Toni", 
+          "group": "PACK"
+        }
+      ], 
+      "name": "School at Columbia"
+    }
+  ]
+}

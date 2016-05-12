@@ -1,2 +1,2 @@
 python generate_luncheon_json.py --csv_file ../../input/BRFC2016/BRFC2016.csv ../../input/BRFC2016/BRFC2016_8-5.json > BRFC2016-random.json
-python assign_groups_to_json2.py BRFC2016-random.json ../static/json/BRC2016-assigned-prenames.json > BRFC2016-assigned.json
+python assign_groups_to_json2.py BRFC2016-random.json ../static/json/BRFC2016-assigned-prenames.json > BRFC2016-assigned.json

@@ -31,7 +31,7 @@ for table in data['tables']:
         if 'group' not in person:
             try:
                 person['group'] = pa[table['number']][i]
-            except IndexError:
+            except (IndexError, KeyError):
                 person['group'] = random.choice(['HERD', 'PACK', 'COLONY'])
 
 json.dump(data, sys.stdout, indent=2)
