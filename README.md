@@ -1,14 +1,12 @@
 # Lotka-Volterra simulation
 
-A simulation in which packs of predators, herds of prey, and colonies
-of invasive species interact according to rules
-(description of rules coming soon).
-While inspired by the Lotka-Volterra equations for modeling predator-prey
-dynamics, it is not a direct representation of those differential
-equations.
+A simulation in which packs of predators, herds of prey,
+and colonies of invasive species interact according to rules
+inspired by the Lotka-Volterra model.
 
-This project is made under the guidance of, and graciously sponsored by, the
-[RiskEcon Lab at NYU](http://www.cims.nyu.edu/riskeconlab/).
+With thanks for conceptual design and funding from
+David K.A. Mordecai and Samantha Kappagoda at
+[RiskEcon Lab @ NYU](http://www.cims.nyu.edu/riskeconlab).
 
 
 ## Code
@@ -17,17 +15,13 @@ Code is in Javascript.
 
 CSS is in [SASS](http://sass-lang.com/).
 
-For the visualization, I am using [D3](http://d3js.org).
+The visualization uses [D3](http://d3js.org).
 
 Please see [INSTALL.md](INSTALL.md) for instructions on installation.
 
 
-## Photographs
+## Photo attributions
 
-Eastern coyote photograph by ForestWander Nature Photography;
-found on Wikimedia Commons.
-
-Wild turkey photograph by [Laura Erickson](http://www.lauraerickson.com).
-
-Eurasian boar photograph by Valentin Panzirsch;
-found on Wikimedia Commons.
+Coyote by ForestWander Nature Photography.
+Turkey by [Laura Erickson](http://www.lauraerickson.com).
+Boar by Valentin Panzirsch.

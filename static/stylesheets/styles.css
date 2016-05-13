@@ -258,10 +258,12 @@ p {
   #home form button {
     margin-top: 10px; }
 #home .attribution {
-  font-size: 14px; }
+  border-top: 1px solid #c4c4c4;
+  padding-top: 20px;
+  font-size: 16px; }
   @media (max-width: 600px) {
     #home .attribution {
-      font-size: 12px; } }
+      font-size: 15px; } }
 #home .disclaimer {
   font-size: 16px; }
   @media (max-width: 600px) {
